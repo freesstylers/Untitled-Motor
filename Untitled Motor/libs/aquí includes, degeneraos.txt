@@ -1,0 +1,4 @@
+$(SolutionDir)bin\
+
+
+$(SolutionDir)interm\$(Platform)\$(Configuration)\$(ProjectName)

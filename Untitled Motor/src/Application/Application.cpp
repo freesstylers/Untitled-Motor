@@ -1,11 +1,23 @@
 // Application.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+#include "Entity.h"
+
 #include <stdio.h>
+#include "ok boomer.h"
+
+
 
 int main()
 {
+    Entity entity;
     printf("Hello World!\n");
+
+    while (true) {
+        okey("bloomer");
+
+        entity.update();
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
