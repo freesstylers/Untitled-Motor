@@ -4,20 +4,17 @@
 #include "Entity.h"
 
 #include <stdio.h>
-#include "ok boomer.h"
-
+#include <OgreRoot.h>
 
 
 int main()
 {
-    Entity entity;
-    printf("Hello World!\n");
+    Ogre::Root* root;
+    root = new Ogre::Root("plugins_d.cfg");
 
-    while (true) {
-        okey("bloomer");
 
-        entity.update();
-    }
+
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

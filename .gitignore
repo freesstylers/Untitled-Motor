@@ -392,6 +392,8 @@ MigrationBackup/
 
 !*.vcxproj.user
 
+dependencies/
+
 !dependencies/cmake-3.17.0-rc1-win64-x64/bin/*
 
 [Bb]uild/
