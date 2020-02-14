@@ -65,6 +65,7 @@ bld/
 
 [Bb]in/*
 ![Bb]in/assets/
+![Bb]in/assets/*.cfg
 
 
 # Visual Studio 2015/2017 cache/options directory
