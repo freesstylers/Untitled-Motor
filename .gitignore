@@ -394,6 +394,6 @@ MigrationBackup/
 
 Untitled Motor/dependencies/ogre-1.12.4
 
-!dependencies/cmake-3.17.0-rc1-win64-x64/bin/*
+!Untitled Motor/dependencies/cmake-3.17.0-rc1-win64-x64/bin/*
 
 [Bb]uild/
