@@ -136,6 +136,13 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreMain_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>cd "$(SolutionDir)scripts"
+call preBuild.bat</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Copies all necessary DLL's from the Ogre build directory (you need to build Ogre for this to work)</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
