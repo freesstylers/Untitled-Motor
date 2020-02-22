@@ -5,11 +5,10 @@
 
 #include <stdio.h>
 #include <OgreRoot.h>
-
-
+#include <SDL.h>
 
 #ifdef  _DEBUG
-    int main()
+    int main(int argc, char* argv[])
 #else
     #include <Windows.h>
     int WINAPI
