@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <OgreRoot.h>
 #include <SDL.h>
+#include <SDL_syswm.h>
+#include "windows.h"
+#include <iostream>
 
 #ifdef  _DEBUG
     int main(int argc, char* argv[])
@@ -15,6 +18,7 @@
     WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdShow)
 #endif
 {
+	// Initialise OGRE
     Ogre::Root* root;
 
 #ifdef  _DEBUG
@@ -23,18 +27,76 @@
     root = new Ogre::Root("plugins.cfg");
 #endif
 
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR, "Cannot initialize SDL2!",
+					"BaseApplication::setup");
+		SDL_Quit();
+		return 1;
+	}
 
+	root->setRenderSystem(*(root->getAvailableRenderers().begin()));
+	root->restoreConfig();
+	root->initialise(false);
+
+	Ogre::NameValuePairList params; // ogre window / render system params
+	SDL_Window* sdlWindow = SDL_CreateWindow("myWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
+	if (sdlWindow == nullptr) {
+		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
+					"Couldn't create SDL Window" + *SDL_GetError(),
+					"BaseApplication::setup");
+		SDL_Quit();
+		return 1;
+	}
+	
+	SDL_Renderer* renderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if (renderer == nullptr) {
+		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
+					"SDL_CreateRenderer Error: " + *SDL_GetError(),
+					"BaseApplication::setup");
+		SDL_DestroyWindow(sdlWindow);
+		SDL_Quit();
+		return 1;
+	}
+
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	if (SDL_GetWindowWMInfo(sdlWindow, &wmInfo) == SDL_FALSE) {
+		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
+					"Couldn't get WM Info! (SDL2)",
+					"BaseApplication::setup");
+		SDL_DestroyWindow(sdlWindow);
+		SDL_Quit();
+		return 1;
+	}
+
+	// grab a string representing the NSWindow pointer
+	Ogre::String winHandle = Ogre::StringConverter::toString((unsigned long)wmInfo.info.win.window);
+
+	// assign the NSWindow pointer to the parentWindowHandle parameter
+	params.insert(std::make_pair("externalWindowHandle", winHandle));
+
+	Ogre::RenderWindow* ogreWindow = root->createRenderWindow("myWindowTitle", 800, 600, false, &params);
+
+
+	// create OGRE scene manager, camera, viewports, etc
+
+
+	while (true)
+	{
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+			continue;
+		}
+
+		if (!root->renderOneFrame())
+			break;
+	}
+
+	// clean up
+	delete root;
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(sdlWindow);
+	SDL_Quit();
 
     return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
