@@ -182,6 +182,11 @@ call preBuild.bat</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreMain.lib;SDL2.lib;SDL2main.lib;SDL2test.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreBuildEvent>
+      <Command>cd "$(SolutionDir)scripts"
+call preBuild.bat</Command>
+      <Message>Copies all necessary DLL's from the Ogre build directory (you need to build Ogre for this to work)</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
