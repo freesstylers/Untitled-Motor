@@ -9,6 +9,9 @@
 #include <SDL_syswm.h>
 #include "windows.h"
 #include <iostream>
+#include <fmod.hpp>
+#include <btBulletDynamicsCommon.h>
+using namespace FMOD;
 
 #ifdef  _DEBUG
     int main(int argc, char* argv[])
@@ -80,6 +83,52 @@
 
 	// create OGRE scene manager, camera, viewports, etc
 
+	// FMOD TESTING
+	FMOD::System* system;
+	FMOD_RESULT result;
+	result = FMOD::System_Create(&system); // Creamos el objeto system
+	// 128 canales (numero maximo que podremos utilizar simultaneamente)
+	result = system->init(128, FMOD_INIT_NORMAL, 0); // Inicializacion de FMOD
+
+	FMOD::Sound* sound;
+	result = system->createSound(
+		"nice.mp3", // path al archivo de sonido
+		FMOD_DEFAULT, // valores (por defecto en este caso: sin loop, 2D)
+		0, // informacion adicional (nada en este caso)
+		&sound);
+
+	FMOD::Channel* channel;
+	result = system->playSound(
+		sound, // buffer que se "engancha" a ese canal
+		0, // grupo de canales, 0 sin agrupar (agrupado en el master)
+		false, // arranca sin "pause" (se reproduce directamente)
+		&channel); // devuelve el canal que asigna
+		// el sonido ya se esta reproduciendo
+
+		///-----initialization_start-----
+
+	// BULLET PHYSICS TESTING
+	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
+	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
+
+	///use the default collision dispatcher. For parallel processing you can use a diffent dispatcher (see Extras/BulletMultiThreaded)
+	btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
+
+	///btDbvtBroadphase is a good general purpose broadphase. You can also try out btAxis3Sweep.
+	btBroadphaseInterface* overlappingPairCache = new btDbvtBroadphase();
+
+	///the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
+	btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
+
+	btDiscreteDynamicsWorld* dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
+
+	dynamicsWorld->setGravity(btVector3(0, -10, 0));
+
+	///-----initialization_end-----
+
+	//keep track of the shapes, we release memory at exit.
+	//make sure to re-use collision shapes among rigid bodies whenever possible!
+	btAlignedObjectArray<btCollisionShape*> collisionShapes;
 
 	while (true)
 	{
