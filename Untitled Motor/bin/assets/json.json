@@ -1,0 +1,14 @@
+{
+    "hola" : "paco",
+    "muerto" : true,
+    "componente" : {
+        "nombre" : "jugador",
+        "posicion" : {
+            "x" : 0,
+            "y" : 0.5,
+            "z" : 2
+        },
+        "color" : "green",
+        "ignacio" : "anarca"
+    }
+}
