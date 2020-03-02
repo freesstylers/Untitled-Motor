@@ -11,8 +11,10 @@
 #include <iostream>
 #include <fmod.hpp>
 #include <btBulletDynamicsCommon.h>
+#include <OgreApplicationContext.h>
 
 using namespace FMOD;
+using namespace OgreBites;
 
 #ifdef  _DEBUG
     int main(int argc, char* argv[])
