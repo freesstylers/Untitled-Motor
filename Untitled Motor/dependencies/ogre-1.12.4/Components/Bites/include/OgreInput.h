@@ -140,10 +140,10 @@ enum {
     SDLK_KP_0,
     SDLK_KP_PERIOD,
     SDLK_LSHIFT = (1 << 30) | 0xE1,
-    /*KMOD_ALT = 0x0100 | 0x0200,
+    KMOD_ALT = 0x0100 | 0x0200,
     KMOD_CTRL = 0x0040 | 0x0080,
     KMOD_GUI = 0x0400 | 0x0800,
-    KMOD_SHIFT = 0x0001 | 0x0002,*/
+    KMOD_SHIFT = 0x0001 | 0x0002,
     KMOD_NUM = 0x1000,
 };
 
