@@ -21,9 +21,15 @@
     <ClCompile Include="..\..\src\Application\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Application\OgreApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Entity.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Application\OgreApp.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

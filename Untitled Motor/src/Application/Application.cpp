@@ -12,6 +12,7 @@
 #include <fmod.hpp>
 #include <btBulletDynamicsCommon.h>
 #include <OgreApplicationContext.h>
+#include "OgreApp.h"
 
 using namespace FMOD;
 using namespace OgreBites;
@@ -45,44 +46,8 @@ using namespace OgreBites;
 	root->initialise(false);
 
 	Ogre::NameValuePairList params; // ogre window / render system params
-	SDL_Window* sdlWindow = SDL_CreateWindow("myWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
-	if (sdlWindow == nullptr) {
-		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
-					"Couldn't create SDL Window" + *SDL_GetError(),
-					"BaseApplication::setup");
-		SDL_Quit();
-		return 1;
-	}
-	
-	SDL_Renderer* renderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (renderer == nullptr) {
-		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
-					"SDL_CreateRenderer Error: " + *SDL_GetError(),
-					"BaseApplication::setup");
-		SDL_DestroyWindow(sdlWindow);
-		SDL_Quit();
-		return 1;
-	}
 
-	SDL_SysWMinfo wmInfo;
-	SDL_VERSION(&wmInfo.version);
-	if (SDL_GetWindowWMInfo(sdlWindow, &wmInfo) == SDL_FALSE) {
-		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
-					"Couldn't get WM Info! (SDL2)",
-					"BaseApplication::setup");
-		SDL_DestroyWindow(sdlWindow);
-		SDL_Quit();
-		return 1;
-	}
-
-	// grab a string representing the NSWindow pointer
-	Ogre::String winHandle = Ogre::StringConverter::toString((unsigned long)wmInfo.info.win.window);
-
-	// assign the NSWindow pointer to the parentWindowHandle parameter
-	params.insert(std::make_pair("externalWindowHandle", winHandle));
-
-	Ogre::RenderWindow* ogreWindow = root->createRenderWindow("myWindowTitle", 800, 600, false, &params);
-
+	//Ogre::RenderWindow* ogreWindow = root->createRenderWindow("myWindowTitle", 800, 600, false, &params);
 
 	// create OGRE scene manager, camera, viewports, etc
 
@@ -132,6 +97,47 @@ using namespace OgreBites;
 	//keep track of the shapes, we release memory at exit.
 	//make sure to re-use collision shapes among rigid bodies whenever possible!
 	btAlignedObjectArray<btCollisionShape*> collisionShapes;
+
+	SDL_Window* sdlWindow = SDL_CreateWindow("myWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
+	if (sdlWindow == nullptr) {
+		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
+			"Couldn't create SDL Window" + *SDL_GetError(),
+			"BaseApplication::setup");
+		SDL_Quit();
+		return 1;
+	}
+
+	SDL_Renderer* renderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	if (renderer == nullptr) {
+		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
+			"SDL_CreateRenderer Error: " + *SDL_GetError(),
+			"BaseApplication::setup");
+		SDL_DestroyWindow(sdlWindow);
+		SDL_Quit();
+		return 1;
+	}
+
+	SDL_SysWMinfo wmInfo;
+	SDL_VERSION(&wmInfo.version);
+	if (SDL_GetWindowWMInfo(sdlWindow, &wmInfo) == SDL_FALSE) {
+		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
+			"Couldn't get WM Info! (SDL2)",
+			"BaseApplication::setup");
+		SDL_DestroyWindow(sdlWindow);
+		SDL_Quit();
+		return 1;
+	}
+
+	// grab a string representing the NSWindow pointer
+	Ogre::String winHandle = Ogre::StringConverter::toString((unsigned long)wmInfo.info.win.window);
+
+	// assign the NSWindow pointer to the parentWindowHandle parameter
+	params.insert(std::make_pair("externalWindowHandle", winHandle));
+
+	//COSAS
+	OgreApp* app = new OgreApp();
+	app->setup();
+	//
 
 	while (true)
 	{
