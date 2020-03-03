@@ -60,7 +60,7 @@ using namespace OgreBites;
 
 	FMOD::Sound* sound;
 	result = system->createSound(
-		"nice.mp3", // path al archivo de sonido
+		"assets/sound/startup.mp3", // path al archivo de sonido
 		FMOD_DEFAULT, // valores (por defecto en este caso: sin loop, 2D)
 		0, // informacion adicional (nada en este caso)
 		&sound);
