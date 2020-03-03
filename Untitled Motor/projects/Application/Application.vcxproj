@@ -20,10 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Application\Application.cpp" />
+    <ClCompile Include="..\..\src\Application\Component.cpp" />
     <ClCompile Include="..\..\src\Application\Entity.cpp" />
+    <ClCompile Include="..\..\src\Application\Factory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\Application\Component.h" />
     <ClInclude Include="..\..\src\Application\Entity.h" />
+    <ClInclude Include="..\..\src\Application\Factory.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
