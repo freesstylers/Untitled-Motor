@@ -11,11 +11,21 @@
 #include <iostream>
 #include <fmod.hpp>
 #include <btBulletDynamicsCommon.h>
-#include <OgreApplicationContext.h>
-#include "OgreApp.h"
+#include <OgreCamera.h>
+#include <OgreSceneManager.h>
+#include <OgreViewport.h>
+#include <OgreRenderWindow.h>
+#include <OgreEntity.h>
+#include <OgreConfigFile.h>
+#include <OgreTextureManager.h>
+#include <OgreResourceGroupManager.h>
+#include <OgreResource.h>
+#include <OgreResourceManager.h>
 
 using namespace FMOD;
-using namespace OgreBites;
+
+Ogre::Camera* cam;
+Ogre::Root* root;
 
 #ifdef  _DEBUG
     int main(int argc, char* argv[])
@@ -26,7 +36,6 @@ using namespace OgreBites;
 #endif
 {
 	// Initialise OGRE
-    Ogre::Root* root;
 
 #ifdef  _DEBUG
     root = new Ogre::Root("plugins_d.cfg");
@@ -34,6 +43,50 @@ using namespace OgreBites;
     root = new Ogre::Root("plugins.cfg");
 #endif
 
+	Ogre::RenderSystem* rs = root->getRenderSystemByName("Direct3D11 Rendering Subsystem");
+	root->setRenderSystem(rs);
+	rs->setConfigOption("Full Screen", "No");
+	rs->setConfigOption("Video Mode", "800 x 600 @ 32-bit colour");
+	root->setRenderSystem(rs);
+
+	Ogre::ConfigFile cf;
+	Ogre::String name, locType;
+	cf.load("resources.cfg");
+	Ogre::ConfigFile::SectionIterator secIt = cf.getSectionIterator();
+	while (secIt.hasMoreElements())
+	{
+		Ogre::ConfigFile::SettingsMultiMap* settings = secIt.getNext();
+		Ogre::ConfigFile::SettingsMultiMap::iterator it;
+		for (it = settings->begin(); it != settings->end(); ++it)
+		{
+			locType = it->first;
+			name = it->second;
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(name, locType);
+		}
+	}
+	Ogre::RenderWindow* mWindow = root->initialise(true, "Motor Casa Paco");
+
+	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
+
+	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();  
+
+	Ogre::SceneManager* mSM = root->createSceneManager();
+	Ogre::Camera* mCamera=mSM->createCamera("MainCam");
+	mCamera->setPosition(0, 0, 80);
+	mCamera->lookAt(0, 0, -300);
+	mCamera->setNearClipDistance(5);
+
+	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
+
+	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+
+	mCamera->setAspectRatio(
+		Ogre::Real(vp->getActualWidth()) /
+		Ogre::Real(vp->getActualHeight()));
+
+	//Ogre::Entity* ogreEntity = mSM->createEntity("sinbad.mesh");
+
+	/*
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR, "Cannot initialize SDL2!",
 					"BaseApplication::setup");
@@ -42,11 +95,12 @@ using namespace OgreBites;
 	}
 
 	root->setRenderSystem(*(root->getAvailableRenderers().begin()));
+
 	root->restoreConfig();
 	root->initialise(false);
 
 	Ogre::NameValuePairList params; // ogre window / render system params
-
+	*/
 	//Ogre::RenderWindow* ogreWindow = root->createRenderWindow("myWindowTitle", 800, 600, false, &params);
 
 	// create OGRE scene manager, camera, viewports, etc
@@ -97,7 +151,7 @@ using namespace OgreBites;
 	//keep track of the shapes, we release memory at exit.
 	//make sure to re-use collision shapes among rigid bodies whenever possible!
 	btAlignedObjectArray<btCollisionShape*> collisionShapes;
-
+	/*
 	SDL_Window* sdlWindow = SDL_CreateWindow("myWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
 	if (sdlWindow == nullptr) {
 		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
@@ -133,10 +187,13 @@ using namespace OgreBites;
 
 	// assign the NSWindow pointer to the parentWindowHandle parameter
 	params.insert(std::make_pair("externalWindowHandle", winHandle));
-
+	*/
 	//COSAS
-	OgreApp* app = new OgreApp();
-	app->setup();
+
+
+	//cam->setPosition(0, 0, 80);
+	//cam->lookAt(0, 0, -300);
+	//cam->setNearClipDistance(5);
 	//
 
 	while (true)
@@ -152,8 +209,8 @@ using namespace OgreBites;
 
 	// clean up
 	delete root;
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(sdlWindow);
+	//SDL_DestroyRenderer(renderer);
+	//SDL_DestroyWindow(sdlWindow);
 	SDL_Quit();
 
     return 0;

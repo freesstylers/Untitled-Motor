@@ -23,13 +23,11 @@
     <ClCompile Include="..\..\src\Application\Component.cpp" />
     <ClCompile Include="..\..\src\Application\Entity.cpp" />
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
-    <ClCompile Include="..\..\src\Application\OgreApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
     <ClInclude Include="..\..\src\Application\Entity.h" />
     <ClInclude Include="..\..\src\Application\Factory.h" />
-    <ClInclude Include="..\..\src\Application\OgreApp.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
