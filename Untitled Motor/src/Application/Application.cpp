@@ -21,6 +21,8 @@
 #include <OgreResourceGroupManager.h>
 #include <OgreResource.h>
 #include <OgreResourceManager.h>
+#include <OgreFileSystemLayer.h>
+#include <OgreGpuProgramManager.h>
 
 using namespace FMOD;
 
@@ -36,7 +38,7 @@ Ogre::Root* root;
 #endif
 {
 	// Initialise OGRE
-
+		
 #ifdef  _DEBUG
     root = new Ogre::Root("plugins_d.cfg");
 #else
@@ -49,21 +51,11 @@ Ogre::Root* root;
 	rs->setConfigOption("Video Mode", "800 x 600 @ 32-bit colour");
 	root->setRenderSystem(rs);
 
-	Ogre::ConfigFile cf;
-	Ogre::String name, locType;
-	cf.load("resources.cfg");
-	Ogre::ConfigFile::SectionIterator secIt = cf.getSectionIterator();
-	while (secIt.hasMoreElements())
-	{
-		Ogre::ConfigFile::SettingsMultiMap* settings = secIt.getNext();
-		Ogre::ConfigFile::SettingsMultiMap::iterator it;
-		for (it = settings->begin(); it != settings->end(); ++it)
-		{
-			locType = it->first;
-			name = it->second;
-			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(name, locType);
-		}
-	}
+	Ogre::String mSolutionPath;
+	mSolutionPath = "C:\\Users\\Briso\\OneDrive\\Documentos\\GitHub\\Untitled-Motor\\Untitled Motor\\bin";
+
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(mSolutionPath, "FileSystem", "General");
+	
 	Ogre::RenderWindow* mWindow = root->initialise(true, "Motor Casa Paco");
 
 	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
@@ -84,7 +76,12 @@ Ogre::Root* root;
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
 
-	//Ogre::Entity* ogreEntity = mSM->createEntity("sinbad.mesh");
+	Ogre::Entity* ogreEntity = mSM->createEntity("sphere.mesh");
+	
+	Ogre::SceneNode* Node = mSM->getRootSceneNode()->createChildSceneNode();
+	Node->attachObject(ogreEntity);//PETA AQUI
+	//Node->setPosition(400, 100, -300);
+	//Node->setScale(20, 20, 20);
 
 	/*
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
