@@ -144,7 +144,7 @@
       <AdditionalDependencies>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreMain_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>cd "$(SolutionDir)scripts"
+      <Command>cd "$(SolutionDir)Untitled-Motor\Untitled Motor\scripts"
 call preBuild.bat</Command>
     </PreBuildEvent>
     <PreBuildEvent>
