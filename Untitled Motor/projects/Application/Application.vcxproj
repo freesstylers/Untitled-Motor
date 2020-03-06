@@ -93,7 +93,7 @@
     <OutDir>$(SolutionDir)bin\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <IntDir>$(SolutionDir)interm\$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\$(Configuration);$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,7 +107,7 @@
     <OutDir>$(SolutionDir)bin\</OutDir>
     <TargetName>$(ProjectName)</TargetName>
     <IntDir>$(SolutionDir)interm\$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\$(Configuration);$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -133,13 +133,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)src\ok boomer\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\fmod-2.00.07\include;$(SolutionDir)dependencies\bullet3-2.89\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\fmod-2.00.07\include;$(SolutionDir)dependencies\bullet3-2.89\src</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreMain_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreMain_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreRTShaderSystem_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>cd "$(SolutionDir)scripts"
@@ -178,7 +178,7 @@ call preBuild.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-1.12.4\\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)src\ok boomer\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
