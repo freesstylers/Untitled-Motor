@@ -523,3 +523,7 @@ include(Packaging)
 
 # Show feature summary
 include(FeatureSummary)
+
+# this also sets the includes and pulls third party dependencies
+target_link_libraries(OgreRTShaderSystem)
+## [discover_ogre]

@@ -5,25 +5,36 @@
 
 
 #include <OgreRoot.h>
-#include <SDL.h>
-#include "windows.h"
-#include <iostream>
-#include <fmod.hpp>
-#include <btBulletDynamicsCommon.h>
-#include <OgreCamera.h>
-#include <OgreSceneManager.h>
+#include <OgreException.h>
+#include <OgreConfigFile.h>
 #include <OgreViewport.h>
+#include <iostream>
+#include <OgreRenderSystem.h>
+#include <OgreResourceGroupManager.h>
+#include <OgreTextureManager.h>
+#include <OgreGpuProgramManager.h>
+#include <OgreFileSystemLayer.h>
+#include <OgreRTShaderSystem.h>
+#include <OgreSGTechniqueResolverListener.h>
+#include <OgreCamera.h>
 #include <OgreRenderWindow.h>
 #include <OgreEntity.h>
-#include <OgreConfigFile.h>
-#include <OgreTextureManager.h>
-#include <OgreResourceGroupManager.h>
-#include <OgreResource.h>
-#include <OgreResourceManager.h>
-#include <OgreFileSystemLayer.h>
-#include <OgreGpuProgramManager.h>
-#include <OgreRTShaderSystem.h>
 
+//#include <iostream>
+//#include <btBulletDynamicsCommon.h>
+//#include <OgreSceneManager.h>
+//#include <OgreConfigFile.h>
+//#include <OgreTextureManager.h>
+//#include <OgreResource.h>
+//#include <OgreResourceManager.h>
+//#include <OgreGpuProgramManager.h>
+
+
+#include <SDL.h>
+#include <SDL_video.h>
+#include <SDL_syswm.h>
+#include "windows.h"
+#include <fmod.hpp>
 
 using namespace FMOD;
 
@@ -32,37 +43,135 @@ Ogre::Root* root;
 
 Ogre::FileSystemLayer* FSLayer;
 Ogre::RTShader::ShaderGenerator* ShaderGenerator; // The Shader generator instance.
+OgreBites::SGTechniqueResolverListener* MaterialMgrListener;
+Ogre::ConfigOptionMap opt;
+Ogre::RenderWindow* mWindow;
+Ogre::RenderSystem* rs;
+
+void SetupWindow() {
+
+	//		WINDOW		//
+
+	rs = root->getRenderSystemByName("Direct3D11 Rendering Subsystem");
+	rs->setConfigOption("Full Screen", "No");
+	rs->setConfigOption("Video Mode", "800 x 600 @ 32-bit colour");
+	root->setRenderSystem(rs);
+
+	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR, "ERROR: Couldn't initialize SDL.",
+			"BaseApplication::setup");
+	}
+
+	opt = rs->getConfigOptions();
+
+	mWindow = root->initialise(true, "Motor Casa Paco");
+}
 
 
 void SetupResources()
 {
 	using namespace Ogre;
 
-	// Load resource paths from config file
-	ConfigFile cf;
-	cf.load("resources.cfg");
 
-	// Go through all sections & settings in the file
-	ConfigFile::SectionIterator itSection = cf.getSectionIterator();
+	FSLayer = new Ogre::FileSystemLayer("./");
 
-	String strGroupName, strLocation, strType;
-	while (itSection.hasMoreElements())
+	if (Ogre::RTShader::ShaderGenerator::initialize())
 	{
-		// Resource group.  "General", etc
-		strGroupName = itSection.peekNextKey();
-
-		ConfigFile::SettingsMultiMap* mapSettings = itSection.getNext();
-		ConfigFile::SettingsMultiMap::iterator itSetting = mapSettings->begin();
-
-		for (; itSetting != mapSettings->end(); ++itSetting)
+		ShaderGenerator = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
+		// Create and register the material manager listener if it doesn't exist yet.
+		if (!MaterialMgrListener)
 		{
-			// Zip or FileSystem
-			strType = itSetting->first;
-			// Filepath
-			strLocation = itSetting->second;
-			ResourceGroupManager::getSingleton().addResourceLocation(strLocation, strType, strGroupName);
+			MaterialMgrListener = new OgreBites::SGTechniqueResolverListener(ShaderGenerator);
+			Ogre::MaterialManager::getSingleton().addListener(MaterialMgrListener);
 		}
 	}
+
+	// load resource paths from config file
+	Ogre::ConfigFile cf;
+
+	Ogre::String resourcesPath = FSLayer->getConfigFilePath("resources.cfg");
+	if (Ogre::FileSystemLayer::fileExists(resourcesPath))
+	{
+		cf.load(resourcesPath);
+	}
+	else
+	{
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(
+			Ogre::FileSystemLayer::resolveBundlePath("./assets/ogre"),
+			"FileSystem", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+	}
+
+	Ogre::String sec, type, arch;
+	// go through all specified resource groups
+	Ogre::ConfigFile::SettingsBySection_::const_iterator seci;
+	for (seci = cf.getSettingsBySection().begin(); seci != cf.getSettingsBySection().end(); ++seci) {
+		sec = seci->first;
+		const Ogre::ConfigFile::SettingsMultiMap& settings = seci->second;
+		Ogre::ConfigFile::SettingsMultiMap::const_iterator i;
+
+		// go through all resource paths
+		for (i = settings.begin(); i != settings.end(); i++)
+		{
+			type = i->first;
+			arch = Ogre::FileSystemLayer::resolveBundlePath(i->second);
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch, type, sec);
+		}
+	}
+
+	sec = Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME;
+	const Ogre::ResourceGroupManager::LocationList genLocs = Ogre::ResourceGroupManager::getSingleton().getResourceLocationList(sec);
+
+	OgreAssert(!genLocs.empty(), ("Resource Group '" + sec + "' must contain at least one entry").c_str());
+
+	arch = genLocs.front().archive->getName();
+	type = genLocs.front().archive->getType();
+
+	// Add locations for supported shader languages
+	if (Ogre::GpuProgramManager::getSingleton().isSyntaxSupported("glsles"))
+	{
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch + "/Shaders/programs/GLSLES", type, sec);
+	}
+	else if (Ogre::GpuProgramManager::getSingleton().isSyntaxSupported("glsl"))
+	{
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch + "/Shaders/programs/GLSL120", type, sec);
+
+		if (Ogre::GpuProgramManager::getSingleton().isSyntaxSupported("glsl150"))
+		{
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch + "/Shaders/programs/GLSL150", type, sec);
+		}
+		else
+		{
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch + "/Shaders/programs/GLSL", type, sec);
+		}
+
+		if (Ogre::GpuProgramManager::getSingleton().isSyntaxSupported("glsl400"))
+		{
+			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch + "/Shaders/programs/GLSL400", type, sec);
+		}
+	}
+	else if (Ogre::GpuProgramManager::getSingleton().isSyntaxSupported("hlsl"))
+	{
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch + "/Shaders/programs/HLSL", type, sec);
+	}
+
+	std::string shaderPath = arch + "/Shaders/programs/RTShaderLib";
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(shaderPath + "/materials", type, sec);
+
+	if (Ogre::GpuProgramManager::getSingleton().isSyntaxSupported("glsles"))
+	{
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(shaderPath + "/GLSL", type, sec);
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(shaderPath + "/GLSLES", type, sec);
+	}
+	else if (Ogre::GpuProgramManager::getSingleton().isSyntaxSupported("glsl"))
+	{
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(shaderPath + "/GLSL", type, sec);
+	}
+	else if (Ogre::GpuProgramManager::getSingleton().isSyntaxSupported("hlsl"))
+	{
+		Ogre::ResourceGroupManager::getSingleton().addResourceLocation(shaderPath + "/HLSL", type, sec);
+	}
+
+	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
 	ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
@@ -74,69 +183,76 @@ void SetupResources()
     WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdShow)
 #endif
 {
-	// Initialise OGRE
-		Ogre::String pluginPath;
+	//Initialise OGRE
+
+	Ogre::String pluginPath;
+
 #ifdef  _DEBUG
 		pluginPath = "plugins_d.cfg";
 #else
 		pluginPath = "plugins.cfg";
 #endif
 
-	FSLayer = new Ogre::FileSystemLayer("Motor Casa Paco");
+	root = new Ogre::Root(pluginPath);
 
-	root = new Ogre::Root(pluginPath, FSLayer->getWritablePath("ogre.cfg"), FSLayer->getWritablePath("ogre.log"));
+//	FSLayer = new Ogre::FileSystemLayer("Motor Casa Paco");
 
-
-	Ogre::RenderSystem* rs = root->getRenderSystemByName("Direct3D11 Rendering Subsystem");
-	rs->setConfigOption("Full Screen", "No");
-	rs->setConfigOption("Video Mode", "800 x 600 @ 32-bit colour");
-	root->setRenderSystem(rs);
-
-
-	Ogre::String mSolutionPath;
-	mSolutionPath = "./assets";
-
-	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(mSolutionPath, "FileSystem", "General");
-	
-	Ogre::RenderWindow* mWindow = root->initialise(true, "Motor Casa Paco");
+	SetupWindow();
 
 	SetupResources();
 
-	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
 
-
-	if (Ogre::RTShader::ShaderGenerator::initialize())
-	{
-		ShaderGenerator = Ogre::RTShader::ShaderGenerator::getSingletonPtr();
-		// Core shader libs not found -> shader generating will fail.
-		// Create and register the material manager listener if it doesn't exist yet.
-	}
+	
 
 
 	Ogre::SceneManager* mSM = root->createSceneManager();
-	Ogre::Camera* mCamera=mSM->createCamera("MainCam");
-	mCamera->setPosition(0, 0, 80);
-	mCamera->lookAt(0, 0, -300);
-	mCamera->setNearClipDistance(5);
 
-	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
+	// create the camera
+	cam = mSM->createCamera("Cam");
+	cam->setNearClipDistance(1);
+	cam->setFarClipDistance(100000000);
+	cam->setAutoAspectRatio(true);
 
-	vp->setBackgroundColour(Ogre::ColourValue(0, 0, 0));
+	Ogre::SceneNode* mCamNode = mSM->getRootSceneNode()->createChildSceneNode("nCam");
+	mCamNode->attachObject(cam);
 
-	mCamera->setAspectRatio(
+	mCamNode->translate(100, 100, 100);
+	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
+
+	Ogre::Viewport* vp = mWindow->addViewport(cam);
+
+	vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+
+	cam->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
 
 	Ogre::Entity* ogreEntity = mSM->createEntity("sphere.mesh");
-	
-	
-	Ogre::SceneNode* Node = mSM->getRootSceneNode()->createChildSceneNode();
+	ogreEntity->setMaterialName("testSphere/sphereTest");
+
+
+	Ogre::SceneNode* Node = mSM->getRootSceneNode()->createChildSceneNode("test1");
 	Node->attachObject(ogreEntity);
+	Node->translate(10, 1, 10);
+	Node->scale(0.1, 0.1, 0.1);
+
+	Ogre::Entity* ogreEntity2 = mSM->createEntity("sphere.mesh");
+	ogreEntity2->setMaterialName("testSphere/sphereTest");
 
 
+	Ogre::SceneNode* Node2 = mSM->getRootSceneNode()->createChildSceneNode("test2");
+	Node2->attachObject(ogreEntity2);
+	Node2->translate(0, 10, 0);
+	Node2->scale(0.1, 0.1, 0.1);
+
+	Ogre::Light* luz = mSM->createLight("Luz");
+	luz->setType(Ogre::Light::LT_POINT);
+	luz->setDiffuseColour(0, 0, 0);
+
+	Ogre::SceneNode* mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
+	mLightNode->attachObject(luz);
 
 
-	//root->startRendering();
 
 	while (true)
 	{

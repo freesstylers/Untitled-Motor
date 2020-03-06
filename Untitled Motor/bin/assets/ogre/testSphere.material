@@ -1,0 +1,15 @@
+material testSphere/sphereTest {
+
+    technique
+    {
+        pass
+        {
+			
+            texture_unit 
+            {
+                texture spotlight_image.png
+				env_map spherical
+            }
+		}
+	}
+}
