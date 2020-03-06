@@ -34,19 +34,73 @@ using namespace OgreBites;
     root = new Ogre::Root("plugins.cfg");
 #endif
 
+<<<<<<< Updated upstream
+=======
+	Ogre::RenderSystem* rs = root->getRenderSystemByName("Direct3D11 Rendering Subsystem");
+	root->setRenderSystem(rs);
+	rs->setConfigOption("Full Screen", "No");
+	rs->setConfigOption("Video Mode", "800 x 600 @ 32-bit colour");
+	root->setRenderSystem(rs);
+
+	Ogre::String mSolutionPath;
+	mSolutionPath = "./assets";
+
+	Ogre::ResourceGroupManager::getSingleton().addResourceLocation(mSolutionPath, "FileSystem", "General");
+	
+	Ogre::RenderWindow* mWindow = root->initialise(true, "Motor Casa Paco");
+
+	Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
+
+	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();  
+
+	Ogre::SceneManager* mSM = root->createSceneManager();
+	Ogre::Camera* mCamera=mSM->createCamera("MainCam");
+	mCamera->setPosition(0, 0, 80);
+	mCamera->lookAt(0, 0, -300);
+	mCamera->setNearClipDistance(5);
+
+	Ogre::Viewport* vp = mWindow->addViewport(mCamera);
+
+	vp->setBackgroundColour(Ogre::ColourValue(1, 0, 0));
+
+	mCamera->setAspectRatio(
+		Ogre::Real(vp->getActualWidth()) /
+		Ogre::Real(vp->getActualHeight()));
+
+	Ogre::Light* luz = mSM->createLight("Luz");
+	luz->setType(Ogre::Light::LT_POINT);
+	luz->setDiffuseColour(1.0, 1.0, 1.0);
+
+	Ogre::SceneNode* mLightNode;
+	mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
+	mLightNode->attachObject(luz);
+
+	Ogre::Entity* ogreEntity = mSM->createEntity("Barrel.mesh");
+	
+	Ogre::SceneNode* node = mSM->getRootSceneNode()->createChildSceneNode();
+	node->attachObject(ogreEntity); //PETA AQUI
+	node->setPosition(0,0,0);
+	node->setScale(20, 20, 20);
+
+	/*
+>>>>>>> Stashed changes
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR, "Cannot initialize SDL2!",
 					"BaseApplication::setup");
 		SDL_Quit();
 		return 1;
 	}
-
+	*/
 	root->setRenderSystem(*(root->getAvailableRenderers().begin()));
 	root->restoreConfig();
 	root->initialise(false);
 
 	Ogre::NameValuePairList params; // ogre window / render system params
+<<<<<<< Updated upstream
 
+=======
+	
+>>>>>>> Stashed changes
 	//Ogre::RenderWindow* ogreWindow = root->createRenderWindow("myWindowTitle", 800, 600, false, &params);
 
 	// create OGRE scene manager, camera, viewports, etc
@@ -133,6 +187,7 @@ using namespace OgreBites;
 
 	// assign the NSWindow pointer to the parentWindowHandle parameter
 	params.insert(std::make_pair("externalWindowHandle", winHandle));
+<<<<<<< Updated upstream
 
 	//COSAS
 	OgreApp* app = new OgreApp();
@@ -140,6 +195,12 @@ using namespace OgreBites;
 	//
 
 	while (true)
+=======
+	*/
+	bool working = true;
+	root->startRendering();
+	while (working)
+>>>>>>> Stashed changes
 	{
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
