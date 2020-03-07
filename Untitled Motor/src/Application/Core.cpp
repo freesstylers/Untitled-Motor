@@ -13,12 +13,14 @@
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
 	resourceManager = new ResourceManager("./assets");
+	inputManager = new InputManager();
 	root = nullptr;
 }
 
 Core::~Core()
 {
 	delete resourceManager;
+	delete inputManager;
 }
 
 void Core::init()
@@ -111,6 +113,7 @@ void Core::pollEvents()
 			break;
 		default:
 			//llamar a InputManager
+			inputManager->InputManagement(event);	//Se podría ir a pincho de forma mas especifica llamando directamente al de boton, tecla, etc
 			break;
 		}
 	}
@@ -159,6 +162,7 @@ void Core::setup()
 	setupWindow(appName);
 
 	resourceManager->setup();
+	inputManager->setup();
 
 	sm = root->createSceneManager();
 

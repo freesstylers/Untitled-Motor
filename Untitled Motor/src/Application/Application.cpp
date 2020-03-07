@@ -30,12 +30,12 @@ Core* core;
 {
 	core = new Core("Motor Casa Paco");
 
+	SDL_Init(SDL_INIT_EVERYTHING);
+
 	core->init();
 	core->initTestScene();
 
 	core->start();
-
-
 
 	delete core;
 	SDL_Quit();

@@ -7,6 +7,7 @@
 #include <OgreFrameListener.h>
 
 #include "ResourceManager.h"
+#include "InputManager.h"
 
 class Core : public Ogre::FrameListener
 {
@@ -51,5 +52,6 @@ private:
 	Ogre::String appName;
 
 	ResourceManager* resourceManager;
+	InputManager* inputManager;
 };
 
