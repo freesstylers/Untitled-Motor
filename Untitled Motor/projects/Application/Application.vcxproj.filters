@@ -5,10 +5,14 @@
     <ClCompile Include="..\..\src\Application\Component.cpp" />
     <ClCompile Include="..\..\src\Application\Entity.cpp" />
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
+    <ClCompile Include="..\..\src\Application\Core.cpp" />
+    <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
     <ClInclude Include="..\..\src\Application\Entity.h" />
     <ClInclude Include="..\..\src\Application\Factory.h" />
+    <ClInclude Include="..\..\src\Application\Core.h" />
+    <ClInclude Include="..\..\src\Application\ResourceManager.h" />
   </ItemGroup>
 </Project>
