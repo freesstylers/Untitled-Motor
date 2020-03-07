@@ -54,17 +54,17 @@ void Core::initTestScene()
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
 
-	Ogre::Entity* ogreEntity = sm->createEntity("sphere.mesh");
-	ogreEntity->setMaterialName("testSphere/sphereTest");
+	Ogre::Entity* ogreEntity = sm->createEntity("barrel.mesh");
+	ogreEntity->setMaterialName("test");
 
 
 	Ogre::SceneNode* Node = sm->getRootSceneNode()->createChildSceneNode("test1");
 	Node->attachObject(ogreEntity);
 	Node->translate(10, 1, 10);
-	Node->scale(0.1, 0.1, 0.1);
+	//Node->scale(0.1, 0.1, 0.1);
 
 	Ogre::Entity* ogreEntity2 = sm->createEntity("sphere.mesh");
-	ogreEntity2->setMaterialName("testSphere/sphereTest");
+	ogreEntity2->setMaterialName("sphereTest");
 
 
 	Ogre::SceneNode* Node2 = sm->getRootSceneNode()->createChildSceneNode("test2");
