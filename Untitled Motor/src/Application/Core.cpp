@@ -9,11 +9,13 @@
 #include <OgreEntity.h>
 #include <OgreCamera.h>
 #include <OgreWindowEventUtilities.h>
+#include <OgreMeshManager.h>
 
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
 	resourceManager = new ResourceManager("./assets");
 	inputManager = new InputManager();
+	physicsManager = new PhysicsManager();
 	root = nullptr;
 }
 
@@ -21,6 +23,7 @@ Core::~Core()
 {
 	delete resourceManager;
 	delete inputManager;
+	delete physicsManager;
 }
 
 void Core::init()
@@ -82,6 +85,62 @@ void Core::initTestScene()
 	mLightNode->attachObject(luz);
 }
 
+void Core::initPhysicsTestScene()
+{
+	Ogre::Camera* cam = sm->createCamera("Cam");
+	cam->setNearClipDistance(1);
+	cam->setFarClipDistance(100000000);
+	cam->setAutoAspectRatio(true);
+
+	Ogre::SceneNode* mCamNode = sm->getRootSceneNode()->createChildSceneNode("nCam");
+	mCamNode->attachObject(cam);
+
+	mCamNode->translate(100, 50, 200);
+	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
+
+	Ogre::Viewport* vp = window->addViewport(cam);
+
+	vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+
+	cam->setAspectRatio(
+		Ogre::Real(vp->getActualWidth()) /
+		Ogre::Real(vp->getActualHeight()));
+
+	std::string cubeid = "cubo";
+	Ogre::SceneNode* cubeNode = sm->getRootSceneNode()->createChildSceneNode(cubeid);
+	Ogre::Entity* cubeEntity = sm->createEntity("cube.mesh");
+	cubeEntity->setMaterialName("test");
+	cubeNode->attachObject(cubeEntity);
+	cubeNode->translate(Ogre::Vector3(0, 50, 0));
+	cubeNode->showBoundingBox(true);
+
+	//se le pasa una referencia al nodo al que esta ligado
+	physicsManager->addBox(cubeid, btVector3(cubeNode->getPosition().x, cubeNode->getPosition().y, cubeNode->getPosition().z), btVector3(70, 70, 70), 10)->setUserPointer(cubeNode);
+
+	Ogre::MeshManager::getSingleton().createPlane("mPlane1080x800",
+		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+		Ogre::Plane(Ogre::Vector3::UNIT_Y, 0),
+		1080, 800, 100, 80, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
+	std::string planeid = "plano";
+	Ogre::SceneNode* planeNode = sm->getRootSceneNode()->createChildSceneNode(planeid);
+	Ogre::Entity* plane = sm->createEntity("mPlane1080x800");
+	plane->setMaterialName("test");
+	planeNode->attachObject(plane);
+	planeNode->translate(0, -100, 0);
+
+	//se le pasa una referencia al nodo al que esta ligado
+	physicsManager->addBox(planeid, btVector3(planeNode->getPosition().x, planeNode->getPosition().y, planeNode->getPosition().z), btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
+
+
+	Ogre::Light* luz = sm->createLight("Luz");
+	luz->setType(Ogre::Light::LT_POINT);
+	luz->setDiffuseColour(0, 0, 0);
+
+	Ogre::SceneNode* mLightNode = sm->getRootSceneNode()->createChildSceneNode("nLuz");
+	mLightNode->attachObject(luz);
+
+}
+
 void Core::start()
 {
 	root->startRendering();
@@ -120,6 +179,14 @@ void Core::pollEvents()
 
 	// just avoid "window not responding"
 	Ogre::WindowEventUtilities::messagePump();
+}
+
+bool Core::frameStarted(const Ogre::FrameEvent& evt)
+{
+	pollEvents();
+	physicsManager->stepWorld();
+	updateRender();
+	return true;
 }
 
 bool Core::checkConfig()
@@ -185,6 +252,26 @@ void Core::shutdown()
 		SDL_DestroyWindow(sdlWindow);
 		SDL_QuitSubSystem(SDL_INIT_VIDEO);
 		sdlWindow = nullptr;
+	}
+}
+
+void Core::updateRender()
+{
+	for (auto b: physicsManager->getBodies()) {
+		btRigidBody* body = b.second;
+
+		if (body && body->getMotionState()) {
+			btTransform trans;
+			body->getMotionState()->getWorldTransform(trans);
+
+			void* userPointer = body->getUserPointer();
+			if (userPointer) {
+				btQuaternion orientation = trans.getRotation();
+				Ogre::SceneNode* sceneNode = static_cast<Ogre::SceneNode*>(userPointer);
+				sceneNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()));
+				sceneNode->setOrientation(Ogre::Quaternion(orientation.getW(), orientation.getX(), orientation.getY(), orientation.getZ()));
+			}
+		}
 	}
 }
 

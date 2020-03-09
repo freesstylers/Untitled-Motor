@@ -8,6 +8,7 @@
 
 #include "ResourceManager.h"
 #include "InputManager.h"
+#include "PhysicsManager.h"
 
 class Core : public Ogre::FrameListener
 {
@@ -20,11 +21,13 @@ public:
 
 	void initTestScene();
 
+	void initPhysicsTestScene();
+
 	void start();
 
 	void pollEvents();
 
-	virtual bool frameStarted(const Ogre::FrameEvent& evt) { pollEvents(); return true; }
+	virtual bool frameStarted(const Ogre::FrameEvent& evt);
 	//virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 	virtual bool frameEnded(const Ogre::FrameEvent& evt) { return true; }
 	virtual void windowMoved(Ogre::RenderWindow* rw) {}
@@ -41,7 +44,7 @@ private:
 	void setupRoot();
 	void setup();
 	void shutdown();
-
+	void updateRender();//actualiza el render de los objetos con rigidbody
 	bool checkConfig();
 
 	Ogre::Root* root;
@@ -53,5 +56,6 @@ private:
 
 	ResourceManager* resourceManager;
 	InputManager* inputManager;
+	PhysicsManager* physicsManager;
 };
 

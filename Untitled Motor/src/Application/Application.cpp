@@ -33,7 +33,7 @@ Core* core;
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	core->init();
-	core->initTestScene();
+	core->initPhysicsTestScene();
 
 	core->start();
 

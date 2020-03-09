@@ -25,6 +25,7 @@
     <ClCompile Include="..\..\src\Application\Entity.cpp" />
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
+    <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
     <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +34,7 @@
     <ClInclude Include="..\..\src\Application\Entity.h" />
     <ClInclude Include="..\..\src\Application\Factory.h" />
     <ClInclude Include="..\..\src\Application\InputManager.h" />
+    <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
     <ClInclude Include="..\..\src\Application\ResourceManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
