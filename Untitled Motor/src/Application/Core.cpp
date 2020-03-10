@@ -11,6 +11,8 @@
 #include <OgreWindowEventUtilities.h>
 #include <OgreMeshManager.h>
 
+#include "TestComponent.h"
+
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
 	resourceManager = new ResourceManager("./assets");
@@ -138,7 +140,13 @@ void Core::initPhysicsTestScene()
 
 	Ogre::SceneNode* mLightNode = sm->getRootSceneNode()->createChildSceneNode("nLuz");
 	mLightNode->attachObject(luz);
+}
 
+void Core::testMessageSystem() {
+	TestComponent testCompA, testCompB;
+	testCompA.RegisterListener(&testCompB);
+	TextEvent event = TextEvent("\nEL MEJOR MENSAJE DE PRUEBA\n");
+	testCompA.EmitEvent(event);
 }
 
 void Core::start()
