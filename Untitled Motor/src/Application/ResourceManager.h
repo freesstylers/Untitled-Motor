@@ -3,21 +3,33 @@
 #include <OgreFileSystemLayer.h>
 #include <OgreSGTechniqueResolverListener.h>
 #include <OgreRTShaderSystem.h>
+#include <json.hpp>
+
+using json = nlohmann::json;
 
 class ResourceManager	//carga de recursos (por ahora)
 {
 public:
-	ResourceManager(const Ogre::String& path);
 	~ResourceManager();
+
+	static ResourceManager* getInstance();
+	static bool setupInstance(const Ogre::String& path);
+	static void clean();
 
 	void setup();
 
 	void addSceneManager(Ogre::SceneManager* sm);
 
+	json loadScene(const Ogre::String& sceneName);
+
 private:
+	ResourceManager(const Ogre::String& path);
 
 	void locateOgreResources();
 	void loadOgreResources();
+
+
+	void loadPrefabFile(const Ogre::String& fileDir);
 
 	bool initRTShaderSystem();
 	void wipeRTShaderSystem();
@@ -26,8 +38,12 @@ private:
 	Ogre::String path;
 	Ogre::String RTShaderLibPath;
 
+	json prefabs;
+
 
 	Ogre::RTShader::ShaderGenerator* shaderGenerator;
 	OgreBites::SGTechniqueResolverListener* materialMgrListener;
+
+	static ResourceManager* instance;
 };
 

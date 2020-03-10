@@ -5,20 +5,20 @@
     <ClCompile Include="..\..\src\Application\Component.cpp" />
     <ClCompile Include="..\..\src\Application\Entity.cpp" />
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
-    <ClCompile Include="..\..\src\Application\OgreApp.cpp" />
     <ClCompile Include="..\..\src\Application\Core.cpp" />
     <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
+    <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
     <ClInclude Include="..\..\src\Application\Entity.h" />
     <ClInclude Include="..\..\src\Application\Factory.h" />
-    <ClInclude Include="..\..\src\Application\OgreApp.h" />
     <ClInclude Include="..\..\src\Application\Core.h" />
     <ClInclude Include="..\..\src\Application\ResourceManager.h" />
     <ClInclude Include="..\..\src\Application\InputManager.h" />
     <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
+    <ClInclude Include="..\..\src\Application\SceneManager.h" />
   </ItemGroup>
 </Project>

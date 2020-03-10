@@ -4,6 +4,35 @@
 #include <OgreConfigFile.h>
 #include <OgreResourceGroupManager.h>
 #include <OgreTextureManager.h>
+#include <iostream>
+
+ResourceManager* ResourceManager::instance = 0;
+
+ResourceManager* ResourceManager::getInstance()
+{
+	if (instance == 0 || instance == nullptr)
+	{
+		return nullptr;
+	}
+
+	return instance;
+}
+
+bool ResourceManager::setupInstance(const Ogre::String& path)
+{
+	if (instance == 0)
+	{
+		instance = new ResourceManager(path);
+		return true;
+	}
+
+	return false;
+}
+
+void ResourceManager::clean()
+{
+	delete instance;
+}
 
 ResourceManager::ResourceManager(const Ogre::String& path) : path(path)
 {
@@ -23,11 +52,24 @@ void ResourceManager::setup()
 	locateOgreResources();
 	initRTShaderSystem();
 	loadOgreResources();
+
+	loadPrefabFile(path + "prefabs.json");
 }
 
 void ResourceManager::addSceneManager(Ogre::SceneManager* sm)
 {
 	shaderGenerator->addSceneManager(sm);
+}
+
+json ResourceManager::loadScene(const Ogre::String& sceneName)
+{
+	json j;
+	std::ifstream i(path + "scenes/" + sceneName + ".json");
+
+	i >> j;
+	i.close();
+
+	return j;
 }
 
 void ResourceManager::locateOgreResources()
@@ -160,4 +202,11 @@ void ResourceManager::wipeRTShaderSystem()
 void ResourceManager::loadOgreResources()
 {
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
+}
+
+void ResourceManager::loadPrefabFile(const Ogre::String& fileDir)
+{
+	std::ifstream i(fileDir);
+	i >> prefabs;
+	i.close();
 }

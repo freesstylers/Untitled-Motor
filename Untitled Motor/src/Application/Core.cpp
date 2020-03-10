@@ -10,10 +10,16 @@
 #include <OgreCamera.h>
 #include <OgreWindowEventUtilities.h>
 #include <OgreMeshManager.h>
+#include <stdexcept>
+
+
+#include "ResourceManager.h"
+//#include "InputManager.h"
+//#include "PhysicsManager.h"
 
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
-	resourceManager = new ResourceManager("./assets");
+
 	inputManager = new InputManager();
 	physicsManager = new PhysicsManager();
 	root = nullptr;
@@ -21,13 +27,31 @@ Core::Core(const Ogre::String& appName) : appName(appName)
 
 Core::~Core()
 {
-	delete resourceManager;
+	ResourceManager::clean();
 	delete inputManager;
 	delete physicsManager;
 }
 
 void Core::init()
 {
+	if (!ResourceManager::setupInstance("./assets"))
+	{
+		throw std::runtime_error("ResourceManager init fail");
+		return;
+	}
+/*
+	if (!InputManager::setupInstance("./assets"))
+	{
+		throw std::runtime_error("InputManager init fail");
+		return;
+	}
+
+	if (!PhysicsManager::setupInstance("./assets"))
+	{
+		throw std::runtime_error("PhysicsManager init fail");
+		return;
+	}
+*/
 	setupRoot();
 
 	if (checkConfig()) {
@@ -228,12 +252,12 @@ void Core::setup()
 	root->initialise(false);
 	setupWindow(appName);
 
-	resourceManager->setup();
+	ResourceManager::getInstance()->setup();
 	inputManager->setup();
 
 	sm = root->createSceneManager();
 
-	resourceManager->addSceneManager(sm);
+	ResourceManager::getInstance()->addSceneManager(sm);
 
 	root->addFrameListener(this);
 }

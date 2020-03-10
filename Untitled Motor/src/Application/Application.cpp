@@ -6,8 +6,8 @@
 
 #include <OgreException.h>
 #include <iostream>
+#include <stdexcept>
 
-//#include <iostream>
 //#include <btBulletDynamicsCommon.h>
 #define NOMINMAX
 
@@ -32,7 +32,19 @@ Core* core;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 
-	core->init();
+	try
+	{
+		core->init();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << "\n";
+		delete core;
+		SDL_Quit();
+
+		return 0;
+	}
+
 	core->initPhysicsTestScene();
 
 	core->start();

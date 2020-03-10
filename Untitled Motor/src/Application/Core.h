@@ -6,7 +6,6 @@
 #include <SDL.h>
 #include <OgreFrameListener.h>
 
-#include "ResourceManager.h"
 #include "InputManager.h"
 #include "PhysicsManager.h"
 
@@ -54,7 +53,7 @@ private:
 	Ogre::RenderWindow* window;
 	Ogre::String appName;
 
-	ResourceManager* resourceManager;
+	//ResourceManager* resourceManager;
 	InputManager* inputManager;
 	PhysicsManager* physicsManager;
 };
