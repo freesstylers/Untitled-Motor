@@ -549,7 +549,7 @@ namespace Ogre {
         // Index resources
         for( StringVector::iterator it = vec->begin(); it != vec->end(); ++it )
             grp->addToIndex(*it, pArch);
-        
+
         StringStream msg;
         msg << "Added resource location '" << name << "' of type '" << locType
             << "' to resource group '" << resGroup << "'";

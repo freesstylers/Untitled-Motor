@@ -1,0 +1,41 @@
+material sphereTest
+{
+
+    // receive_shadows on
+	
+    technique
+    {
+        pass
+        {
+			lighting on
+			
+            texture_unit 
+            {
+                texture spotlight_image.png
+                tex_address_mode wrap
+				env_map spherical
+				colour_op alpha_blend
+            }
+		}
+	}
+}
+material test
+{
+
+    // receive_shadows on
+	
+    technique
+    {
+        pass
+        {
+			lighting on
+			
+            texture_unit 
+            {
+                texture spotlight_image.png
+                tex_address_mode wrap
+				colour_op alpha_blend
+            }
+		}
+	}
+}
