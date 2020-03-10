@@ -26,5 +26,4 @@ AudioManager::~AudioManager()
 void AudioManager::playSound()
 {
    FMOD_MODE soundMode = FMOD_LOOP_NORMAL;
-   FMOD::Sound* sound = System::createSound(".\assets\sound\nice.mp3",soundMode,FMOD_CREATESOUNDEXINFO )
 }
