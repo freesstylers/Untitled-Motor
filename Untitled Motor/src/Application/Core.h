@@ -23,6 +23,8 @@ public:
 
 	void initPhysicsTestScene();
 
+	void testMessageSystem();
+
 	void start();
 
 	void pollEvents();
