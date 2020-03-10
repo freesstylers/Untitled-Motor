@@ -33,6 +33,7 @@ Core* core;
 
 	core->init();
 	core->initPhysicsTestScene();
+	core->testMessageSystem();
 
 	core->start();
 
