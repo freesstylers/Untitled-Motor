@@ -9,6 +9,7 @@
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "PhysicsManager.h"
+#include "AudioManager.h"
 
 class Core : public Ogre::FrameListener
 {
