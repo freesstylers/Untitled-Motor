@@ -12,6 +12,7 @@
 #include <OgreMeshManager.h>
 
 #include "TestComponent.h"
+#include "EventManager.h"
 
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
@@ -143,10 +144,24 @@ void Core::initPhysicsTestScene()
 }
 
 void Core::testMessageSystem() {
-	TestComponent testCompA, testCompB;
-	testCompA.RegisterListener(&testCompB);
+	// Normal check
+	TestComponent testComp;
+	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
 	TextEvent event = TextEvent("\nEL MEJOR MENSAJE DE PRUEBA\n");
-	testCompA.EmitEvent(event);
+	EventManager::GetInstance()->EmitEvent(event);
+
+	// Check double-add protection
+	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	EventManager::GetInstance()->EmitEvent(event);
+
+	// Check remove
+	EventManager::GetInstance()->UnregisterListener(&testComp, EventType::TEXT);
+	EventManager::GetInstance()->EmitEvent(event);
+
+	// Check clear
+	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	EventManager::GetInstance()->ClearListeners(EventType::TEXT);
+	EventManager::GetInstance()->EmitEvent(event);
 }
 
 void Core::start()

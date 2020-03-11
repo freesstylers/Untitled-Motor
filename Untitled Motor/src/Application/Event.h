@@ -2,23 +2,23 @@
 
 #include <string>
 
-enum EventID {
-	Text,
+enum EventType {
+	TEXT,
 };
 
 struct Event
 {
 public:
-	inline Event(EventID id) {
-		this->id = id;
+	inline Event(EventType id) {
+		this->type = id;
 	};
 
-	EventID id;
+	EventType type;
 };
 
 struct TextEvent : public Event {
 public:
-	inline TextEvent(std::string text) : Event(EventID::Text) {
+	inline TextEvent(std::string text) : Event(EventType::TEXT) {
 		this->text = text;
 	};
 

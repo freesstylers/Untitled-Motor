@@ -2,7 +2,7 @@
 
 bool TestComponent::ReceiveEvent(Event& event)
 {
-	if (event.id == EventID::Text) {
+	if (event.type == EventType::TEXT) {
 		TextEvent textEvent = static_cast<TextEvent&>(event);
 		printf(textEvent.text.c_str());
 	}

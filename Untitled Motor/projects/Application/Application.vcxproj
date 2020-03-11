@@ -24,7 +24,7 @@
     <ClCompile Include="..\..\src\Application\Component.cpp" />
     <ClCompile Include="..\..\src\Application\Core.cpp" />
     <ClCompile Include="..\..\src\Application\Entity.cpp" />
-    <ClCompile Include="..\..\src\Application\EventEmitter.cpp" />
+    <ClCompile Include="..\..\src\Application\EventManager.cpp" />
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
@@ -37,7 +37,7 @@
     <ClInclude Include="..\..\src\Application\Core.h" />
     <ClInclude Include="..\..\src\Application\Entity.h" />
     <ClInclude Include="..\..\src\Application\Event.h" />
-    <ClInclude Include="..\..\src\Application\EventEmitter.h" />
+    <ClInclude Include="..\..\src\Application\EventManager.h" />
     <ClInclude Include="..\..\src\Application\EventListener.h" />
     <ClInclude Include="..\..\src\Application\Factory.h" />
     <ClInclude Include="..\..\src\Application\InputManager.h" />
