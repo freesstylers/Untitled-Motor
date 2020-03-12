@@ -11,6 +11,9 @@
 #include <OgreWindowEventUtilities.h>
 #include <OgreMeshManager.h>
 
+#include "TestComponent.h"
+#include "EventManager.h"
+
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
 	resourceManager = new ResourceManager("./assets");
@@ -128,7 +131,27 @@ void Core::initPhysicsTestScene()
 
 	Ogre::SceneNode* mLightNode = sm->getRootSceneNode()->createChildSceneNode("nLuz");
 	mLightNode->attachObject(luz);
+}
 
+void Core::testMessageSystem() {
+	// Normal check
+	TestComponent testComp;
+	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	TextEvent event = TextEvent("\nEL MEJOR MENSAJE DE PRUEBA\n");
+	EventManager::GetInstance()->EmitEvent(event);
+
+	// Check double-add protection
+	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	EventManager::GetInstance()->EmitEvent(event);
+
+	// Check remove
+	EventManager::GetInstance()->UnregisterListener(&testComp, EventType::TEXT);
+	EventManager::GetInstance()->EmitEvent(event);
+
+	// Check clear
+	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	EventManager::GetInstance()->ClearListeners(EventType::TEXT);
+	EventManager::GetInstance()->EmitEvent(event);
 }
 
 void Core::start()

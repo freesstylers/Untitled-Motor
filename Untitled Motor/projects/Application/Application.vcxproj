@@ -20,22 +20,30 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Application\Application.cpp" />
+    <ClCompile Include="..\..\src\Application\AudioManager.cpp" />
     <ClCompile Include="..\..\src\Application\Component.cpp" />
     <ClCompile Include="..\..\src\Application\Core.cpp" />
     <ClCompile Include="..\..\src\Application\Entity.cpp" />
+    <ClCompile Include="..\..\src\Application\EventManager.cpp" />
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
     <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
+    <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\src\Application\AudioManager.h" />
     <ClInclude Include="..\..\src\Application\Component.h" />
     <ClInclude Include="..\..\src\Application\Core.h" />
     <ClInclude Include="..\..\src\Application\Entity.h" />
+    <ClInclude Include="..\..\src\Application\Event.h" />
+    <ClInclude Include="..\..\src\Application\EventManager.h" />
+    <ClInclude Include="..\..\src\Application\EventListener.h" />
     <ClInclude Include="..\..\src\Application\Factory.h" />
     <ClInclude Include="..\..\src\Application\InputManager.h" />
     <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
     <ClInclude Include="..\..\src\Application\ResourceManager.h" />
+    <ClInclude Include="..\..\src\Application\TestComponent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -150,7 +158,7 @@
       <AdditionalDependencies>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreMain_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreRTShaderSystem_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreBites_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>cd "$(SolutionDir)scripts"
+      <Command>cd "$(ProjectDir)..\..\scripts"
 call preBuild.bat</Command>
     </PreBuildEvent>
     <PreBuildEvent>
