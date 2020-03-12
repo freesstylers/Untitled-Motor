@@ -14,3 +14,8 @@ void Entity::update()
 
 	this_thread::sleep_for(chrono::milliseconds(1000));
 }
+
+void Entity::addComponent(Component* component)
+{
+
+}

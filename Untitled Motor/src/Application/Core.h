@@ -10,6 +10,7 @@
 #include "InputManager.h"
 #include "PhysicsManager.h"
 #include "AudioManager.h"
+#include "Entity.h"
 
 class Core : public Ogre::FrameListener
 {
@@ -62,5 +63,7 @@ private:
 	ResourceManager* resourceManager;
 	InputManager* inputManager;
 	PhysicsManager* physicsManager;
+
+	Entity* canicastanhazo;
 };
 

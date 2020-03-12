@@ -13,6 +13,7 @@
 
 #include "TestComponent.h"
 #include "EventManager.h"
+#include "SphereBody.h"
 
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
@@ -125,6 +126,22 @@ void Core::initPhysicsTestScene()
 	physicsManager->addBox(btVector3(planeNode->getPosition().x, planeNode->getPosition().y, planeNode->getPosition().z), btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
 
 
+	canicastanhazo = new Entity();
+
+	Ogre::SceneNode* sphereNode = sm->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity* sphereEntity = sm->createEntity("sphere.mesh");
+	sphereEntity->setMaterialName("sphereTest");
+	sphereNode->attachObject(sphereEntity);
+	sphereNode->translate(Ogre::Vector3(0, 100, 0));
+	float scaleFactor = 0.25;
+	sphereNode->setScale(sphereNode->getScale() * scaleFactor);
+
+	float rad = sphereEntity->getBoundingRadius();
+
+	canicastanhazo->addComponent(new SphereBody(canicastanhazo, physicsManager, rad * scaleFactor / 2, 
+		btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z),
+		10, sphereNode));
+
 	Ogre::Light* luz = sm->createLight("Luz");
 	luz->setType(Ogre::Light::LT_POINT);
 	luz->setDiffuseColour(0, 0, 0);
@@ -135,7 +152,7 @@ void Core::initPhysicsTestScene()
 
 void Core::testMessageSystem() {
 	// Normal check
-	TestComponent testComp;
+	TestComponent testComp(nullptr);
 	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
 	TextEvent event = TextEvent("\nEL MEJOR MENSAJE DE PRUEBA\n");
 	EventManager::GetInstance()->EmitEvent(event);
@@ -240,7 +257,6 @@ void Core::spawnSphere()
 		10);
 
 	rb->setUserPointer(sphereNode);
-	rb->applyCentralImpulse(btVector3(10, 0, 0));
 
 
 }

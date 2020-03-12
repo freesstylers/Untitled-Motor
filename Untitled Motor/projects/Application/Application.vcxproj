@@ -27,8 +27,11 @@
     <ClCompile Include="..\..\src\Application\EventManager.cpp" />
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
+    <ClCompile Include="..\..\src\Application\PhysicsComponent.cpp" />
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
     <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
+    <ClCompile Include="..\..\src\Application\RigidBodyComponent.cpp" />
+    <ClCompile Include="..\..\src\Application\SphereBody.cpp" />
     <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -41,8 +44,11 @@
     <ClInclude Include="..\..\src\Application\EventListener.h" />
     <ClInclude Include="..\..\src\Application\Factory.h" />
     <ClInclude Include="..\..\src\Application\InputManager.h" />
+    <ClInclude Include="..\..\src\Application\PhysicsComponent.h" />
     <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
     <ClInclude Include="..\..\src\Application\ResourceManager.h" />
+    <ClInclude Include="..\..\src\Application\RigidBodyComponent.h" />
+    <ClInclude Include="..\..\src\Application\SphereBody.h" />
     <ClInclude Include="..\..\src\Application\TestComponent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
