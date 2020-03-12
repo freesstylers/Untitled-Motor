@@ -61,6 +61,8 @@ void InputManager::KeyBoardInputManagement(SDL_Event event)
 		break;
 	case SDLK_d:
 		break;
+	default:
+		break;
 	}
 }
 

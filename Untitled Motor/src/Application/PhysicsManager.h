@@ -1,6 +1,6 @@
 #pragma once
 #include <btBulletDynamicsCommon.h>
-#include <map>
+#include <vector>
 
 class PhysicsManager
 {
@@ -8,10 +8,10 @@ public:
 	PhysicsManager();
 	void initWorld();
 	void stepWorld();
-	void addRigidBody(std::string id, btRigidBody* body);
-	btRigidBody* addSphere(std::string id, float rad, btVector3 pos, float mass);
-	btRigidBody* addBox(std::string id, btVector3 pos, btVector3 dimensions, float mass);
-	std::map<std::string, btRigidBody*> getBodies();
+	void addRigidBody(btRigidBody* body);
+	btRigidBody* addSphere(float rad, btVector3 pos, float mass);
+	btRigidBody* addBox(btVector3 pos, btVector3 dimensions, float mass);
+	std::vector<btRigidBody*> getBodies();
 
 	~PhysicsManager();
 private:
@@ -21,6 +21,6 @@ private:
 	btBroadphaseInterface* broadphase=nullptr;
 	btConstraintSolver* solver=nullptr;
 
-	std::map<std::string, btRigidBody*> bodies;
+	std::vector<btRigidBody*> bodies;
 };
 

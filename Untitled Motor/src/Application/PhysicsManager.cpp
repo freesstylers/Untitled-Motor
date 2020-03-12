@@ -19,13 +19,13 @@ void PhysicsManager::stepWorld()
 	world->stepSimulation(1.0 / 60.0);
 }
 
-void PhysicsManager::addRigidBody(std::string id, btRigidBody* body)
+void PhysicsManager::addRigidBody(btRigidBody* body)
 {
-	bodies[id] = body;
+	bodies.push_back(body);
 	world->addRigidBody(body);
 }
 
-btRigidBody* PhysicsManager::addSphere(std::string id, float rad, btVector3 pos, float mass)
+btRigidBody* PhysicsManager::addSphere(float rad, btVector3 pos, float mass)
 {
 	btTransform t;
 	t.setIdentity();
@@ -35,13 +35,13 @@ btRigidBody* PhysicsManager::addSphere(std::string id, float rad, btVector3 pos,
 	if (mass != 0.0)
 		sphere->calculateLocalInertia(mass, inertia);
 	btMotionState* motion = new btDefaultMotionState(t);
-	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, sphere);
+	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, sphere, inertia);
 	btRigidBody* body = new btRigidBody(info);
-	addRigidBody(id, body);
+	addRigidBody(body);
 	return body;
 }
 
-btRigidBody* PhysicsManager::addBox(std::string id, btVector3 pos, btVector3 dimensions, float mass)
+btRigidBody* PhysicsManager::addBox(btVector3 pos, btVector3 dimensions, float mass)
 {
 	btTransform t;
 	t.setIdentity();
@@ -51,13 +51,13 @@ btRigidBody* PhysicsManager::addBox(std::string id, btVector3 pos, btVector3 dim
 	if (mass != 0.0)
 		box->calculateLocalInertia(mass, inertia);
 	btMotionState* motion = new btDefaultMotionState(t);
-	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, box);
+	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, box, inertia);
 	btRigidBody* body = new btRigidBody(info);
-	addRigidBody(id, body);
+	addRigidBody(body);
 	return body;
 }
 
-std::map<std::string, btRigidBody*> PhysicsManager::getBodies()
+std::vector<btRigidBody*> PhysicsManager::getBodies()
 {
 	return bodies;
 }
@@ -65,8 +65,8 @@ std::map<std::string, btRigidBody*> PhysicsManager::getBodies()
 PhysicsManager::~PhysicsManager()
 {
 	for (auto b : bodies) {
-		world->removeRigidBody(b.second);
-		delete b.second;
+		world->removeRigidBody(b);
+		delete b;
 	}
 	delete config;
 	delete solver;

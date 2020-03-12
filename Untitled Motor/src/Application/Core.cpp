@@ -100,22 +100,11 @@ void Core::initPhysicsTestScene()
 
 	Ogre::Viewport* vp = window->addViewport(cam);
 
-	vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+	vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
 
 	cam->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
-
-	std::string cubeid = "cubo";
-	Ogre::SceneNode* cubeNode = sm->getRootSceneNode()->createChildSceneNode(cubeid);
-	Ogre::Entity* cubeEntity = sm->createEntity("cube.mesh");
-	cubeEntity->setMaterialName("test");
-	cubeNode->attachObject(cubeEntity);
-	cubeNode->translate(Ogre::Vector3(0, 50, 0));
-	cubeNode->showBoundingBox(true);
-
-	//se le pasa una referencia al nodo al que esta ligado
-	physicsManager->addBox(cubeid, btVector3(cubeNode->getPosition().x, cubeNode->getPosition().y, cubeNode->getPosition().z), btVector3(70, 70, 70), 10)->setUserPointer(cubeNode);
 
 	Ogre::MeshManager::getSingleton().createPlane("mPlane1080x800",
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -127,9 +116,10 @@ void Core::initPhysicsTestScene()
 	plane->setMaterialName("test");
 	planeNode->attachObject(plane);
 	planeNode->translate(0, -100, 0);
+	planeNode->showBoundingBox(true);
 
 	//se le pasa una referencia al nodo al que esta ligado
-	physicsManager->addBox(planeid, btVector3(planeNode->getPosition().x, planeNode->getPosition().y, planeNode->getPosition().z), btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
+	physicsManager->addBox(btVector3(planeNode->getPosition().x, planeNode->getPosition().y, planeNode->getPosition().z), btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
 
 
 	Ogre::Light* luz = sm->createLight("Luz");
@@ -170,6 +160,17 @@ void Core::pollEvents()
 				}
 			}
 			break;
+		case SDL_KEYDOWN:
+			switch (event.key.keysym.sym) {
+			case SDLK_SPACE:
+				spawnBox();
+				break;
+			case SDLK_v:
+				spawnSphere();
+				break;
+			default:
+				break;
+			}
 		default:
 			//llamar a InputManager
 			inputManager->InputManagement(event);	//Se podría ir a pincho de forma mas especifica llamando directamente al de boton, tecla, etc
@@ -196,6 +197,48 @@ bool Core::checkConfig()
 		return root->showConfigDialog(OgreBites::getNativeConfigDialog());
 	}
 	else return true;
+}
+
+void Core::spawnSphere()
+{
+	Ogre::SceneNode* sphereNode = sm->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity* sphereEntity = sm->createEntity("sphere.mesh");
+	sphereEntity->setMaterialName("sphereTest");
+	sphereNode->attachObject(sphereEntity);
+	sphereNode->translate(Ogre::Vector3(0, 100, 0));
+	float scaleFactor = 0.25;
+	sphereNode->setScale(sphereNode->getScale() * scaleFactor);
+
+	float rad=sphereEntity->getBoundingRadius();
+
+	//se le pasa una referencia al nodo al que esta ligado
+	btRigidBody* rb=physicsManager->addSphere(sphereEntity->getBoundingRadius()*scaleFactor/2, 
+		btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z),
+		10);
+
+	rb->setUserPointer(sphereNode);
+	rb->applyCentralImpulse(btVector3(10, 0, 0));
+
+
+}
+
+void Core::spawnBox()
+{
+	Ogre::SceneNode* boxNode = sm->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity* boxEntity = sm->createEntity("cube.mesh");
+	boxEntity->setMaterialName("test");
+	boxNode->attachObject(boxEntity);
+	boxNode->translate(Ogre::Vector3(0, 100, 0));
+	float scaleFactor = 0.25;
+	boxNode->setScale(boxNode->getScale() * scaleFactor);
+
+	Ogre::Vector3 size = boxEntity->getBoundingBox().getSize();
+
+	//se le pasa una referencia al nodo al que esta ligado
+	btRigidBody* rb=physicsManager->addBox(btVector3(boxNode->getPosition().x, boxNode->getPosition().y, boxNode->getPosition().z), 
+		btVector3(boxEntity->getBoundingBox().getSize().x, boxEntity->getBoundingBox().getSize().y, boxEntity->getBoundingBox().getSize().z)*scaleFactor/2,
+		10);
+	rb->setUserPointer(boxNode);
 }
 
 void Core::setupRoot()
@@ -258,7 +301,7 @@ void Core::shutdown()
 void Core::updateRender()
 {
 	for (auto b: physicsManager->getBodies()) {
-		btRigidBody* body = b.second;
+		btRigidBody* body = b;
 
 		if (body && body->getMotionState()) {
 			btTransform trans;
