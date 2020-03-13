@@ -5,7 +5,7 @@
 class PhysicsComponent : public Component
 {
 public:
-	PhysicsComponent(void* ent, PhysicsManager* manager);
+	PhysicsComponent(std::string tag, PhysicsManager* manager);
 protected:
 	PhysicsManager* phManager = nullptr;
 };

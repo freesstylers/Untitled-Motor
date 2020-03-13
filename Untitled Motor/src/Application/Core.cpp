@@ -123,10 +123,11 @@ void Core::initPhysicsTestScene()
 	planeNode->showBoundingBox(true);
 
 	//se le pasa una referencia al nodo al que esta ligado
-	physicsManager->addBox(btVector3(planeNode->getPosition().x, planeNode->getPosition().y, planeNode->getPosition().z), btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
+	physicsManager->addBox(btVector3(planeNode->getPosition().x, planeNode->getPosition().y, planeNode->getPosition().z),
+		btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
 
 
-	canicastanhazo = new Entity();
+	//canicastanhazo = new Entity("canicastanhazo");
 
 	Ogre::SceneNode* sphereNode = sm->getRootSceneNode()->createChildSceneNode();
 	Ogre::Entity* sphereEntity = sm->createEntity("sphere.mesh");
@@ -138,9 +139,8 @@ void Core::initPhysicsTestScene()
 
 	float rad = sphereEntity->getBoundingRadius();
 
-	canicastanhazo->addComponent(new SphereBody(canicastanhazo, physicsManager, rad * scaleFactor / 2, 
-		btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z),
-		10, sphereNode));
+	//SphereBody* sp = new SphereBody("s", physicsManager, rad*scaleFactor/2, 
+		//btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode);
 
 	Ogre::Light* luz = sm->createLight("Luz");
 	luz->setType(Ogre::Light::LT_POINT);

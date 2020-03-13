@@ -4,7 +4,8 @@
 class RigidBodyComponent : public PhysicsComponent
 {
 public:
-	RigidBodyComponent(void* ent, PhysicsManager* manager);
+	RigidBodyComponent(std::string tag, PhysicsManager* manager);
+	btRigidBody* getRigidBody();
 protected:
 	btRigidBody* body=nullptr;
 };

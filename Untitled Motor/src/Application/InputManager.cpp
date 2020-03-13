@@ -103,8 +103,6 @@ void InputManager::MouseButtonChange(int button, int change)
 		break;
 	default:
 		break;
-	default:
-		break;
 	}
 }
 

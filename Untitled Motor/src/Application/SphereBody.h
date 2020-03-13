@@ -5,6 +5,5 @@
 class SphereBody : public RigidBodyComponent
 {
 public:
-	SphereBody(void* ent, PhysicsManager* manager, float rad, btVector3 initPos, float mass, void* user);
-	bool ReceiveEvent(Event& event) override;
+	SphereBody(std::string tag, PhysicsManager* manager, float rad, btVector3 initPos, float mass, void* user);
 };

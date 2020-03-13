@@ -1,7 +1,8 @@
 #pragma once
 #include "Component.h"
+#include "EventListener.h"
 
-class TestComponent : public Component
+class TestComponent : public Component, public EventListener
 {
 public:
 	TestComponent(std::string n);
