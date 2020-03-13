@@ -213,7 +213,7 @@ void Core::pollEvents()
 			}
 		default:
 			//llamar a InputManager
-			inputManager->InputManagement(event);	//Se podría ir a pincho de forma mas especifica llamando directamente al de boton, tecla, etc
+			inputManager->GeneralInputManagement(event);	//Se podría ir a pincho de forma mas especifica llamando directamente al de boton, tecla, etc
 			break;
 		}
 	}
