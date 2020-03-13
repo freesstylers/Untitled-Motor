@@ -145,7 +145,7 @@ void Core::initPhysicsTestScene()
 
 void Core::testMessageSystem() {
 	// Normal check
-	TestComponent testComp;
+	TestComponent testComp("prueba");
 	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
 	TextEvent event = TextEvent("\nEL MEJOR MENSAJE DE PRUEBA\n");
 	EventManager::GetInstance()->EmitEvent(event);

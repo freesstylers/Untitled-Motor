@@ -5,6 +5,8 @@
 class TestComponent :
 	public Component, public EventListener
 {
+public:
+	TestComponent(std::string n);
 	bool ReceiveEvent(Event& event) override;
 };
 
