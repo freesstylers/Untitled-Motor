@@ -13,11 +13,18 @@ public:
 	AudioManager();
 	~AudioManager();
 
-	void playSound();
+	void playSound(const char* path, int nChannel);
+	void playMusic(const char* path, int nChannel);
+
+	bool isPlaying();
+	bool isPlayingChannel(int nChannel);
+	void update();
 
 private:
 	FMOD::System* system;
-	
+	FMOD_RESULT result;
+	FMOD::ChannelGroup* channelGroup;
+	FMOD::Channel* channels[];
 
 };
 
