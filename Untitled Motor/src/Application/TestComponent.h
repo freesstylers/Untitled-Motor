@@ -4,7 +4,7 @@
 class TestComponent : public Component
 {
 public:
-	TestComponent(void* ent) :Component(ent) {};
+	TestComponent(std::string n);
 	bool ReceiveEvent(Event& event) override;
 };
 
