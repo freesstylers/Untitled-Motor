@@ -19,6 +19,7 @@ Core::Core(const Ogre::String& appName) : appName(appName)
 	resourceManager = new ResourceManager("./assets");
 	inputManager = new InputManager();
 	physicsManager = new PhysicsManager();
+	audioManager = new AudioManager();
 	root = nullptr;
 }
 
@@ -40,7 +41,7 @@ void Core::init()
 
 void Core::initTestScene()
 {
-
+	
 	// create the camera
 
 	Ogre::Camera* cam = sm->createCamera("Cam");
@@ -90,6 +91,12 @@ void Core::initTestScene()
 
 void Core::initPhysicsTestScene()
 {
+
+	//Aki para que suene temporalmente
+	audioManager->playMusic("assets/sound/rock.wav",0);
+	audioManager->playSound("assets/sound/a.wav",1);
+	audioManager->setVolume(.2, 0);
+
 	Ogre::Camera* cam = sm->createCamera("Cam");
 	cam->setNearClipDistance(1);
 	cam->setFarClipDistance(100000000);
@@ -209,6 +216,9 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 	pollEvents();
 	physicsManager->stepWorld();
 	updateRender();
+
+	audioManager->update();
+
 	return true;
 }
 

@@ -60,5 +60,7 @@ private:
 	ResourceManager* resourceManager;
 	InputManager* inputManager;
 	PhysicsManager* physicsManager;
+	AudioManager* audioManager;
+
 };
 
