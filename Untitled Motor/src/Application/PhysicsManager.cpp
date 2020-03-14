@@ -37,6 +37,7 @@ btRigidBody* PhysicsManager::addSphere(float rad, btVector3 pos, float mass)
 	btMotionState* motion = new btDefaultMotionState(t);
 	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, sphere, inertia);
 	btRigidBody* body = new btRigidBody(info);
+	
 	addRigidBody(body);
 	return body;
 }

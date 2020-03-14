@@ -146,8 +146,10 @@ void Core::initPhysicsTestScene()
 
 	float rad = sphereEntity->getBoundingRadius();
 
-	//SphereBody* sp = new SphereBody("s", physicsManager, rad*scaleFactor/2, 
-		//btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode);
+	//canicastanhazo->addComponent<SphereBody>("spherebody", physicsManager, rad * scaleFactor / 2,
+	//	btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode);
+	SphereBody* sp = new SphereBody("s", physicsManager, rad*scaleFactor/2,
+		btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode);
 
 	Ogre::Light* luz = sm->createLight("Luz");
 	luz->setType(Ogre::Light::LT_POINT);

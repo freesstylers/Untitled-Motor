@@ -4,7 +4,10 @@
 
 enum EventType {
 	TEXT,
+	RIGIDBODY_INFO
 };
+
+class btRigidBody;
 
 struct Event
 {
@@ -23,4 +26,12 @@ public:
 	};
 
 	std::string text;
+};
+
+struct RigidBodyInfoEvent : public Event {
+public:
+	inline RigidBodyInfoEvent(btRigidBody* rb) : Event(EventType::RIGIDBODY_INFO) {
+		this->rb = rb;
+	}
+	btRigidBody* rb;
 };
