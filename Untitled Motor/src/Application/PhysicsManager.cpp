@@ -1,5 +1,7 @@
 #include "PhysicsManager.h"
 
+PhysicsManager* PhysicsManager::instance = 0;
+
 PhysicsManager::PhysicsManager()
 {
 	config = new btDefaultCollisionConfiguration();
@@ -73,6 +75,32 @@ PhysicsManager::~PhysicsManager()
 	delete dispatcher;
 	delete broadphase;
 	delete world;
+}
+
+PhysicsManager* PhysicsManager::getInstance()
+{
+	if (instance == 0 || instance == nullptr)
+	{
+		return nullptr;
+	}
+
+	return instance;
+}
+
+bool PhysicsManager::setupInstance()
+{
+	if (instance == 0)
+	{
+		instance = new PhysicsManager();
+		return true;
+	}
+
+	return false;
+}
+
+void PhysicsManager::clean()
+{
+	delete instance;
 }
 
 

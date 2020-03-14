@@ -1,6 +1,8 @@
 #include "InputManager.h"
 #include <iostream>
 
+InputManager* InputManager::instance = 0;
+
 InputManager::InputManager()
 {
 
@@ -8,10 +10,36 @@ InputManager::InputManager()
 
 InputManager::~InputManager()
 {
-	for (int i = 0; i < NumControls; i++)
+	for (int i = 0; i < NumControls && controllers.size() > i; i++)
 		SDL_GameControllerClose(controllers[i]);
 
 	controllers.clear();
+}
+
+InputManager* InputManager::getInstance()
+{
+	if (instance == 0 || instance == nullptr)
+	{
+		return nullptr;
+	}
+
+	return instance;
+}
+
+bool InputManager::setupInstance()
+{
+	if (instance == 0)
+	{
+		instance = new InputManager();
+		return true;
+	}
+
+	return false;
+}
+
+void InputManager::clean()
+{
+	delete instance;
 }
 
 void InputManager::setup()

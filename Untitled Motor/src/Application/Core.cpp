@@ -14,44 +14,41 @@
 
 
 #include "ResourceManager.h"
-//#include "InputManager.h"
-//#include "PhysicsManager.h"
+#include "InputManager.h"
+#include "PhysicsManager.h"
 
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
-
-	inputManager = new InputManager();
-	physicsManager = new PhysicsManager();
 	root = nullptr;
 }
 
 Core::~Core()
 {
 	ResourceManager::clean();
-	delete inputManager;
-	delete physicsManager;
+	InputManager::clean();
+	PhysicsManager::clean();
 }
 
 void Core::init()
 {
-	if (!ResourceManager::setupInstance("./assets"))
+	try	{ ResourceManager::setupInstance("./assets/"); }
+	catch(const std::exception& e)
 	{
-		throw std::runtime_error("ResourceManager init fail");
-		return;
-	}
-/*
-	if (!InputManager::setupInstance("./assets"))
-	{
-		throw std::runtime_error("InputManager init fail");
-		return;
+		throw std::runtime_error("ResourceManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
-	if (!PhysicsManager::setupInstance("./assets"))
+	try	{ InputManager::setupInstance(); }
+	catch (const std::exception& e)
 	{
-		throw std::runtime_error("PhysicsManager init fail");
-		return;
+		throw std::runtime_error("InputManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
-*/
+
+	try	{ PhysicsManager::setupInstance(); }
+	catch (const std::exception& e)
+	{
+		throw std::runtime_error("PhysicsManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}
+
 	setupRoot();
 
 	if (checkConfig()) {
@@ -139,7 +136,7 @@ void Core::initPhysicsTestScene()
 	cubeNode->showBoundingBox(true);
 
 	//se le pasa una referencia al nodo al que esta ligado
-	physicsManager->addBox(cubeid, btVector3(cubeNode->getPosition().x, cubeNode->getPosition().y, cubeNode->getPosition().z), btVector3(70, 70, 70), 10)->setUserPointer(cubeNode);
+	PhysicsManager::getInstance()->addBox(cubeid, btVector3(cubeNode->getPosition().x, cubeNode->getPosition().y, cubeNode->getPosition().z), btVector3(70, 70, 70), 10)->setUserPointer(cubeNode);
 
 	Ogre::MeshManager::getSingleton().createPlane("mPlane1080x800",
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -153,7 +150,7 @@ void Core::initPhysicsTestScene()
 	planeNode->translate(0, -100, 0);
 
 	//se le pasa una referencia al nodo al que esta ligado
-	physicsManager->addBox(planeid, btVector3(planeNode->getPosition().x, planeNode->getPosition().y, planeNode->getPosition().z), btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
+	PhysicsManager::getInstance()->addBox(planeid, btVector3(planeNode->getPosition().x, planeNode->getPosition().y, planeNode->getPosition().z), btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
 
 
 	Ogre::Light* luz = sm->createLight("Luz");
@@ -196,7 +193,7 @@ void Core::pollEvents()
 			break;
 		default:
 			//llamar a InputManager
-			inputManager->InputManagement(event);	//Se podría ir a pincho de forma mas especifica llamando directamente al de boton, tecla, etc
+			InputManager::getInstance()->InputManagement(event);	//Se podría ir a pincho de forma mas especifica llamando directamente al de boton, tecla, etc
 			break;
 		}
 	}
@@ -208,7 +205,7 @@ void Core::pollEvents()
 bool Core::frameStarted(const Ogre::FrameEvent& evt)
 {
 	pollEvents();
-	physicsManager->stepWorld();
+	PhysicsManager::getInstance()->stepWorld();
 	updateRender();
 	return true;
 }
@@ -252,8 +249,17 @@ void Core::setup()
 	root->initialise(false);
 	setupWindow(appName);
 
-	ResourceManager::getInstance()->setup();
-	inputManager->setup();
+	try { ResourceManager::getInstance()->setup(); }
+	catch (const std::exception& e)
+	{
+		throw std::runtime_error("ResourceManager setup fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}
+
+	try { InputManager::getInstance()->setup(); }
+	catch (const std::exception& e)
+	{
+		throw std::runtime_error("InputManager setup fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}	
 
 	sm = root->createSceneManager();
 
@@ -281,7 +287,7 @@ void Core::shutdown()
 
 void Core::updateRender()
 {
-	for (auto b: physicsManager->getBodies()) {
+	for (auto b: PhysicsManager::getInstance()->getBodies()) {
 		btRigidBody* body = b.second;
 
 		if (body && body->getMotionState()) {

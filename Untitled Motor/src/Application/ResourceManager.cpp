@@ -66,8 +66,15 @@ json ResourceManager::loadScene(const Ogre::String& sceneName)
 	json j;
 	std::ifstream i(path + "scenes/" + sceneName + ".json");
 
-	i >> j;
-	i.close();
+	if (i.is_open())
+	{
+		i >> j;
+		i.close();
+	}
+	else
+	{
+		std::cout << "File not found: " << path << "scenes/" << sceneName << ".json" << "\n";
+	}
 
 	return j;
 }
@@ -207,6 +214,15 @@ void ResourceManager::loadOgreResources()
 void ResourceManager::loadPrefabFile(const Ogre::String& fileDir)
 {
 	std::ifstream i(fileDir);
-	i >> prefabs;
-	i.close();
+
+	if (i.is_open())
+	{
+		i >> prefabs;
+		i.close();
+	}
+	else
+	{
+		std::cout << "File not found: " << fileDir << "\n";
+	}
+
 }

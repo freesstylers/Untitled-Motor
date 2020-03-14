@@ -6,9 +6,6 @@
 #include <SDL.h>
 #include <OgreFrameListener.h>
 
-#include "InputManager.h"
-#include "PhysicsManager.h"
-
 class Core : public Ogre::FrameListener
 {
 
@@ -52,9 +49,5 @@ private:
 	SDL_Window* sdlWindow;
 	Ogre::RenderWindow* window;
 	Ogre::String appName;
-
-	//ResourceManager* resourceManager;
-	InputManager* inputManager;
-	PhysicsManager* physicsManager;
 };
 

@@ -6,13 +6,15 @@
 #include <Vector>
 #include <SDL_gamecontroller.h>
 #include <SDL_events.h>
-//#include "SDL.h"
 
 class InputManager	//carga de recursos (por ahora)
 {
 public:
-	InputManager();
 	~InputManager();
+
+	static InputManager* getInstance();
+	static bool setupInstance();
+	static void clean();
 
 	void setup();
 
@@ -24,8 +26,11 @@ public:
 
 	void GameControllerAxisManagement(SDL_Event event);
 private:
+	InputManager();
 
 	std::vector<SDL_GameController*> controllers;
 	
 	const int NumControls = 1;
+
+	static InputManager* instance;
 };
