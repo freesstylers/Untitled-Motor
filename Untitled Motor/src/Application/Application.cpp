@@ -45,7 +45,10 @@ Core* core;
 		return 0;
 	}
 
-	core->initPhysicsTestScene();
+
+	core->initLoadingTestScene();
+
+	//core->initPhysicsTestScene();
 
 	core->start();
 

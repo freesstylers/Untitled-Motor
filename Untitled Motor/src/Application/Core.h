@@ -6,6 +6,8 @@
 #include <SDL.h>
 #include <OgreFrameListener.h>
 
+#include "TestEntity.h"
+
 class Core : public Ogre::FrameListener
 {
 
@@ -18,6 +20,8 @@ public:
 	void initTestScene();
 
 	void initPhysicsTestScene();
+
+	void initLoadingTestScene();
 
 	void start();
 
@@ -49,5 +53,6 @@ private:
 	SDL_Window* sdlWindow;
 	Ogre::RenderWindow* window;
 	Ogre::String appName;
+	std::vector<TestEntity> testEntities;
 };
 

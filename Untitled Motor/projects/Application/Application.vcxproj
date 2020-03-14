@@ -28,6 +28,7 @@
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
     <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
     <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
+    <ClCompile Include="..\..\src\Application\TestEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -38,6 +39,7 @@
     <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
     <ClInclude Include="..\..\src\Application\ResourceManager.h" />
     <ClInclude Include="..\..\src\Application\SceneManager.h" />
+    <ClInclude Include="..\..\src\Application\TestEntity.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

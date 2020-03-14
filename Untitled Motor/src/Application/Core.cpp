@@ -16,6 +16,8 @@
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "PhysicsManager.h"
+#include "SceneManager.h"
+#include <iostream>
 
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
@@ -162,6 +164,20 @@ void Core::initPhysicsTestScene()
 
 }
 
+void Core::initLoadingTestScene()
+{
+	json file = ResourceManager::getInstance()->loadScene("prefabs");
+
+	for (json::iterator it = file.begin(); it != file.end(); ++it) {
+		testEntities.push_back(TestEntity(0, *it));
+	}
+
+	for (int i = 0; i < testEntities.size(); i++)
+		testEntities.at(i).update();
+
+	std::cout << "eeeee" << std::endl;
+}
+
 void Core::start()
 {
 	root->startRendering();
@@ -207,6 +223,7 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 	pollEvents();
 	PhysicsManager::getInstance()->stepWorld();
 	updateRender();
+	
 	return true;
 }
 
