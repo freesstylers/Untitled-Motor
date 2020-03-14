@@ -65,5 +65,6 @@ private:
 	PhysicsManager* physicsManager;
 
 	Entity* canicastanhazo;
+	AudioManager* audioManager;
 };
 
