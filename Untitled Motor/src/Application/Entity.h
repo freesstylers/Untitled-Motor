@@ -10,40 +10,46 @@
 
 class Component;
 
-using namespace std;
-using uptr_cmp = unique_ptr<Component>;
+using uptr_cmp = std::unique_ptr<Component>;
 
 
 class Entity {
 public:
-	Entity(string name);
+	Entity(std::string name);
 	void update();
 
 	template <typename T>
-	T* getComponent(string tag);
+	T* getComponent(std::string tag) {
+		return static_cast<T*>(map_.find(tag));
+	}
 
 	template <typename T, typename ... Targs>
-	T* addComponent(string tag, Targs&& ... mArgs);
+	T* addComponent(std::string tag, Targs&& ... mArgs) {
+		T* c(new T(tag, std::forward<Targs>(mArgs)...)); //Alomejor hay que usar factory
+		components_.push_back(uptr_cmp(c));
+		map_.insert(std::pair<std::string, Component*>(tag, c));
+		c->setEntity(this); //Uso para conseguir otros componentes
+		c->init();
+		return c;
+	}
 
-	bool hasComponent(string tag);
+	bool hasComponent(std::string tag);
 
 	template<typename T>
-	void toggleComponent(string tag, bool state);
+	void toggleComponent(std::string tag, bool state);
 
-	void setName(string name);
-	string const getName();
+	void setName(std::string name);
+	std::string const getName();
 
 	void setActive(bool state);
 	bool const getActive();
 protected:
 
 private:
-
 	bool isActive_;
-	string name_;
-	vector<uptr_cmp> components_; 
-	map<string, Component*> map_;
-
+	std::string name_;
+	std::vector<uptr_cmp> components_;
+	std::map<std::string, Component*> map_;
 };
 
 #endif

@@ -6,6 +6,8 @@
 #include <utility>
 #include "Component.h"
 
+using namespace std;
+
 Entity::Entity(string name): name_(name) {
 	
 }
@@ -17,23 +19,6 @@ void Entity::update()
 	{
 		components_[i]->update();
 	}
-}
-
-template<typename T>
-T* Entity::getComponent(std::string tag)
-{
-	return static_cast<T*>(map_.find(tag));
-}
-
-template<typename T, typename ... Targs>
-T* Entity::addComponent(string tag, Targs&& ... mArgs){
-	T* c(new T(forward<Targs>(mArgs)...)); //Alomejor hay que usar factory
-	uptr_cmp uPtr(c);
-	components_.push_back(uPtr);
-	map_.insert(pair<string, Component*>(tag, c));
-	c->setEntity(this); //Uso para conseguir otros componentes
-	c->init();
-	return c;
 }
 
 bool Entity::hasComponent(string tag) {
