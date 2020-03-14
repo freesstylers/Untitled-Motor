@@ -39,6 +39,33 @@ AudioManager::~AudioManager()
     delete []channels;
 }
 
+void AudioManager::setVolume(float vol, int nChannel)
+{
+    channels[nChannel]->setVolume(vol);
+}
+
+void AudioManager::pauseChannel(int nChannel)
+{
+    bool isPaused;
+    channels[nChannel]->getPaused(&isPaused);
+    if (isPaused)
+    {
+        channels[nChannel]->setPaused(false);
+    }
+
+    else if (!isPaused)
+    {
+        channels[nChannel]->setPaused(true);
+    }
+}
+
+bool AudioManager::isPlaying()
+{
+    bool isPlaying;
+    channelGroup->isPlaying(&isPlaying);
+    return isPlaying;
+}
+
 void AudioManager::update() 
 {
     if (isPlaying()) {
@@ -53,16 +80,15 @@ bool AudioManager::isPlayingChannel(int nChannel)
     return isPlaying;
 }
 
-bool AudioManager::isPlaying()
-{
-    bool isPlaying;
-    channelGroup->isPlaying(&isPlaying);
-    return isPlaying;
-}
 
 void AudioManager::playMusic(const char* path, int nChannel)
 {
     Sound* sound;
+    
+    int i = 0;
+
+   
+
     system->createSound(path, FMOD_CREATESTREAM, nullptr, &sound);
 
 

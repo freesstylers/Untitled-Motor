@@ -95,7 +95,7 @@ void Core::initPhysicsTestScene()
 	//Aki para que suene temporalmente
 	audioManager->playMusic("assets/sound/rock.wav",0);
 	audioManager->playSound("assets/sound/a.wav",1);
-	cout << audioManager->isPlayingChannel(0);
+	audioManager->setVolume(.2, 0);
 
 	Ogre::Camera* cam = sm->createCamera("Cam");
 	cam->setNearClipDistance(1);
