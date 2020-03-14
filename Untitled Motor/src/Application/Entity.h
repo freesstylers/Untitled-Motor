@@ -24,10 +24,10 @@ public:
 	}
 
 	template <typename T, typename ... Targs>
-	T* addComponent(std::string tag, Targs&& ... mArgs) {
-		T* c(new T(tag, std::forward<Targs>(mArgs)...)); //Alomejor hay que usar factory
+	T* addComponent(Targs&& ... mArgs) {
+		T* c(new T(std::forward<Targs>(mArgs)...)); //Alomejor hay que usar factory
 		components_.push_back(uptr_cmp(c));
-		map_.insert(std::pair<std::string, Component*>(tag, c));
+		map_.insert(std::pair<std::string, Component*>(c->getTag(), c));
 		c->setEntity(this); //Uso para conseguir otros componentes
 		c->init();
 		return c;
