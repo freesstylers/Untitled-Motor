@@ -7,6 +7,7 @@
 #include <OgreFrameListener.h>
 
 #include "TestEntity.h"
+#include "AudioManager.h"
 
 class Core : public Ogre::FrameListener
 {
@@ -22,6 +23,7 @@ public:
 	void initPhysicsTestScene();
 
 	void initLoadingTestScene();
+	void testMessageSystem();
 
 	void start();
 
@@ -53,6 +55,8 @@ private:
 	SDL_Window* sdlWindow;
 	Ogre::RenderWindow* window;
 	Ogre::String appName;
+	
 	std::vector<TestEntity> testEntities;
+	AudioManager* audioManager;
 };
 

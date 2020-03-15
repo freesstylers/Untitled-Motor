@@ -9,6 +9,7 @@
 
 class InputManager	//carga de recursos (por ahora)
 {
+
 public:
 	~InputManager();
 
@@ -18,19 +19,36 @@ public:
 
 	void setup();
 
-	void InputManagement(SDL_Event event);
+	void GeneralInputManagement(SDL_Event event);
 
-	void KeyBoardInputManagement(SDL_Event event);
+	bool GameControllerIsButtonDown(SDL_GameControllerButton button, int controller = 0);
 
-	void GameControllerInputManagement(SDL_Event event);
+	void MouseButtonChange(int button, int change);
 
-	void GameControllerAxisManagement(SDL_Event event);
+	void MouseWheelChange(int field, int value);
+
+	void MousePositionChange(int x, int y);
+
+	int GameControllerGetAxisMovement(SDL_GameControllerAxis axis, int controller = 0);
+
+	SDL_GameController* getWhichController(SDL_Event event);
+
+	MouseButtons getMouseButtons();
+
+	MouseWheel getMouseWheel();
+
+	MousePosition getMousePosition();
+
 private:
 	InputManager();
 
+	static InputManager* instance;
+
 	std::vector<SDL_GameController*> controllers;
-	
+
 	const int NumControls = 1;
 
-	static InputManager* instance;
+	struct MouseButtons { bool leftPressed = false; bool middlePressed = false; bool rightPressed = false; } mouseButtons;
+	struct MouseWheel { int x = 0; int y = 0; } mouseWheel;
+	struct MousePosition { int x = 0; int y = 0; } mousePosition;
 };

@@ -46,61 +46,136 @@ void InputManager::setup()
 {
 	//SetUp de Mandos con variable para numero de mandos
 	for (int i = 0; i < NumControls; i++)
-		controllers.push_back(SDL_GameControllerOpen(0));
-
+		controllers.push_back(SDL_GameControllerOpen(i));	
 	//Mapping de esquemas de controles?
 }
 
-void InputManager::InputManagement(SDL_Event event)
+void InputManager::GeneralInputManagement(SDL_Event event)
 {
+
 	switch (event.type)
 	{
+		//En principio, como se puede preguntar si X tecla o boton del mando está pulsada/o, no hace falta gestionar esos eventos
+		/*
+		//Teclado
 		case SDL_KEYDOWN:
 			KeyBoardInputManagement(event);
 			break;
+		case SDL_KEYUP:
+			KeyBoardInputManagement(event);
+			break;
+		//Mando
 		case SDL_CONTROLLERBUTTONDOWN:
-			GameControllerInputManagement(event);
+			//GameControllerInputManagement(event);
+			break;
+		case SDL_CONTROLLERBUTTONUP:
+			//GameControllerInputManagement(event);
 			break;
 		case SDL_CONTROLLERAXISMOTION:
-			GameControllerAxisManagement(event);
+			//GameControllerAxisManagement(event);
+			break;
+		*/
+
+		//Estos si hay que guardarlos
+		//Raton
+		case SDL_MOUSEMOTION:
+			
+			break;
+		case SDL_MOUSEWHEEL:
+			if (event.wheel.y != mouseWheel.y) // scroll up/down
+			{
+				MouseWheelChange(1, event.wheel.y);
+			}
+			else if (event.wheel.x != mouseWheel.x) // scroll left
+			{
+				MouseWheelChange(0, event.wheel.x);
+			}
+			break;
+		case SDL_MOUSEBUTTONUP:
+			MouseButtonChange(event.button.button, 0);
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			MouseButtonChange(event.button.button, 1);
 			break;
 		default:
 			break;
 	}
 }
 
-void InputManager::KeyBoardInputManagement(SDL_Event event)
+bool InputManager::GameControllerIsButtonDown(SDL_GameControllerButton button, int controller)
 {
-	switch (event.key.keysym.sym)
+	return (SDL_GameControllerGetButton(controllers[controller], button));
+}
+
+void InputManager::MouseButtonChange(int button, int change)
+{
+	switch (button)
 	{
-	case SDLK_DOWN:
+	case SDL_BUTTON_LEFT:
+		if (change)
+			mouseButtons.leftPressed = true;
+		else
+			mouseButtons.leftPressed = false;
 		break;
-	case SDLK_UP:
+	case SDL_BUTTON_RIGHT:
+		if (change)
+			mouseButtons.rightPressed = true;
+		else
+			mouseButtons.rightPressed = false;
 		break;
-	case SDLK_LEFT:
+	case SDL_BUTTON_MIDDLE:
+		if (change)
+			mouseButtons.middlePressed = true;
+		else
+			mouseButtons.middlePressed = false;
 		break;
-	case SDLK_RIGHT:
-		break;
-	case SDLK_s:
-		break;
-	case SDLK_w:
-		break;
-	case SDLK_a:
-		break;
-	case SDLK_d:
+	default:
 		break;
 	}
 }
 
-void InputManager::GameControllerInputManagement(SDL_Event event)
+void InputManager::MouseWheelChange(int field, int value)
 {
-	if (SDL_GameControllerGetButton(controllers[event.cbutton.which], SDL_CONTROLLER_BUTTON_A))
-		std::cout << "eeeee" << std::endl;
-
-	//Esto no se como hacerlo con un switch para que tenga en cuenta que mando es, y que boton
+	if (field)
+		mouseWheel.y = value;
+	else
+		mouseWheel.x = value;
 }
 
-void InputManager::GameControllerAxisManagement(SDL_Event event)
+void InputManager::MousePositionChange(int x, int y)
 {
-	//Esto ni zorra de como se hacia en SDL asi que que lo haga otro
+	mousePosition.x = x;
+	mousePosition.y = y;
+}
+
+int InputManager::GameControllerGetAxisMovement(SDL_GameControllerAxis axis, int controller)
+{
+	return SDL_GameControllerGetAxis(controllers[controller], axis);
+}
+
+SDL_GameController* InputManager::getWhichController(SDL_Event event)
+{
+	if (event.type == (SDL_CONTROLLERBUTTONDOWN || SDL_CONTROLLERBUTTONUP))
+	{
+		return SDL_GameControllerFromInstanceID(event.cbutton.which);
+	}
+	else if (event.type == SDL_CONTROLLERAXISMOTION)
+	{
+		return SDL_GameControllerFromInstanceID(event.caxis.which);
+	}
+}
+
+InputManager::MouseButtons InputManager::getMouseButtons()
+{
+	return mouseButtons;
+}
+
+InputManager::MousePosition InputManager::getMousePosition()
+{
+	return mousePosition;
+}
+
+InputManager::MouseWheel InputManager::getMouseWheel()
+{
+	return mouseWheel;
 }

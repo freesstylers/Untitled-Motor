@@ -19,8 +19,13 @@
 #include "SceneManager.h"
 #include <iostream>
 
+#include "TestComponent.h"
+#include "EventManager.h"
+
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
+	
+	audioManager = new AudioManager();
 	root = nullptr;
 }
 
@@ -60,7 +65,7 @@ void Core::init()
 
 void Core::initTestScene()
 {
-
+	
 	// create the camera
 
 	Ogre::Camera* cam = sm->createCamera("Cam");
@@ -110,6 +115,12 @@ void Core::initTestScene()
 
 void Core::initPhysicsTestScene()
 {
+
+	//Aki para que suene temporalmente
+	audioManager->playMusic("assets/sound/rock.wav",0);
+	audioManager->playSound("assets/sound/a.wav",1);
+	audioManager->setVolume(.2, 0);
+
 	Ogre::Camera* cam = sm->createCamera("Cam");
 	cam->setNearClipDistance(1);
 	cam->setFarClipDistance(100000000);
@@ -161,7 +172,27 @@ void Core::initPhysicsTestScene()
 
 	Ogre::SceneNode* mLightNode = sm->getRootSceneNode()->createChildSceneNode("nLuz");
 	mLightNode->attachObject(luz);
+}
 
+void Core::testMessageSystem() {
+	// Normal check
+	TestComponent testComp("prueba");
+	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	TextEvent event = TextEvent("\nEL MEJOR MENSAJE DE PRUEBA\n");
+	EventManager::GetInstance()->EmitEvent(event);
+
+	// Check double-add protection
+	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	EventManager::GetInstance()->EmitEvent(event);
+
+	// Check remove
+	EventManager::GetInstance()->UnregisterListener(&testComp, EventType::TEXT);
+	EventManager::GetInstance()->EmitEvent(event);
+
+	// Check clear
+	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	EventManager::GetInstance()->ClearListeners(EventType::TEXT);
+	EventManager::GetInstance()->EmitEvent(event);
 }
 
 void Core::initLoadingTestScene()
@@ -209,7 +240,7 @@ void Core::pollEvents()
 			break;
 		default:
 			//llamar a InputManager
-			InputManager::getInstance()->InputManagement(event);	//Se podría ir a pincho de forma mas especifica llamando directamente al de boton, tecla, etc
+			InputManager::getInstance()->GeneralInputManagement(event);	//Se podrï¿½a ir a pincho de forma mas especifica llamando directamente al de boton, tecla, etc
 			break;
 		}
 	}
@@ -223,7 +254,9 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 	pollEvents();
 	PhysicsManager::getInstance()->stepWorld();
 	updateRender();
-	
+
+	audioManager->update();
+
 	return true;
 }
 

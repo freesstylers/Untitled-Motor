@@ -11,6 +11,9 @@
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
     <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
     <ClCompile Include="..\..\src\Application\TestEntity.cpp" />
+    <ClCompile Include="..\..\src\Application\AudioManager.cpp" />
+    <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
+    <ClCompile Include="..\..\src\Application\EventManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -22,5 +25,10 @@
     <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
     <ClInclude Include="..\..\src\Application\SceneManager.h" />
     <ClInclude Include="..\..\src\Application\TestEntity.h" />
+    <ClInclude Include="..\..\src\Application\AudioManager.h" />
+    <ClInclude Include="..\..\src\Application\TestComponent.h" />
+    <ClInclude Include="..\..\src\Application\Event.h" />
+    <ClInclude Include="..\..\src\Application\EventListener.h" />
+    <ClInclude Include="..\..\src\Application\EventManager.h" />
   </ItemGroup>
 </Project>

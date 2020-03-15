@@ -12,11 +12,10 @@
 #define NOMINMAX
 
 #include "windows.h"
-#include <fmod.hpp>
 
 #include "Core.h"
 
-using namespace FMOD;
+
 
 Core* core;
 
