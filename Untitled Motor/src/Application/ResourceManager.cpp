@@ -61,7 +61,7 @@ void ResourceManager::addSceneManager(Ogre::SceneManager* sm)
 	shaderGenerator->addSceneManager(sm);
 }
 
-json ResourceManager::loadScene(const Ogre::String& sceneName)
+json ResourceManager::loadSceneFile(const Ogre::String& sceneName)
 {
 	json j;
 	std::ifstream i(path + "scenes/" + sceneName + ".json");

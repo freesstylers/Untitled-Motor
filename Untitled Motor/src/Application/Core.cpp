@@ -166,7 +166,7 @@ void Core::initPhysicsTestScene()
 
 void Core::initLoadingTestScene()
 {
-	json file = ResourceManager::getInstance()->loadScene("prefabs");
+	json file = ResourceManager::getInstance()->loadSceneFile("prefabs");
 
 	for (json::iterator it = file.begin(); it != file.end(); ++it) {
 		testEntities.push_back(TestEntity(0, *it));

@@ -20,7 +20,7 @@ public:
 
 	void addSceneManager(Ogre::SceneManager* sm);
 
-	json loadScene(const Ogre::String& sceneName);
+	json loadSceneFile(const Ogre::String& sceneName);
 
 private:
 	ResourceManager(const Ogre::String& path);
