@@ -5,9 +5,6 @@
 #include <SDL_syswm.h>
 #include <OgreBitesConfigDialog.h>
 #include <OgreRenderWindow.h>
-#include <OgreViewport.h>
-#include <OgreEntity.h>
-#include <OgreCamera.h>
 #include <OgreWindowEventUtilities.h>
 #include <OgreMeshManager.h>
 #include <stdexcept>
@@ -34,14 +31,47 @@ Core::~Core()
 	ResourceManager::clean();
 	InputManager::clean();
 	PhysicsManager::clean();
+	SceneManager::clean();
+}
+
+Core* Core::getInstance()
+{
+	if (instance == 0 || instance == nullptr)
+	{
+		return nullptr;
+	}
+
+	return instance;
+}
+
+bool Core::setupInstance(const Ogre::String& appName)
+{
+	if (instance == 0)
+	{
+		instance = new Core(appName);
+		return true;
+	}
+
+	return false;
+}
+
+void Core::clean()
+{
+	delete instance;
 }
 
 void Core::init()
 {
-	try	{ ResourceManager::setupInstance("./assets/"); }
-	catch(const std::exception& e)
+	try { ResourceManager::setupInstance("./assets/"); }
+	catch (const std::exception& e)
 	{
 		throw std::runtime_error("ResourceManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}
+
+	try { SceneManager::setupInstance(); }
+	catch (const std::exception& e)
+	{
+		throw std::runtime_error("SceneManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
 	try	{ InputManager::setupInstance(); }
@@ -63,54 +93,9 @@ void Core::init()
 	}
 }
 
-void Core::initTestScene()
+void Core::changeScene(Ogre::String name)
 {
-	
-	// create the camera
-
-	Ogre::Camera* cam = sm->createCamera("Cam");
-	cam->setNearClipDistance(1);
-	cam->setFarClipDistance(100000000);
-	cam->setAutoAspectRatio(true);
-
-	Ogre::SceneNode* mCamNode = sm->getRootSceneNode()->createChildSceneNode("nCam");
-	mCamNode->attachObject(cam);
-
-	mCamNode->translate(100, 100, 100);
-	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
-
-	Ogre::Viewport* vp = window->addViewport(cam);
-
-	vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
-
-	cam->setAspectRatio(
-		Ogre::Real(vp->getActualWidth()) /
-		Ogre::Real(vp->getActualHeight()));
-
-	Ogre::Entity* ogreEntity = sm->createEntity("barrel.mesh");
-	ogreEntity->setMaterialName("test");
-
-
-	Ogre::SceneNode* Node = sm->getRootSceneNode()->createChildSceneNode("test1");
-	Node->attachObject(ogreEntity);
-	Node->translate(10, 1, 10);
-	//Node->scale(0.1, 0.1, 0.1);
-
-	Ogre::Entity* ogreEntity2 = sm->createEntity("sphere.mesh");
-	ogreEntity2->setMaterialName("sphereTest");
-
-
-	Ogre::SceneNode* Node2 = sm->getRootSceneNode()->createChildSceneNode("test2");
-	Node2->attachObject(ogreEntity2);
-	Node2->translate(0, 10, 0);
-	Node2->scale(0.1, 0.1, 0.1);
-
-	Ogre::Light* luz = sm->createLight("Luz");
-	luz->setType(Ogre::Light::LT_POINT);
-	luz->setDiffuseColour(0, 0, 0);
-
-	Ogre::SceneNode* mLightNode = sm->getRootSceneNode()->createChildSceneNode("nLuz");
-	mLightNode->attachObject(luz);
+	SceneManager::getInstance()->changeScene(name);
 }
 
 void Core::initPhysicsTestScene()
@@ -197,16 +182,7 @@ void Core::testMessageSystem() {
 
 void Core::initLoadingTestScene()
 {
-	json file = ResourceManager::getInstance()->loadSceneFile("prefabs");
-
-	for (json::iterator it = file.begin(); it != file.end(); ++it) {
-		testEntities.push_back(TestEntity(0, *it));
-	}
-
-	for (int i = 0; i < testEntities.size(); i++)
-		testEntities.at(i).update();
-
-	std::cout << "eeeee" << std::endl;
+	changeScene("test");
 }
 
 void Core::start()
@@ -397,31 +373,25 @@ void Core::setupWindow(Ogre::String windowName)
 //////////por si queremos que la ventana oculte el cursor
 	SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
 	SDL_ShowCursor(true);
-
-/*
-	Ogre::RenderSystem* rs = root->getRenderSystemByName("Direct3D11 Rendering Subsystem");
-	root->setRenderSystem(rs);
-
-
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR, "ERROR: Couldn't initialize SDL.",
-			"BaseApplication::setup");
-	}
-
-	Ogre::ConfigOptionMap opt = rs->getConfigOptions();
-
-	SDL_SysWMinfo wmInfo;
-	SDL_VERSION(&wmInfo.version);
-	if (SDL_GetWindowWMInfo(sdlWindow, &wmInfo) == SDL_FALSE) {
-		OGRE_EXCEPT(Ogre::Exception::ERR_INTERNAL_ERROR,
-			"Couldn't get WM Info! (SDL2)",
-			"BaseApplication::setup");
-	}
-*/
 }
 
 
 Ogre::Root* Core::getRoot()
 {
 	return root;
+}
+
+Ogre::SceneManager* Core::getSM()
+{
+	return sm;
+}
+
+Ogre::RenderWindow* Core::getOgreWin()
+{
+	return window;
+}
+
+SDL_Window* Core::getSDLWin()
+{
+	return sdlWindow;
 }

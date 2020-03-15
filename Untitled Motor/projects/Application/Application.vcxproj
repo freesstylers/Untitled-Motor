@@ -29,6 +29,7 @@
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
     <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
+    <ClCompile Include="..\..\src\Application\Scene.cpp" />
     <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
     <ClCompile Include="..\..\src\Application\TestEntity.cpp" />
     <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
@@ -45,6 +46,7 @@
     <ClInclude Include="..\..\src\Application\InputManager.h" />
     <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
     <ClInclude Include="..\..\src\Application\ResourceManager.h" />
+    <ClInclude Include="..\..\src\Application\Scene.h" />
     <ClInclude Include="..\..\src\Application\SceneManager.h" />
     <ClInclude Include="..\..\src\Application\TestEntity.h" />
     <ClInclude Include="..\..\src\Application\TestComponent.h" />

@@ -26,6 +26,23 @@ bool Entity::hasComponent(string tag) {
 }
 
 template<typename T>
+T* Entity::getComponent(std::string tag)
+{
+	return static_cast<T*>(map_.find(tag));
+}
+
+template<typename T>
+T* Entity::addComponent(json args)
+{
+	T* c(/*call factory*/);
+	components_.push_back(uptr_cmp(c));
+	map_.insert(std::pair<std::string, Component*>(c->getTag(), c));
+	c->setEntity(this);
+	c->init();
+	return c;
+}
+
+template<typename T>
 void Entity::toggleComponent(string tag, bool state) {
 	getComponent(tag).toggle(state);
 }

@@ -7,6 +7,9 @@
 #include <map>
 #include <string>
 #include <memory>
+#include <json.hpp>
+
+using json = nlohmann::json;
 
 class Component;
 
@@ -19,19 +22,10 @@ public:
 	void update();
 
 	template <typename T>
-	T* getComponent(std::string tag) {
-		return static_cast<T*>(map_.find(tag));
-	}
+	T* getComponent(std::string tag);
 
-	template <typename T, typename ... Targs>
-	T* addComponent(Targs&& ... mArgs) {
-		T* c(new T(std::forward<Targs>(mArgs)...)); //Alomejor hay que usar factory
-		components_.push_back(uptr_cmp(c));
-		map_.insert(std::pair<std::string, Component*>(c->getTag(), c));
-		c->setEntity(this); //Uso para conseguir otros componentes
-		c->init();
-		return c;
-	}
+	template <typename T>
+	T* addComponent(json args);
 
 	bool hasComponent(std::string tag);
 

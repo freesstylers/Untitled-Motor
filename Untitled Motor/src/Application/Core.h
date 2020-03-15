@@ -9,16 +9,21 @@
 #include "TestEntity.h"
 #include "AudioManager.h"
 
+#include "Scene.h"
+
 class Core : public Ogre::FrameListener
 {
 
 public:
-	Core(const Ogre::String& appName);
 	~Core();
+
+	static Core* getInstance();
+	static bool setupInstance(const Ogre::String& appName);
+	static void clean();
 
 	void init();
 
-	void initTestScene();
+	void changeScene(Ogre::String name);
 
 	void initPhysicsTestScene();
 
@@ -39,14 +44,21 @@ public:
 	virtual void windowFocusChange(Ogre::RenderWindow* rw) {}
 
 	Ogre::Root* getRoot();
+	Ogre::SceneManager* getSM();
+	Ogre::RenderWindow* getOgreWin();
+	SDL_Window* getSDLWin();
 
 private:
+
+	Core(const Ogre::String& appName);
+
+	void sceneCleanup();
 
 	void setupWindow(Ogre::String windowName);
 	void setupRoot();
 	void setup();
 	void shutdown();
-	void updateRender();//actualiza el render de los objetos con rigidbody
+	void updateRender(); //actualiza el render de los objetos con rigidbody
 	bool checkConfig();
 
 	Ogre::Root* root;
@@ -58,5 +70,9 @@ private:
 	
 	std::vector<TestEntity> testEntities;
 	AudioManager* audioManager;
+
+	Scene* currentScene;
+
+	static Core* instance;
 };
 

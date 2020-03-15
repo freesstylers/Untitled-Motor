@@ -1,9 +1,13 @@
 #include "SceneManager.h"
 
+
+#include "ResourceManager.h"
+
 SceneManager* SceneManager::instance = 0;
 
 SceneManager::~SceneManager()
 {
+	sceneCleanup();
 }
 
 SceneManager::SceneManager()
@@ -36,16 +40,27 @@ void SceneManager::clean()
 	delete instance;
 }
 
-void SceneManager::loadScene(const json& scene)
+Scene* SceneManager::loadScene(const Ogre::String& scene)
 {
-	currentScene = scene;
+	json j = ResourceManager::getInstance()->loadSceneFile(scene);
 
-	//call factories (one for entity and one for comps? Entity gets transform?
-	//load prefabs
-	//load components
+	currentScene = new Scene();
+	currentScene->setupScene(j);
 }
 
-json SceneManager::getCurrentScene()
+Scene* SceneManager::getCurrentScene()
 {
 	return currentScene;
+}
+
+void SceneManager::sceneCleanup()
+{
+	delete currentScene;
+	currentScene = nullptr;
+}
+
+void SceneManager::changeScene(const Ogre::String& name)
+{
+	sceneCleanup();
+	currentScene = loadScene(name);
 }

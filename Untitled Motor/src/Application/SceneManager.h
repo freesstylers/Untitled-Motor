@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Entity.h"
-
+#include "Scene.h"
 
 #include <json.hpp>
 
@@ -16,15 +15,19 @@ public:
 	static bool setupInstance();
 	static void clean();
 
-	void loadScene(const json& scene);
+	Scene* loadScene(const Ogre::String& scene);
 
-	json getCurrentScene();
+	Scene* getCurrentScene();
+
+	void sceneCleanup();
+
+	void changeScene(const Ogre::String& name);
 
 private:
 	SceneManager();
 
 
-	json currentScene;
+	Scene* currentScene;
 
 	static SceneManager* instance;
 };

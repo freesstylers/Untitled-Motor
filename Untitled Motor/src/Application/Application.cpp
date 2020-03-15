@@ -27,7 +27,14 @@ Core* core;
     WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdShow)
 #endif
 {
-	core = new Core("Motor Casa Paco");
+
+	try { Core::setupInstance("Motor Casa Paco"); }
+	catch (const std::exception& e)
+	{
+		throw std::runtime_error("Core init fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}
+
+	core = Core::getInstance();
 
 	SDL_Init(SDL_INIT_EVERYTHING);
 
@@ -45,9 +52,7 @@ Core* core;
 	}
 
 
-	core->initLoadingTestScene();
-
-	//core->initPhysicsTestScene();
+	core->changeScene("test");
 
 	core->start();
 
