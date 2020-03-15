@@ -45,3 +45,15 @@ void Entity::setActive(bool state) {
 bool const Entity::getActive() {
 	return isActive_;
 }
+
+bool Entity::ReceiveEvent(Event& event)
+{
+	//reenvia o mesaxe a todolos seus componentes
+	for (auto c : map_) {
+		EventManager::GetInstance()->RegisterListener(c.second, event.type);
+		EventManager::GetInstance()->EmitEvent(event);
+		EventManager::GetInstance()->UnregisterListener(c.second, event.type);
+	}
+	
+	return false;
+}

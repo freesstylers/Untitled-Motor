@@ -4,6 +4,5 @@ BoxBody::BoxBody(std::string tag, PhysicsManager* manager, btVector3 initPos, bt
 {
 	body=phManager->addBox(initPos, dimensions, mass);
 	body->setUserPointer(user);
-	if(rbTypeFlag==btCollisionObject::CF_STATIC_OBJECT || rbTypeFlag ==btCollisionObject::CF_KINEMATIC_OBJECT)//Por defecto os corpos son dinamicos
-		body->setCollisionFlags(rbType);
+	body->setCollisionFlags(body->getCollisionFlags() | rbType);
 }

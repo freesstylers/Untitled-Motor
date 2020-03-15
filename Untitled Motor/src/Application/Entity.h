@@ -10,12 +10,14 @@
 #include <string>
 #include <memory>
 
+#include "EventListener.h"
+#include "EventManager.h"
+
 class Component;
 
 using uptr_cmp = std::unique_ptr<Component>;
 
-
-class Entity {
+class Entity: public EventListener {
 public:
 	Entity(std::string name);
 	void update();
@@ -45,6 +47,9 @@ public:
 
 	void setActive(bool state);
 	bool const getActive();
+
+	bool ReceiveEvent(Event& event) override;
+
 protected:
 
 private:

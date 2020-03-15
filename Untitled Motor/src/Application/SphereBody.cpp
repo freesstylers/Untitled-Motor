@@ -4,7 +4,6 @@ SphereBody::SphereBody(std::string tag, PhysicsManager* manager, float rad, btVe
 {
 	body=phManager->addSphere(rad, initPos, mass);
 	body->setUserPointer(user);
-	if (rbTypeFlag == btCollisionObject::CF_STATIC_OBJECT || rbTypeFlag == btCollisionObject::CF_KINEMATIC_OBJECT)//Por d	efecto os corpos son dinamicos
-		body->setCollisionFlags(rbType);
+	body->setCollisionFlags(body->getCollisionFlags() | rbType);
 }
 

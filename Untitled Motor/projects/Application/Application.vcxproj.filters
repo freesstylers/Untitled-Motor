@@ -17,6 +17,7 @@
     <ClCompile Include="..\..\src\Application\RigidBodyComponent.cpp" />
     <ClCompile Include="..\..\src\Application\BoxBody.cpp" />
     <ClCompile Include="..\..\src\Application\MeshBody.cpp" />
+    <ClCompile Include="..\..\src\Application\RenderComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -36,5 +37,6 @@
     <ClInclude Include="..\..\src\Application\RigidBodyComponent.h" />
     <ClInclude Include="..\..\src\Application\BoxBody.h" />
     <ClInclude Include="..\..\src\Application\MeshBody.h" />
+    <ClInclude Include="..\..\src\Application\RenderComponent.h" />
   </ItemGroup>
 </Project>

@@ -12,6 +12,8 @@ Component::~Component() {
 
 void Component::setEntity(Entity* e) { e_ = e; }
 
+Entity* Component::getEntity(){ return e_; }
+
 string const Component::getTag() {
 	return tag_;
 }

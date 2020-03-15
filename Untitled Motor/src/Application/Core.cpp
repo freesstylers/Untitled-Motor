@@ -31,6 +31,19 @@ Core::~Core()
 	delete physicsManager;
 }
 
+bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
+{
+	//Chamar a funcion de colision do componente rigidbody
+	RigidBodyComponent* rb1;
+	RigidBodyComponent* rb2;
+	//rb1 = static_cast<RigidBodyComponent*>(obj1->getCollisionObject()->getUserPointer());
+	//rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
+	//rb2 = static_cast<RigidBodyComponent*>(obj2->getCollisionObject()->getUserPointer());
+	//rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
+	std::cout << "collision" << endl;
+	return false;
+}
+
 void Core::init()
 {
 	setupRoot();
@@ -38,6 +51,8 @@ void Core::init()
 	if (checkConfig()) {
 		setup();
 	}
+
+	gContactAddedCallback=callbackFunc;
 }
 
 void Core::initTestScene()
@@ -134,7 +149,7 @@ void Core::initPhysicsTestScene()
 		btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
 
 
-	//canicastanhazo = new Entity("canicastanhazo");
+	canicastanhazo = new Entity("canicastanhazo");
 
 	Ogre::SceneNode* sphereNode = sm->getRootSceneNode()->createChildSceneNode();
 	Ogre::Entity* sphereEntity = sm->createEntity("sphere.mesh");
@@ -149,7 +164,11 @@ void Core::initPhysicsTestScene()
 	//canicastanhazo->addComponent<SphereBody>("spherebody", physicsManager, rad * scaleFactor / 2,
 	//	btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode);
 	SphereBody* sp = new SphereBody("s", physicsManager, rad*scaleFactor/2,
-		btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode);
+		btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
+	sp->setEntity(canicastanhazo);
+
+	sp->init();
 
 	Ogre::Light* luz = sm->createLight("Luz");
 	luz->setType(Ogre::Light::LT_POINT);
@@ -291,6 +310,7 @@ void Core::spawnBox()
 		10);
 	rb->setUserPointer(boxNode);
 }
+
 
 void Core::setupRoot()
 {
