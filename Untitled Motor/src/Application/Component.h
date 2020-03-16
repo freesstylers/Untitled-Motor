@@ -4,6 +4,9 @@
 #define COMPONENT_H
 
 #include <string>
+#include <json.hpp>
+
+using json = nlohmann::json;
 
 class Entity;
 
@@ -11,13 +14,14 @@ class Entity;
 class Component
 {
 public:
-	Component(std::string tag);
+	Component(json& args);
 	virtual ~Component();
 
 	void setEntity(Entity* e);
 	std::string const getTag();
 
 	virtual void init();
+	virtual void initFromJson(json& j);
 	virtual void update();
 	virtual void render();
 

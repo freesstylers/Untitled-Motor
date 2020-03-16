@@ -1,0 +1,45 @@
+{
+	"name" : "sceneName",
+	"camera" :
+	{
+		"COMENTARIO" : "definicion de las propiedades de la cámara, añadir a medida que sea necesario",
+		"nearClipDistance" : int,
+		"farClipDistance" : int,
+		"autoAspectRatio" : bool,
+		"pos" : [x, y, z],
+		"lookAt" : [x, y, z],
+		"bgColour" : [r, g, b, a] (bgColor works too!)
+	},
+	"entities" :
+	[
+		{
+			"COMENTARIO" : "Entidad definida sin prefab, con componentes a mano",
+			"tag" : "cube",
+			"components" : [
+				{
+					"type" : ,
+					"tag" : "hewwo"
+				},
+				{
+					"tag" : "hewwo"
+				},
+				{
+					"tag" : "hewwo"
+				}
+			]
+		},
+		{
+			"COMENTARIO" : "Entidad definida con prefab",
+			"tag" : "cube2",
+			"prefab" : "cube"
+		},
+		{
+			"COMENTARIO" : "Entidad definida con prefab, editando los componentes. IMPORTANTE: USAR LA MISMA TAG!",
+			"tag" : "cube3",
+			"prefab" : "cube",
+			"components" : [
+			
+			]
+		}
+	]
+}

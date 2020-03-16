@@ -15,6 +15,8 @@
     <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
     <ClCompile Include="..\..\src\Application\EventManager.cpp" />
     <ClCompile Include="..\..\src\Application\Scene.cpp" />
+    <ClCompile Include="..\..\src\Application\JsonFactoryParser.cpp" />
+    <ClCompile Include="..\..\src\Application\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -32,5 +34,7 @@
     <ClInclude Include="..\..\src\Application\EventListener.h" />
     <ClInclude Include="..\..\src\Application\EventManager.h" />
     <ClInclude Include="..\..\src\Application\Scene.h" />
+    <ClInclude Include="..\..\src\Application\JsonFactoryParser.h" />
+    <ClInclude Include="..\..\src\Application\Transform.h" />
   </ItemGroup>
 </Project>

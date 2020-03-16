@@ -15,6 +15,10 @@
 
 #include "Core.h"
 
+#include <json.hpp>
+
+using json = nlohmann::json;
+using namespace std;
 
 
 Core* core;
@@ -28,36 +32,37 @@ Core* core;
 #endif
 {
 
-	try { Core::setupInstance("Motor Casa Paco"); }
-	catch (const std::exception& e)
-	{
-		throw std::runtime_error("Core init fail \n" + (Ogre::String)e.what() + "\n");	return;
-	}
+		try { Core::setupInstance("Motor Casa Paco"); }
+		catch (const std::exception& e)
+		{
+			throw std::runtime_error("Core init fail \n" + (Ogre::String)e.what() + "\n");	return 0;
+		}
 
-	core = Core::getInstance();
+		core = Core::getInstance();
 
-	SDL_Init(SDL_INIT_EVERYTHING);
+		SDL_Init(SDL_INIT_EVERYTHING);
 
-	try
-	{
-		core->init();
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << e.what() << "\n";
+		try
+		{
+			core->init();
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << e.what() << "\n";
+			delete core;
+			SDL_Quit();
+
+			return 0;
+		}
+
+
+		core->changeScene("test");
+
+		core->start();
+
 		delete core;
+
 		SDL_Quit();
 
 		return 0;
-	}
-
-
-	core->changeScene("test");
-
-	core->start();
-
-	delete core;
-	SDL_Quit();
-
-    return 0;
 }

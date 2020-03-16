@@ -10,6 +10,19 @@
 class InputManager	//carga de recursos (por ahora)
 {
 
+private:
+	InputManager();
+
+	static InputManager* instance;
+
+	std::vector<SDL_GameController*> controllers;
+
+	const int NumControls = 1;
+
+	struct MouseButtons { bool leftPressed = false; bool middlePressed = false; bool rightPressed = false; } mouseButtons;
+	struct MouseWheel { int x = 0; int y = 0; } mouseWheel;
+	struct MousePosition { int x = 0; int y = 0; } mousePosition;
+
 public:
 	~InputManager();
 
@@ -38,17 +51,4 @@ public:
 	MouseWheel getMouseWheel();
 
 	MousePosition getMousePosition();
-
-private:
-	InputManager();
-
-	static InputManager* instance;
-
-	std::vector<SDL_GameController*> controllers;
-
-	const int NumControls = 1;
-
-	struct MouseButtons { bool leftPressed = false; bool middlePressed = false; bool rightPressed = false; } mouseButtons;
-	struct MouseWheel { int x = 0; int y = 0; } mouseWheel;
-	struct MousePosition { int x = 0; int y = 0; } mousePosition;
 };

@@ -14,10 +14,13 @@
 #include "InputManager.h"
 #include "PhysicsManager.h"
 #include "SceneManager.h"
+#include "JsonFactoryParser.h"
 #include <iostream>
 
 #include "TestComponent.h"
 #include "EventManager.h"
+
+Core* Core::instance = 0;
 
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
@@ -26,12 +29,18 @@ Core::Core(const Ogre::String& appName) : appName(appName)
 	root = nullptr;
 }
 
+void Core::sceneCleanup()
+{
+	SceneManager::getInstance()->sceneCleanup();
+}
+
 Core::~Core()
 {
 	ResourceManager::clean();
 	InputManager::clean();
 	PhysicsManager::clean();
 	SceneManager::clean();
+	JsonFactoryParser::clean();
 }
 
 Core* Core::getInstance()
@@ -80,10 +89,16 @@ void Core::init()
 		throw std::runtime_error("InputManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
-	try	{ PhysicsManager::setupInstance(); }
+	try { PhysicsManager::setupInstance(); }
 	catch (const std::exception& e)
 	{
 		throw std::runtime_error("PhysicsManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}
+
+	try { JsonFactoryParser::setupInstance(); }
+	catch (const std::exception& e)
+	{
+		throw std::runtime_error("JsonFactoryParser init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
 	setupRoot();
@@ -100,7 +115,7 @@ void Core::changeScene(Ogre::String name)
 
 void Core::initPhysicsTestScene()
 {
-
+	/*
 	//Aki para que suene temporalmente
 	audioManager->playMusic("assets/sound/rock.wav",0);
 	audioManager->playSound("assets/sound/a.wav",1);
@@ -157,27 +172,28 @@ void Core::initPhysicsTestScene()
 
 	Ogre::SceneNode* mLightNode = sm->getRootSceneNode()->createChildSceneNode("nLuz");
 	mLightNode->attachObject(luz);
+	*/
 }
 
 void Core::testMessageSystem() {
-	// Normal check
-	TestComponent testComp("prueba");
-	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
-	TextEvent event = TextEvent("\nEL MEJOR MENSAJE DE PRUEBA\n");
-	EventManager::GetInstance()->EmitEvent(event);
+	//// Normal check
+	//TestComponent testComp("prueba");
+	//EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	//TextEvent event = TextEvent("\nEL MEJOR MENSAJE DE PRUEBA\n");
+	//EventManager::GetInstance()->EmitEvent(event);
 
-	// Check double-add protection
-	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
-	EventManager::GetInstance()->EmitEvent(event);
+	//// Check double-add protection
+	//EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	//EventManager::GetInstance()->EmitEvent(event);
 
-	// Check remove
-	EventManager::GetInstance()->UnregisterListener(&testComp, EventType::TEXT);
-	EventManager::GetInstance()->EmitEvent(event);
+	//// Check remove
+	//EventManager::GetInstance()->UnregisterListener(&testComp, EventType::TEXT);
+	//EventManager::GetInstance()->EmitEvent(event);
 
-	// Check clear
-	EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
-	EventManager::GetInstance()->ClearListeners(EventType::TEXT);
-	EventManager::GetInstance()->EmitEvent(event);
+	//// Check clear
+	//EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
+	//EventManager::GetInstance()->ClearListeners(EventType::TEXT);
+	//EventManager::GetInstance()->EmitEvent(event);
 }
 
 void Core::initLoadingTestScene()
@@ -187,7 +203,7 @@ void Core::initLoadingTestScene()
 
 void Core::start()
 {
-	root->startRendering();
+	Core::getInstance()->getRoot()->startRendering();
 }
 
 void Core::pollEvents()
@@ -201,7 +217,7 @@ void Core::pollEvents()
 		switch (event.type)
 		{
 		case SDL_QUIT:
-			root->queueEndRendering();
+			Core::getInstance()->getRoot()->queueEndRendering();
 			break;
 		case SDL_WINDOWEVENT:
 			if (event.window.windowID == SDL_GetWindowID(sdlWindow)) {
@@ -238,9 +254,9 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 
 bool Core::checkConfig()
 {
-	if (!root->restoreConfig())
+	if (!Core::getInstance()->getRoot()->restoreConfig())
 	{
-		return root->showConfigDialog(OgreBites::getNativeConfigDialog());
+		return Core::getInstance()->getRoot()->showConfigDialog(OgreBites::getNativeConfigDialog());
 	}
 	else return true;
 }
@@ -266,13 +282,13 @@ void Core::setupRoot()
 	}
 
 
-	if (!(root->restoreConfig() || root->showConfigDialog(nullptr)))
+	if (!(Core::getInstance()->getRoot()->restoreConfig() || Core::getInstance()->getRoot()->showConfigDialog(nullptr)))
 		return;
 }
 
 void Core::setup()
 {
-	root->initialise(false);
+	Core::getInstance()->getRoot()->initialise(false);
 	setupWindow(appName);
 
 	try { ResourceManager::getInstance()->setup(); }
@@ -287,11 +303,11 @@ void Core::setup()
 		throw std::runtime_error("InputManager setup fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}	
 
-	sm = root->createSceneManager();
+	sm = Core::getInstance()->getRoot()->createSceneManager();
 
 	ResourceManager::getInstance()->addSceneManager(sm);
 
-	root->addFrameListener(this);
+	Core::getInstance()->getRoot()->addFrameListener(this);
 }
 
 void Core::shutdown()
@@ -299,7 +315,7 @@ void Core::shutdown()
 
 	if (window != nullptr)
 	{
-		root->destroyRenderTarget(window);
+		Core::getInstance()->getRoot()->destroyRenderTarget(window);
 		window = nullptr;
 	}
 
@@ -336,7 +352,7 @@ void Core::setupWindow(Ogre::String windowName)
 {
 	uint32_t w, h;
 
-	Ogre::ConfigOptionMap ropts = root->getRenderSystem()->getConfigOptions();
+	Ogre::ConfigOptionMap ropts = Core::getInstance()->getRoot()->getRenderSystem()->getConfigOptions();
 
 	std::istringstream mode(ropts["Video Mode"].currentValue);
 	Ogre::String token;
@@ -367,7 +383,7 @@ void Core::setupWindow(Ogre::String windowName)
 
 	params["externalWindowHandle"] = Ogre::StringConverter::toString(size_t(wmInfo.info.win.window));
 
-	window = root->createRenderWindow(windowName, w, h, false, &params);
+	window = Core::getInstance()->getRoot()->createRenderWindow(windowName, w, h, false, &params);
 
 
 //////////por si queremos que la ventana oculte el cursor

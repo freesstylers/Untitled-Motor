@@ -15,16 +15,21 @@ public:
 	Scene();
 	~Scene();
 
-	void setupScene(const json& j);
+	void setupScene(json& j);
+
+	Ogre::Camera* getCam();
+	Ogre::Viewport* getVP();
+	Entity* getEntity(const std::string& name);
 
 private:
+
+	Entity* createEntity(json& j);
+	void createCam(json& j);
+
 	Ogre::Camera* cam;
 	Ogre::Viewport* vp;
+	std::map<std::string, Entity*> entities;
 
-	Ogre::Root* root;
-	Ogre::SceneManager* sm;
-	Ogre::RenderWindow* window;
-
-	std::vector<Entity*> entities;
+	Ogre::String name;
 };
 

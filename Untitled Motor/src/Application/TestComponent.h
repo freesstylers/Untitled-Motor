@@ -6,7 +6,9 @@ class TestComponent :
 	public Component, public EventListener
 {
 public:
-	TestComponent(std::string n);
+	TestComponent(json& args);
 	bool ReceiveEvent(Event& event) override;
+
+	int value = 0;
 };
 

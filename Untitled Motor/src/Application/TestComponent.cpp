@@ -1,6 +1,12 @@
 #include "TestComponent.h"
+#include <iostream>
 
-TestComponent::TestComponent(std::string n): Component(n) { }
+TestComponent::TestComponent(json& args): Component(args)
+{
+	value = args["value"];
+
+	std::cout << args["type"] << ": " << args["tag"] << " " << value << "\n";
+}
 
 bool TestComponent::ReceiveEvent(Event& event)
 {

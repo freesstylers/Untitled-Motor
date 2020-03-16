@@ -46,6 +46,8 @@ Scene* SceneManager::loadScene(const Ogre::String& scene)
 
 	currentScene = new Scene();
 	currentScene->setupScene(j);
+
+	return currentScene;
 }
 
 Scene* SceneManager::getCurrentScene()

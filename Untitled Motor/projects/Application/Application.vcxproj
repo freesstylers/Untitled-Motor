@@ -27,12 +27,14 @@
     <ClCompile Include="..\..\src\Application\EventManager.cpp" />
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
+    <ClCompile Include="..\..\src\Application\JsonFactoryParser.cpp" />
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
     <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
     <ClCompile Include="..\..\src\Application\Scene.cpp" />
     <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
     <ClCompile Include="..\..\src\Application\TestEntity.cpp" />
     <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
+    <ClCompile Include="..\..\src\Application\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\AudioManager.h" />
@@ -44,12 +46,14 @@
     <ClInclude Include="..\..\src\Application\EventListener.h" />
     <ClInclude Include="..\..\src\Application\Factory.h" />
     <ClInclude Include="..\..\src\Application\InputManager.h" />
+    <ClInclude Include="..\..\src\Application\JsonFactoryParser.h" />
     <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
     <ClInclude Include="..\..\src\Application\ResourceManager.h" />
     <ClInclude Include="..\..\src\Application\Scene.h" />
     <ClInclude Include="..\..\src\Application\SceneManager.h" />
     <ClInclude Include="..\..\src\Application\TestEntity.h" />
     <ClInclude Include="..\..\src\Application\TestComponent.h" />
+    <ClInclude Include="..\..\src\Application\Transform.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

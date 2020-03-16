@@ -8,35 +8,40 @@
 #include <string>
 #include <memory>
 #include <json.hpp>
+#include "Component.h"
 
 using json = nlohmann::json;
 
-class Component;
+class Scene;
 
 using uptr_cmp = std::unique_ptr<Component>;
 
 
 class Entity {
 public:
-	Entity(std::string name);
+	Entity(Scene* scene, const std::string& name);
 	void update();
 
 	template <typename T>
-	T* getComponent(std::string tag);
+	T* getComponent(const std::string& tag);
 
 	template <typename T>
-	T* addComponent(json args);
+	T* addComponent(json& args);
 
-	bool hasComponent(std::string tag);
+	void addComponentFromJson(json& args);
+
+	bool hasComponent(const std::string& tag);
 
 	template<typename T>
-	void toggleComponent(std::string tag, bool state);
+	void toggleComponent(const std::string& tag, bool state);
 
-	void setName(std::string name);
+	void setName(const std::string& name);
 	std::string const getName();
 
 	void setActive(bool state);
 	bool const getActive();
+
+	void init(json& args);
 protected:
 
 private:
@@ -44,6 +49,8 @@ private:
 	std::string name_;
 	std::vector<uptr_cmp> components_;
 	std::map<std::string, Component*> map_;
+
+	Scene* scene;
 };
 
 #endif

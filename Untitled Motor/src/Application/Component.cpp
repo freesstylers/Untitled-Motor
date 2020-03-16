@@ -1,9 +1,12 @@
 #include "Component.h"
 
+#include "Entity.h"
+
 using namespace std;
 
-Component::Component(string tag): tag_(tag) {
-
+Component::Component(json& args) {
+	std::string str = args["tag"];
+	tag_ = str;
 }
 
 Component::~Component() {
@@ -19,6 +22,8 @@ string const Component::getTag() {
 //Se rellenan segun convenga en sus hijos
 
 void Component::init() { }
+
+void Component::initFromJson(json& j)	{ }
 
 void Component::update() { }
 
