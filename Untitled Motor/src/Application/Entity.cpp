@@ -21,6 +21,15 @@ void Entity::update()
 	}
 }
 
+void Entity::preupdate()
+{
+	int length = components_.size();
+	for (int i = 0; i < length; i++)
+	{
+		components_[i]->preupdate();
+	}
+}
+
 bool Entity::hasComponent(string tag) {
 	return &map_.find(tag) != nullptr;
 }
@@ -50,6 +59,7 @@ bool Entity::ReceiveEvent(Event& event)
 {
 	//reenvia o mesaxe a todolos seus componentes
 	for (auto c : map_) {
+		EventManager::GetInstance()->ClearListeners(event.type);
 		EventManager::GetInstance()->RegisterListener(c.second, event.type);
 		EventManager::GetInstance()->EmitEvent(event);
 		EventManager::GetInstance()->UnregisterListener(c.second, event.type);

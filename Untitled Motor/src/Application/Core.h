@@ -63,8 +63,8 @@ private:
 	ResourceManager* resourceManager;
 	InputManager* inputManager;
 	PhysicsManager* physicsManager;
-
-	Entity* canicastanhazo;
 	AudioManager* audioManager;
+
+	std::vector<Entity*> entities;
 };
 

@@ -21,6 +21,7 @@ public:
 	std::string const getTag();
 
 	virtual void init();
+	virtual void preupdate();
 	virtual void update();
 	virtual void render();
 

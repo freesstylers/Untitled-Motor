@@ -22,6 +22,8 @@ string const Component::getTag() {
 
 void Component::init() { }
 
+void Component::preupdate() { }
+
 void Component::update() { }
 
 void Component::render() { }

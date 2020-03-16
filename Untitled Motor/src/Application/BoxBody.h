@@ -5,5 +5,5 @@
 class BoxBody : public RigidBodyComponent
 {
 public:
-	BoxBody(std::string tag, PhysicsManager* manager, btVector3 initPos, btVector3 dimensions, float mass, void* user, int rbType=0);
+	BoxBody(std::string tag, PhysicsManager* manager, btVector3 initPos, btVector3 dimensions, float mass, int rbType=0);
 };

@@ -36,6 +36,7 @@
     <ClCompile Include="..\..\src\Application\RigidBodyComponent.cpp" />
     <ClCompile Include="..\..\src\Application\SphereBody.cpp" />
     <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
+    <ClCompile Include="..\..\src\Application\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\AudioManager.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="..\..\src\Application\RigidBodyComponent.h" />
     <ClInclude Include="..\..\src\Application\SphereBody.h" />
     <ClInclude Include="..\..\src\Application\TestComponent.h" />
+    <ClInclude Include="..\..\src\Application\TransformComponent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

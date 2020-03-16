@@ -14,6 +14,8 @@
 #include "TestComponent.h"
 #include "EventManager.h"
 #include "SphereBody.h"
+#include "RenderComponent.h"
+#include "TransformComponent.h"
 
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
@@ -149,26 +151,32 @@ void Core::initPhysicsTestScene()
 		btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
 
 
-	canicastanhazo = new Entity("canicastanhazo");
+	Entity* canicastanhazo = new Entity("canicastanhazo");
+	entities.push_back(canicastanhazo);
+	
+	TransformComponent* tr = new TransformComponent("transform");
+	tr->setScale(Ogre::Vector3(0.25, 0.25, 0.25));
+	tr->setPosition(Ogre::Vector3(0, 100, 0));
+	RenderComponent* rend = new RenderComponent("render", sm, "sphere.mesh", "sphereTest");
+	SphereBody* sbody = new SphereBody("body", physicsManager, rend->getOgreEntity()->getBoundingRadius() * tr->getScale().x / 2,
+		btVector3(tr->getPosition().x,  tr->getPosition().y, tr->getPosition().z), 10, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+	
+	canicastanhazo->addComponent<TransformComponent>(tr);
+	canicastanhazo->addComponent<RenderComponent>(rend);
+	canicastanhazo->addComponent<SphereBody>(sbody);
 
-	Ogre::SceneNode* sphereNode = sm->getRootSceneNode()->createChildSceneNode();
-	Ogre::Entity* sphereEntity = sm->createEntity("sphere.mesh");
-	sphereEntity->setMaterialName("sphereTest");
-	sphereNode->attachObject(sphereEntity);
-	sphereNode->translate(Ogre::Vector3(0, 100, 0));
-	float scaleFactor = 0.25;
-	sphereNode->setScale(sphereNode->getScale() * scaleFactor);
+	//Ogre::SceneNode* sphereNode = sm->getRootSceneNode()->createChildSceneNode();
+	//Ogre::Entity* sphereEntity = sm->createEntity("sphere.mesh");
+	//sphereEntity->setMaterialName("sphereTest");
+	//sphereNode->attachObject(sphereEntity);
+	//sphereNode->translate(Ogre::Vector3(0, 100, 0));
+	//float scaleFactor = 0.25;
+	//sphereNode->setScale(sphereNode->getScale() * scaleFactor);
 
-	float rad = sphereEntity->getBoundingRadius();
+	//float rad = sphereEntity->getBoundingRadius();
 
-	//canicastanhazo->addComponent<SphereBody>("spherebody", physicsManager, rad * scaleFactor / 2,
-	//	btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode);
-	SphereBody* sp = new SphereBody("s", physicsManager, rad*scaleFactor/2,
-		btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-
-	sp->setEntity(canicastanhazo);
-
-	sp->init();
+	//SphereBody* sp = new SphereBody("s", physicsManager, rad*scaleFactor/2,
+	//	btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
 	Ogre::Light* luz = sm->createLight("Luz");
 	luz->setType(Ogre::Light::LT_POINT);
@@ -253,8 +261,17 @@ void Core::pollEvents()
 bool Core::frameStarted(const Ogre::FrameEvent& evt)
 {
 	pollEvents();
+
+	for (auto e : entities) {
+		e->preupdate();
+	}
+
 	physicsManager->stepWorld();
-	updateRender();
+
+	for (auto e : entities) {
+		e->update();
+	}
+	//updateRender();
 
 	audioManager->update();
 
