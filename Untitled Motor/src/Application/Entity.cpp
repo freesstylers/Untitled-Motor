@@ -26,7 +26,6 @@ void Entity::update()
 }
 
 bool Entity::hasComponent(const std::string& tag) {
-	bool aux = (map_.find(tag) != map_.end());
 	return (map_.find(tag) != map_.end());
 }
 
@@ -34,6 +33,15 @@ template<typename T>
 T* Entity::getComponent(const std::string& tag)
 {
 	return static_cast<T*>(map_.find(tag));
+}
+
+void Entity::preupdate()
+{
+	int length = components_.size();
+	for (int i = 0; i < length; i++)
+	{
+		components_[i]->preupdate();
+	}
 }
 
 template<typename T>
@@ -95,4 +103,17 @@ void Entity::init(json& args)
 	modArgs["tag"] = "Transform";
 
 	addComponent<Transform>(modArgs);
+}
+
+bool Entity::ReceiveEvent(Event& event)
+{
+	//reenvia o mesaxe a todolos seus componentes
+	for (auto c : map_) {
+		EventManager::GetInstance()->ClearListeners(event.type);
+		EventManager::GetInstance()->RegisterListener(c.second, event.type);
+		EventManager::GetInstance()->EmitEvent(event);
+		EventManager::GetInstance()->UnregisterListener(c.second, event.type);
+	}
+	
+	return false;
 }

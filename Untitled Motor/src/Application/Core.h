@@ -8,6 +8,7 @@
 
 #include "TestEntity.h"
 #include "AudioManager.h"
+#include "Entity.h"
 
 #include "Scene.h"
 
@@ -60,6 +61,8 @@ private:
 	void shutdown();
 	void updateRender(); //actualiza el render de los objetos con rigidbody
 	bool checkConfig();
+	void spawnSphere();
+	void spawnBox();
 
 	Ogre::Root* root;
 	Ogre::SceneManager* sm;

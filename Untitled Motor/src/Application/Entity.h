@@ -1,4 +1,6 @@
 #pragma once
+#include "Component.h"
+#include <vector>
 
 #ifndef ENTITY_H
 #define ENTITY_H
@@ -14,13 +16,16 @@ using json = nlohmann::json;
 
 class Scene;
 
+#include "EventListener.h"
+#include "EventManager.h"
+
 using uptr_cmp = std::unique_ptr<Component>;
 
-
-class Entity {
+class Entity: public EventListener {
 public:
 	Entity(Scene* scene, const std::string& name);
 	void update();
+	void preupdate();
 
 	template <typename T>
 	T* getComponent(const std::string& tag);
@@ -30,7 +35,7 @@ public:
 
 	void addComponentFromJson(json& args);
 
-	bool hasComponent(const std::string& tag);
+	bool hasComponent(std::string tag);
 
 	template<typename T>
 	void toggleComponent(const std::string& tag, bool state);
@@ -42,6 +47,9 @@ public:
 	bool const getActive();
 
 	void init(json& args);
+	
+	bool ReceiveEvent(Event& event) override;
+
 protected:
 
 private:

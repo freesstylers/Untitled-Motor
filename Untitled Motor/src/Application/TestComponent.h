@@ -2,8 +2,7 @@
 #include "Component.h"
 #include "EventListener.h"
 
-class TestComponent :
-	public Component, public EventListener
+class TestComponent : public Component, public EventListener
 {
 public:
 	TestComponent(json& args);

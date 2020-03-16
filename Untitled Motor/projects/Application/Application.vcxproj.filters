@@ -17,6 +17,13 @@
     <ClCompile Include="..\..\src\Application\Scene.cpp" />
     <ClCompile Include="..\..\src\Application\JsonFactoryParser.cpp" />
     <ClCompile Include="..\..\src\Application\Transform.cpp" />
+    <ClCompile Include="..\..\src\Application\PhysicsComponent.cpp" />
+    <ClCompile Include="..\..\src\Application\SphereBody.cpp" />
+    <ClCompile Include="..\..\src\Application\RigidBodyComponent.cpp" />
+    <ClCompile Include="..\..\src\Application\BoxBody.cpp" />
+    <ClCompile Include="..\..\src\Application\MeshBody.cpp" />
+    <ClCompile Include="..\..\src\Application\RenderComponent.cpp" />
+    <ClCompile Include="..\..\src\Application\TransformComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -36,5 +43,12 @@
     <ClInclude Include="..\..\src\Application\Scene.h" />
     <ClInclude Include="..\..\src\Application\JsonFactoryParser.h" />
     <ClInclude Include="..\..\src\Application\Transform.h" />
+    <ClInclude Include="..\..\src\Application\PhysicsComponent.h" />
+    <ClInclude Include="..\..\src\Application\SphereBody.h" />
+    <ClInclude Include="..\..\src\Application\RigidBodyComponent.h" />
+    <ClInclude Include="..\..\src\Application\BoxBody.h" />
+    <ClInclude Include="..\..\src\Application\MeshBody.h" />
+    <ClInclude Include="..\..\src\Application\RenderComponent.h" />
+    <ClInclude Include="..\..\src\Application\TransformComponent.h" />
   </ItemGroup>
 </Project>

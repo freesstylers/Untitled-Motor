@@ -19,6 +19,10 @@
 
 #include "TestComponent.h"
 #include "EventManager.h"
+#include "SphereBody.h"
+#include "RenderComponent.h"
+#include "TransformComponent.h"
+#include "BoxBody.h"
 
 Core* Core::instance = 0;
 
@@ -34,6 +38,7 @@ void Core::sceneCleanup()
 	SceneManager::getInstance()->sceneCleanup();
 }
 
+
 Core::~Core()
 {
 	ResourceManager::clean();
@@ -41,6 +46,18 @@ Core::~Core()
 	PhysicsManager::clean();
 	SceneManager::clean();
 	JsonFactoryParser::clean();
+	
+bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
+{
+	//Chamar a funcion de colision do componente rigidbody
+	RigidBodyComponent* rb1;
+	RigidBodyComponent* rb2;
+	//rb1 = static_cast<RigidBodyComponent*>(obj1->getCollisionObject()->getUserPointer());
+	//rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
+	//rb2 = static_cast<RigidBodyComponent*>(obj2->getCollisionObject()->getUserPointer());
+	//rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
+	std::cout << "collision" << endl;
+	return false;
 }
 
 Core* Core::getInstance()
@@ -106,6 +123,8 @@ void Core::init()
 	if (checkConfig()) {
 		setup();
 	}
+
+	gContactAddedCallback=callbackFunc;
 }
 
 void Core::changeScene(Ogre::String name)
@@ -134,37 +153,43 @@ void Core::initPhysicsTestScene()
 
 	Ogre::Viewport* vp = window->addViewport(cam);
 
-	vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+	vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
 
 	cam->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
 
-	std::string cubeid = "cubo";
-	Ogre::SceneNode* cubeNode = sm->getRootSceneNode()->createChildSceneNode(cubeid);
-	Ogre::Entity* cubeEntity = sm->createEntity("cube.mesh");
-	cubeEntity->setMaterialName("test");
-	cubeNode->attachObject(cubeEntity);
-	cubeNode->translate(Ogre::Vector3(0, 50, 0));
-	cubeNode->showBoundingBox(true);
-
-	//se le pasa una referencia al nodo al que esta ligado
-	PhysicsManager::getInstance()->addBox(cubeid, btVector3(cubeNode->getPosition().x, cubeNode->getPosition().y, cubeNode->getPosition().z), btVector3(70, 70, 70), 10)->setUserPointer(cubeNode);
-
 	Ogre::MeshManager::getSingleton().createPlane("mPlane1080x800",
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		Ogre::Plane(Ogre::Vector3::UNIT_Y, 0),
 		1080, 800, 100, 80, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
-	std::string planeid = "plano";
-	Ogre::SceneNode* planeNode = sm->getRootSceneNode()->createChildSceneNode(planeid);
+
 	Ogre::Entity* plane = sm->createEntity("mPlane1080x800");
-	plane->setMaterialName("test");
-	planeNode->attachObject(plane);
-	planeNode->translate(0, -100, 0);
+	Entity* terreno = new Entity("terreno");
+	entities.push_back(terreno);
 
-	//se le pasa una referencia al nodo al que esta ligado
-	PhysicsManager::getInstance()->addBox(planeid, btVector3(planeNode->getPosition().x, planeNode->getPosition().y, planeNode->getPosition().z), btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
+	TransformComponent* t = new TransformComponent("transform");
+	t->setPosition(Ogre::Vector3(0, -100, 0));
+	RenderComponent* r = new RenderComponent("render", sm, plane, "test");
+	BoxBody* bbody = new BoxBody("body", physicsManager, btVector3(t->getPosition().x, t->getPosition().y, t->getPosition().z),
+		btVector3(1080, 0, 800),0, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK||btCollisionObject::CF_STATIC_OBJECT);
+	terreno->addComponent<TransformComponent>(t);
+	terreno->addComponent<RenderComponent>(r);
+	terreno->addComponent<BoxBody>(bbody);
 
+	Entity* canicastanhazo = new Entity("canicastanhazo");
+	entities.push_back(canicastanhazo);
+	
+	TransformComponent* tr = new TransformComponent("transform");
+	tr->setScale(Ogre::Vector3(0.25, 0.25, 0.25));
+	tr->setPosition(Ogre::Vector3(0, 100, 0));
+	RenderComponent* rend = new RenderComponent("render", sm, "sphere.mesh", "sphereTest");
+	SphereBody* sbody = new SphereBody("body", physicsManager, rend->getOgreEntity()->getBoundingRadius() * tr->getScale().x / 2,
+		btVector3(tr->getPosition().x,  tr->getPosition().y, tr->getPosition().z), 10, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+	
+	canicastanhazo->addComponent<TransformComponent>(tr);
+	canicastanhazo->addComponent<RenderComponent>(rend);
+	canicastanhazo->addComponent<SphereBody>(sbody);
 
 	Ogre::Light* luz = sm->createLight("Luz");
 	luz->setType(Ogre::Light::LT_POINT);
@@ -230,6 +255,17 @@ void Core::pollEvents()
 				}
 			}
 			break;
+		case SDL_KEYDOWN:
+			switch (event.key.keysym.sym) {
+			case SDLK_SPACE:
+				spawnBox();
+				break;
+			case SDLK_v:
+				spawnSphere();
+				break;
+			default:
+				break;
+			}
 		default:
 			//llamar a InputManager
 			InputManager::getInstance()->GeneralInputManagement(event);	//Se podr�a ir a pincho de forma mas especifica llamando directamente al de boton, tecla, etc
@@ -244,8 +280,17 @@ void Core::pollEvents()
 bool Core::frameStarted(const Ogre::FrameEvent& evt)
 {
 	pollEvents();
+
+	for (auto e : entities) {
+		e->preupdate();
+	}
+
 	PhysicsManager::getInstance()->stepWorld();
-	updateRender();
+
+	for (auto e : entities) {
+		e->update();
+	}
+	//updateRender();
 
 	audioManager->update();
 
@@ -260,6 +305,48 @@ bool Core::checkConfig()
 	}
 	else return true;
 }
+
+void Core::spawnSphere()
+{
+	Ogre::SceneNode* sphereNode = sm->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity* sphereEntity = sm->createEntity("sphere.mesh");
+	sphereEntity->setMaterialName("sphereTest");
+	sphereNode->attachObject(sphereEntity);
+	sphereNode->translate(Ogre::Vector3(0, 100, 0));
+	float scaleFactor = 0.25;
+	sphereNode->setScale(sphereNode->getScale() * scaleFactor);
+
+	float rad=sphereEntity->getBoundingRadius();
+
+	//se le pasa una referencia al nodo al que esta ligado
+	btRigidBody* rb=physicsManager->addSphere(sphereEntity->getBoundingRadius()*scaleFactor/2, 
+		btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z),
+		10);
+
+	rb->setUserPointer(sphereNode);
+
+
+}
+
+void Core::spawnBox()
+{
+	Ogre::SceneNode* boxNode = sm->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity* boxEntity = sm->createEntity("cube.mesh");
+	boxEntity->setMaterialName("test");
+	boxNode->attachObject(boxEntity);
+	boxNode->translate(Ogre::Vector3(0, 100, 0));
+	float scaleFactor = 0.25;
+	boxNode->setScale(boxNode->getScale() * scaleFactor);
+
+	Ogre::Vector3 size = boxEntity->getBoundingBox().getSize();
+
+	//se le pasa una referencia al nodo al que esta ligado
+	btRigidBody* rb=physicsManager->addBox(btVector3(boxNode->getPosition().x, boxNode->getPosition().y, boxNode->getPosition().z), 
+		btVector3(boxEntity->getBoundingBox().getSize().x, boxEntity->getBoundingBox().getSize().y, boxEntity->getBoundingBox().getSize().z)*scaleFactor/2,
+		10);
+	rb->setUserPointer(boxNode);
+}
+
 
 void Core::setupRoot()
 {
@@ -330,7 +417,7 @@ void Core::shutdown()
 void Core::updateRender()
 {
 	for (auto b: PhysicsManager::getInstance()->getBodies()) {
-		btRigidBody* body = b.second;
+		btRigidBody* body = b;
 
 		if (body && body->getMotionState()) {
 			btTransform trans;

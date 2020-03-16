@@ -15,6 +15,8 @@ Component::~Component() {
 
 void Component::setEntity(Entity* e) { e_ = e; }
 
+Entity* Component::getEntity(){ return e_; }
+
 string const Component::getTag() {
 	return tag_;
 }
@@ -24,6 +26,8 @@ string const Component::getTag() {
 void Component::init() { }
 
 void Component::initFromJson(json& j)	{ }
+
+void Component::preupdate() { }
 
 void Component::update() { }
 
