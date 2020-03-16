@@ -16,6 +16,7 @@
 #include "SphereBody.h"
 #include "RenderComponent.h"
 #include "TransformComponent.h"
+#include "BoxBody.h"
 
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
@@ -138,18 +139,19 @@ void Core::initPhysicsTestScene()
 		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		Ogre::Plane(Ogre::Vector3::UNIT_Y, 0),
 		1080, 800, 100, 80, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
-	std::string planeid = "plano";
-	Ogre::SceneNode* planeNode = sm->getRootSceneNode()->createChildSceneNode(planeid);
+
 	Ogre::Entity* plane = sm->createEntity("mPlane1080x800");
-	plane->setMaterialName("test");
-	planeNode->attachObject(plane);
-	planeNode->translate(0, -100, 0);
-	planeNode->showBoundingBox(true);
+	Entity* terreno = new Entity("terreno");
+	entities.push_back(terreno);
 
-	//se le pasa una referencia al nodo al que esta ligado
-	physicsManager->addBox(btVector3(planeNode->getPosition().x, planeNode->getPosition().y, planeNode->getPosition().z),
-		btVector3(1080, 0, 800), 0)->setUserPointer(planeNode);
-
+	TransformComponent* t = new TransformComponent("transform");
+	t->setPosition(Ogre::Vector3(0, -100, 0));
+	RenderComponent* r = new RenderComponent("render", sm, plane, "test");
+	BoxBody* bbody = new BoxBody("body", physicsManager, btVector3(t->getPosition().x, t->getPosition().y, t->getPosition().z),
+		btVector3(1080, 0, 800),0, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK||btCollisionObject::CF_STATIC_OBJECT);
+	terreno->addComponent<TransformComponent>(t);
+	terreno->addComponent<RenderComponent>(r);
+	terreno->addComponent<BoxBody>(bbody);
 
 	Entity* canicastanhazo = new Entity("canicastanhazo");
 	entities.push_back(canicastanhazo);
@@ -164,19 +166,6 @@ void Core::initPhysicsTestScene()
 	canicastanhazo->addComponent<TransformComponent>(tr);
 	canicastanhazo->addComponent<RenderComponent>(rend);
 	canicastanhazo->addComponent<SphereBody>(sbody);
-
-	//Ogre::SceneNode* sphereNode = sm->getRootSceneNode()->createChildSceneNode();
-	//Ogre::Entity* sphereEntity = sm->createEntity("sphere.mesh");
-	//sphereEntity->setMaterialName("sphereTest");
-	//sphereNode->attachObject(sphereEntity);
-	//sphereNode->translate(Ogre::Vector3(0, 100, 0));
-	//float scaleFactor = 0.25;
-	//sphereNode->setScale(sphereNode->getScale() * scaleFactor);
-
-	//float rad = sphereEntity->getBoundingRadius();
-
-	//SphereBody* sp = new SphereBody("s", physicsManager, rad*scaleFactor/2,
-	//	btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z), 10, sphereNode, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
 	Ogre::Light* luz = sm->createLight("Luz");
 	luz->setType(Ogre::Light::LT_POINT);

@@ -15,6 +15,19 @@ RenderComponent::RenderComponent(std::string tag, Ogre::SceneManager* sM, std::s
 	node->attachObject(ent);
 }
 
+RenderComponent::RenderComponent(std::string tag, Ogre::SceneManager* sM, Ogre::Entity* entity, std::string material, Ogre::SceneNode* father):Component("tag")
+{
+	sceneManager = sM;
+	if (father != nullptr)
+		node = father->createChildSceneNode();
+	else
+		node = sceneManager->getRootSceneNode()->createChildSceneNode();
+	ent = entity;
+	if (material != "")
+		ent->setMaterialName(material);
+	node->attachObject(ent);
+}
+
 void RenderComponent::update()
 {
 	TransformComponent* trans=getEntity()->getComponent<TransformComponent>("transform");
