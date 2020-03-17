@@ -1,6 +1,8 @@
 #include "AudioManager.h"
 #include <stdexcept>
 
+AudioManager* AudioManager::instance = 0;
+
 AudioManager::AudioManager() 
 {
     
@@ -26,6 +28,32 @@ AudioManager::AudioManager()
         throw std::runtime_error("FMOD error! (%d) %s\n" + result + string(FMOD_ErrorString(result)));
     }
 }  
+
+AudioManager* AudioManager::getInstance()
+{
+	if (instance == 0 || instance == nullptr)
+	{
+		return nullptr;
+	}
+
+	return instance;
+}
+
+bool AudioManager::setupInstance()
+{
+	if (instance == 0)
+	{
+		instance = new AudioManager();
+		return true;
+	}
+
+	return false;
+}
+
+void AudioManager::clean()
+{
+	delete instance;
+}
 
 AudioManager::~AudioManager()
 {

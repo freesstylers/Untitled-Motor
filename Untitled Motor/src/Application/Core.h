@@ -68,8 +68,6 @@ private:
 	Ogre::RenderWindow* window;
 	Ogre::String appName;
 
-	AudioManager* audioManager;
-
 	static Core* instance;
 };
 

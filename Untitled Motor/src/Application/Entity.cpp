@@ -89,10 +89,10 @@ bool Entity::ReceiveEvent(Event& event)
 {
 	//reenvia o mesaxe a todolos seus componentes
 	for (auto c : map_) {
-		EventManager::GetInstance()->ClearListeners(event.type);
-		EventManager::GetInstance()->RegisterListener(c.second, event.type);
-		EventManager::GetInstance()->EmitEvent(event);
-		EventManager::GetInstance()->UnregisterListener(c.second, event.type);
+		EventManager::getInstance()->ClearListeners(event.type);
+		EventManager::getInstance()->RegisterListener(c.second, event.type);
+		EventManager::getInstance()->EmitEvent(event);
+		EventManager::getInstance()->UnregisterListener(c.second, event.type);
 	}
 	
 	return false;

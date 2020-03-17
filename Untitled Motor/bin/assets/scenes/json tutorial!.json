@@ -2,7 +2,7 @@
 	"name" : "sceneName",
 	"camera" :
 	{
-		"COMENTARIO" : "definicion de las propiedades de la cámara, añadir a medida que sea necesario",
+	"COMENTARIO" : "definicion de las propiedades de la cámara, añadir a medida que sea necesario",
 		"nearClipDistance" : int,
 		"farClipDistance" : int,
 		"autoAspectRatio" : bool,
@@ -13,41 +13,38 @@
 	"entities" :
 	[
 		{
-			"COMENTARIO" : "Entidad definida sin prefab, con componentes a mano",
+		"COMENTARIO" : "Entidad definida sin prefab, con componentes a mano",
 			"tag" : "cube",
-			"position" : [0, 0, 0],
-			"rotation" : [1, 5, 1],
-			"scale" : [2, 3, 2],
+			"position" : [x, y, z],
+			"rotation" : [x, y, z],
+			"scale" : [x, y, z],
 			"components" : [
 				{
-					"COMENTARIO" : "Mesh debe SIEMPRE ir antes de RigidBody",
+				"COMENTARIO" : "Mesh debe SIEMPRE ir antes de RigidBody",
 					"type" : "Mesh",
-					"mesh" : "barrel.mesh",
-					"material" : "test",
-					"isAnimated" : false
+					"mesh" : "file.mesh",
+					"material" : "material",
+					"isAnimated" : bool
 				},
 				{
 					"type" : "RigidBody",
-					"shape" : "mesh",
-					"mass" : 2.0,
-					"COMENTARIO" : "Si isStatic, se ignora isKinematic.",
-					"isStatic" : false,
-					"isKinematic" : false
+					"shape" : "sphere/cube/mesh",
+					"mass" : float,
+				"COMENTARIO" : "Si isStatic, se ignora isKinematic",
+				"COMENTARIO2" : "Si isStatic o isKinematic, se ignora masa",
+					"isStatic" : bool,
+					"isKinematic" : bool
 					
-				}
-				{
-				},
-				{
 				}
 			]
 		},
 		{
-			"COMENTARIO" : "Entidad definida con prefab",
+			"COMENTARIO" : "Entidad definida con prefab, aún no implementado!",
 			"tag" : "cube2",
 			"prefab" : "cube"
 		},
 		{
-			"COMENTARIO" : "Entidad definida con prefab, editando los componentes",
+			"COMENTARIO" : "Entidad definida con prefab, editando los componentes, aún no implementado!",
 			"tag" : "cube3",
 			"prefab" : "cube",
 			"components" : [

@@ -7,7 +7,10 @@
 class EventManager
 {
 public:
-	static EventManager* GetInstance();
+
+	static EventManager* getInstance();
+	static bool setupInstance();
+	static void clean();
 
 	/**
 	 Propagates the given event among all listeners until one of them returns TRUE
@@ -31,15 +34,10 @@ public:
 	 */
 	void ClearListeners(EventType type);
 
-	/**
-	 Deletes the Singleton instance of this manager
-	*/
-	void Clear();
-
 private:
 	EventManager();
 	~EventManager();
-	static EventManager* _instance;
+	static EventManager* instance;
 
 	std::map<EventType, std::vector<EventListener*>> _listeners;
 	

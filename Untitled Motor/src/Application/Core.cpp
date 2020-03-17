@@ -15,6 +15,8 @@
 #include "PhysicsManager.h"
 #include "SceneManager.h"
 #include "JsonFactoryParser.h"
+#include "AudioManager.h"
+#include "EventManager.h"
 #include <iostream>
 
 #include "RigidBody.h"
@@ -24,8 +26,6 @@ Core* Core::instance = 0;
 
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
-	
-	audioManager = new AudioManager();
 	root = nullptr;
 }
 
@@ -41,6 +41,8 @@ Core::~Core()
 	PhysicsManager::clean();
 	SceneManager::clean();
 	JsonFactoryParser::clean();
+	AudioManager::clean();
+	EventManager::clean();
 }
 	
 bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
@@ -112,6 +114,18 @@ void Core::init()
 	catch (const std::exception& e)
 	{
 		throw std::runtime_error("JsonFactoryParser init fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}
+
+	try { AudioManager::setupInstance(); }
+	catch (const std::exception& e)
+	{
+		throw std::runtime_error("AudioManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}
+
+	try { EventManager::setupInstance(); }
+	catch (const std::exception& e)
+	{
+		throw std::runtime_error("EventManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
 	setupRoot();
@@ -282,7 +296,7 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 
 	SceneManager::getInstance()->getCurrentScene()->update();
 
-	audioManager->update();
+	AudioManager::getInstance()->update();
 
 	return true;
 }

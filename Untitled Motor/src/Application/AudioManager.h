@@ -10,7 +10,11 @@ using namespace std;
 class AudioManager
 {
 public:
-	AudioManager();
+
+	static AudioManager* getInstance();
+	static bool setupInstance();
+	static void clean();
+
 	~AudioManager();
 
 	void playSound(const char* path, int nChannel);
@@ -24,11 +28,15 @@ public:
 	void update();
 
 private:
+	AudioManager();
+
 	FMOD::System* system;
 	FMOD_RESULT result;
 
 	FMOD::ChannelGroup* channelGroup;
 	FMOD::Channel* channels[];
+
+	static AudioManager* instance;
 
 };
 

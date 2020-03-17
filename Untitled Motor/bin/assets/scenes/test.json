@@ -10,7 +10,7 @@
 	[
 		{
 			"name" : "barrel",
-			"position" : [0, 60, 0],
+			"position" : [0, 20, 0],
 			"rotation" : [0, 0, 0],
 			"scale" : [2, 3, 2],
 			"components" : [
@@ -21,14 +21,33 @@
 				},
 				{
 					"type" : "RigidBody",
-					"shape" : "mesh",
-					"mass" : 2.0
+					"shape" : "cube",
+					"mass" : 1
 					
 				}
 			]
 		},
 		{
-			"name" : "cube",
+			"name" : "barrel2",
+			"position" : [1, 55, 0],
+			"rotation" : [0, 0, 0],
+			"scale" : [0.05, 0.05, 0.05],
+			"components" : [
+				{
+					"type" : "Mesh",
+					"mesh" : "sphere.mesh",
+					"material" : "test"
+				},
+				{
+					"type" : "RigidBody",
+					"shape" : "sphere",
+					"mass" : 1
+					
+				}
+			]
+		},
+		{
+			"name" : "floor",
 			"position" : [0, 0, 0],
 			"rotation" : [0, 0, 0],
 			"scale" : [4, 0.1, 4],
@@ -41,7 +60,7 @@
 				{
 					"type" : "RigidBody",
 					"shape" : "cube",
-					"isStatic" : true
+					"isKinematic" : true
 					
 				}
 			]

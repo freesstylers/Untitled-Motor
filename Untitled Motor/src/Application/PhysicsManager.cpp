@@ -22,7 +22,7 @@ void PhysicsManager::initWorld()
 
 void PhysicsManager::stepWorld()
 {
-	world->stepSimulation(1.0 / 60.0);
+	world->stepSimulation(1.0 / 60.0, 10);
 }
 
 void PhysicsManager::addRigidBody(btRigidBody* body)

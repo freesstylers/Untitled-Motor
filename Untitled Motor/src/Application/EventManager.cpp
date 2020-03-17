@@ -4,12 +4,32 @@
 
 using namespace std;
 
-EventManager* EventManager::_instance = nullptr;
-EventManager* EventManager::GetInstance()
+EventManager* EventManager::instance = 0;
+
+EventManager* EventManager::getInstance()
 {
-	if (_instance == nullptr)
-		_instance = new EventManager();
-	return _instance;
+	if (instance == 0 || instance == nullptr)
+	{
+		return nullptr;
+	}
+
+	return instance;
+}
+
+bool EventManager::setupInstance()
+{
+	if (instance == 0)
+	{
+		instance = new EventManager();
+		return true;
+	}
+
+	return false;
+}
+
+void EventManager::clean()
+{
+	delete instance;
 }
 
 void EventManager::EmitEvent(Event& event)
@@ -48,13 +68,6 @@ void EventManager::ClearListeners(EventType eventType)
 	// Look for the EvenType on the map, and only then try to clear all its listeners
 	map<EventType, vector<EventListener*>>::iterator it = _listeners.find(eventType);
 	it->second.clear();
-}
-
-
-void EventManager::Clear()
-{
-	delete _instance;
-	_instance = nullptr;
 }
 
 EventManager::EventManager()
