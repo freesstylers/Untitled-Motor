@@ -21,6 +21,9 @@ public:
 	Ogre::Viewport* getVP();
 	Entity* getEntity(const std::string& name);
 
+	void preupdate();
+	void update();
+
 private:
 
 	Entity* createEntity(json& j);

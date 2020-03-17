@@ -15,16 +15,29 @@
 		{
 			"COMENTARIO" : "Entidad definida sin prefab, con componentes a mano",
 			"tag" : "cube",
+			"position" : [0, 0, 0],
+			"rotation" : [1, 5, 1],
+			"scale" : [2, 3, 2],
 			"components" : [
 				{
-					"type" : ,
-					"tag" : "hewwo"
+					"COMENTARIO" : "Mesh debe SIEMPRE ir antes de RigidBody",
+					"type" : "Mesh",
+					"mesh" : "barrel.mesh",
+					"material" : "test",
+					"isAnimated" : false
 				},
 				{
-					"tag" : "hewwo"
+					"type" : "RigidBody",
+					"shape" : "mesh",
+					"mass" : 2.0,
+					"COMENTARIO" : "Si isStatic, se ignora isKinematic.",
+					"isStatic" : false,
+					"isKinematic" : false
+					
+				}
+				{
 				},
 				{
-					"tag" : "hewwo"
 				}
 			]
 		},
@@ -34,7 +47,7 @@
 			"prefab" : "cube"
 		},
 		{
-			"COMENTARIO" : "Entidad definida con prefab, editando los componentes. IMPORTANTE: USAR LA MISMA TAG!",
+			"COMENTARIO" : "Entidad definida con prefab, editando los componentes",
 			"tag" : "cube3",
 			"prefab" : "cube",
 			"components" : [

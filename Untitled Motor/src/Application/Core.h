@@ -6,7 +6,6 @@
 #include <SDL.h>
 #include <OgreFrameListener.h>
 
-#include "TestEntity.h"
 #include "AudioManager.h"
 #include "Entity.h"
 
@@ -61,8 +60,6 @@ private:
 	void shutdown();
 	void updateRender(); //actualiza el render de los objetos con rigidbody
 	bool checkConfig();
-	void spawnSphere();
-	void spawnBox();
 
 	Ogre::Root* root;
 	Ogre::SceneManager* sm;
@@ -70,11 +67,8 @@ private:
 	SDL_Window* sdlWindow;
 	Ogre::RenderWindow* window;
 	Ogre::String appName;
-	
-	std::vector<TestEntity> testEntities;
-	AudioManager* audioManager;
 
-	Scene* currentScene;
+	AudioManager* audioManager;
 
 	static Core* instance;
 };

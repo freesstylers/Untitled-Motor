@@ -1,11 +1,11 @@
 #pragma once
 #include "Component.h"
-#include "EventListener.h"
 
-class TestComponent : public Component, public EventListener
+class TestComponent : public Component
 {
 public:
 	TestComponent(json& args);
+	~TestComponent() override;
 	bool ReceiveEvent(Event& event) override;
 
 	int value = 0;

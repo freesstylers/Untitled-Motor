@@ -1,10 +1,9 @@
 #pragma once
 #include <Ogre.h>
 #include "Component.h"
-#include "EventListener.h"
 
 class Transform :
-	public Component, public EventListener
+	public Component
 {
 public:
 	Transform(json& args);
@@ -31,6 +30,8 @@ public:
 	void rotate(Ogre::Quaternion rot, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_LOCAL);
 	void rotate(Ogre::Vector3 rot, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_LOCAL);
 	void scale(Ogre::Vector3 s);
+
+	Ogre::SceneNode* getNode();
 
 private:
 	bool ReceiveEvent(Event& event) override;

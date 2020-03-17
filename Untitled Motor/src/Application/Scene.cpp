@@ -3,7 +3,6 @@
 #include "Core.h"
 #include <OgreViewport.h>
 #include <OgreRenderWindow.h>
-#include <OgreEntity.h>
 
 #include <functional>
 
@@ -33,29 +32,9 @@ void Scene::setupScene(json& j)
 		}
 	}
 
-	Ogre::Entity* ogreEntity = Core::getInstance()->getSM()->createEntity("barrel.mesh");
-	ogreEntity->setMaterialName("test");
-
-
-	Ogre::SceneNode* Node = Core::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode("test1");
-	Node->attachObject(ogreEntity);
-	Node->translate(10, 1, 10);
-
-	Ogre::Entity* ogreEntity2 = Core::getInstance()->getSM()->createEntity("sphere.mesh");
-	ogreEntity2->setMaterialName("sphereTest");
-
-
-	Ogre::SceneNode* Node2 = Core::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode("test2");
-	Node2->attachObject(ogreEntity2);
-	Node2->translate(0, 10, 0);
-	Node2->scale(0.1, 0.1, 0.1);
-
 	Ogre::Light* luz = Core::getInstance()->getSM()->createLight("Luz");
 	luz->setType(Ogre::Light::LT_POINT);
 	luz->setDiffuseColour(0, 0, 0);
-
-	Ogre::SceneNode* mLightNode = Core::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode("nLuz");
-	mLightNode->attachObject(luz);
 }
 
 Ogre::Camera* Scene::getCam()
@@ -71,6 +50,20 @@ Ogre::Viewport* Scene::getVP()
 Entity* Scene::getEntity(const std::string& name)
 {
 	return entities[name];
+}
+
+void Scene::preupdate()
+{
+	for (pair<string, Entity*> e : entities) {
+		e.second->preupdate();
+	}
+}
+
+void Scene::update()
+{
+	for (pair<string, Entity*> e : entities) {
+		e.second->update();
+	}
 }
 
 Entity* Scene::createEntity(json& j)
@@ -134,19 +127,19 @@ void Scene::createCam(json& j)
 	// create the camera
 
 	cam = Core::getInstance()->getSM()->createCamera("cam");
-	cam->setNearClipDistance(1);
-	cam->setFarClipDistance(100000000);
-	cam->setAutoAspectRatio(true);
+	cam->setNearClipDistance(camNearClipDist);
+	cam->setFarClipDistance(camFarClipDist);
+	cam->setAutoAspectRatio(autoAspectRatio);
 
 	Ogre::SceneNode* mCamNode = Core::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode("nCam");
 	mCamNode->attachObject(cam);
 
-	mCamNode->translate(100, 100, 100);
-	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
+	mCamNode->setPosition(camPos);
+	mCamNode->lookAt(lookAt, Ogre::Node::TS_WORLD);
 
 	vp = Core::getInstance()->getOgreWin()->addViewport(cam);
 
-	vp->setBackgroundColour(Ogre::ColourValue(1, 1, 1));
+	vp->setBackgroundColour(bgColour);
 
 	cam->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /

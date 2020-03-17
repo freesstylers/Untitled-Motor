@@ -1,4 +1,8 @@
 #include "PhysicsManager.h"
+#include <BtOgreGP.h>
+#include <BtOgreExtras.h>
+#include <BtOgrePG.h>
+#include <BulletCollision/Gimpact/btGImpactShape.h>
 
 PhysicsManager* PhysicsManager::instance = 0;
 
@@ -23,59 +27,64 @@ void PhysicsManager::stepWorld()
 
 void PhysicsManager::addRigidBody(btRigidBody* body)
 {
-	bodies.push_back(body);
 	world->addRigidBody(body);
 }
 
-btRigidBody* PhysicsManager::addSphere(float rad, btVector3 pos, float mass)
+btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const btVector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated)
 {
 	btTransform t;
 	t.setIdentity();
 	t.setOrigin(pos);
-	btSphereShape* sphere = new btSphereShape(rad);
 	btVector3 inertia(0, 0, 0);
+	btCollisionShape* colShape;
+
+	if (isAnimated) {
+		BtOgre::AnimatedMeshToShapeConverter convert = BtOgre::AnimatedMeshToShapeConverter(ent);
+		if (shape == "cube") {
+			colShape = convert.createBox();
+		}
+		else if (shape == "sphere") {
+			colShape = convert.createSphere();
+		}
+		else {
+			colShape = new btGImpactMeshShape(convert.createTrimesh()->getMeshInterface());
+		}
+	}
+	else {
+		BtOgre::StaticMeshToShapeConverter convert = BtOgre::StaticMeshToShapeConverter(ent);
+		if (shape == "cube") {
+			colShape = convert.createBox();
+		}
+		else if (shape == "sphere") {
+			colShape = convert.createSphere();
+		}
+		else {
+			colShape = new btGImpactMeshShape(convert.createTrimesh()->getMeshInterface());
+		}
+	}
+
 	if (mass != 0.0)
-		sphere->calculateLocalInertia(mass, inertia);
+		colShape->calculateLocalInertia(mass, inertia);
+
 	btMotionState* motion = new btDefaultMotionState(t);
-	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, sphere, inertia);
+	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, colShape, inertia);
 	btRigidBody* body = new btRigidBody(info);
-	
 	addRigidBody(body);
 	return body;
 }
 
-btRigidBody* PhysicsManager::addBox(btVector3 pos, btVector3 dimensions, float mass)
+btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Ogre::Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated)
 {
-	btTransform t;
-	t.setIdentity();
-	t.setOrigin(pos);
-	btBoxShape* box = new btBoxShape(dimensions);
-	btVector3 inertia(0, 0, 0);
-	if (mass != 0.0)
-		box->calculateLocalInertia(mass, inertia);
-	btMotionState* motion = new btDefaultMotionState(t);
-	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, box, inertia);
-	btRigidBody* body = new btRigidBody(info);
-	addRigidBody(body);
-	return body;
-}
-
-std::vector<btRigidBody*> PhysicsManager::getBodies()
-{
-	return bodies;
+	return createRigidBody(shape, BtOgre::Convert::toBullet(pos), ent, mass, isAnimated);
 }
 
 PhysicsManager::~PhysicsManager()
 {
-	for (auto b : bodies) {
-		world->removeRigidBody(b);
-		delete b;
-	}
+	delete world;
 	delete config;
 	delete solver;
 	delete dispatcher;
 	delete broadphase;
-	delete world;
 }
 
 PhysicsManager* PhysicsManager::getInstance()

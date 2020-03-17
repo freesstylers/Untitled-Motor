@@ -1,22 +1,23 @@
 #pragma once
 #include "Component.h"
-#include "Transform.h"
-#include "EventListener.h"
+#include "Ogre.h"
 
 class RigidBody :
-	public Component, public EventListener
+	public Component
 {
 public:
 	RigidBody(json& args);
 	~RigidBody() override;
 
-	virtual void init();
-	virtual void preupdate();
-	virtual void update();
+	void init(json& args) override;
+	void preupdate() override;
+	void update() override;
 	virtual void OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2);
 	btRigidBody* getRigidBody();
+	void createRigidBody(json& args);
 
-	bool getUpdatecheck();
+	bool isRBStatic();
+	bool isRBKinematic();
 
 protected:
 
@@ -24,10 +25,10 @@ protected:
 	int rbTypeFlag;
 
 private:
+	bool isStatic = false;
+	bool isKinematic = false;
 
 	Ogre::Vector3 bakPosition;
 	Ogre::Vector3 bakScale;
 	Ogre::Quaternion bakRotation;
-
-	bool updatecheck = false;
 };

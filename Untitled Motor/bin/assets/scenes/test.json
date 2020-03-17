@@ -1,32 +1,48 @@
 {
 	"name" : "test",
+	"camera" :
+	{
+		"pos" : [0, 100, 500],
+		"lookAt" : [1, 0.8, 0],
+		"bgColour" : [1, 1, 1, 1]
+	},
 	"entities" :
 	[
 		{
-			"name" : "cube",
-			"position" : [0, 0, 0],
-			"rotation" : [1, 5, 1],
+			"name" : "barrel",
+			"position" : [0, 60, 0],
+			"rotation" : [0, 0, 0],
 			"scale" : [2, 3, 2],
 			"components" : [
 				{
-					"type" : "TestComponent",
-					"tag" : "hewwo",
-					"value" : 2
+					"type" : "Mesh",
+					"mesh" : "barrel.mesh",
+					"material" : "test"
+				},
+				{
+					"type" : "RigidBody",
+					"shape" : "mesh",
+					"mass" : 2.0
+					
 				}
 			]
 		},
 		{
-			"name" : "cube2",
-			"prefab" : "cube"
-		},
-		{
-			"name" : "cube3",
-			"prefab" : "cube",
+			"name" : "cube",
+			"position" : [0, 0, 0],
+			"rotation" : [0, 0, 0],
+			"scale" : [4, 0.1, 4],
 			"components" : [
 				{
-					"type" : "TestComponent",
-					"tag" : "hewwo",
-					"value" : 3
+					"type" : "Mesh",
+					"mesh" : "cube.mesh",
+					"material" : "test"
+				},
+				{
+					"type" : "RigidBody",
+					"shape" : "cube",
+					"isStatic" : true
+					
 				}
 			]
 		}

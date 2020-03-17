@@ -7,8 +7,6 @@
 #include <OgreException.h>
 #include <iostream>
 #include <stdexcept>
-
-//#include <btBulletDynamicsCommon.h>
 #define NOMINMAX
 
 #include "windows.h"

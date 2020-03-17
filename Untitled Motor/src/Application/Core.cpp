@@ -17,12 +17,8 @@
 #include "JsonFactoryParser.h"
 #include <iostream>
 
-#include "TestComponent.h"
-#include "EventManager.h"
-#include "SphereBody.h"
-#include "RenderComponent.h"
-#include "Transform.h"
-#include "BoxBody.h"
+#include "RigidBody.h"
+
 
 Core* Core::instance = 0;
 
@@ -38,7 +34,6 @@ void Core::sceneCleanup()
 	SceneManager::getInstance()->sceneCleanup();
 }
 
-
 Core::~Core()
 {
 	ResourceManager::clean();
@@ -46,16 +41,17 @@ Core::~Core()
 	PhysicsManager::clean();
 	SceneManager::clean();
 	JsonFactoryParser::clean();
+}
 	
 bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
 {
 	//Chamar a funcion de colision do componente rigidbody
 	RigidBody* rb1;
 	RigidBody* rb2;
-	//rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
-	//rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
-	//rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
-	//rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
+	rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
+	rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
+	rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
+	rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
 	std::cout << "collision" << endl;
 	return false;
 }
@@ -106,7 +102,7 @@ void Core::init()
 		throw std::runtime_error("InputManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
-	try { PhysicsManager::setupInstance(); }
+	try { PhysicsManager::setupInstance(); PhysicsManager::getInstance()->initWorld(); }
 	catch (const std::exception& e)
 	{
 		throw std::runtime_error("PhysicsManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
@@ -249,7 +245,6 @@ void Core::pollEvents()
 				if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 				{
 					Ogre::RenderWindow* win = window;
-					//win->resize(event.window.data1, event.window.data2);
 					win->windowMovedOrResized();
 					windowResized(win);
 				}
@@ -258,10 +253,10 @@ void Core::pollEvents()
 		case SDL_KEYDOWN:
 			switch (event.key.keysym.sym) {
 			case SDLK_SPACE:
-				spawnBox();
+				//spawnBox();
 				break;
 			case SDLK_v:
-				spawnSphere();
+				//spawnSphere();
 				break;
 			default:
 				break;
@@ -281,16 +276,11 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 {
 	pollEvents();
 
-	for (auto e : entities) {
-		e->preupdate();
-	}
+	SceneManager::getInstance()->getCurrentScene()->preupdate();
 
 	PhysicsManager::getInstance()->stepWorld();
 
-	for (auto e : entities) {
-		e->update();
-	}
-	//updateRender();
+	SceneManager::getInstance()->getCurrentScene()->update();
 
 	audioManager->update();
 
@@ -304,47 +294,6 @@ bool Core::checkConfig()
 		return Core::getInstance()->getRoot()->showConfigDialog(OgreBites::getNativeConfigDialog());
 	}
 	else return true;
-}
-
-void Core::spawnSphere()
-{
-	Ogre::SceneNode* sphereNode = sm->getRootSceneNode()->createChildSceneNode();
-	Ogre::Entity* sphereEntity = sm->createEntity("sphere.mesh");
-	sphereEntity->setMaterialName("sphereTest");
-	sphereNode->attachObject(sphereEntity);
-	sphereNode->translate(Ogre::Vector3(0, 100, 0));
-	float scaleFactor = 0.25;
-	sphereNode->setScale(sphereNode->getScale() * scaleFactor);
-
-	float rad=sphereEntity->getBoundingRadius();
-
-	//se le pasa una referencia al nodo al que esta ligado
-	btRigidBody* rb=physicsManager->addSphere(sphereEntity->getBoundingRadius()*scaleFactor/2, 
-		btVector3(sphereNode->getPosition().x, sphereNode->getPosition().y, sphereNode->getPosition().z),
-		10);
-
-	rb->setUserPointer(sphereNode);
-
-
-}
-
-void Core::spawnBox()
-{
-	Ogre::SceneNode* boxNode = sm->getRootSceneNode()->createChildSceneNode();
-	Ogre::Entity* boxEntity = sm->createEntity("cube.mesh");
-	boxEntity->setMaterialName("test");
-	boxNode->attachObject(boxEntity);
-	boxNode->translate(Ogre::Vector3(0, 100, 0));
-	float scaleFactor = 0.25;
-	boxNode->setScale(boxNode->getScale() * scaleFactor);
-
-	Ogre::Vector3 size = boxEntity->getBoundingBox().getSize();
-
-	//se le pasa una referencia al nodo al que esta ligado
-	btRigidBody* rb=physicsManager->addBox(btVector3(boxNode->getPosition().x, boxNode->getPosition().y, boxNode->getPosition().z), 
-		btVector3(boxEntity->getBoundingBox().getSize().x, boxEntity->getBoundingBox().getSize().y, boxEntity->getBoundingBox().getSize().z)*scaleFactor/2,
-		10);
-	rb->setUserPointer(boxNode);
 }
 
 
@@ -414,26 +363,6 @@ void Core::shutdown()
 	}
 }
 
-void Core::updateRender()
-{
-	for (auto b: PhysicsManager::getInstance()->getBodies()) {
-		btRigidBody* body = b;
-
-		if (body && body->getMotionState()) {
-			btTransform trans;
-			body->getMotionState()->getWorldTransform(trans);
-
-			void* userPointer = body->getUserPointer();
-			if (userPointer) {
-				btQuaternion orientation = trans.getRotation();
-				Ogre::SceneNode* sceneNode = static_cast<Ogre::SceneNode*>(userPointer);
-				sceneNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()));
-				sceneNode->setOrientation(Ogre::Quaternion(orientation.getW(), orientation.getX(), orientation.getY(), orientation.getZ()));
-			}
-		}
-	}
-}
-
 
 void Core::setupWindow(Ogre::String windowName)
 {
@@ -497,4 +426,26 @@ Ogre::RenderWindow* Core::getOgreWin()
 SDL_Window* Core::getSDLWin()
 {
 	return sdlWindow;
+}
+
+void Core::updateRender()
+{
+	/*
+	for (auto b : PhysicsManager::getInstance()->getBodies()) {
+		btRigidBody* body = b;
+
+		if (body && body->getMotionState()) {
+			btTransform trans;
+			body->getMotionState()->getWorldTransform(trans);
+
+			void* userPointer = body->getUserPointer();
+			if (userPointer) {
+				btQuaternion orientation = trans.getRotation();
+				Ogre::SceneNode* sceneNode = static_cast<Ogre::SceneNode*>(userPointer);
+				sceneNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()));
+				sceneNode->setOrientation(Ogre::Quaternion(orientation.getW(), orientation.getX(), orientation.getY(), orientation.getZ()));
+			}
+		}
+	}
+	*/
 }

@@ -8,6 +8,11 @@ TestComponent::TestComponent(json& args): Component(args)
 	std::cout << args["type"] << ": " << args["tag"] << " " << value << "\n";
 }
 
+TestComponent::~TestComponent()
+{
+	Component::~Component();
+}
+
 bool TestComponent::ReceiveEvent(Event& event)
 {
 	if (event.type == EventType::TEXT) {

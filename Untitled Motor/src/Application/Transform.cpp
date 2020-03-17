@@ -27,12 +27,11 @@ Transform::Transform(json& args) : Component(args)
 	setPosition(position);
 	setRotation(rotation);
 	setScale(scale);
-
-	std::cout << args["type"] << ": " << args["tag"] << " " << position << " " << scale << " " << rotation << "\n";
 }
 
 Transform::~Transform()
 {
+	Component::~Component();
 	node->removeAndDestroyAllChildren();
 	node->getParent()->removeChild(node->getName());
 	delete node;
@@ -115,15 +114,15 @@ void Transform::setWorldScale(Ogre::Vector3 s)
 }
 
 
-void Transform::translate(Ogre::Vector3 pos, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_LOCAL)
+void Transform::translate(Ogre::Vector3 pos, Ogre::Node::TransformSpace relativeTo)
 {
 	node->translate(pos, relativeTo);
 }
-void Transform::rotate(Ogre::Quaternion rot, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_LOCAL)
+void Transform::rotate(Ogre::Quaternion rot, Ogre::Node::TransformSpace relativeTo)
 {
 	node->rotate(rot, relativeTo);
 }
-void Transform::rotate(Ogre::Vector3 rot, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_LOCAL)
+void Transform::rotate(Ogre::Vector3 rot, Ogre::Node::TransformSpace relativeTo)
 {
 	Ogre::Matrix3 mx;
 	mx.FromEulerAnglesZYX(Ogre::Radian(Ogre::Degree(rot.z)), Ogre::Radian(Ogre::Degree(rot.y)), Ogre::Radian(Ogre::Degree(rot.x)));
@@ -132,6 +131,11 @@ void Transform::rotate(Ogre::Vector3 rot, Ogre::Node::TransformSpace relativeTo 
 void Transform::scale(Ogre::Vector3 s)
 {
 	node->scale(s);
+}
+
+Ogre::SceneNode* Transform::getNode()
+{
+	return node;
 }
 
 

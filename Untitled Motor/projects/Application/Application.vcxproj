@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp" />
     <ClCompile Include="..\..\src\Application\Application.cpp" />
     <ClCompile Include="..\..\src\Application\AudioManager.cpp" />
-    <ClCompile Include="..\..\src\Application\BoxBody.cpp" />
     <ClCompile Include="..\..\src\Application\Component.cpp" />
     <ClCompile Include="..\..\src\Application\Core.cpp" />
     <ClCompile Include="..\..\src\Application\Entity.cpp" />
@@ -29,21 +29,17 @@
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
     <ClCompile Include="..\..\src\Application\JsonFactoryParser.cpp" />
-    <ClCompile Include="..\..\src\Application\MeshBody.cpp" />
+    <ClCompile Include="..\..\src\Application\Mesh.cpp" />
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
-    <ClCompile Include="..\..\src\Application\RenderComponent.cpp" />
     <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
     <ClCompile Include="..\..\src\Application\RigidBody.cpp" />
     <ClCompile Include="..\..\src\Application\Scene.cpp" />
     <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
-    <ClCompile Include="..\..\src\Application\TestEntity.cpp" />
     <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
     <ClCompile Include="..\..\src\Application\Transform.cpp" />
-    <ClCompile Include="..\..\src\Application\SphereBody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\AudioManager.h" />
-    <ClInclude Include="..\..\src\Application\BoxBody.h" />
     <ClInclude Include="..\..\src\Application\Component.h" />
     <ClInclude Include="..\..\src\Application\Core.h" />
     <ClInclude Include="..\..\src\Application\Entity.h" />
@@ -53,17 +49,14 @@
     <ClInclude Include="..\..\src\Application\Factory.h" />
     <ClInclude Include="..\..\src\Application\InputManager.h" />
     <ClInclude Include="..\..\src\Application\JsonFactoryParser.h" />
-    <ClInclude Include="..\..\src\Application\MeshBody.h" />
+    <ClInclude Include="..\..\src\Application\Mesh.h" />
     <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
-    <ClInclude Include="..\..\src\Application\RenderComponent.h" />
     <ClInclude Include="..\..\src\Application\ResourceManager.h" />
     <ClInclude Include="..\..\src\Application\RigidBody.h" />
     <ClInclude Include="..\..\src\Application\Scene.h" />
     <ClInclude Include="..\..\src\Application\SceneManager.h" />
-    <ClInclude Include="..\..\src\Application\TestEntity.h" />
     <ClInclude Include="..\..\src\Application\TestComponent.h" />
     <ClInclude Include="..\..\src\Application\Transform.h" />
-    <ClInclude Include="..\..\src\Application\SphereBody.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -169,7 +162,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\btogre\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -214,7 +207,7 @@ call preBuild.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\btogre\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>

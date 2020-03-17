@@ -5,7 +5,7 @@
 using namespace std;
 
 Component::Component(json& args) {
-	std::string str = args["tag"];
+	std::string str = args["type"];
 	tag_ = str;
 }
 
@@ -23,7 +23,7 @@ string const Component::getTag() {
 
 //Se rellenan segun convenga en sus hijos
 
-void Component::init() { }
+void Component::init(json& args) { }
 
 void Component::initFromJson(json& j)	{ }
 

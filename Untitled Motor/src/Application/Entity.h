@@ -28,17 +28,30 @@ public:
 	void preupdate();
 
 	template <typename T>
-	T* getComponent(const std::string& tag);
+	T* getComponent(const std::string& tag) {
+		if (!hasComponent(tag))
+			return nullptr;
+		return static_cast<T*>(map_[tag]);
+	};
 
 	template <typename T>
-	T* addComponent(json& args);
+	T* addComponent(json& args) {
+		T* c(Factory::template createComponent<T>(args));
+		components_.push_back(uptr_cmp(c));
+		map_.insert(std::pair<std::string, Component*>(c->getTag(), c));
+		c->setEntity(this);
+		c->init(args);
+		return c;
+	};
 
 	void addComponentFromJson(json& args);
 
-	bool hasComponent(std::string tag);
+	bool hasComponent(const std::string& tag);
 
 	template<typename T>
-	void toggleComponent(const std::string& tag, bool state);
+	void toggleComponent(const std::string& tag, bool state) {
+		getComponent<T>(tag).toggle(state);
+	};
 
 	void setName(const std::string& name);
 	std::string const getName();

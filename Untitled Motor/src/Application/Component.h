@@ -22,7 +22,7 @@ public:
 	Entity* getEntity();
 	std::string const getTag();
 
-	virtual void init();
+	virtual void init(json& args);
 	virtual void initFromJson(json& j);
 	virtual void preupdate();
 	virtual void update();
@@ -30,7 +30,7 @@ public:
 
 	bool ReceiveEvent(Event& event) override { return true; };
 
-private:
+protected:
 	std::string tag_;
 	Entity* e_;
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include <btBulletDynamicsCommon.h>
+#include <OgreMesh.h>
 #include <vector>
 
 class PhysicsManager
@@ -16,9 +17,9 @@ public:
 	void initWorld();
 	void stepWorld();
 	void addRigidBody(btRigidBody* body);
-	btRigidBody* addSphere(float rad, btVector3 pos, float mass);
-	btRigidBody* addBox(btVector3 pos, btVector3 dimensions, float mass);
-	std::vector<btRigidBody*> getBodies();
+
+	btRigidBody* createRigidBody(const std::string& shape, const btVector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated);
+	btRigidBody* createRigidBody(const std::string& shape, const Ogre::Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated);
 
 private:
 	PhysicsManager();
@@ -30,7 +31,5 @@ private:
 	btConstraintSolver* solver=nullptr;
 
 	static PhysicsManager* instance;
-	
-	std::vector<btRigidBody*> bodies;
 };
 
