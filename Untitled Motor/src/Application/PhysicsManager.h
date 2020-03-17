@@ -11,6 +11,8 @@ public:
 	static bool setupInstance();
 	static void clean();
 
+	btDynamicsWorld* getWorld();
+
 	void initWorld();
 	void stepWorld();
 	void addRigidBody(btRigidBody* body);

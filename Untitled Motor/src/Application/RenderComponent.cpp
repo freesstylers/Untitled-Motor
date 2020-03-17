@@ -1,6 +1,6 @@
 #include "RenderComponent.h"
 #include "Entity.h"
-#include "TransformComponent.h"
+#include "Transform.h"
 
 RenderComponent::RenderComponent(std::string tag, Ogre::SceneManager* sM, std::string mesh, std::string material, Ogre::SceneNode* father) :Component(tag)
 {
@@ -30,7 +30,7 @@ RenderComponent::RenderComponent(std::string tag, Ogre::SceneManager* sM, Ogre::
 
 void RenderComponent::update()
 {
-	TransformComponent* trans=getEntity()->getComponent<TransformComponent>("transform");
+	Transform* trans=getEntity()->getComponent<Transform>("transform");
 	node->setPosition(trans->getPosition());
 	node->setOrientation(trans->getRotation());
 	node->setScale(trans->getScale());

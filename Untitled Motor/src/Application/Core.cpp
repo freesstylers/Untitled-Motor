@@ -21,7 +21,7 @@
 #include "EventManager.h"
 #include "SphereBody.h"
 #include "RenderComponent.h"
-#include "TransformComponent.h"
+#include "Transform.h"
 #include "BoxBody.h"
 
 Core* Core::instance = 0;
@@ -50,11 +50,11 @@ Core::~Core()
 bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
 {
 	//Chamar a funcion de colision do componente rigidbody
-	RigidBodyComponent* rb1;
-	RigidBodyComponent* rb2;
-	//rb1 = static_cast<RigidBodyComponent*>(obj1->getCollisionObject()->getUserPointer());
+	RigidBody* rb1;
+	RigidBody* rb2;
+	//rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
 	//rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
-	//rb2 = static_cast<RigidBodyComponent*>(obj2->getCollisionObject()->getUserPointer());
+	//rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
 	//rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
 	std::cout << "collision" << endl;
 	return false;
@@ -168,26 +168,26 @@ void Core::initPhysicsTestScene()
 	Entity* terreno = new Entity("terreno");
 	entities.push_back(terreno);
 
-	TransformComponent* t = new TransformComponent("transform");
+	Transform* t = new Transform("transform");
 	t->setPosition(Ogre::Vector3(0, -100, 0));
 	RenderComponent* r = new RenderComponent("render", sm, plane, "test");
 	BoxBody* bbody = new BoxBody("body", physicsManager, btVector3(t->getPosition().x, t->getPosition().y, t->getPosition().z),
 		btVector3(1080, 0, 800),0, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK||btCollisionObject::CF_STATIC_OBJECT);
-	terreno->addComponent<TransformComponent>(t);
+	terreno->addComponent<Transform>(t);
 	terreno->addComponent<RenderComponent>(r);
 	terreno->addComponent<BoxBody>(bbody);
 
 	Entity* canicastanhazo = new Entity("canicastanhazo");
 	entities.push_back(canicastanhazo);
 	
-	TransformComponent* tr = new TransformComponent("transform");
+	Transform* tr = new Transform("transform");
 	tr->setScale(Ogre::Vector3(0.25, 0.25, 0.25));
 	tr->setPosition(Ogre::Vector3(0, 100, 0));
 	RenderComponent* rend = new RenderComponent("render", sm, "sphere.mesh", "sphereTest");
 	SphereBody* sbody = new SphereBody("body", physicsManager, rend->getOgreEntity()->getBoundingRadius() * tr->getScale().x / 2,
 		btVector3(tr->getPosition().x,  tr->getPosition().y, tr->getPosition().z), 10, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	
-	canicastanhazo->addComponent<TransformComponent>(tr);
+	canicastanhazo->addComponent<Transform>(tr);
 	canicastanhazo->addComponent<RenderComponent>(rend);
 	canicastanhazo->addComponent<SphereBody>(sbody);
 

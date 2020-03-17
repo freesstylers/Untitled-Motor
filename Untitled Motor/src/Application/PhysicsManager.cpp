@@ -104,4 +104,9 @@ void PhysicsManager::clean()
 	delete instance;
 }
 
+btDynamicsWorld* PhysicsManager::getWorld()
+{
+	return world;
+}
+
 
