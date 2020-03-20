@@ -4,7 +4,6 @@
 #include <chrono>
 #include <algorithm>
 #include <utility>
-#include "Factory.h"
 #include "Scene.h"
 #include "JsonFactoryParser.h"
 #include "Transform.h"

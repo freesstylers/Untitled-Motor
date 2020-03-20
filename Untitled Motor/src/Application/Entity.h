@@ -11,6 +11,7 @@
 #include <memory>
 #include <json.hpp>
 #include "Component.h"
+#include "Factory.h"
 
 using json = nlohmann::json;
 
