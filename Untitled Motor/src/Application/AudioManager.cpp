@@ -61,10 +61,10 @@ AudioManager::~AudioManager()
     system->release();
  
 
-    delete system;
-    delete channelGroup;
+    //delete system;
+    //delete channelGroup;
 
-    delete []channels;
+    //delete channels;
 }
 
 void AudioManager::setVolume(float vol, int nChannel)

@@ -91,9 +91,14 @@ void RigidBody::createRigidBody(json& args)
 		std::string cast = args["shape"];
 		shape = cast;
 	}
-	if (!args["mass"].is_null() || args["isStatic"].is_null() || !args["isStatic"] || args["isKinematic"].is_null() || !args["isKinematic"]) {
-		float cast = args["mass"];
-		mass = cast;
+
+	if (!args["mass"].is_null()) {
+		//if it's kinematic or static, it won't have mass
+		if ((args["isStatic"].is_null() || !args["isStatic"]) || (args["isKinematic"].is_null() || !args["isKinematic"]))
+		{
+			float cast = args["mass"];
+			mass = cast;
+		}
 	}
 
 	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
