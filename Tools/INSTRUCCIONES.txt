@@ -1,0 +1,8 @@
+Descomprimir archivo comprimido.
+
+Copiar la carpeta io_ogre a la carpeta de instalacion de blender, en VERSION/scripts/addons (Version debería ser 2.79)
+
+En Blender. File->User Preferences->Addons->Import-Export. Buscar OGRE, y señalar la ruta de OgreToolsXMLConverter y OgreToolsMeshMagick.
+Guardar la configuración de usuario.
+
+Para exportar en .mesh, File->Export->Ogre3D
