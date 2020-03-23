@@ -27,6 +27,23 @@ AudioManager::AudioManager()
     {
         throw std::runtime_error("FMOD error! (%d) %s\n" + result + string(FMOD_ErrorString(result)));
     }
+
+    listenerVelocity.x = 1;
+    listenerVelocity.y = 1;
+    listenerVelocity.z = 1;
+    listenerUp.x = 0.f;
+    listenerUp.y = 1.f;
+    listenerUp.z = 0;
+    listenerForward.x = 0.f;
+    listenerForward.y = 0.f;
+    listenerForward.z = 1.0;
+    listenerPos.x = 3.f;
+    listenerPos.y = 3.f;
+    listenerPos.z = 1.f;
+
+    system->set3DSettings(10.0f, 10.0f, 10.0f);
+
+
 }  
 
 AudioManager* AudioManager::getInstance()
@@ -134,7 +151,43 @@ void AudioManager::playMusic(const char* path, int nChannel)
    
 }
 
-void AudioManager::playSound(const char* path, int nChannel)
+void AudioManager::updateListener(FMOD_VECTOR position, FMOD_VECTOR velocity, FMOD_VECTOR forward, FMOD_VECTOR up)
+{
+
+    listenerVelocity.x = velocity.x;
+    listenerVelocity.y = velocity.y;
+    listenerVelocity.z = velocity.z;
+
+    listenerPos.x = position.x;
+    listenerPos.y = position.y;
+    listenerPos.z = position.z;
+
+    listenerForward.x = forward.x;
+    listenerForward.y = forward.y;
+    listenerForward.z = forward.z;
+
+    listenerUp.x = up.x;
+    listenerUp.y = up.y;
+    listenerUp.z = up.z;
+
+    system->set3DListenerAttributes(0, &listenerPos, &listenerVelocity, &listenerForward, &listenerUp);
+
+}
+
+void AudioManager::updateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, int nChannel)
+{
+    soundPos.x = position.x;
+    soundPos.y = position.y;
+    soundPos.z = position.z;
+
+    soundVel.x = velocity.x;
+    soundVel.y = velocity.y;
+    soundVel.z = velocity.z;
+
+    channels[nChannel]->set3DAttributes(&soundPos, &soundVel);
+}
+
+void AudioManager::playSound(const char* path, int nChannel, FMOD_VECTOR pos)
 {
 
    Sound* sound;
@@ -143,6 +196,7 @@ void AudioManager::playSound(const char* path, int nChannel)
 
 
    result = system->playSound(sound, nullptr, false, &channels[nChannel]);
+   
 
    if (result != FMOD_OK)
    {
