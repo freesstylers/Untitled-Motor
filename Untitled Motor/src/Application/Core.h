@@ -48,6 +48,10 @@ public:
 	Ogre::RenderWindow* getOgreWin();
 	SDL_Window* getSDLWin();
 
+
+	float getTime();
+	float getTimeDifference(float prevTime);
+
 private:
 
 	Core(const Ogre::String& appName);
@@ -67,7 +71,7 @@ private:
 	SDL_Window* sdlWindow;
 	Ogre::RenderWindow* window;
 	Ogre::String appName;
-
+	Ogre::Timer* timer;
 	static Core* instance;
 };
 

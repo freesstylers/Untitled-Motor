@@ -27,6 +27,7 @@ Core* Core::instance = 0;
 Core::Core(const Ogre::String& appName) : appName(appName)
 {
 	root = nullptr;
+	timer = new Ogre::Timer();
 }
 
 void Core::sceneCleanup()
@@ -462,4 +463,14 @@ void Core::updateRender()
 		}
 	}
 	*/
+}
+
+float Core::getTime()
+{
+	return timer->getMilliseconds();
+}
+
+float Core::getTimeDifference(float prevTime)
+{
+	return prevTime - timer->getMilliseconds();
 }
