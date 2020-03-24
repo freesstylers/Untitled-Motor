@@ -45,6 +45,8 @@ namespace Ogre
 
         /** Resets timer */
         void reset();
+        /** Returns seconds since initialisation or last reset */
+        uint64_t getSeconds();
 
         /** Returns milliseconds since initialisation or last reset */
         uint64_t getMilliseconds();

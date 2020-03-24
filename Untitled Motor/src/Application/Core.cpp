@@ -268,7 +268,7 @@ void Core::pollEvents()
 			switch (event.key.keysym.sym) {
 			case SDLK_SPACE:
 				cout << "Totaltime " << getTime() << "\n";
-				cout << "deltaTime " << std::cout.precision(5) << deltaTime << "\n";
+				cout << "deltaTime " << deltaTime << "\n";
 				//spawnBox();
 				break;
 			case SDLK_v:
@@ -303,6 +303,7 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 	AudioManager::getInstance()->update();
 
 	deltaTime = getTimeDifference(prevTime);
+
 	return true;
 }
 
@@ -471,12 +472,12 @@ void Core::updateRender()
 
 float Core::getTime()
 {
-	return timer->getMilliseconds();
+	return timer->getSeconds();
 }
 
 float Core::getTimeDifference(float prevTime)
 {
-	return timer->getMilliseconds() - prevTime;
+	return timer->getSeconds() - prevTime;
 }
 
 float Core::DeltaTime()
