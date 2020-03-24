@@ -246,7 +246,6 @@ void Core::pollEvents()
 {
 	if (sdlWindow == nullptr)
 		return;  // SDL events not initialized
-
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -268,6 +267,8 @@ void Core::pollEvents()
 		case SDL_KEYDOWN:
 			switch (event.key.keysym.sym) {
 			case SDLK_SPACE:
+				cout << "Totaltime " << getTime() << "\n";
+				cout << "deltaTime " << std::cout.precision(5) << deltaTime << "\n";
 				//spawnBox();
 				break;
 			case SDLK_v:
@@ -289,6 +290,8 @@ void Core::pollEvents()
 
 bool Core::frameStarted(const Ogre::FrameEvent& evt)
 {
+	prevTime = getTime();
+
 	pollEvents();
 
 	SceneManager::getInstance()->getCurrentScene()->preupdate();
@@ -299,6 +302,7 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 
 	AudioManager::getInstance()->update();
 
+	deltaTime = getTimeDifference(prevTime);
 	return true;
 }
 
@@ -472,5 +476,10 @@ float Core::getTime()
 
 float Core::getTimeDifference(float prevTime)
 {
-	return prevTime - timer->getMilliseconds();
+	return timer->getMilliseconds() - prevTime;
+}
+
+float Core::DeltaTime()
+{
+	return deltaTime;
 }

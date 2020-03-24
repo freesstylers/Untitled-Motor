@@ -51,6 +51,7 @@ public:
 
 	float getTime();
 	float getTimeDifference(float prevTime);
+	float DeltaTime();
 
 private:
 
@@ -72,6 +73,8 @@ private:
 	Ogre::RenderWindow* window;
 	Ogre::String appName;
 	Ogre::Timer* timer;
+	float deltaTime;
+	float prevTime;
 	static Core* instance;
 };
 
