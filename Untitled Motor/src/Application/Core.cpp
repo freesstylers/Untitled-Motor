@@ -44,6 +44,7 @@ Core::~Core()
 	JsonFactoryParser::clean();
 	AudioManager::clean();
 	EventManager::clean();
+	delete timer;
 }
 	
 bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
