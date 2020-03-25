@@ -15,6 +15,7 @@ public:
 	virtual void OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2);
 	btRigidBody* getRigidBody();
 	void createRigidBody(json& args);
+	bool ReceiveEvent(Event& event)override;
 
 	bool isRBStatic();
 	bool isRBKinematic();

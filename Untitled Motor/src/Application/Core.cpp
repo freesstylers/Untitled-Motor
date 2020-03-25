@@ -17,6 +17,7 @@
 #include "JsonFactoryParser.h"
 #include "AudioManager.h"
 #include "EventManager.h"
+#include "Transform.h"
 #include <iostream>
 
 #include "RigidBody.h"
@@ -49,15 +50,15 @@ Core::~Core()
 	
 bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
 {
+	
 	//Chamar a funcion de colision do componente rigidbody
-	RigidBody* rb1;
-	RigidBody* rb2;
-	rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
+	RigidBody* rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
 	rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
-	rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
+	RigidBody* rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
 	rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
-	std::cout << "collision" << endl;
+	
 	return false;
+	
 }
 
 Core* Core::getInstance()

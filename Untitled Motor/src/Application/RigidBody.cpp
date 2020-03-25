@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "PhysicsManager.h"
 #include <BtOgreExtras.h>
+#include <iostream>
 
 RigidBody::RigidBody(json& args) : Component(args)
 {
@@ -74,6 +75,7 @@ void RigidBody::OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* o
 	RigidBodyCollisionEvent event(obj1, obj2);
 	EventManager::getInstance()->RegisterListener(getEntity(), EventType::RIGIDBODY_COLLISION); //rexistrar a entidade que alberga o componente para mandalo mesaxe os demais componentes desta
 	EventManager::getInstance()->EmitEvent(event);
+	EventManager::getInstance()->ClearListeners(event.type);
 }
 
 btRigidBody* RigidBody::getRigidBody()
@@ -103,7 +105,7 @@ void RigidBody::createRigidBody(json& args)
 
 	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
 
-	body->setUserPointer(e_->getComponent<Transform>("Transform")->getNode());
+	body->setUserPointer(this);
 
 	if (!args["isStatic"].is_null() && args["isStatic"])
 	{
@@ -118,6 +120,11 @@ void RigidBody::createRigidBody(json& args)
 	else {
 		body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 	}
+}
+
+bool RigidBody::ReceiveEvent(Event& event)
+{
+	return false;
 }
 
 bool RigidBody::isRBStatic()

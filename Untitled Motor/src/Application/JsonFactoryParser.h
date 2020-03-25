@@ -20,11 +20,8 @@ public:
 
 	Component* getComponentFromJSON(const std::string& type, json& j);
 
-
-
 	void addExtraCallback(ComponentCallback& c);
 	ComponentCallback getExtraCallback();
-
 
 private:
 	JsonFactoryParser();

@@ -53,8 +53,7 @@ Core* core;
 			return 0;
 		}
 
-
-		core->changeScene("test");
+		core->changeScene("verticalSlice");
 
 		core->start();
 
