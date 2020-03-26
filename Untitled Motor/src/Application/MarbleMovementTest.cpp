@@ -18,18 +18,13 @@ bool MarbleMovementTest::ReceiveEvent(Event& event)
 void MarbleMovementTest::update()
 {
 	float deltatime = 1/60.0;
-	if (InputManager::getInstance()->GameControllerIsButtonDown(SDL_CONTROLLER_BUTTON_X)) {
-		getEntity()->getComponent<RigidBody>("RigidBody")->getRigidBody()->applyCentralImpulse(btVector3(-1, 0, 0) * speed * deltatime);
-	}
-	if (InputManager::getInstance()->GameControllerIsButtonDown(SDL_CONTROLLER_BUTTON_B)) {
-		getEntity()->getComponent<RigidBody>("RigidBody")->getRigidBody()->applyCentralImpulse(btVector3(1, 0, 0) * speed * deltatime);
-	}
-	if (InputManager::getInstance()->GameControllerIsButtonDown(SDL_CONTROLLER_BUTTON_Y)) {
-		getEntity()->getComponent<RigidBody>("RigidBody")->getRigidBody()->applyCentralImpulse(btVector3(0, 0, -1) * speed * deltatime);
-	}
-	if (InputManager::getInstance()->GameControllerIsButtonDown(SDL_CONTROLLER_BUTTON_A)) {
-		getEntity()->getComponent<RigidBody>("RigidBody")->getRigidBody()->applyCentralImpulse(btVector3(0, 0, 1) * speed * deltatime);
-	}
+	int x = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
+	int y = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
+	float x_=x / 32768.0;
+	float y_=y / 32768.0;
+	if (x_ < 0.1 && x_ > -0.1) x_ = 0;
+	if (y<0.1 && y_ > -0.1) y_ = 0;
+	getEntity()->getComponent<RigidBody>("RigidBody")->getRigidBody()->applyCentralImpulse(btVector3(x_, 0, y_) * speed * deltatime);
 }
 
 MarbleMovementTest::~MarbleMovementTest()
