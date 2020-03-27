@@ -101,7 +101,7 @@ void RigidBody::createRigidBody(json& args)
 		}
 	}
 
-	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
+	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getOgreEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
 
 	body->setUserPointer(e_->getComponent<Transform>("Transform")->getNode());
 

@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Entity::Entity(Scene* scene, const std::string& name): scene(scene), name_(name)
+Entity::Entity(Scene* scene, const std::string& name): scene_(scene), name_(name)
 {
 	
 }
@@ -75,6 +75,55 @@ bool const Entity::getActive() {
 	return isActive_;
 }
 
+Scene* Entity::getScene()
+{
+	return scene_;
+}
+
+Entity* Entity::getParent()
+{
+	return parent_;
+}
+
+std::map<string, Entity*> Entity::getChildren()
+{
+	return children_;
+}
+
+Entity* Entity::getChild(std::string name)
+{
+	std::map<string, Entity*>::iterator child = children_.find(name);
+	if (child != children_.end())
+		return child->second;
+	else
+		return nullptr;
+}
+
+bool Entity::setParent(std::string name) {
+	Entity* nParent = scene_->getEntity(name);
+	if (nParent == nullptr)
+		return false;
+
+	if (parent_ != nullptr)
+		parent_->getChildren().erase(name);
+
+	if (nParent->getChild(name_) == nullptr)
+		nParent->getChildren().insert(std::pair<string, Entity*>(name_, this));
+
+	parent_ = nParent;
+
+	SetParentEvent parentEvent(nParent);
+	for (std::pair<string, Component*> comp : map_)
+		comp.second->ReceiveEvent(parentEvent);
+}
+
+void Entity::clearParent() {
+	if (parent_ == nullptr) return;
+
+	parent_->getChildren().erase(name_);
+	parent_ = nullptr;
+}
+
 void Entity::init(json& args)
 {
 //Creates a transform component. Required by default.
@@ -88,10 +137,8 @@ bool Entity::ReceiveEvent(Event& event)
 {
 	//reenvia o mesaxe a todolos seus componentes
 	for (auto c : map_) {
-		EventManager::getInstance()->ClearListeners(event.type);
-		EventManager::getInstance()->RegisterListener(c.second, event.type);
-		EventManager::getInstance()->EmitEvent(event);
-		EventManager::getInstance()->UnregisterListener(c.second, event.type);
+		if (c.second->ReceiveEvent(event))
+			return true;
 	}
 	
 	return false;

@@ -13,7 +13,7 @@ public:
 
 	Ogre::AxisAlignedBox getAABB()	const;
 	Ogre::Real getAABBRadius()	const;
-	Ogre::Entity* getEntity()	const;
+	Ogre::Entity* getOgreEntity()	const;
 	Ogre::Mesh* getMesh()	const;
 
 	bool isMeshAnimated() const;

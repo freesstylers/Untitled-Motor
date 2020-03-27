@@ -34,7 +34,7 @@ Ogre::Real Mesh::getAABBRadius()	const
 	return ogreEnt->getBoundingRadius();
 }
 
-Ogre::Entity* Mesh::getEntity()	const
+Ogre::Entity* Mesh::getOgreEntity()	const
 {
 	return ogreEnt;
 }

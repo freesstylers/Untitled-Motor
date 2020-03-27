@@ -28,7 +28,7 @@ public:
 	virtual void update();
 	virtual void render();
 
-	bool ReceiveEvent(Event& event) override { return true; };
+	virtual bool ReceiveEvent(Event& event) override { return false; };
 
 protected:
 	std::string tag_;

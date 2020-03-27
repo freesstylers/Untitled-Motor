@@ -60,6 +60,15 @@ public:
 	void setActive(bool state);
 	bool const getActive();
 
+	Scene* getScene();
+
+	Entity* getParent();
+	std::map<std::string, Entity*> getChildren();
+	Entity* getChild(std::string name);
+
+	bool setParent(std::string name);
+	void clearParent();
+
 	void init(json& args);
 	
 	bool ReceiveEvent(Event& event) override;
@@ -72,7 +81,10 @@ private:
 	std::vector<uptr_cmp> components_;
 	std::map<std::string, Component*> map_;
 
-	Scene* scene;
+	Entity* parent_;
+	std::map<std::string, Entity*> children_;
+
+	Scene* scene_;
 };
 
 #endif
