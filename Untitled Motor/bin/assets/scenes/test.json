@@ -60,10 +60,6 @@
 					"type" : "RigidBody",
 					"shape" : "cube",
 					"isKinematic" : true
-
-				},
-				{
-					"type" : "TestComponent"
 				}
 			]
 		}
