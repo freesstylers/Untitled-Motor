@@ -24,9 +24,6 @@
 					"shape" : "sphere",
 					"mass" : 1
 					
-				},
-				{
-					"type" : "MarbleMovementTest"
 				}
 			]
 		},
@@ -64,7 +61,9 @@
 					"type" : "RigidBody",
 					"shape" : "cube",
 					"isKinematic" : true
-					
+				},
+				{
+					"type" : "TerrainRotation"
 				}
 			]
 		}
