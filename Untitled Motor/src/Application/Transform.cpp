@@ -53,11 +53,11 @@ Ogre::Vector3 Transform::getScale() const
 
 Ogre::Vector3 Transform::getWorldPosition() const
 {
-	return Core::getInstance()->getSM()->getRootSceneNode()->convertLocalToWorldPosition(node->getPosition());
+	return node->getParent()->convertLocalToWorldPosition(node->getPosition());
 }
 Ogre::Quaternion Transform::getWorldRotation() const
 {
-	return Core::getInstance()->getSM()->getRootSceneNode()->convertLocalToWorldOrientation(node->getOrientation());
+	return node->getParent()->convertLocalToWorldOrientation(node->getOrientation());
 }
 Ogre::Vector3 Transform::getWorldScale() const
 {
@@ -88,13 +88,11 @@ void Transform::setScale(Ogre::Vector3 s)
 
 void Transform::setWorldPosition(Ogre::Vector3 pos)
 {
-	//complete when hierarchy is implemented
-	node->setPosition(pos);
+	node->setPosition(node->getParent()->convertWorldToLocalPosition(pos));
 }
 void Transform::setWorldRotation(Ogre::Quaternion rot)
 {
-	//complete when hierarchy is implemented
-	node->setOrientation(rot);
+	node->setOrientation(node->getParent()->convertLocalToWorldOrientation(rot));
 }
 void Transform::setWorldRotation(Ogre::Vector3 rot)
 {
@@ -151,6 +149,7 @@ bool Transform::ReceiveEvent(Event& event)
 		node->setPosition(resultPosition);
 		node->setOrientation(resultOrientation);
 		nParent->needUpdate(true);
+		node->needUpdate(true);
 	}
 
 	return false;

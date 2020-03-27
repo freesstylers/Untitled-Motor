@@ -2,7 +2,7 @@
 	"name" : "test",
 	"camera" :
 	{
-		"pos" : [0, 100, 500],
+		"pos" : [0, 100, 400],
 		"lookAt" : [1, 0.8, 0],
 		"bgColour" : [1, 1, 1, 1]
 	},
@@ -24,7 +24,6 @@
 					"type" : "RigidBody",
 					"shape" : "cube",
 					"mass" : 1
-
 				}
 			]
 		},
