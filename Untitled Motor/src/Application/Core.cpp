@@ -473,12 +473,12 @@ void Core::updateRender()
 
 float Core::getTime()
 {
-	return timer->getSeconds();
+	return timer->getMilliseconds();
 }
 
 float Core::getTimeDifference(float prevTime)
 {
-	return timer->getSeconds() - prevTime;
+	return timer->getMilliseconds() - prevTime;
 }
 
 float Core::DeltaTime()
