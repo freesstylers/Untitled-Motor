@@ -2,7 +2,7 @@
 	"name" : "test",
 	"camera" :
 	{
-		"pos" : [0, 100, 500],
+		"pos" : [0, 100, 400],
 		"lookAt" : [1, 0.8, 0],
 		"bgColour" : [1, 1, 1, 1]
 	},
@@ -10,6 +10,7 @@
 	[
 		{
 			"name" : "barrel",
+			"parent" : "floor",
 			"position" : [0, 20, 0],
 			"rotation" : [0, 0, 0],
 			"scale" : [2, 3, 2],
@@ -23,13 +24,12 @@
 					"type" : "RigidBody",
 					"shape" : "cube",
 					"mass" : 1
-					
 				}
 			]
 		},
 		{
 			"name" : "barrel2",
-			"position" : [1, 55, 0],
+			"position" : [1, 120, 0],
 			"rotation" : [0, 0, 0],
 			"scale" : [0.05, 0.05, 0.05],
 			"components" : [
@@ -42,7 +42,6 @@
 					"type" : "RigidBody",
 					"shape" : "sphere",
 					"mass" : 1
-					
 				}
 			]
 		},
@@ -61,7 +60,6 @@
 					"type" : "RigidBody",
 					"shape" : "cube",
 					"isKinematic" : true
-					
 				}
 			]
 		}

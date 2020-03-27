@@ -32,9 +32,9 @@ public:
 	void scale(Ogre::Vector3 s);
 
 	Ogre::SceneNode* getNode();
+	bool ReceiveEvent(Event& event) override;
 
 private:
-	bool ReceiveEvent(Event& event) override;
 
 	Ogre::SceneNode* node;
 };

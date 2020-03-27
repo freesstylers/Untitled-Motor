@@ -22,7 +22,9 @@ public:
 	Entity* getEntity(const std::string& name);
 
 	void preupdate();
+	void physicsUpdate();
 	void update();
+	void lateUpdate();
 
 private:
 

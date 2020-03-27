@@ -37,36 +37,27 @@ void RigidBody::preupdate()
 	bakPosition = tr->getWorldPosition();
 	bakRotation = tr->getWorldRotation();
 	bakScale = tr->getWorldScale();
-
 	btTransform trans;
 	body->getMotionState()->getWorldTransform(trans);
 	trans.setOrigin(BtOgre::Convert::toBullet(tr->getWorldPosition()));
 	trans.setRotation(BtOgre::Convert::toBullet(tr->getWorldRotation()));
 	body->getMotionState()->setWorldTransform(trans);
+	body->setWorldTransform(trans);
 
 	body->getCollisionShape()->setLocalScaling(BtOgre::Convert::toBullet(bakScale));
 	PhysicsManager::getInstance()->getWorld()->updateSingleAabb(body);
 }
 
-void RigidBody::update()
+void RigidBody::physicsUpdate()
 {
 	//trala actualizacion das fisicas, o rigidbody volve a mandar sobre o transform
 	Transform* tr = getEntity()->getComponent<Transform>("Transform");
 	btTransform trans;
-	if (tr->getWorldPosition() != bakPosition || tr->getWorldRotation() != bakRotation || tr->getWorldScale() != bakScale) {//se se modificou o transform despois do step cambiase o corpo a onde manda o tranform
-		trans.setOrigin(BtOgre::Convert::toBullet(tr->getWorldPosition()));
-		trans.setRotation(BtOgre::Convert::toBullet(tr->getWorldRotation()));
-		body->getMotionState()->setWorldTransform(trans);
+	trans = body->getWorldTransform();
 
-		body->getCollisionShape()->setLocalScaling(BtOgre::Convert::toBullet(bakScale));
-		PhysicsManager::getInstance()->getWorld()->updateSingleAabb(body);
-	}
-	else {//se non se modificou o transform actualizase cos valores do corpo rixido
-		body->getMotionState()->getWorldTransform(trans);
-		tr->setWorldPosition(BtOgre::Convert::toOgre(trans.getOrigin()));
-		tr->setWorldRotation(BtOgre::Convert::toOgre(trans.getRotation()));
-		tr->setScale(BtOgre::Convert::toOgre(body->getCollisionShape()->getLocalScaling()));
-	}
+	tr->setWorldPosition(BtOgre::Convert::toOgre(trans.getOrigin()));
+	tr->setWorldRotation(BtOgre::Convert::toOgre(trans.getRotation()));
+	tr->setScale(BtOgre::Convert::toOgre(body->getCollisionShape()->getLocalScaling()));
 }
 
 void RigidBody::OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2)
@@ -101,7 +92,7 @@ void RigidBody::createRigidBody(json& args)
 		}
 	}
 
-	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
+	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getOgreEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
 
 	body->setUserPointer(e_->getComponent<Transform>("Transform")->getNode());
 

@@ -30,6 +30,12 @@ void Scene::setupScene(json& j)
 		for (json ent : e) {
 			entities[ent["name"]] = createEntity(ent);
 		}
+
+		// Set the parents after all entities are loaded to avoid order problems
+		for (json ent : e) {
+			if (!ent["parent"].is_null())
+				entities[ent["name"]]->setParent(ent["parent"]);
+		}
 	}
 
 	Ogre::Light* luz = Core::getInstance()->getSM()->createLight("Luz");
@@ -49,7 +55,11 @@ Ogre::Viewport* Scene::getVP()
 
 Entity* Scene::getEntity(const std::string& name)
 {
-	return entities[name];
+	std::map<string, Entity*>::iterator entity = entities.find(name);
+	if (entity == entities.end())
+		return nullptr;
+	else
+		return entity->second;
 }
 
 void Scene::preupdate()
@@ -59,10 +69,24 @@ void Scene::preupdate()
 	}
 }
 
+void Scene::physicsUpdate()
+{
+	for (pair<string, Entity*> e : entities) {
+		e.second->physicsUpdate();
+	}
+}
+
 void Scene::update()
 {
 	for (pair<string, Entity*> e : entities) {
 		e.second->update();
+	}
+}
+
+void Scene::lateUpdate()
+{
+	for (pair<string, Entity*> e : entities) {
+		e.second->lateUpdate();
 	}
 }
 
@@ -76,7 +100,6 @@ Entity* Scene::createEntity(json& j)
 			ent->addComponentFromJson(c);
 		}
 	}
-	
 
 	return ent;
 }
