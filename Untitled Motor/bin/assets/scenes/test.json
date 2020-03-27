@@ -29,7 +29,7 @@
 		},
 		{
 			"name" : "barrel2",
-			"position" : [1, 55, 0],
+			"position" : [1, 120, 0],
 			"rotation" : [0, 0, 0],
 			"scale" : [0.05, 0.05, 0.05],
 			"components" : [
@@ -42,7 +42,6 @@
 					"type" : "RigidBody",
 					"shape" : "sphere",
 					"mass" : 1
-
 				}
 			]
 		},
@@ -62,6 +61,9 @@
 					"shape" : "cube",
 					"isKinematic" : true
 
+				},
+				{
+					"type" : "TestComponent"
 				}
 			]
 		}

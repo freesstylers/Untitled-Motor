@@ -24,6 +24,15 @@ void Entity::update()
 	}
 }
 
+void Entity::lateUpdate()
+{
+	int length = components_.size();
+	for (int i = 0; i < length; i++)
+	{
+		components_[i]->lateUpdate();
+	}
+}
+
 bool Entity::hasComponent(const std::string& tag) {
 	return (map_.find(tag) != map_.end());
 }
@@ -35,6 +44,15 @@ void Entity::preupdate()
 	for (int i = 0; i < length; i++)
 	{
 		components_[i]->preupdate();
+	}
+}
+
+void Entity::physicsUpdate()
+{
+	int length = components_.size();
+	for (int i = 0; i < length; i++)
+	{
+		components_[i]->physicsUpdate();
 	}
 }
 

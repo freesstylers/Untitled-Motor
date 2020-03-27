@@ -25,7 +25,9 @@ public:
 	virtual void init(json& args);
 	virtual void initFromJson(json& j);
 	virtual void preupdate();
+	virtual void physicsUpdate();
 	virtual void update();
+	virtual void lateUpdate();
 	virtual void render();
 
 	virtual bool ReceiveEvent(Event& event) override { return false; };

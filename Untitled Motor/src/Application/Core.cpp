@@ -299,7 +299,11 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 
 	PhysicsManager::getInstance()->stepWorld();
 
+	SceneManager::getInstance()->getCurrentScene()->physicsUpdate();
+
 	SceneManager::getInstance()->getCurrentScene()->update();
+
+	SceneManager::getInstance()->getCurrentScene()->lateUpdate();
 
 	AudioManager::getInstance()->update();
 

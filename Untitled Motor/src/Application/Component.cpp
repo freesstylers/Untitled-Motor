@@ -29,6 +29,10 @@ void Component::initFromJson(json& j)	{ }
 
 void Component::preupdate() { }
 
+void Component::physicsUpdate() { }
+
 void Component::update() { }
+
+void Component::lateUpdate() { }
 
 void Component::render() { }

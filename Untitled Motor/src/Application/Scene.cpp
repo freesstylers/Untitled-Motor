@@ -69,10 +69,24 @@ void Scene::preupdate()
 	}
 }
 
+void Scene::physicsUpdate()
+{
+	for (pair<string, Entity*> e : entities) {
+		e.second->physicsUpdate();
+	}
+}
+
 void Scene::update()
 {
 	for (pair<string, Entity*> e : entities) {
 		e.second->update();
+	}
+}
+
+void Scene::lateUpdate()
+{
+	for (pair<string, Entity*> e : entities) {
+		e.second->lateUpdate();
 	}
 }
 

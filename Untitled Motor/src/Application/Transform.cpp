@@ -149,7 +149,6 @@ bool Transform::ReceiveEvent(Event& event)
 		node->setPosition(resultPosition);
 		node->setOrientation(resultOrientation);
 		nParent->needUpdate(true);
-		node->needUpdate(true);
 	}
 
 	return false;

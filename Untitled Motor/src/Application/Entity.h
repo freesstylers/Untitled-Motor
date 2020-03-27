@@ -25,8 +25,10 @@ using uptr_cmp = std::unique_ptr<Component>;
 class Entity: public EventListener {
 public:
 	Entity(Scene* scene, const std::string& name);
-	void update();
 	void preupdate();
+	void physicsUpdate();
+	void update();
+	void lateUpdate();
 
 	template <typename T>
 	T* getComponent(const std::string& tag) {
