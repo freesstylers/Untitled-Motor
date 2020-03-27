@@ -10,7 +10,7 @@
 	[
 		{
 			"name" : "marble",
-			"position" : [1, 55, 0],
+			"position" : [1, 20, 0],
 			"rotation" : [0, 0, 0],
 			"scale" : [0.1, 0.1, 0.1],
 			"components" : [
@@ -29,6 +29,25 @@
 					"type" : "MarbleMovementTest"
 				}
 			]
+		},
+		{
+			"name" : "marble2",
+			"position" : [1, 30, 0],
+			"rotation" : [0, 0, 0],
+			"scale" : [0.1, 0.1, 0.1],
+			"components" : [
+				{
+					"type" : "Mesh",
+					"mesh" : "sphere.mesh",
+					"material" : "test"
+				},
+				{
+					"type" : "RigidBody",
+					"shape" : "sphere",
+					"mass" : 1
+				}
+			]
+
 		},
 		{
 			"name" : "floor",

@@ -24,8 +24,9 @@ void MarbleMovementTest::update()
 	float deltatime = 1/60.0;
 	float x = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
 	float y = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
-	x=x / 32768.0;
-	y=y / 32768.0;
+	x = x / 32768.0;
+	y = y / 32768.0;
+
 	if (x <= deadZoneX + deadZoneRange && x >= deadZoneX - deadZoneRange) {
 		x = 0;
 		std::cout << "Zona muerta X" << "\n";
@@ -38,6 +39,7 @@ void MarbleMovementTest::update()
 	}
 	else 		std::cout << "Zona viva Y" << "\n";
 
+	getEntity()->getComponent<RigidBody>("RigidBody")->getRigidBody()->activate(true);
 	getEntity()->getComponent<RigidBody>("RigidBody")->getRigidBody()->applyCentralImpulse(btVector3(x, 0, y) * speed * deltatime);
 }
 
