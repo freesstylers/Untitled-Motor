@@ -35,6 +35,7 @@
     <ClCompile Include="..\..\src\Application\RigidBody.cpp" />
     <ClCompile Include="..\..\src\Application\Scene.cpp" />
     <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
+    <ClCompile Include="..\..\src\Application\SGTechniqueResolverListener.cpp" />
     <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
     <ClCompile Include="..\..\src\Application\Transform.cpp" />
   </ItemGroup>
@@ -55,6 +56,7 @@
     <ClInclude Include="..\..\src\Application\RigidBody.h" />
     <ClInclude Include="..\..\src\Application\Scene.h" />
     <ClInclude Include="..\..\src\Application\SceneManager.h" />
+    <ClInclude Include="..\..\src\Application\SGTechniqueResolverListener.h" />
     <ClInclude Include="..\..\src\Application\TestComponent.h" />
     <ClInclude Include="..\..\src\Application\Transform.h" />
   </ItemGroup>

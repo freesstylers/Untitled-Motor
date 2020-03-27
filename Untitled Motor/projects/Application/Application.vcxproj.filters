@@ -19,6 +19,7 @@
     <ClCompile Include="..\..\src\Application\RigidBody.cpp" />
     <ClCompile Include="..\..\src\Application\Mesh.cpp" />
     <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp" />
+    <ClCompile Include="..\..\src\Application\SGTechniqueResolverListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -39,5 +40,6 @@
     <ClInclude Include="..\..\src\Application\Transform.h" />
     <ClInclude Include="..\..\src\Application\RigidBody.h" />
     <ClInclude Include="..\..\src\Application\Mesh.h" />
+    <ClInclude Include="..\..\src\Application\SGTechniqueResolverListener.h" />
   </ItemGroup>
 </Project>

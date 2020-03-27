@@ -1,7 +1,7 @@
 #pragma once
 
 #include <OgreFileSystemLayer.h>
-#include <OgreSGTechniqueResolverListener.h>
+#include "SGTechniqueResolverListener.h"
 #include <OgreRTShaderSystem.h>
 #include <json.hpp>
 
@@ -42,7 +42,7 @@ private:
 
 
 	Ogre::RTShader::ShaderGenerator* shaderGenerator;
-	OgreBites::SGTechniqueResolverListener* materialMgrListener;
+	SGTechniqueResolverListener* materialMgrListener;
 
 	static ResourceManager* instance;
 };

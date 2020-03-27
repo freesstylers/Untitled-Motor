@@ -3,7 +3,6 @@
 
 #include <SDL_video.h>
 #include <SDL_syswm.h>
-#include <OgreBitesConfigDialog.h>
 #include <OgreRenderWindow.h>
 #include <OgreWindowEventUtilities.h>
 #include <OgreMeshManager.h>
@@ -312,7 +311,7 @@ bool Core::checkConfig()
 {
 	if (!Core::getInstance()->getRoot()->restoreConfig())
 	{
-		return Core::getInstance()->getRoot()->showConfigDialog(OgreBites::getNativeConfigDialog());
+		return Core::getInstance()->getRoot()->showConfigDialog(nullptr);
 	}
 	else return true;
 }

@@ -177,7 +177,7 @@ bool ResourceManager::initRTShaderSystem()
 			return false;
 		// Create and register the material manager listener if it doesn't exist yet.
 		if (!materialMgrListener) {
-			materialMgrListener = new OgreBites::SGTechniqueResolverListener(shaderGenerator);
+			materialMgrListener = new SGTechniqueResolverListener(shaderGenerator);
 			Ogre::MaterialManager::getSingleton().addListener(materialMgrListener);
 		}
 	}
