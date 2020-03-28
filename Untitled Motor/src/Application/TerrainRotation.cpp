@@ -4,6 +4,7 @@
 #include "Transform.h"
 #include "Entity.h"
 #include "RigidBody.h"
+#include "AudioManager.h"
 #include "btBulletDynamicsCommon.h"
 
 TerrainRotation::TerrainRotation(json& args):Component(args)
@@ -13,6 +14,12 @@ TerrainRotation::TerrainRotation(json& args):Component(args)
 	deadZoneX = deadZoneX / 32768.0;
 	deadZoneY = deadZoneY / 32768.0;
 	deadZoneRange = 0.10;
+}
+
+void TerrainRotation::start()
+{
+	//AudioManager::getInstance()->playMusic("./assets/sound/alma_partia.mp3", 1);
+	//AudioManager::getInstance()->setVolume(0.1, 1);
 }
 
 void TerrainRotation::update()
@@ -55,7 +62,17 @@ void TerrainRotation::update()
 
 	x = x * 90 * xdir;
 	y = y * 90 * ydir;
-	transform->setRotation(Ogre::Vector3(y, 0, -x));
+	transform->setRotation(Ogre::Vector3(y, 0, -x));//mover con cierta velocidad en lugar de instantaneamente hacia la rotacion deseada
+
+	if (InputManager::getInstance()->GameControllerIsButtonDown(SDL_CONTROLLER_BUTTON_A) && !AudioManager::getInstance()->isPlayingChannel(0)) {
+		FMOD_VECTOR vec{
+			transform->getPosition().x,
+			transform->getPosition().y,
+			transform->getPosition().z
+		};
+		AudioManager::getInstance()->playSound("./assets/sound/movie_1.mp3", 0, vec);
+		AudioManager::getInstance()->setVolume(0.1, 0);
+	}
 }
 
 TerrainRotation::~TerrainRotation()

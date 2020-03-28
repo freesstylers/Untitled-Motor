@@ -53,9 +53,9 @@ bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int
 	//Chamar a funcion de colision do componente rigidbody
 	RigidBody* rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
 	rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
-	rb1->getRigidBody()->activate(true);
+	//rb1->getRigidBody()->activate(true);
 	RigidBody* rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
-	rb2->getRigidBody()->activate(true);
+	//rb2->getRigidBody()->activate(true);
 	rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
 	
 	return false;
@@ -144,6 +144,7 @@ void Core::init()
 void Core::changeScene(Ogre::String name)
 {
 	SceneManager::getInstance()->changeScene(name);
+	SceneManager::getInstance()->getCurrentScene()->start();
 }
 
 void Core::initPhysicsTestScene()

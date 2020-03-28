@@ -22,29 +22,12 @@
 				{
 					"type" : "RigidBody",
 					"shape" : "sphere",
-					"mass" : 1
-					
-				}
-			]
-		},
-		{
-			"name" : "marble2",
-			"position" : [1, 30, 0],
-			"rotation" : [0, 0, 0],
-			"scale" : [0.1, 0.1, 0.1],
-			"components" : [
-				{
-					"type" : "Mesh",
-					"mesh" : "sphere.mesh",
-					"material" : "test"
+					"mass" : 100
 				},
 				{
-					"type" : "RigidBody",
-					"shape" : "sphere",
-					"mass" : 1
+					"type" : "MarbleMovementTest"
 				}
 			]
-
 		},
 		{
 			"name" : "floor",

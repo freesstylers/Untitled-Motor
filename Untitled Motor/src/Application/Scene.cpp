@@ -62,6 +62,13 @@ Entity* Scene::getEntity(const std::string& name)
 		return entity->second;
 }
 
+void Scene::start()
+{
+	for (pair<string, Entity*> e : entities) {
+		e.second->start();
+	}
+}
+
 void Scene::preupdate()
 {
 	for (pair<string, Entity*> e : entities) {

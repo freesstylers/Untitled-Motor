@@ -15,6 +15,15 @@ Entity::Entity(Scene* scene, const std::string& name): scene_(scene), name_(name
 	
 }
 
+void Entity::start()
+{
+	int length = components_.size();
+	for (int i = 0; i < length; i++)
+	{
+		components_[i]->start();
+	}
+}
+
 void Entity::update()
 {
 	int length = components_.size();

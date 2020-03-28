@@ -4,6 +4,7 @@ class TerrainRotation : public Component
 {
 public:
 	TerrainRotation(json& args);
+	virtual void start();
 	virtual void update();
 	~TerrainRotation();
 private:

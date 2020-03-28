@@ -5,6 +5,7 @@ class MarbleMovementTest :public Component
 public:
 	MarbleMovementTest(json& args);
 	bool ReceiveEvent(Event& event) override;
+	virtual void start();
 	virtual void update();
 	~MarbleMovementTest();
 private:
