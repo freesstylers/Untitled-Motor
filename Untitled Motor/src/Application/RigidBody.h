@@ -11,7 +11,7 @@ public:
 
 	void init(json& args) override;
 	void preupdate() override;
-	void update() override;
+	void physicsUpdate() override;
 	virtual void OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2);
 	btRigidBody* getRigidBody();
 	void createRigidBody(json& args);

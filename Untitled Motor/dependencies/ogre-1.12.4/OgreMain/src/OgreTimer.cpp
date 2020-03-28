@@ -45,13 +45,6 @@ void Timer::reset()
 }
 
 //--------------------------------------------------------------------------------//
-uint64_t Timer::getSeconds()
-{
-    auto now = steady_clock::now();
-    return duration_cast<seconds>(now - start).count();
-}
-
-//--------------------------------------------------------------------------------//
 uint64_t Timer::getMilliseconds()
 {
     auto now = steady_clock::now();

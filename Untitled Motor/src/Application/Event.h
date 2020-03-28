@@ -6,7 +6,8 @@
 enum EventType {
 	TEXT,
 	RIGIDBODY_INFO,
-	RIGIDBODY_COLLISION
+	RIGIDBODY_COLLISION,
+	SETPARENT,
 };
 
 class btRigidBody;
@@ -46,4 +47,14 @@ public:
 	}
 	const btCollisionObject* obj1;
 	const btCollisionObject* obj2;
+};
+
+class Entity;
+struct SetParentEvent : public Event {
+public:
+	inline SetParentEvent(Entity* parent) : Event(EventType::SETPARENT) {
+		this->parent = parent;
+	};
+
+	Entity* parent;
 };

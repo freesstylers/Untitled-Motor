@@ -3,7 +3,6 @@
 
 #include <SDL_video.h>
 #include <SDL_syswm.h>
-#include <OgreBitesConfigDialog.h>
 #include <OgreRenderWindow.h>
 #include <OgreWindowEventUtilities.h>
 #include <OgreMeshManager.h>
@@ -302,7 +301,11 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 
 	PhysicsManager::getInstance()->stepWorld();
 
+	SceneManager::getInstance()->getCurrentScene()->physicsUpdate();
+
 	SceneManager::getInstance()->getCurrentScene()->update();
+
+	SceneManager::getInstance()->getCurrentScene()->lateUpdate();
 
 	AudioManager::getInstance()->update();
 
@@ -315,7 +318,7 @@ bool Core::checkConfig()
 {
 	if (!Core::getInstance()->getRoot()->restoreConfig())
 	{
-		return Core::getInstance()->getRoot()->showConfigDialog(OgreBites::getNativeConfigDialog());
+		return Core::getInstance()->getRoot()->showConfigDialog(nullptr);
 	}
 	else return true;
 }
@@ -476,12 +479,12 @@ void Core::updateRender()
 
 float Core::getTime()
 {
-	return timer->getSeconds();
+	return timer->getMilliseconds();
 }
 
 float Core::getTimeDifference(float prevTime)
 {
-	return timer->getSeconds() - prevTime;
+	return timer->getMilliseconds() - prevTime;
 }
 
 float Core::DeltaTime()

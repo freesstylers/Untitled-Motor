@@ -4,6 +4,7 @@
 Transform::Transform(json& args) : Component(args)
 {
 	node = Core::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode(args["name"]);
+	node->setInheritScale(false);
 
 	Ogre::Vector3 position = Ogre::Vector3(0, 0, 0);
 	Ogre::Vector3 rotation = Ogre::Vector3(0, 0, 0);
@@ -37,11 +38,6 @@ Transform::~Transform()
 	delete node;
 }
 
-bool Transform::ReceiveEvent(Event& event)
-{
-	return false;
-}
-
 Ogre::Vector3 Transform::getPosition() const
 {
 	return node->getPosition();
@@ -57,11 +53,11 @@ Ogre::Vector3 Transform::getScale() const
 
 Ogre::Vector3 Transform::getWorldPosition() const
 {
-	return Core::getInstance()->getSM()->getRootSceneNode()->convertLocalToWorldPosition(node->getPosition());
+	return node->getParent()->convertLocalToWorldPosition(node->getPosition());
 }
 Ogre::Quaternion Transform::getWorldRotation() const
 {
-	return Core::getInstance()->getSM()->getRootSceneNode()->convertLocalToWorldOrientation(node->getOrientation());
+	return node->getParent()->convertLocalToWorldOrientation(node->getOrientation());
 }
 Ogre::Vector3 Transform::getWorldScale() const
 {
@@ -92,13 +88,11 @@ void Transform::setScale(Ogre::Vector3 s)
 
 void Transform::setWorldPosition(Ogre::Vector3 pos)
 {
-	//complete when hierarchy is implemented
-	node->setPosition(pos);
+	node->setPosition(node->getParent()->convertWorldToLocalPosition(pos));
 }
 void Transform::setWorldRotation(Ogre::Quaternion rot)
 {
-	//complete when hierarchy is implemented
-	node->setOrientation(rot);
+	node->setOrientation(node->getParent()->convertLocalToWorldOrientation(rot));
 }
 void Transform::setWorldRotation(Ogre::Vector3 rot)
 {
@@ -138,4 +132,24 @@ Ogre::SceneNode* Transform::getNode()
 	return node;
 }
 
+bool Transform::ReceiveEvent(Event& event)
+{
+	if (event.type == EventType::SETPARENT) {
+		SetParentEvent parentEvent = static_cast<SetParentEvent&>(event);
+		Ogre::Node* nParent = parentEvent.parent->getComponent<Transform>("Transform")->getNode();
+		Ogre::Node* currentParent = node->getParent();
 
+		Ogre::Vector3 nodeWorldPos = currentParent->convertLocalToWorldPosition(node->getPosition());
+		Ogre::Vector3 resultPosition = nParent->convertWorldToLocalPosition(nodeWorldPos);
+		Ogre::Quaternion nodeWorldOrientation = currentParent->convertLocalToWorldOrientation(node->getOrientation());
+		Ogre::Quaternion resultOrientation = nParent->convertWorldToLocalOrientation(nodeWorldOrientation);
+
+		currentParent->removeChild(node);
+		nParent->addChild(node);
+		node->setPosition(resultPosition);
+		node->setOrientation(resultOrientation);
+		nParent->needUpdate(true);
+	}
+
+	return false;
+}
