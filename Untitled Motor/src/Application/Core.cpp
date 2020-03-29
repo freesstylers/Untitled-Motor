@@ -8,7 +8,6 @@
 #include <OgreMeshManager.h>
 #include <stdexcept>
 
-
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "PhysicsManager.h"
@@ -16,6 +15,7 @@
 #include "JsonFactoryParser.h"
 #include "AudioManager.h"
 #include "EventManager.h"
+#include "UIManager.h"
 #include <iostream>
 
 #include "RigidBody.h"
@@ -43,6 +43,7 @@ Core::~Core()
 	JsonFactoryParser::clean();
 	AudioManager::clean();
 	EventManager::clean();
+	UIManager::clean();
 	delete timer;
 }
 	
@@ -362,6 +363,12 @@ void Core::setup()
 	{
 		throw std::runtime_error("InputManager setup fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}	
+
+	try { UIManager::setupInstance(getOgreWin()); }
+	catch (const std::exception & e)
+	{
+		throw std::runtime_error("UIManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}
 
 	sm = Core::getInstance()->getRoot()->createSceneManager();
 

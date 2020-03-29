@@ -1,4 +1,5 @@
 #pragma once
+
 #include <CEGUI/Event.h>
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
@@ -10,13 +11,16 @@ public:
 	~UIManager();
 
 	static UIManager* getInstance();
-	bool setupInstance(Ogre::RenderWindow* window);
+	static bool setupInstance(Ogre::RenderWindow* window);
 	void setupResources();
-	void clean();
+	static void clean();
 	void createRoot();
+	void loadLayout(CEGUI::String filename);
+	void setupDefaultResources();
+	void initResources(int code);
 
 private:
-	UIManager();
+	UIManager(Ogre::RenderWindow* window);
 
 	static UIManager* instance;
 	CEGUI::OgreRenderer* renderer;

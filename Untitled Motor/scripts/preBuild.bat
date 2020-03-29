@@ -5,3 +5,4 @@ for /r ..\dependencies\fmod-2.00.07\ %%f in (*.dll) do @copy "%%f" ..\bin\
 for /r ..\dependencies\bullet3-2.89\build\lib %%f in (*.dll) do @copy "%%f" ..\bin\
 for /r ..\dependencies\cegui-0.8.7\build\bin\Debug %%f in (*.dll) do @copy "%%f" ..\bin\
 for /r ..\dependencies\cegui-0.8.7\build\bin\Release %%f in (*.dll) do @copy "%%f" ..\bin\
+for /r ..\dependencies\cegui-0.8.7\dependencies\bin %%f in (*.dll) do @copy "%%f" ..\bin\
