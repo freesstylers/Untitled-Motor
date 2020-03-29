@@ -20,6 +20,7 @@ void TerrainRotation::start()
 {
 	//AudioManager::getInstance()->playMusic("./assets/sound/alma_partia.mp3", 1);
 	//AudioManager::getInstance()->setVolume(0.1, 1);
+	rotation= Ogre::Vector3(0, 0, 0);
 }
 
 void TerrainRotation::update()
@@ -32,15 +33,15 @@ void TerrainRotation::update()
 
 	if (x <= deadZoneX + deadZoneRange && x >= deadZoneX - deadZoneRange) {
 		x = 0;
-		std::cout << "Zona muerta X" << "\n";
+		//std::cout << "Zona muerta X" << "\n";
 	}
-	else 		std::cout << "Zona viva X" << "\n";
+	/*else 		std::cout << "Zona viva X" << "\n";*/
 
 	if (y <= deadZoneY + deadZoneRange && y >= deadZoneY - deadZoneRange) {
 		y = 0;
-		std::cout << "Zona muerta Y" << "\n";
+		//std::cout << "Zona muerta Y" << "\n";
 	}
-	else 		std::cout << "Zona viva Y" << "\n";
+	//else		std::cout << "Zona viva Y" << "\n";
 
 	x *= 10;
 	y *= 10;
@@ -62,8 +63,19 @@ void TerrainRotation::update()
 
 	x = x * 90 * xdir;
 	y = y * 90 * ydir;
-	transform->setRotation(Ogre::Vector3(y, 0, -x));//mover con cierta velocidad en lugar de instantaneamente hacia la rotacion deseada
 
+	Ogre::Vector3 target(y, 0, -x);
+
+	Ogre::Vector3 dir = target - rotation;
+
+	if (dir.length() <= 1) dir = Ogre::Vector3(0, 0, 0);
+
+	dir.normalise();
+
+	rotation += dir * speed * deltatime;
+	transform->setRotation(rotation);
+
+	
 	if (InputManager::getInstance()->GameControllerIsButtonDown(SDL_CONTROLLER_BUTTON_A) && !AudioManager::getInstance()->isPlayingChannel(0)) {
 		FMOD_VECTOR vec{
 			transform->getPosition().x,
