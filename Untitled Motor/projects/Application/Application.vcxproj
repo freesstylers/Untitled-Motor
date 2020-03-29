@@ -38,6 +38,7 @@
     <ClCompile Include="..\..\src\Application\SGTechniqueResolverListener.cpp" />
     <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
     <ClCompile Include="..\..\src\Application\Transform.cpp" />
+    <ClCompile Include="..\..\src\Application\UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\AudioManager.h" />
@@ -59,6 +60,7 @@
     <ClInclude Include="..\..\src\Application\SGTechniqueResolverListener.h" />
     <ClInclude Include="..\..\src\Application\TestComponent.h" />
     <ClInclude Include="..\..\src\Application\Transform.h" />
+    <ClInclude Include="..\..\src\Application\UIManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -124,7 +126,7 @@
     <OutDir>$(SolutionDir)bin\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <IntDir>$(SolutionDir)interm\$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)dependencies\cegui-0.8.7\build\cegui\include\CEGUI;$(SolutionDir)dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\$(Configuration);$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -138,7 +140,7 @@
     <OutDir>$(SolutionDir)bin\</OutDir>
     <TargetName>$(ProjectName)</TargetName>
     <IntDir>$(SolutionDir)interm\$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\cegui-0.8.7\build\cegui\include\CEGUI;$(SolutionDir)dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\$(Configuration);$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -170,7 +172,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreMain_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreRTShaderSystem_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreBites_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cegui\CEGUIBase-0_d.lib;cegui\CEGUIExpatParser_d.lib;cegui\CEGUIOgreRenderer-0_d.lib;cegui\CEGUISILLYImageCodec_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreMain_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreRTShaderSystem_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreBites_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>cd "$(ProjectDir)..\..\scripts"
@@ -217,7 +219,7 @@ call preBuild.bat</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreMain.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreBites.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreRTShaderSystem.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics.lib;bullet\BulletCollision.lib;bullet\LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cegui\CEGUIBase-0.lib;cegui\CEGUIExpatParser.lib;cegui\CEGUIOgreRenderer-0.lib;cegui\CEGUISILLYImageCodec.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreMain.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreBites.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreRTShaderSystem.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics.lib;bullet\BulletCollision.lib;bullet\LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>cd "$(SolutionDir)scripts"
