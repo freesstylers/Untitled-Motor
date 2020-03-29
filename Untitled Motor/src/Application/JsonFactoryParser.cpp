@@ -6,6 +6,7 @@
 #include "Transform.h"
 #include "Mesh.h"
 #include "RigidBody.h"
+#include "Camera.h"
 
 
 JsonFactoryParser* JsonFactoryParser::instance = 0;
@@ -59,6 +60,8 @@ Component* JsonFactoryParser::getComponentFromJSON(const std::string& type, json
 		return Factory::createComponent<RigidBody>(j);
 	else if (type == "TestComponent")
 		return Factory::createComponent<TestComponent>(j);
+	else if (type == "Camera")
+		return Factory::createComponent<Camera>(j);
 	else
 		return extraCallback(type, j);
 }

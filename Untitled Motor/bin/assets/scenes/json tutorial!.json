@@ -1,15 +1,6 @@
 {
 	"name" : "sceneName",
-	"camera" :
-	{
-	"COMENTARIO" : "definicion de las propiedades de la cámara, añadir a medida que sea necesario",
-		"nearClipDistance" : int,
-		"farClipDistance" : int,
-		"autoAspectRatio" : bool,
-		"pos" : [x, y, z],
-		"lookAt" : [x, y, z],
-		"bgColour" : [r, g, b, a] (bgColor works too!)
-	},
+	
 	"entities" :
 	[
 		{
@@ -34,6 +25,16 @@
 				"COMENTARIO2" : "Si isStatic o isKinematic, se ignora masa",
 					"isStatic" : bool,
 					"isKinematic" : bool
+					
+				},
+				{
+					"COMENTARIO" : "definicion de las propiedades de la cámara, añadir a medida que sea necesario. La camara es un componente",
+					"type" : "Camera",
+					"nearClipDistance" : int,
+					"farClipDistance" : int,
+					"autoAspectRatio" : bool,
+					"lookAt" : [x, y, z],
+					"bgColour" : [r, g, b, a] (bgColor works too!)
 					
 				}
 			]
