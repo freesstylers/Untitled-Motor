@@ -38,16 +38,6 @@ public:
 		return static_cast<T*>(map_[tag]);
 	};
 
-	template <typename T>
-	T* addComponent(json& args) {
-		T* c(Factory::template createComponent<T>(args));
-		components_.push_back(uptr_cmp(c));
-		map_.insert(std::pair<std::string, Component*>(c->getTag(), c));
-		c->setEntity(this);
-		c->init(args);
-		return c;
-	};
-
 	void addComponentFromJson(json& args);
 
 	bool hasComponent(const std::string& tag);

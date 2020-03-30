@@ -57,7 +57,6 @@ bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int
 	RigidBody* rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
 	//rb2->getRigidBody()->activate(true);
 	rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
-	
 	return false;
 	
 }
@@ -139,6 +138,8 @@ void Core::init()
 	}
 
 	gContactAddedCallback=callbackFunc;
+
+	setupFactories();
 }
 
 void Core::changeScene(Ogre::String name)
@@ -493,4 +494,79 @@ float Core::getTimeDifference(float prevTime)
 float Core::DeltaTime()
 {
 	return deltaTime;
+}
+
+void Core::resetTimer()
+{
+	timer->reset();
+}
+
+#include "Factory.h"
+
+#include "Transform.h"
+#include "Mesh.h"
+#include "RigidBody.h"
+#include "Camera.h"
+#include "AudioComponent.h"
+#include "AudioListenerComponent.h"
+
+class TransformFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Transform(args);
+	};
+};
+class MeshFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Mesh(args);
+	};
+};
+class RigidBodyFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new RigidBody(args);
+	};
+};
+class CameraFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Camera(args);
+	};
+};
+class AudioComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new AudioComponent(args);
+	};
+};
+class AudioListenerComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new AudioListenerComponent(args);
+	};
+};
+
+void Core::setupFactories()
+{
+	JsonFactoryParser* j = JsonFactoryParser::getInstance();
+
+	j->addFactory("Transform", new TransformFactory());
+	j->addFactory("Mesh", new MeshFactory());
+	j->addFactory("RigidBody", new RigidBodyFactory());
+	j->addFactory("Camera", new CameraFactory());
+	j->addFactory("AudioComponent", new AudioComponentFactory());
+	j->addFactory("AudioListenerComponent", new AudioListenerComponentFactory());
 }

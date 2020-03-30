@@ -71,17 +71,17 @@ void Entity::addComponentFromJson(json& args)
 //if it doesn't exist, it's created
 	if (!hasComponent(args["type"])) {
 		Component* c(JsonFactoryParser::getInstance()->getComponentFromJSON(args["type"], args));
-		if (c != nullptr)
-		{
-			components_.push_back(uptr_cmp(c));
-			map_.insert(std::pair<std::string, Component*>(c->getTag(), c));
-			c->setEntity(this);
-			c->init(args);
-		}
+		if (c == nullptr)
+			return;
+
+		components_.push_back(uptr_cmp(c));
+		map_.insert(std::pair<std::string, Component*>(c->getTag(), c));
+		c->setEntity(this);
+		c->init(args);
 	}
 //if it already exists, it's being redefined (ideally only used with prefabs)
 	else {
-		map_[args["type"]]->initFromJson(args);
+		map_[args["type"]]->init(args);
 	}
 }
 
@@ -157,7 +157,7 @@ void Entity::init(json& args)
 	json modArgs = args;
 	modArgs["type"] = "Transform";
 
-	addComponent<Transform>(modArgs);
+	addComponentFromJson(modArgs);
 }
 
 bool Entity::ReceiveEvent(Event& event)
