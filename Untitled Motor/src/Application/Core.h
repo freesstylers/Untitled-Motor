@@ -52,6 +52,7 @@ public:
 	float getTime();
 	float getTimeDifference(float prevTime);
 	float DeltaTime();
+	void resetTimer();
 
 private:
 
@@ -76,7 +77,6 @@ private:
 	Ogre::String appName;
 	Ogre::Timer* timer;
 	float deltaTime;
-	float prevTime;
 	static Core* instance;
 };
 

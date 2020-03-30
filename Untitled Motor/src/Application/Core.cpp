@@ -273,6 +273,8 @@ void Core::pollEvents()
 				cout << "deltaTime " << deltaTime << "\n";
 				//spawnBox();
 				break;
+			case SDLK_p:
+				resetTimer();
 			case SDLK_v:
 				//spawnSphere();
 				break;
@@ -292,7 +294,7 @@ void Core::pollEvents()
 
 bool Core::frameStarted(const Ogre::FrameEvent& evt)
 {
-	prevTime = getTime();
+	float prevTime = getTime();
 
 	pollEvents();
 
@@ -478,12 +480,12 @@ void Core::updateRender()
 
 float Core::getTime()
 {
-	return timer->getMilliseconds();
+	return timer->getMicroseconds()/1000.0f;
 }
 
 float Core::getTimeDifference(float prevTime)
 {
-	return timer->getMilliseconds() - prevTime;
+	return timer->getMicroseconds()/1000.0f - prevTime;
 }
 
 float Core::DeltaTime()
@@ -496,6 +498,7 @@ float Core::DeltaTime()
 #include "Transform.h"
 #include "Mesh.h"
 #include "RigidBody.h"
+#include "Camera.h"
 
 class TransformFactory : public BaseFactory
 {
@@ -521,6 +524,14 @@ public:
 		return new RigidBody(args);
 	};
 };
+class CameraFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Camera(args);
+	};
+};
 
 void Core::setupFactories()
 {
@@ -529,4 +540,9 @@ void Core::setupFactories()
 	j->addFactory("Transform", new TransformFactory());
 	j->addFactory("Mesh", new MeshFactory());
 	j->addFactory("RigidBody", new RigidBodyFactory());
+	j->addFactory("Camera", new CameraFactory());
+}
+void Core::resetTimer()
+{
+	timer->reset();
 }
