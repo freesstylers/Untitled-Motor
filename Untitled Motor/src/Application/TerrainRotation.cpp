@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "RigidBody.h"
 #include "AudioManager.h"
+#include "Core.h"
 #include "btBulletDynamicsCommon.h"
 
 TerrainRotation::TerrainRotation(json& args):Component(args)
@@ -18,14 +19,15 @@ TerrainRotation::TerrainRotation(json& args):Component(args)
 
 void TerrainRotation::start()
 {
-	//AudioManager::getInstance()->playMusic("./assets/sound/alma_partia.mp3", 1);
-	//AudioManager::getInstance()->setVolume(0.1, 1);
+	AudioManager::getInstance()->playMusic("./assets/sound/alma_partia.mp3", 1);
+	AudioManager::getInstance()->setVolume(0.1, 1);
 	rotation= Ogre::Vector3(0, 0, 0);
 }
 
 void TerrainRotation::update()
 {
-	float deltatime = 1 / 60.0;
+	float deltatime = Core::getInstance()->DeltaTime();
+	deltatime /= 1000;
 	float x = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
 	float y = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
 	x = x / 32768.0;
@@ -74,7 +76,6 @@ void TerrainRotation::update()
 
 	rotation += dir * speed * deltatime;
 	transform->setRotation(rotation);
-
 	
 	if (InputManager::getInstance()->GameControllerIsButtonDown(SDL_CONTROLLER_BUTTON_A) && !AudioManager::getInstance()->isPlayingChannel(0)) {
 		FMOD_VECTOR vec{
@@ -83,7 +84,7 @@ void TerrainRotation::update()
 			transform->getPosition().z
 		};
 		AudioManager::getInstance()->playSound("./assets/sound/movie_1.mp3", 0, vec);
-		AudioManager::getInstance()->setVolume(0.1, 0);
+		AudioManager::getInstance()->setVolume(0.5, 0);
 	}
 }
 

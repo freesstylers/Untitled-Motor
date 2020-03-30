@@ -310,8 +310,7 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 
 	AudioManager::getInstance()->update();
 
-	deltaTime = getTimeDifference(prevTime);
-
+	deltaTime = timer->getMilliseconds() - prevTime;
 	return true;
 }
 
