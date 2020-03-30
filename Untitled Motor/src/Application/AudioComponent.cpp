@@ -23,6 +23,7 @@ void AudioComponent::update()
 
 void AudioComponent::removeEmisor() {
 	AudioManager::getInstance()->removeEmisor(numObj);
+	numObj = -1;
 }
 
 void AudioComponent::init(json& j)

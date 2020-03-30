@@ -17,7 +17,7 @@ public:
 	void removeEmisor();
 
 private:
-	int numObj;
+	int numObj = -1;
 	FMOD_VECTOR pos;
 	FMOD_VECTOR vel;
 };
