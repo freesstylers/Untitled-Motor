@@ -20,9 +20,9 @@ void PhysicsManager::initWorld()
 	world->setGravity(btVector3(0, -10, 0));
 }
 
-void PhysicsManager::stepWorld(float time)
+void PhysicsManager::stepWorld()
 {
-	world->stepSimulation(time, 10);
+	world->stepSimulation(1.0 / 60.0, 10);
 }
 
 void PhysicsManager::addRigidBody(btRigidBody* body)

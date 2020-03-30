@@ -5,10 +5,13 @@
 
 using json = nlohmann::json;
 
-class BaseFactory
+class Factory
 {
 public:
-	BaseFactory() {};
-
-	virtual Component* createComponent(json& args) = 0;
+	template<typename T>
+	static T* createComponent(json& args) {
+		return new T(args);
+	};
+private:
+	Factory();
 };

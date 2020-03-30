@@ -37,27 +37,14 @@ AudioManager::AudioManager()
     listenerForward.x = 0.f;
     listenerForward.y = 0.f;
     listenerForward.z = 1.0;
-   
-    for (int i = 0; i < 32 ; i++) {
+    listenerPos.x = 3.f;
+    listenerPos.y = 3.f;
+    listenerPos.z = 1.f;
 
-        emisores->soundPos.x = 0;
-        emisores->soundPos.y = 0;
-        emisores->soundPos.z = 0;
-
-        emisores->soundVel.x = 0;
-        emisores->soundVel.y = 0;
-        emisores->soundVel.z = 0;
-    }
-
-    for (int i = 0; i < 32; i++) {
-        activo[i] = false;
-    }
-    system->set3DSettings(1.0f, 10.0f, 1.0f);
+    system->set3DSettings(10.0f, 10.0f, 10.0f);
 
 
 }  
-
-
 
 AudioManager* AudioManager::getInstance()
 {
@@ -87,41 +74,14 @@ void AudioManager::clean()
 
 AudioManager::~AudioManager()
 {
-    //channelGroup->release();
-    //system->release();
+    channelGroup->release();
+    system->release();
  
-}
 
-int AudioManager::addEmisor(FMOD_VECTOR position, FMOD_VECTOR velocity) 
-{
-    int i = 0;
+    //delete system;
+    //delete channelGroup;
 
-    while (activo[i]) {
-        i++;
-    }
-
-    emisores[i].soundPos.x = position.x;
-    emisores[i].soundPos.y = position.y;
-    emisores[i].soundPos.z = position.z;
-
-    emisores[i].soundVel.x = velocity.x;
-    emisores[i].soundVel.y = velocity.y;
-    emisores[i].soundVel.z = velocity.z;
-
-    activo[i] = true;
-    return i;
-}
-
-void AudioManager::removeEmisor(int numObj)
-{
-    activo[numObj] = false;
-    emisores[numObj].soundPos.x = 0;
-    emisores[numObj].soundPos.y = 0;
-    emisores[numObj].soundPos.z = 0;
-
-    emisores[numObj].soundVel.x = 0;
-    emisores[numObj].soundVel.x = 0;
-    emisores[numObj].soundVel.x = 0;
+    //delete channels;
 }
 
 void AudioManager::setVolume(float vol, int nChannel)
@@ -153,10 +113,8 @@ bool AudioManager::isPlaying()
 
 void AudioManager::update() 
 {
-
     if (isPlaying()) {
         system->update();
-
     }
 }
 
@@ -171,6 +129,10 @@ bool AudioManager::isPlayingChannel(int nChannel)
 void AudioManager::playMusic(const char* path, int nChannel)
 {
     Sound* sound;
+    
+    int i = 0;
+
+   
 
     system->createSound(path, FMOD_CREATESTREAM, nullptr, &sound);
 
@@ -212,25 +174,26 @@ void AudioManager::updateListener(FMOD_VECTOR position, FMOD_VECTOR velocity, FM
 
 }
 
-void AudioManager::updateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, int nChannel, int numObj)
+void AudioManager::updateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, int nChannel)
 {
-        emisores[numObj].soundPos.x = position.x;
-        emisores[numObj].soundPos.y = position.y;
-        emisores[numObj].soundPos.z = position.z;
+    soundPos.x = position.x;
+    soundPos.y = position.y;
+    soundPos.z = position.z;
 
-        emisores[numObj].soundVel.x = velocity.x;
-        emisores[numObj].soundVel.y = velocity.y;
-        emisores[numObj].soundVel.z = velocity.z;
-    
+    soundVel.x = velocity.x;
+    soundVel.y = velocity.y;
+    soundVel.z = velocity.z;
 
-    channels[nChannel]->set3DAttributes(&emisores[numObj].soundPos, &emisores[numObj].soundVel);
+    channels[nChannel]->set3DAttributes(&soundPos, &soundVel);
 }
 
-void AudioManager::playSound(const char* path, int nChannel)
+void AudioManager::playSound(const char* path, int nChannel, FMOD_VECTOR pos)
 {
 
    Sound* sound;
-   system->createSound(path, FMOD_3D_HEADRELATIVE, nullptr,  &sound);
+   system->createSound(path, FMOD_DEFAULT, nullptr,  &sound);
+
+
 
    result = system->playSound(sound, nullptr, false, &channels[nChannel]);
    

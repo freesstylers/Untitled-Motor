@@ -3,7 +3,6 @@
 #include <fmod.h>
 #include <fmod_errors.h>
 #include <iostream>
-#include <array>
 
 using namespace FMOD;
 using namespace std;
@@ -12,19 +11,13 @@ class AudioManager
 {
 public:
 
-	struct emisor {
-	
-		FMOD_VECTOR soundPos;
-		FMOD_VECTOR	soundVel;
-	};
-
 	static AudioManager* getInstance();
 	static bool setupInstance();
 	static void clean();
 
 	~AudioManager();
 
-	void playSound(const char* path, int nChannel);
+	void playSound(const char* path, int nChannel, FMOD_VECTOR pos);
 	void playMusic(const char* path, int nChannel);
 
 	void pauseChannel(int nChannel);
@@ -35,10 +28,7 @@ public:
 
 	void update();
 	void updateListener(FMOD_VECTOR position, FMOD_VECTOR velocity, FMOD_VECTOR forward, FMOD_VECTOR up);
-	void updateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, int nChannel, int numObj);
-
-	int addEmisor(FMOD_VECTOR position, FMOD_VECTOR velocity);
-	void removeEmisor(int numObj);
+	void updateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, int nChannel);
 
 private:
 	AudioManager();
@@ -46,9 +36,9 @@ private:
 	FMOD::System* system;
 	FMOD_RESULT result;
 
-
-	emisor emisores[32];
-	FMOD_VECTOR listenerVelocity, listenerUp, listenerForward, listenerPos;
+	//FMOD_VECTOR* posEmisores[32];
+	//FMOD_VECTOR* velEmisores[32];
+	FMOD_VECTOR listenerVelocity, listenerUp, listenerForward, listenerPos, soundPos, soundVel; 
 	bool activo[32];
 	FMOD::ChannelGroup* channelGroup;
 	FMOD::Channel* channels[];

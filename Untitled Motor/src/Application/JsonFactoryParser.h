@@ -1,11 +1,11 @@
 #pragma once
 #include <json.hpp>
 #include "Component.h"
-
-#include "Factory.h"
-#include <map>
+#include <functional>
 
 using json = nlohmann::json;
+
+Component* defaultCallback(const std::string& name, json& j);
 
 class JsonFactoryParser
 {
@@ -18,14 +18,15 @@ public:
 	static bool setupInstance();
 	static void clean();
 
-	Component* getComponentFromJSON(const std::string& type, json& args);
+	Component* getComponentFromJSON(const std::string& type, json& j);
 
-	void addFactory(const std::string& type, BaseFactory* f);
+	void addExtraCallback(ComponentCallback& c);
+	ComponentCallback getExtraCallback();
 
 private:
 	JsonFactoryParser();
 	static JsonFactoryParser* instance;
 
-	std::map<std::string, BaseFactory*> map;
+	ComponentCallback extraCallback;
 };
 

@@ -15,7 +15,7 @@ public:
 	btDynamicsWorld* getWorld();
 
 	void initWorld();
-	void stepWorld(float time);
+	void stepWorld();
 	void addRigidBody(btRigidBody* body);
 
 	btRigidBody* createRigidBody(const std::string& shape, const btVector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated);

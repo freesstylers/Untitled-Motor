@@ -66,8 +66,6 @@ private:
 	void updateRender(); //actualiza el render de los objetos con rigidbody
 	bool checkConfig();
 
-	void setupFactories();
-
 	Ogre::Root* root;
 	Ogre::SceneManager* sm;
 
@@ -75,8 +73,8 @@ private:
 	Ogre::RenderWindow* window;
 	Ogre::String appName;
 	Ogre::Timer* timer;
-	double deltaTime = 16;
-	double prevTime;
+	float deltaTime;
+	float prevTime;
 	static Core* instance;
 };
 

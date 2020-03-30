@@ -21,8 +21,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp" />
     <ClCompile Include="..\..\src\Application\Application.cpp" />
-    <ClCompile Include="..\..\src\Application\AudioComponent.cpp" />
-    <ClCompile Include="..\..\src\Application\AudioListenerComponent.cpp" />
     <ClCompile Include="..\..\src\Application\AudioManager.cpp" />
     <ClCompile Include="..\..\src\Application\Component.cpp" />
     <ClCompile Include="..\..\src\Application\Core.cpp" />
@@ -40,11 +38,10 @@
     <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
     <ClCompile Include="..\..\src\Application\TerrainRotation.cpp" />
     <ClCompile Include="..\..\src\Application\SGTechniqueResolverListener.cpp" />
+    <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
     <ClCompile Include="..\..\src\Application\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\Application\AudioComponent.h" />
-    <ClInclude Include="..\..\src\Application\AudioListenerComponent.h" />
     <ClInclude Include="..\..\src\Application\AudioManager.h" />
     <ClInclude Include="..\..\src\Application\Component.h" />
     <ClInclude Include="..\..\src\Application\Core.h" />
@@ -64,6 +61,7 @@
     <ClInclude Include="..\..\src\Application\SceneManager.h" />
     <ClInclude Include="..\..\src\Application\TerrainRotation.h" />
     <ClInclude Include="..\..\src\Application\SGTechniqueResolverListener.h" />
+    <ClInclude Include="..\..\src\Application\TestComponent.h" />
     <ClInclude Include="..\..\src\Application\Transform.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

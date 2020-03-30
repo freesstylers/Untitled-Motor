@@ -11,6 +11,7 @@
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
     <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
     <ClCompile Include="..\..\src\Application\AudioManager.cpp" />
+    <ClCompile Include="..\..\src\Application\TestComponent.cpp" />
     <ClCompile Include="..\..\src\Application\EventManager.cpp" />
     <ClCompile Include="..\..\src\Application\Scene.cpp" />
     <ClCompile Include="..\..\src\Application\JsonFactoryParser.cpp" />
@@ -21,9 +22,6 @@
     <ClCompile Include="..\..\src\Application\MarbleMovementTest.cpp" />
     <ClCompile Include="..\..\src\Application\TerrainRotation.cpp" />
     <ClCompile Include="..\..\src\Application\SGTechniqueResolverListener.cpp" />
-    <ClCompile Include="..\..\src\Application\Camera.cpp" />
-    <ClCompile Include="..\..\src\Application\AudioComponent.cpp" />
-    <ClCompile Include="..\..\src\Application\AudioListenerComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -35,6 +33,7 @@
     <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
     <ClInclude Include="..\..\src\Application\SceneManager.h" />
     <ClInclude Include="..\..\src\Application\AudioManager.h" />
+    <ClInclude Include="..\..\src\Application\TestComponent.h" />
     <ClInclude Include="..\..\src\Application\Event.h" />
     <ClInclude Include="..\..\src\Application\EventListener.h" />
     <ClInclude Include="..\..\src\Application\EventManager.h" />
@@ -46,8 +45,5 @@
     <ClInclude Include="..\..\src\Application\MarbleMovementTest.h" />
     <ClInclude Include="..\..\src\Application\TerrainRotation.h" />
     <ClInclude Include="..\..\src\Application\SGTechniqueResolverListener.h" />
-    <ClInclude Include="..\..\src\Application\Camera.h" />
-    <ClInclude Include="..\..\src\Application\AudioComponent.h" />
-    <ClInclude Include="..\..\src\Application\AudioListenerComponent.h" />
   </ItemGroup>
 </Project>

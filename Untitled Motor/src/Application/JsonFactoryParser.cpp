@@ -1,6 +1,7 @@
 #include "JsonFactoryParser.h"
 
 #include "Factory.h"
+
 #include "TestComponent.h"
 #include "Transform.h"
 #include "Mesh.h"
@@ -10,8 +11,13 @@
 
 JsonFactoryParser* JsonFactoryParser::instance = 0;
 
-JsonFactoryParser::JsonFactoryParser() {
+Component* defaultCallback(const std::string& name, json& j)
+{
+	return nullptr;
+}
 
+JsonFactoryParser::JsonFactoryParser() {
+	extraCallback = defaultCallback;
 }
 
 JsonFactoryParser::~JsonFactoryParser()
@@ -44,15 +50,30 @@ void JsonFactoryParser::clean()
 	delete instance;
 }
 
-Component* JsonFactoryParser::getComponentFromJSON(const std::string& type, json& args)
+Component* JsonFactoryParser::getComponentFromJSON(const std::string& type, json& j)
 {
-	std::map<std::string, BaseFactory*>::iterator it = map.find(type);
-	if (it != map.end())
-		return (*it).second->createComponent(args);
-	return nullptr;
+	if (type == "Transform")
+		return Factory::createComponent<Transform>(j);
+	else if (type == "Mesh")
+		return Factory::createComponent<Mesh>(j);
+	else if (type == "RigidBody")
+		return Factory::createComponent<RigidBody>(j);
+	else if (type == "TestComponent")
+		return Factory::createComponent<TestComponent>(j);
+	else if (type == "MarbleMovementTest")
+		return Factory::createComponent<MarbleMovementTest>(j);
+	else if (type == "TerrainRotation")
+		return Factory::createComponent<TerrainRotation>(j);
+	else
+		return extraCallback(type, j);
 }
 
-void JsonFactoryParser::addFactory(const std::string& type, BaseFactory* f)
+void JsonFactoryParser::addExtraCallback(ComponentCallback& c)
 {
-	map[type] = f;
+	extraCallback = c;
+}
+
+JsonFactoryParser::ComponentCallback JsonFactoryParser::getExtraCallback()
+{
+	return extraCallback;
 }
