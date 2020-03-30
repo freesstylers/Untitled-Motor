@@ -14,7 +14,7 @@ public:
 	void update() override;
 	void init(json& args) override;
 
-	void deleteComponent();
+	void removeEmisor();
 
 private:
 	int numObj;
