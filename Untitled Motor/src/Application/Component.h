@@ -23,7 +23,6 @@ public:
 	std::string const getTag();
 
 	virtual void init(json& args);
-	virtual void initFromJson(json& j);
 	virtual void preupdate();
 	virtual void physicsUpdate();
 	virtual void update();

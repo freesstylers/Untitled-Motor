@@ -25,8 +25,6 @@ string const Component::getTag() {
 
 void Component::init(json& args) { }
 
-void Component::initFromJson(json& j)	{ }
-
 void Component::preupdate() { }
 
 void Component::physicsUpdate() { }
