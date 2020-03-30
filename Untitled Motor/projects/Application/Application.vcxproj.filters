@@ -22,6 +22,7 @@
     <ClCompile Include="..\..\src\Application\MarbleMovementTest.cpp" />
     <ClCompile Include="..\..\src\Application\TerrainRotation.cpp" />
     <ClCompile Include="..\..\src\Application\SGTechniqueResolverListener.cpp" />
+    <ClCompile Include="..\..\src\Application\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -45,5 +46,6 @@
     <ClInclude Include="..\..\src\Application\MarbleMovementTest.h" />
     <ClInclude Include="..\..\src\Application\TerrainRotation.h" />
     <ClInclude Include="..\..\src\Application\SGTechniqueResolverListener.h" />
+    <ClInclude Include="..\..\src\Application\Camera.h" />
   </ItemGroup>
 </Project>

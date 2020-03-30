@@ -275,6 +275,8 @@ void Core::pollEvents()
 				cout << "deltaTime " << deltaTime << "\n";
 				//spawnBox();
 				break;
+			case SDLK_p:
+				resetTimer();
 			case SDLK_v:
 				//spawnSphere();
 				break;
@@ -294,7 +296,7 @@ void Core::pollEvents()
 
 bool Core::frameStarted(const Ogre::FrameEvent& evt)
 {
-	prevTime = getTime();
+	float prevTime = getTime();
 
 	pollEvents();
 
@@ -479,15 +481,20 @@ void Core::updateRender()
 
 float Core::getTime()
 {
-	return timer->getMilliseconds();
+	return timer->getMicroseconds()/1000.0f;
 }
 
 float Core::getTimeDifference(float prevTime)
 {
-	return timer->getMilliseconds() - prevTime;
+	return timer->getMicroseconds()/1000.0f - prevTime;
 }
 
 float Core::DeltaTime()
 {
 	return deltaTime;
+}
+
+void Core::resetTimer()
+{
+	timer->reset();
 }

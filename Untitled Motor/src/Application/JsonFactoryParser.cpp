@@ -8,6 +8,7 @@
 #include "RigidBody.h"
 #include "MarbleMovementTest.h"
 #include "TerrainRotation.h"
+#include "Camera.h"
 
 JsonFactoryParser* JsonFactoryParser::instance = 0;
 
@@ -64,6 +65,8 @@ Component* JsonFactoryParser::getComponentFromJSON(const std::string& type, json
 		return Factory::createComponent<MarbleMovementTest>(j);
 	else if (type == "TerrainRotation")
 		return Factory::createComponent<TerrainRotation>(j);
+	else if (type == "Camera")
+		return Factory::createComponent<Camera>(j);
 	else
 		return extraCallback(type, j);
 }
