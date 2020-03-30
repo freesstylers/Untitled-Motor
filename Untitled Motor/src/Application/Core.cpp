@@ -294,13 +294,16 @@ void Core::pollEvents()
 
 bool Core::frameStarted(const Ogre::FrameEvent& evt)
 {
+	
+	deltaTime = getTime()-prevTime;
+
 	prevTime = getTime();
 
 	pollEvents();
 
 	SceneManager::getInstance()->getCurrentScene()->preupdate();
 
-	PhysicsManager::getInstance()->stepWorld();
+	PhysicsManager::getInstance()->stepWorld(1/60.0);
 
 	SceneManager::getInstance()->getCurrentScene()->physicsUpdate();
 
@@ -310,7 +313,7 @@ bool Core::frameStarted(const Ogre::FrameEvent& evt)
 
 	AudioManager::getInstance()->update();
 
-	deltaTime = timer->getMilliseconds() - prevTime;
+	deltaTime = deltaTime/1000.0f;
 	return true;
 }
 

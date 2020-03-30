@@ -27,7 +27,7 @@ void TerrainRotation::start()
 void TerrainRotation::update()
 {
 	float deltatime = Core::getInstance()->DeltaTime();
-	deltatime /= 1000;
+	deltatime /= 1000.0f;
 	float x = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
 	float y = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
 	x = x / 32768.0;
@@ -72,9 +72,11 @@ void TerrainRotation::update()
 
 	if (dir.length() <= 1) dir = Ogre::Vector3(0, 0, 0);
 
+	float speedmult = dir.length();
+
 	dir.normalise();
 
-	rotation += dir * speed * deltatime;
+	rotation += dir * speed * deltatime * speedmult * 0.5;
 	transform->setRotation(rotation);
 	
 	if (InputManager::getInstance()->GameControllerIsButtonDown(SDL_CONTROLLER_BUTTON_A) && !AudioManager::getInstance()->isPlayingChannel(0)) {

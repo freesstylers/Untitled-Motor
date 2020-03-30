@@ -73,8 +73,8 @@ private:
 	Ogre::RenderWindow* window;
 	Ogre::String appName;
 	Ogre::Timer* timer;
-	float deltaTime;
-	float prevTime;
+	double deltaTime = 16;
+	double prevTime;
 	static Core* instance;
 };
 

@@ -10,7 +10,7 @@ public:
 	virtual void update();
 	~TerrainRotation();
 private:
-	float speed = 120;
+	float speed = 70;
 	float deadZoneX;
 	float deadZoneY;
 	float deadZoneRange;
