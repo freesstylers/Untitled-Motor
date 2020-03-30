@@ -493,6 +493,11 @@ float Core::DeltaTime()
 	return deltaTime;
 }
 
+void Core::resetTimer()
+{
+	timer->reset();
+}
+
 #include "Factory.h"
 
 #include "Transform.h"
@@ -541,8 +546,4 @@ void Core::setupFactories()
 	j->addFactory("Mesh", new MeshFactory());
 	j->addFactory("RigidBody", new RigidBodyFactory());
 	j->addFactory("Camera", new CameraFactory());
-}
-void Core::resetTimer()
-{
-	timer->reset();
 }
