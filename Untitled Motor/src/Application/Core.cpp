@@ -51,10 +51,10 @@ bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int
 	//Chamar a funcion de colision do componente rigidbody
 	RigidBody* rb1;
 	RigidBody* rb2;
-	rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
+	/*rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
 	rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
 	rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
-	rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
+	rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());*/
 	std::cout << "collision" << endl;
 	return false;
 }
@@ -136,6 +136,8 @@ void Core::init()
 	}
 
 	gContactAddedCallback=callbackFunc;
+
+	setupFactories();
 }
 
 void Core::changeScene(Ogre::String name)
@@ -494,4 +496,54 @@ float Core::DeltaTime()
 void Core::resetTimer()
 {
 	timer->reset();
+}
+
+#include "Factory.h"
+
+#include "Transform.h"
+#include "Mesh.h"
+#include "RigidBody.h"
+#include "Camera.h"
+
+class TransformFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Transform(args);
+	};
+};
+class MeshFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Mesh(args);
+	};
+};
+class RigidBodyFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new RigidBody(args);
+	};
+};
+class CameraFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Camera(args);
+	};
+};
+
+void Core::setupFactories()
+{
+	JsonFactoryParser* j = JsonFactoryParser::getInstance();
+
+	j->addFactory("Transform", new TransformFactory());
+	j->addFactory("Mesh", new MeshFactory());
+	j->addFactory("RigidBody", new RigidBodyFactory());
+	j->addFactory("Camera", new CameraFactory());
 }
