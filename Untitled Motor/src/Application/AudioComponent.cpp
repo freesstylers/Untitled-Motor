@@ -13,7 +13,7 @@ AudioComponent::~AudioComponent()
 
 bool AudioComponent::ReceiveEvent(Event& event)
 {
-	
+	return false;
 }
 
 void AudioComponent::update()
