@@ -24,7 +24,7 @@ public:
 
 	~AudioManager();
 
-	void playSound(const char* path, int nChannel, FMOD_VECTOR pos);
+	void playSound(const char* path, int nChannel);
 	void playMusic(const char* path, int nChannel);
 
 	void pauseChannel(int nChannel);
@@ -46,7 +46,6 @@ private:
 	FMOD::System* system;
 	FMOD_RESULT result;
 
-	int numEmisores = 0;
 
 	emisor emisores[32];
 	FMOD_VECTOR listenerVelocity, listenerUp, listenerForward, listenerPos;

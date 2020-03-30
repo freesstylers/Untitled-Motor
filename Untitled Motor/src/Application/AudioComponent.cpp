@@ -18,6 +18,15 @@ bool AudioComponent::ReceiveEvent(Event& event)
 
 void AudioComponent::update()
 {
+	pos.x = e_->getComponent<Transform>("Transform")->getPosition().x;
+	pos.y = e_->getComponent<Transform>("Transform")->getPosition().y;
+	pos.z = e_->getComponent<Transform>("Transform")->getPosition().z;
+
+
+
+	vel.x = 0;
+	vel.y = 0;
+	vel.z = 0;
 	AudioManager::getInstance()->updateSound(pos, vel, numObj, numObj);
 }
 
@@ -32,8 +41,15 @@ void AudioComponent::init(json& j)
 	pos.y = e_->getComponent<Transform>("Transform")->getPosition().y;
 	pos.z = e_->getComponent<Transform>("Transform")->getPosition().z;
 
+	
+
 	vel.x = 0;
 	vel.y = 0;
 	vel.z = 0;
 	numObj = AudioManager::getInstance()->addEmisor(pos, vel);
+
+	AudioManager::getInstance()->updateSound(pos, vel, numObj, numObj);
+
+
+	AudioManager::getInstance()->playSound("assets/sound/rock.wav",numObj);
 }

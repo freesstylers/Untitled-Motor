@@ -52,7 +52,8 @@ AudioManager::AudioManager()
     for (int i = 0; i < 32; i++) {
         activo[i] = false;
     }
-    system->set3DSettings(10.0f, 10.0f, 10.0f);
+    system->set3DSettings(1.0f, 10.0f, 1.0f);
+
 
 }  
 
@@ -86,8 +87,8 @@ void AudioManager::clean()
 
 AudioManager::~AudioManager()
 {
-    channelGroup->release();
-    system->release();
+    //channelGroup->release();
+    //system->release();
  
 }
 
@@ -152,8 +153,10 @@ bool AudioManager::isPlaying()
 
 void AudioManager::update() 
 {
+
     if (isPlaying()) {
         system->update();
+
     }
 }
 
@@ -168,9 +171,6 @@ bool AudioManager::isPlayingChannel(int nChannel)
 void AudioManager::playMusic(const char* path, int nChannel)
 {
     Sound* sound;
-    
-    int i = 0;
-
 
     system->createSound(path, FMOD_CREATESTREAM, nullptr, &sound);
 
@@ -226,13 +226,11 @@ void AudioManager::updateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, int n
     channels[nChannel]->set3DAttributes(&emisores[numObj].soundPos, &emisores[numObj].soundVel);
 }
 
-void AudioManager::playSound(const char* path, int nChannel, FMOD_VECTOR pos)
+void AudioManager::playSound(const char* path, int nChannel)
 {
 
    Sound* sound;
-   system->createSound(path, FMOD_DEFAULT, nullptr,  &sound);
-
-
+   system->createSound(path, FMOD_3D_HEADRELATIVE, nullptr,  &sound);
 
    result = system->playSound(sound, nullptr, false, &channels[nChannel]);
    
