@@ -37,14 +37,26 @@ AudioManager::AudioManager()
     listenerForward.x = 0.f;
     listenerForward.y = 0.f;
     listenerForward.z = 1.0;
-    listenerPos.x = 3.f;
-    listenerPos.y = 3.f;
-    listenerPos.z = 1.f;
+   
+    for (int i = 0; i < 32 ; i++) {
 
+        emisores->soundPos.x = 0;
+        emisores->soundPos.y = 0;
+        emisores->soundPos.z = 0;
+
+        emisores->soundVel.x = 0;
+        emisores->soundVel.y = 0;
+        emisores->soundVel.z = 0;
+    }
+
+    for (int i = 0; i < 32; i++) {
+        activo[i] = false;
+    }
     system->set3DSettings(10.0f, 10.0f, 10.0f);
 
-
 }  
+
+
 
 AudioManager* AudioManager::getInstance()
 {
@@ -77,11 +89,38 @@ AudioManager::~AudioManager()
     channelGroup->release();
     system->release();
  
+}
 
-    //delete system;
-    //delete channelGroup;
+int AudioManager::addEmisor(FMOD_VECTOR position, FMOD_VECTOR velocity) 
+{
+    int i = 0;
 
-    //delete channels;
+    while (activo[i]) {
+        i++;
+    }
+
+    emisores[i].soundPos.x = position.x;
+    emisores[i].soundPos.y = position.y;
+    emisores[i].soundPos.z = position.z;
+
+    emisores[i].soundVel.x = velocity.x;
+    emisores[i].soundVel.y = velocity.y;
+    emisores[i].soundVel.z = velocity.z;
+
+    activo[i] = true;
+    return i;
+}
+
+void AudioManager::removeEmisor(int numObj)
+{
+    activo[numObj] = false;
+    emisores[numObj].soundPos.x = 0;
+    emisores[numObj].soundPos.y = 0;
+    emisores[numObj].soundPos.z = 0;
+
+    emisores[numObj].soundVel.x = 0;
+    emisores[numObj].soundVel.x = 0;
+    emisores[numObj].soundVel.x = 0;
 }
 
 void AudioManager::setVolume(float vol, int nChannel)
@@ -132,7 +171,6 @@ void AudioManager::playMusic(const char* path, int nChannel)
     
     int i = 0;
 
-   
 
     system->createSound(path, FMOD_CREATESTREAM, nullptr, &sound);
 
@@ -174,17 +212,18 @@ void AudioManager::updateListener(FMOD_VECTOR position, FMOD_VECTOR velocity, FM
 
 }
 
-void AudioManager::updateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, int nChannel)
+void AudioManager::updateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, int nChannel, int numObj)
 {
-    soundPos.x = position.x;
-    soundPos.y = position.y;
-    soundPos.z = position.z;
+        emisores[numObj].soundPos.x = position.x;
+        emisores[numObj].soundPos.y = position.y;
+        emisores[numObj].soundPos.z = position.z;
 
-    soundVel.x = velocity.x;
-    soundVel.y = velocity.y;
-    soundVel.z = velocity.z;
+        emisores[numObj].soundVel.x = velocity.x;
+        emisores[numObj].soundVel.y = velocity.y;
+        emisores[numObj].soundVel.z = velocity.z;
+    
 
-    channels[nChannel]->set3DAttributes(&soundPos, &soundVel);
+    channels[nChannel]->set3DAttributes(&emisores[numObj].soundPos, &emisores[numObj].soundVel);
 }
 
 void AudioManager::playSound(const char* path, int nChannel, FMOD_VECTOR pos)
