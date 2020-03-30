@@ -22,7 +22,6 @@
     <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp" />
     <ClCompile Include="..\..\src\Application\Application.cpp" />
     <ClCompile Include="..\..\src\Application\AudioManager.cpp" />
-    <ClCompile Include="..\..\src\Application\Camera.cpp" />
     <ClCompile Include="..\..\src\Application\Component.cpp" />
     <ClCompile Include="..\..\src\Application\Core.cpp" />
     <ClCompile Include="..\..\src\Application\Entity.cpp" />
@@ -44,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\AudioManager.h" />
-    <ClInclude Include="..\..\src\Application\Camera.h" />
     <ClInclude Include="..\..\src\Application\Component.h" />
     <ClInclude Include="..\..\src\Application\Core.h" />
     <ClInclude Include="..\..\src\Application\Entity.h" />

@@ -142,8 +142,6 @@ bool Entity::setParent(std::string name) {
 	SetParentEvent parentEvent(nParent);
 	for (std::pair<string, Component*> comp : map_)
 		comp.second->ReceiveEvent(parentEvent);
-
-	return true;
 }
 
 void Entity::clearParent() {
