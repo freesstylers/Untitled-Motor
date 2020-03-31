@@ -179,3 +179,9 @@ InputManager::MouseWheel InputManager::getMouseWheel()
 {
 	return mouseWheel;
 }
+
+bool InputManager::IsKeyDown(SDL_Scancode key)
+{
+	const Uint8* state = SDL_GetKeyboardState(NULL);
+	return state[key];
+}
