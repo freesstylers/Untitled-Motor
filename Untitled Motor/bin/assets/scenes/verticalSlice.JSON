@@ -18,6 +18,9 @@
 					"shape" : "sphere",
 					"mass" : 100,
 					"disableDeactivation" : true
+				},
+				{
+					"type" : "ForcesTest"
 				}
 			]
 		},
@@ -36,9 +39,6 @@
 					"type" : "RigidBody",
 					"shape" : "cube",
 					"isKinematic" : true
-				},
-				{
-					"type" : "TerrainRotation"
 				}
 			]
 		},

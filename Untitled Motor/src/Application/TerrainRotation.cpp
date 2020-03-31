@@ -10,15 +10,16 @@
 
 TerrainRotation::TerrainRotation(json& args) :Component(args)
 {
+
+}
+
+void TerrainRotation::start()
+{
 	deadZoneX = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
 	deadZoneY = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
 	deadZoneX = deadZoneX / 32768.0;
 	deadZoneY = deadZoneY / 32768.0;
 	deadZoneRange = 0.10;
-}
-
-void TerrainRotation::start()
-{
 	AudioManager::getInstance()->playMusic("./assets/sound/alma_partia.mp3", 1);
 	AudioManager::getInstance()->setVolume(0.1, 1);
 	rotation = Ogre::Vector3(0, 0, 0);

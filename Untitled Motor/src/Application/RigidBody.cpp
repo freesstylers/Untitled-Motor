@@ -72,6 +72,45 @@ btRigidBody* RigidBody::getRigidBody()
 	return body;
 }
 
+void RigidBody::applyForce(ForceType type, btVector3 force, btVector3 relPos)
+{
+	body->activate(true);
+	switch (type) {
+		case CENTRAL_FORCE:
+			body->applyCentralForce(force);
+			break;
+		case CENTRAL_IMPULSE:
+			body->applyCentralImpulse(force);
+			break;
+		case FORCE:
+			body->applyForce(force, relPos);
+			break;
+		case IMPULSE:
+			body->applyImpulse(force, relPos);
+			break;
+		case PUSH_IMPULSE:
+			body->applyImpulse(force, relPos);
+			break;
+		case TORQUE:
+			body->applyTorque(force);
+			break;
+		case TORQUE_IMPULSE:
+			body->applyTorqueImpulse(force);
+			break;
+		case TORQUE_TURN_IMPULSE:
+			body->applyTorqueTurnImpulse(force);
+			break;
+		case LINEAR_VELOCITY:
+			body->setLinearVelocity(force);
+			break;
+		case ANGULAR_VELOCITY:
+			body->setAngularVelocity(force);
+			break;
+		default:
+			break;
+	}
+}
+
 void RigidBody::createRigidBody(json& args)
 {
 	//default rigidbody shape is mesh
