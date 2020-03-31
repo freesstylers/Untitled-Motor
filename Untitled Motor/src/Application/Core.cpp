@@ -504,6 +504,8 @@ void Core::resetTimer()
 #include "Mesh.h"
 #include "RigidBody.h"
 #include "Camera.h"
+#include "AudioComponent.h"
+#include "AudioListenerComponent.h"
 
 class TransformFactory : public BaseFactory
 {
@@ -537,6 +539,22 @@ public:
 		return new Camera(args);
 	};
 };
+class AudioComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new AudioComponent(args);
+	};
+};
+class AudioListenerComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new AudioListenerComponent(args);
+	};
+};
 
 void Core::setupFactories()
 {
@@ -546,4 +564,6 @@ void Core::setupFactories()
 	j->addFactory("Mesh", new MeshFactory());
 	j->addFactory("RigidBody", new RigidBodyFactory());
 	j->addFactory("Camera", new CameraFactory());
+	j->addFactory("AudioComponent", new AudioComponentFactory());
+	j->addFactory("AudioListenerComponent", new AudioListenerComponentFactory());
 }

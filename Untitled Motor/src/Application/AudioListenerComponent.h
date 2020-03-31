@@ -5,19 +5,21 @@
 #include <fmod.h>
 #include "AudioManager.h"
 
-class AudioComponent : public Component
+class AudioListenerComponent : public Component
 {
 public:
-	AudioComponent(json& args);
-	~AudioComponent();
+	AudioListenerComponent(json& args);
+	~AudioListenerComponent();
 	bool ReceiveEvent(Event& event) override;
 	void update() override;
 	void init(json& args) override;
 
-	void removeEmisor();
 
 private:
-	int numObj = -1;
+
+	FMOD_VECTOR forward;
+	FMOD_VECTOR up;
+
 	FMOD_VECTOR pos;
 	FMOD_VECTOR vel;
 };
