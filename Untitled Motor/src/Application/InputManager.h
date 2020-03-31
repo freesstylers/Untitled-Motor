@@ -36,6 +36,8 @@ public:
 
 	bool GameControllerIsButtonDown(SDL_GameControllerButton button, int controller = 0);
 
+	bool IsKeyDown(SDL_Scancode key);
+
 	void MouseButtonChange(int button, int change);
 
 	void MouseWheelChange(int field, int value);

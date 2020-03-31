@@ -25,6 +25,7 @@ using uptr_cmp = std::unique_ptr<Component>;
 class Entity: public EventListener {
 public:
 	Entity(Scene* scene, const std::string& name);
+	void start();
 	void preupdate();
 	void physicsUpdate();
 	void update();
@@ -35,16 +36,6 @@ public:
 		if (!hasComponent(tag))
 			return nullptr;
 		return static_cast<T*>(map_[tag]);
-	};
-
-	template <typename T>
-	T* addComponent(json& args) {
-		T* c(Factory::template createComponent<T>(args));
-		components_.push_back(uptr_cmp(c));
-		map_.insert(std::pair<std::string, Component*>(c->getTag(), c));
-		c->setEntity(this);
-		c->init(args);
-		return c;
 	};
 
 	void addComponentFromJson(json& args);

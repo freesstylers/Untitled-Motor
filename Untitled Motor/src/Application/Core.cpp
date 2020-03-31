@@ -16,6 +16,7 @@
 #include "JsonFactoryParser.h"
 #include "AudioManager.h"
 #include "EventManager.h"
+#include "TerrainRotation.h"
 #include <iostream>
 
 #include "RigidBody.h"
@@ -55,7 +56,6 @@ bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int
 	rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
 	rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
 	rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
-	std::cout << "collision" << endl;
 	return false;
 }
 
@@ -136,11 +136,14 @@ void Core::init()
 	}
 
 	gContactAddedCallback=callbackFunc;
+
+	setupFactories();
 }
 
 void Core::changeScene(Ogre::String name)
 {
 	SceneManager::getInstance()->changeScene(name);
+	SceneManager::getInstance()->getCurrentScene()->start();
 }
 
 void Core::initPhysicsTestScene()
@@ -494,4 +497,84 @@ float Core::DeltaTime()
 void Core::resetTimer()
 {
 	timer->reset();
+}
+
+#include "Factory.h"
+
+#include "Transform.h"
+#include "Mesh.h"
+#include "RigidBody.h"
+#include "Camera.h"
+#include "AudioComponent.h"
+#include "AudioListenerComponent.h"
+
+class TransformFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Transform(args);
+	};
+};
+class MeshFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Mesh(args);
+	};
+};
+class RigidBodyFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new RigidBody(args);
+	};
+};
+class CameraFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Camera(args);
+	};
+};
+class AudioComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new AudioComponent(args);
+	};
+};
+class AudioListenerComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new AudioListenerComponent(args);
+	};
+};
+
+class TerrainRotationFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new TerrainRotation(args);
+	};
+};
+
+void Core::setupFactories()
+{
+	JsonFactoryParser* j = JsonFactoryParser::getInstance();
+
+	j->addFactory("Transform", new TransformFactory());
+	j->addFactory("Mesh", new MeshFactory());
+	j->addFactory("RigidBody", new RigidBodyFactory());
+	j->addFactory("Camera", new CameraFactory());
+	j->addFactory("AudioComponent", new AudioComponentFactory());
+	j->addFactory("AudioListenerComponent", new AudioListenerComponentFactory());
+	j->addFactory("TerrainRotation", new TerrainRotationFactory());
 }

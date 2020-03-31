@@ -94,7 +94,7 @@ void RigidBody::createRigidBody(json& args)
 
 	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getOgreEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
 
-	body->setUserPointer(e_->getComponent<Transform>("Transform")->getNode());
+	body->setUserPointer(this);
 
 	if (!args["isStatic"].is_null() && args["isStatic"])
 	{
@@ -108,6 +108,8 @@ void RigidBody::createRigidBody(json& args)
 	}
 	else {
 		body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+		if (!args["disableDeactivation"].is_null() && args["disableDeactivation"])
+			body->setActivationState(DISABLE_DEACTIVATION);
 	}
 }
 

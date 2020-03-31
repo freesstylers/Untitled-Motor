@@ -1,0 +1,62 @@
+{
+	"name" : "verticalSlice",
+	"entities" :
+	[
+		{
+			"name" : "marble",
+			"position" : [1, 20, 0],
+			"rotation" : [0, 0, 0],
+			"scale" : [0.1, 0.1, 0.1],
+			"components" : [
+				{
+					"type" : "Mesh",
+					"mesh" : "sphere.mesh",
+					"material" : "test"
+				},
+				{
+					"type" : "RigidBody",
+					"shape" : "sphere",
+					"mass" : 100,
+					"disableDeactivation" : true
+				}
+			]
+		},
+		{
+			"name" : "floor",
+			"position" : [0, 0, 0],
+			"rotation" : [0, 0, 0],
+			"scale" : [4, 0.1, 4],
+			"components" : [
+				{
+					"type" : "Mesh",
+					"mesh" : "cube.mesh",
+					"material" : "test"
+				},
+				{
+					"type" : "RigidBody",
+					"shape" : "cube",
+					"isKinematic" : true
+				},
+				{
+					"type" : "TerrainRotation"
+				}
+			]
+		},
+		{
+			"name" : "camera",
+			"position" : [0, 100, 500],
+			"rotation" : [0, 0, 0], 
+			"scale" : [1, 1, 1],
+			"components" : [
+				{
+					"type" : "Camera",
+					"lookAt" : [1, 0.8, 0],
+					"bgColour" : [0.79, 0.17, 0.57, 1]
+				},
+				{
+					"type": "AudioListenerComponent"
+				}
+			]
+		}
+	]
+}
