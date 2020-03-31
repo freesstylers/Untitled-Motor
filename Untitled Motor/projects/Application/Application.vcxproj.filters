@@ -23,6 +23,7 @@
     <ClCompile Include="..\..\src\Application\AudioComponent.cpp" />
     <ClCompile Include="..\..\src\Application\AudioListenerComponent.cpp" />
     <ClCompile Include="..\..\src\Application\TerrainRotation.cpp" />
+    <ClCompile Include="..\..\src\Application\SimpleMovement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -47,5 +48,6 @@
     <ClInclude Include="..\..\src\Application\AudioComponent.h" />
     <ClInclude Include="..\..\src\Application\AudioListenerComponent.h" />
     <ClInclude Include="..\..\src\Application\TerrainRotation.h" />
+    <ClInclude Include="..\..\src\Application\SimpleMovement.h" />
   </ItemGroup>
 </Project>
