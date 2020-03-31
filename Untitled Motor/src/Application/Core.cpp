@@ -16,6 +16,7 @@
 #include "JsonFactoryParser.h"
 #include "AudioManager.h"
 #include "EventManager.h"
+#include "TerrainRotation.h"
 #include <iostream>
 
 #include "RigidBody.h"
@@ -51,11 +52,10 @@ bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int
 	//Chamar a funcion de colision do componente rigidbody
 	RigidBody* rb1;
 	RigidBody* rb2;
-	/*rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
+	rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
 	rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
 	rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
-	rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());*/
-	std::cout << "collision" << endl;
+	rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
 	return false;
 }
 
@@ -143,6 +143,7 @@ void Core::init()
 void Core::changeScene(Ogre::String name)
 {
 	SceneManager::getInstance()->changeScene(name);
+	SceneManager::getInstance()->getCurrentScene()->start();
 }
 
 void Core::initPhysicsTestScene()
@@ -556,6 +557,15 @@ public:
 	};
 };
 
+class TerrainRotationFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new TerrainRotation(args);
+	};
+};
+
 void Core::setupFactories()
 {
 	JsonFactoryParser* j = JsonFactoryParser::getInstance();
@@ -566,4 +576,5 @@ void Core::setupFactories()
 	j->addFactory("Camera", new CameraFactory());
 	j->addFactory("AudioComponent", new AudioComponentFactory());
 	j->addFactory("AudioListenerComponent", new AudioListenerComponentFactory());
+	j->addFactory("TerrainRotation", new TerrainRotationFactory());
 }
