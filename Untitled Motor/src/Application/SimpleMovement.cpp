@@ -3,6 +3,8 @@
 #include "Transform.h"
 #include "Entity.h"
 #include "Core.h"
+#include "Ogre.h"
+
 SimpleMovement::SimpleMovement(json& args) : Component(args)
 {
 	speed = args["speed"];
@@ -20,13 +22,13 @@ void SimpleMovement::update()
 	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_RIGHT))
 	{
 		Transform* transform = getEntity()->getComponent<Transform>("Transform");
-		transform->setRotation(transform->getRotation + (rotateSpeed * Core::getInstance()->DeltaTime() / 1000.0f));
+		//transform->setRotation(transform->getRotation + (rotateSpeed * Core::getInstance()->DeltaTime() / 1000.0f));
 	}
 
 	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_LEFT))
 	{
 		Transform* transform = getEntity()->getComponent<Transform>("Transform");
-		transform->setRotation(transform->getRotation - (rotateSpeed * Core::getInstance()->DeltaTime() / 1000.0f));
+		//transform->setRotation(transform->getRotation - (rotateSpeed * Core::getInstance()->DeltaTime() / 1000.0f));
 	}
 
 	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_DOWN))
