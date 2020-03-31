@@ -4,6 +4,8 @@
 #include "RigidBody.h"
 #include "Entity.h"
 #include "Core.h"
+#include "Ogre.h"
+
 SimpleMovement::SimpleMovement(json& args) : Component(args)
 {
 	speed = args["speed"];

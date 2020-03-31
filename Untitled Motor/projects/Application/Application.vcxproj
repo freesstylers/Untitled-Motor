@@ -39,6 +39,7 @@
     <ClCompile Include="..\..\src\Application\Scene.cpp" />
     <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
     <ClCompile Include="..\..\src\Application\SGTechniqueResolverListener.cpp" />
+    <ClCompile Include="..\..\src\Application\TerrainRotation.cpp" />
     <ClCompile Include="..\..\src\Application\SimpleMovement.cpp" />
     <ClCompile Include="..\..\src\Application\Transform.cpp" />
   </ItemGroup>
@@ -63,6 +64,7 @@
     <ClInclude Include="..\..\src\Application\Scene.h" />
     <ClInclude Include="..\..\src\Application\SceneManager.h" />
     <ClInclude Include="..\..\src\Application\SGTechniqueResolverListener.h" />
+    <ClInclude Include="..\..\src\Application\TerrainRotation.h" />
     <ClInclude Include="..\..\src\Application\SimpleMovement.h" />
     <ClInclude Include="..\..\src\Application\Transform.h" />
   </ItemGroup>

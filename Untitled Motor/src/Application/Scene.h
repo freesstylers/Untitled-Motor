@@ -21,6 +21,7 @@ public:
 	//Ogre::Viewport* getVP();
 	Entity* getEntity(const std::string& name);
 
+	void start();
 	void preupdate();
 	void physicsUpdate();
 	void update();
