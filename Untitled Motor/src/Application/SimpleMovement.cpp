@@ -9,6 +9,7 @@ SimpleMovement::SimpleMovement(json& args) : Component(args)
 	rotateSpeed = args["rotateSpeed"];
 }
 
+
 void SimpleMovement::start()
 {
 
@@ -31,6 +32,6 @@ void SimpleMovement::update()
 	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_DOWN))
 	{
 		Transform* transform = getEntity()->getComponent<Transform>("Transform");
-		transform->setPosition(transform->getPosition - (spee))
+		//transform->setPosition(transform->getPosition - (spee))
 	}
 }
