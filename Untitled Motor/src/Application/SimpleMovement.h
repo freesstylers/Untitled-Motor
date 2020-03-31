@@ -8,7 +8,7 @@ public:
 	SimpleMovement(json& args);
 	virtual void start();
 	virtual void update();
-	~SimpleMovement() {};
+	~SimpleMovement();
 
 	float speed;
 	float rotateSpeed;

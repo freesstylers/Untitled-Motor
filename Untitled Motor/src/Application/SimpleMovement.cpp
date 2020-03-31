@@ -11,6 +11,7 @@ SimpleMovement::SimpleMovement(json& args) : Component(args)
 	speed = args["speed"];
 	rotateSpeed = args["rotateSpeed"];
 }
+
 SimpleMovement::~SimpleMovement()
 {
 
