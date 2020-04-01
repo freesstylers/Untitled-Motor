@@ -17,6 +17,7 @@
 #include "AudioManager.h"
 #include "EventManager.h"
 #include "TerrainRotation.h"
+#include "SimpleMovement.h"
 #include <iostream>
 
 #include "RigidBody.h"
@@ -566,6 +567,15 @@ public:
 	};
 };
 
+class SimpleMovementFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new SimpleMovement(args);
+	};
+};
+
 void Core::setupFactories()
 {
 	JsonFactoryParser* j = JsonFactoryParser::getInstance();
@@ -577,4 +587,5 @@ void Core::setupFactories()
 	j->addFactory("AudioComponent", new AudioComponentFactory());
 	j->addFactory("AudioListenerComponent", new AudioListenerComponentFactory());
 	j->addFactory("TerrainRotation", new TerrainRotationFactory());
+	j->addFactory("SimpleMovement", new SimpleMovementFactory());
 }

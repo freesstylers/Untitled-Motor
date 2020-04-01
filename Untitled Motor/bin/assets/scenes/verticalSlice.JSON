@@ -55,7 +55,14 @@
 				},
 				{
 					"type": "AudioListenerComponent"
+				},   
+				{
+					"type": "SimpleMovement",
+					"speed": 5.0,
+					"rotateSpeed":1.0,
+					"onlycontroller" : false
 				}
+				
 			]
 		}
 	]
