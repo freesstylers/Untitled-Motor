@@ -18,6 +18,7 @@
 #include "EventManager.h"
 #include "TerrainRotation.h"
 #include "SimpleMovement.h"
+#include "ForcesTest.h"
 #include <iostream>
 
 #include "RigidBody.h"
@@ -569,10 +570,17 @@ public:
 
 class SimpleMovementFactory : public BaseFactory
 {
-public:
 	Component* createComponent(json& args) override
 	{
 		return new SimpleMovement(args);
+	}
+};
+class ForcesTestFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ForcesTest(args);
 	};
 };
 
@@ -588,4 +596,5 @@ void Core::setupFactories()
 	j->addFactory("AudioListenerComponent", new AudioListenerComponentFactory());
 	j->addFactory("TerrainRotation", new TerrainRotationFactory());
 	j->addFactory("SimpleMovement", new SimpleMovementFactory());
+	j->addFactory("ForcesTest", new ForcesTestFactory());
 }

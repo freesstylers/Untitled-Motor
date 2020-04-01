@@ -30,6 +30,7 @@
     <ClCompile Include="..\..\src\Application\Entity.cpp" />
     <ClCompile Include="..\..\src\Application\EventManager.cpp" />
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
+    <ClCompile Include="..\..\src\Application\ForcesTest.cpp" />
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
     <ClCompile Include="..\..\src\Application\JsonFactoryParser.cpp" />
     <ClCompile Include="..\..\src\Application\Mesh.cpp" />
@@ -55,6 +56,7 @@
     <ClInclude Include="..\..\src\Application\EventManager.h" />
     <ClInclude Include="..\..\src\Application\EventListener.h" />
     <ClInclude Include="..\..\src\Application\Factory.h" />
+    <ClInclude Include="..\..\src\Application\ForcesTest.h" />
     <ClInclude Include="..\..\src\Application\InputManager.h" />
     <ClInclude Include="..\..\src\Application\JsonFactoryParser.h" />
     <ClInclude Include="..\..\src\Application\Mesh.h" />
