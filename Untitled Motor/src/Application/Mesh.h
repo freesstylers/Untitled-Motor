@@ -25,5 +25,7 @@ private:
 
 	Ogre::String meshFile;
 	Ogre::String materialName;
+
+	bool castShadow;
 };
 

@@ -46,8 +46,14 @@ btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const btV
 		else if (shape == "sphere") {
 			colShape = convert.createSphere();
 		}
+		else if (shape == "capsule") {
+			colShape = convert.createCapsule();
+		}
+		else if (shape == "cylinder") {
+			colShape = convert.createCylinder();
+		}
 		else {
-			colShape = new btGImpactMeshShape(convert.createTrimesh()->getMeshInterface());
+			colShape = convert.createConvex();
 		}
 	}
 	else {
@@ -58,8 +64,14 @@ btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const btV
 		else if (shape == "sphere") {
 			colShape = convert.createSphere();
 		}
+		else if (shape == "capsule") {
+			colShape = convert.createCapsule();
+		}
+		else if (shape == "cylinder") {
+			colShape = convert.createCylinder();
+		}
 		else {
-			colShape = new btGImpactMeshShape(convert.createTrimesh()->getMeshInterface());
+			colShape = convert.createConvex();
 		}
 	}
 

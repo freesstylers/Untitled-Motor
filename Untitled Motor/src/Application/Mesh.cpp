@@ -11,6 +11,7 @@ void Mesh::init(json& args)
 	std::string cast = args["mesh"];
 	meshFile = cast;
 	ogreEnt = Core::getInstance()->getSM()->createEntity(meshFile);
+	castShadow = true;
 
 	if (!args["material"].is_null())
 	{
@@ -19,7 +20,12 @@ void Mesh::init(json& args)
 		ogreEnt->setMaterialName(args["material"]);
 	}
 
+	if (!args["castShadow"].is_null())
+		castShadow = args["castShadow"];
+
 	isAnimated = ((!args["isAnimated"].is_null()) && (args["isAnimated"]));
+
+	ogreEnt->setCastShadows(castShadow);
 
 	e_->getComponent<Transform>("Transform")->getNode()->attachObject(ogreEnt);
 }

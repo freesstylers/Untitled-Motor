@@ -16,6 +16,25 @@
 			]
 		},
 		{
+			"name" : "barrel",
+			"position" : [30, 40, 0],
+			"rotation" : [70, 0, 70],
+			"scale" : [10, 10, 10],
+			"components" : [
+				{
+					"type" : "Mesh",
+					"mesh" : "barrel.mesh",
+					"material" : "blank"
+				},
+				{
+					"type" : "RigidBody",
+					"shape" : "mesh",
+					"mass" : 100,
+					"disableDeactivation" : true
+				}
+			]
+		},
+		{
 			"name" : "floor",
 			"prefab" : "floor",
 			"scale" : [4, 0.1, 4]
@@ -29,7 +48,7 @@
 				{
 					"type" : "Camera",
 					"lookAt" : [1, 0.8, 0],
-					"bgColour" : [0.79, 0.17, 0.57, 1]
+					"bgColour" : [1, 1, 1, 1]
 				},
 				{
 					"type": "AudioListenerComponent"

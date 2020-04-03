@@ -148,95 +148,6 @@ void Core::changeScene(Ogre::String name)
 	SceneManager::getInstance()->getCurrentScene()->start();
 }
 
-void Core::initPhysicsTestScene()
-{
-	/*
-	//Aki para que suene temporalmente
-	audioManager->playMusic("assets/sound/rock.wav",0);
-	audioManager->playSound("assets/sound/a.wav",1);
-	audioManager->setVolume(.2, 0);
-
-	Ogre::Camera* cam = sm->createCamera("Cam");
-	cam->setNearClipDistance(1);
-	cam->setFarClipDistance(100000000);
-	cam->setAutoAspectRatio(true);
-
-	Ogre::SceneNode* mCamNode = sm->getRootSceneNode()->createChildSceneNode("nCam");
-	mCamNode->attachObject(cam);
-
-	mCamNode->translate(100, 50, 200);
-	mCamNode->lookAt(Ogre::Vector3(0, 0, 0), Ogre::Node::TS_WORLD);
-
-	Ogre::Viewport* vp = window->addViewport(cam);
-
-	vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
-
-	cam->setAspectRatio(
-		Ogre::Real(vp->getActualWidth()) /
-		Ogre::Real(vp->getActualHeight()));
-
-	Ogre::MeshManager::getSingleton().createPlane("mPlane1080x800",
-		Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-		Ogre::Plane(Ogre::Vector3::UNIT_Y, 0),
-		1080, 800, 100, 80, true, 1, 1.0, 1.0, Ogre::Vector3::UNIT_Z);
-
-	Ogre::Entity* plane = sm->createEntity("mPlane1080x800");
-	Entity* terreno = new Entity("terreno");
-	entities.push_back(terreno);
-
-	Transform* t = new Transform("transform");
-	t->setPosition(Ogre::Vector3(0, -100, 0));
-	RenderComponent* r = new RenderComponent("render", sm, plane, "test");
-	BoxBody* bbody = new BoxBody("body", physicsManager, btVector3(t->getPosition().x, t->getPosition().y, t->getPosition().z),
-		btVector3(1080, 0, 800),0, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK||btCollisionObject::CF_STATIC_OBJECT);
-	terreno->addComponent<Transform>(t);
-	terreno->addComponent<RenderComponent>(r);
-	terreno->addComponent<BoxBody>(bbody);
-
-	Entity* canicastanhazo = new Entity("canicastanhazo");
-	entities.push_back(canicastanhazo);
-	
-	Transform* tr = new Transform("transform");
-	tr->setScale(Ogre::Vector3(0.25, 0.25, 0.25));
-	tr->setPosition(Ogre::Vector3(0, 100, 0));
-	RenderComponent* rend = new RenderComponent("render", sm, "sphere.mesh", "sphereTest");
-	SphereBody* sbody = new SphereBody("body", physicsManager, rend->getOgreEntity()->getBoundingRadius() * tr->getScale().x / 2,
-		btVector3(tr->getPosition().x,  tr->getPosition().y, tr->getPosition().z), 10, btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-	
-	canicastanhazo->addComponent<Transform>(tr);
-	canicastanhazo->addComponent<RenderComponent>(rend);
-	canicastanhazo->addComponent<SphereBody>(sbody);
-
-	Ogre::Light* luz = sm->createLight("Luz");
-	luz->setType(Ogre::Light::LT_POINT);
-	luz->setDiffuseColour(0, 0, 0);
-
-	Ogre::SceneNode* mLightNode = sm->getRootSceneNode()->createChildSceneNode("nLuz");
-	mLightNode->attachObject(luz);
-	*/
-}
-
-void Core::testMessageSystem() {
-	//// Normal check
-	//TestComponent testComp("prueba");
-	//EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
-	//TextEvent event = TextEvent("\nEL MEJOR MENSAJE DE PRUEBA\n");
-	//EventManager::GetInstance()->EmitEvent(event);
-
-	//// Check double-add protection
-	//EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
-	//EventManager::GetInstance()->EmitEvent(event);
-
-	//// Check remove
-	//EventManager::GetInstance()->UnregisterListener(&testComp, EventType::TEXT);
-	//EventManager::GetInstance()->EmitEvent(event);
-
-	//// Check clear
-	//EventManager::GetInstance()->RegisterListener(&testComp, EventType::TEXT);
-	//EventManager::GetInstance()->ClearListeners(EventType::TEXT);
-	//EventManager::GetInstance()->EmitEvent(event);
-}
-
 void Core::initLoadingTestScene()
 {
 	changeScene("test");
@@ -371,6 +282,10 @@ void Core::setup()
 	}	
 
 	sm = Core::getInstance()->getRoot()->createSceneManager();
+
+	sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+	sm->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+	Core::getInstance()->getSM()->setShadowFarDistance(100);
 
 	ResourceManager::getInstance()->addSceneManager(sm);
 

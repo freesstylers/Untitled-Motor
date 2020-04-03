@@ -31,7 +31,7 @@
 			{
 				"type" : "Mesh",
 				"mesh" : "cube.mesh",
-				"material" : "test"
+				"material" : "red"
 			},
 			{
 				"type" : "RigidBody",

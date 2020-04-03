@@ -38,7 +38,12 @@ void Scene::setupScene(json& j)
 
 	Ogre::Light* luz = Core::getInstance()->getSM()->createLight("Luz");
 	luz->setType(Ogre::Light::LT_POINT);
-	luz->setDiffuseColour(0, 0, 0);
+	luz->setDiffuseColour(1, 1, 1);
+	luz->setCastShadows(true);
+
+	Ogre::SceneNode* luzNode = Core::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode("lightNode");
+	luzNode->attachObject(luz);
+	luzNode->setPosition(Ogre::Vector3(0, 100, 0));
 }
 
 //Ogre::Camera* Scene::getCam()
