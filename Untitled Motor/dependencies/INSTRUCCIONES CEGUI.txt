@@ -5,10 +5,10 @@
 5) Se hace Cmake con dependencies\cegui-0.8.7 como source, y una carpeta "build" como salida (Hacer 2 veces el configure porque Cmake)
 5.1) Tras configurar, buscar con la casilla Advanced marcada "Ogre"
 5.2) Se marca la casilla de CEGUI_BUILD_RENDERER_OGRE
-5.3) En ruta absoluta, en OGRE_H_BUILD_SETTINGS_PATH: ..dependencies\ogre-1.12.4\Build\include
-5.4) En ruta absoluta, en OGRE_H_PATH: ..dependencies/ogre-1.12.4/OgreMain/include
-5.5) En ruta absoluta, en OGRE_LIB: ..dependencies/ogre-1.12.4/Build/lib/Release/OgreMain.lib
-5.6) En ruta absoluta, en OGRE_LIB_DBG: ..dependencies/ogre-1.12.4/Build/lib/Debug/OgreMain_d.lib
+5.3) En ruta absoluta, en OGRE_H_BUILD_SETTINGS_PATH: ..\dependencies\ogre-1.12.4\Build\include
+5.4) En ruta absoluta, en OGRE_H_PATH: ../dependencies/ogre-1.12.4/OgreMain/include
+5.5) En ruta absoluta, en OGRE_LIB: ../dependencies/ogre-1.12.4/Build/lib/Release/OgreMain.lib
+5.6) En ruta absoluta, en OGRE_LIB_DBG: ../dependencies/ogre-1.12.4/Build/lib/Debug/OgreMain_d.lib
 6) Tras generar, buscar el archivo Config.h en cegui-0.8.7/Build/cegui/include/CEGUI y buscar "ogre". Dejar esta parte con los numeros que siguen
 
 #ifndef CEGUI_OGRE_VERSION_MAJOR

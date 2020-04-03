@@ -1,8 +1,9 @@
 #pragma once
 
+#include <json.hpp>
+
 #include "Scene.h"
 
-#include <json.hpp>
 
 using json = nlohmann::json;
 

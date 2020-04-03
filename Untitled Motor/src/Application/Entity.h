@@ -1,15 +1,9 @@
 #pragma once
-#include "Component.h"
-#include <vector>
+#include <json.hpp>
 
-#ifndef ENTITY_H
-#define ENTITY_H
-
-#include <vector>
 #include <map>
 #include <string>
 #include <memory>
-#include <json.hpp>
 #include "Component.h"
 #include "Factory.h"
 
@@ -88,5 +82,3 @@ private:
 
 	Scene* scene_;
 };
-
-#endif

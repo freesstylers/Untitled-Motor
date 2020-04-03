@@ -3,8 +3,8 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include <string>
 #include <json.hpp>
+#include <string>
 
 using json = nlohmann::json;
 #include "EventManager.h"
