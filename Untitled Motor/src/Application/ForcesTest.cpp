@@ -5,11 +5,7 @@
 
 ForcesTest::ForcesTest(json& args):Component(args)
 {
-	deadZoneX = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
-	deadZoneY = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
-	deadZoneX = deadZoneX / 32768.0;
-	deadZoneY = deadZoneY / 32768.0;
-	deadZoneRange = 0.10;
+
 }
 
 void ForcesTest::start()

@@ -3,6 +3,11 @@
 
 Transform::Transform(json& args) : Component(args)
 {
+
+}
+
+void Transform::init(json& args)
+{
 	node = Core::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode(args["name"]);
 	node->setInheritScale(false);
 
@@ -30,12 +35,44 @@ Transform::Transform(json& args) : Component(args)
 	setScale(scale);
 }
 
+void Transform::redefine(json& args)
+{
+	Ogre::Quaternion origRotation = getRotation();
+
+	if (args["name"].is_null())
+		args["name"] = node->getName();
+
+	if (args["position"].is_null())
+		args["position"] = { getPosition().x, getPosition().y, getPosition().z };
+
+	if (args["scale"].is_null())
+		args["scale"] = { getScale().x, getScale().y, getScale().z };
+
+	vector<Ogre::MovableObject*> obj = node->getAttachedObjects();
+	vector<Ogre::Node*> children = node->getChildren();
+	node->getParent()->removeChild(node->getName());
+	Core::getInstance()->getSM()->destroySceneNode(node->getName());
+	node = nullptr;
+
+	init(args);
+
+	for (Ogre::MovableObject* n : obj)
+		node->attachObject(n);
+	
+	for (Ogre::Node* n : children)
+		node->addChild(n);
+
+	//separate because the constructor for transform takes euler angles, and translating from quaternion to euler can lead to errors, so the rotation is "reset" after init()
+	if (args["rotation"].is_null())
+		setRotation(origRotation);
+}
+
 Transform::~Transform()
 {
 	Component::~Component();
 	node->removeAndDestroyAllChildren();
 	node->getParent()->removeChild(node->getName());
-	delete node;
+	Core::getInstance()->getSM()->destroySceneNode(node->getName());
 }
 
 Ogre::Vector3 Transform::getPosition() const

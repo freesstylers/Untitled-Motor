@@ -28,6 +28,31 @@ void RigidBody::init(json& args)//mandar unha mesaxe a outros componentes (por e
 	EventManager::getInstance()->ClearListeners(event.type);
 }
 
+void RigidBody::redefine(json& args)
+{
+	if (args["shape"].is_null())
+		args["shape"] = shape;
+
+	if (args["mass"].is_null())
+		args["mass"] = body->getMass();
+
+	if (args["isStatic"].is_null())
+		args["isStatic"] = isStatic;
+
+	if (args["isKinematic"].is_null())
+		args["isKinematic"] = isKinematic;
+
+	if (args["disableDeactivation"].is_null())
+		args["disableDeactivation"] = (body->getActivationState() == DISABLE_DEACTIVATION);
+
+	body->setUserPointer(nullptr);
+	PhysicsManager::getInstance()->getWorld()->removeRigidBody(body);
+	delete body->getCollisionShape();
+	delete body;
+
+	init(args);
+}
+
 void RigidBody::preupdate()
 {
 	//asigna o rigidbody a posicion e rotacion que manda o transform
@@ -114,7 +139,7 @@ void RigidBody::applyForce(ForceType type, btVector3 force, btVector3 relPos)
 void RigidBody::createRigidBody(json& args)
 {
 	//default rigidbody shape is mesh
-	std::string shape = "mesh";
+	shape = "mesh";
 	float mass = 0.0;
 
 	if (!args["shape"].is_null()) {

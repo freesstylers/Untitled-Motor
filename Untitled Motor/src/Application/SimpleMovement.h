@@ -6,8 +6,10 @@ class SimpleMovement : public Component
 public:
 
 	SimpleMovement(json& args);
-	virtual void start();
-	virtual void update();
+	void init(json& args) override;
+	void redefine(json& args) override;
+	void start() override;
+	void update() override;
 	void controllerMovement();
 	void keyboardMovement();
 	~SimpleMovement() {};

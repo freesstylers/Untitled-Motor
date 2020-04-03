@@ -9,6 +9,7 @@ class Mesh :
 public:
 	Mesh(json& args);
 	void init(json& args) override;
+	void redefine(json& args) override;
 	~Mesh() override;
 
 	Ogre::AxisAlignedBox getAABB()	const;
@@ -21,5 +22,8 @@ public:
 private:
 	Ogre::Entity* ogreEnt;
 	bool isAnimated;
+
+	Ogre::String meshFile;
+	Ogre::String materialName;
 };
 

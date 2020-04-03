@@ -3,6 +3,7 @@
 #include "Core.h"
 #include <OgreViewport.h>
 #include <OgreRenderWindow.h>
+#include "ResourceManager.h"
 
 #include <functional>
 
@@ -22,7 +23,6 @@ void Scene::setupScene(json& j)
 	string interm = j["name"];
 	name = interm;
 
-	//load prefabs
 	if (!j["entities"].is_null() && j["entities"].is_array()) {
 		vector<json> e = j["entities"];
 		for (json ent : e) {
@@ -97,6 +97,27 @@ void Scene::lateUpdate()
 Entity* Scene::createEntity(json& j)
 {
 	Entity* ent = new Entity(this, j["name"]);
+
+
+	if (!j["prefab"].is_null() && j["prefab"].is_string()) {
+
+		std::string cast = j["prefab"];
+
+		json prefab = ResourceManager::getInstance()->getPrefabs()[cast];
+
+		if (!prefab.is_null()) {
+			prefab["name"] = j["name"];
+			ent->init(prefab);
+
+			if (!prefab["components"].is_null() && prefab["components"].is_array()) {
+				vector<json> e = prefab["components"];
+				for (json c : e) {
+					ent->addComponentFromJson(c);
+				}
+			}
+		}
+	}
+
 	ent->init(j);
 	if (!j["components"].is_null() && j["components"].is_array()) {
 		vector<json> e = j["components"];

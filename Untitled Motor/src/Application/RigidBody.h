@@ -23,6 +23,7 @@ public:
 	~RigidBody() override;
 
 	void init(json& args) override;
+	void redefine(json& args) override;
 	void preupdate() override;
 	void physicsUpdate() override;
 	virtual void OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2);
@@ -47,4 +48,5 @@ private:
 	Ogre::Vector3 bakPosition;
 	Ogre::Vector3 bakScale;
 	Ogre::Quaternion bakRotation;
+	std::string shape;
 };

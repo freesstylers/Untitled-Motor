@@ -8,16 +8,39 @@
 
 SimpleMovement::SimpleMovement(json& args) : Component(args)
 {
-	if(!args["speed"].is_null())
+
+}
+
+void SimpleMovement::init(json& args)
+{
+	speed = 1.0;
+	rotateSpeed = 1.0;
+	onlycontroller = false;
+	if (!args["speed"].is_null())
 		speed = args["speed"];
-	if(!args["rotateSpeed"].is_null())
+	if (!args["rotateSpeed"].is_null())
 		rotateSpeed = args["rotateSpeed"];
 	if (!args["controller"].is_null())
 		onlycontroller = args["onlycontroller"];
 
+
+	deadZoneX = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
+	deadZoneY = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
 	deadZoneX = deadZoneX / 32768.0;
 	deadZoneY = deadZoneY / 32768.0;
 	deadZoneRange = 0.10;
+}
+
+void SimpleMovement::redefine(json& args)
+{
+	if (args["speed"].is_null())
+		args["speed"] = speed;
+	if (args["rotateSpeed"].is_null())
+		args["rotateSpeed"] = rotateSpeed;
+	if (args["controller"].is_null())
+		args["onlycontroller"] = onlycontroller;
+
+	init(args);
 }
 
 

@@ -1,13 +1,43 @@
-[
+{
+	"marble" : 
 	{
-		"name" : "cube",
+		"position" : [1, 20, 0],
+		"rotation" : [0, 0, 0],
+		"scale" : [0.7, 0.7, 0.7],
+		"components" : [
+				{
+					"type" : "Mesh",
+					"mesh" : "sphere.mesh",
+					"material" : "test"
+				},
+				{
+					"type" : "RigidBody",
+					"shape" : "sphere",
+					"mass" : 100,
+					"disableDeactivation" : true
+				},
+				{
+					"type" : "ForcesTest"
+				}
+			]
+	},
+	
+	"floor" :
+	{
+		"position" : [0, 0, 0],
+		"rotation" : [0, 0, 0],
+		"scale" : [7, 0.1, 3],
 		"components" : [
 			{
+				"type" : "Mesh",
+				"mesh" : "cube.mesh",
+				"material" : "test"
 			},
 			{
-			},
-			{
+				"type" : "RigidBody",
+				"shape" : "cube",
+				"isKinematic" : true
 			}
 		]
 	}
-]
+}

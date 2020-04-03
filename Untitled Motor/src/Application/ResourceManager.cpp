@@ -79,6 +79,11 @@ json ResourceManager::loadSceneFile(const Ogre::String& sceneName)
 	return j;
 }
 
+json ResourceManager::getPrefabs()
+{
+	return prefabs;
+}
+
 void ResourceManager::locateOgreResources()
 {
 	// load resource paths from config file

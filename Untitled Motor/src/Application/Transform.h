@@ -8,6 +8,8 @@ class Transform :
 public:
 	Transform(json& args);
 	~Transform() override;
+	void init(json& args) override;
+	void redefine(json& args) override;
 	Ogre::Vector3 getPosition() const;
 	Ogre::Quaternion getRotation() const;
 	Ogre::Vector3 getScale() const;

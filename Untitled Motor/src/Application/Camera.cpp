@@ -12,6 +12,12 @@ Camera::Camera(json& args): Component(args)
 
 Camera::~Camera()
 {
+	Component::~Component();
+	Core::getInstance()->getOgreWin()->removeViewport(vp->getZOrder());
+	delete vp;
+	e_->getComponent<Transform>("Transform")->getNode()->removeAndDestroyChild(mCamNode->getName());
+	delete mCamNode;
+	delete cam;
 }
 
 bool Camera::ReceiveEvent(Event& event)
@@ -35,7 +41,7 @@ void Camera::init(json& j)
 	int camFarClipDist = 100000000;
 	bool autoAspectRatio = true;
 	Ogre::Vector3 camPos = Ogre::Vector3(100, 100, 100);
-	Ogre::Vector3 lookAt = Ogre::Vector3(0, 0, 0);
+	lookAtVec = Ogre::Vector3(0, 0, 0);
 	Ogre::ColourValue bgColour = Ogre::ColourValue(1, 1, 1, 1);
 
 	//this checks if there's an item for the camera in the json, and then checks if there's an item for each parameter
@@ -50,9 +56,9 @@ void Camera::init(json& j)
 	}
 	if (!j["lookAt"].is_null())
 	{
-		lookAt.x = j["lookAt"][0];
-		lookAt.y = j["lookAt"][1];
-		lookAt.z = j["lookAt"][2];
+		lookAtVec.x = j["lookAt"][0];
+		lookAtVec.y = j["lookAt"][1];
+		lookAtVec.z = j["lookAt"][2];
 	}
 	if (!j["bgColor"].is_null())
 	{
@@ -90,7 +96,7 @@ void Camera::init(json& j)
 	mCamNode->attachObject(cam);
 	mCamNode->setPosition(camPos);
 
-	Camera::lookAt(lookAt);
+	Camera::lookAt(lookAtVec);
 	
 
 
@@ -101,6 +107,45 @@ void Camera::init(json& j)
 	cam->setAspectRatio(
 		Ogre::Real(vp->getActualWidth()) /
 		Ogre::Real(vp->getActualHeight()));
+}
+
+void Camera::redefine(json& args)
+{
+	if (args["nearClipDistance"].is_null())
+		args["nearClipDistance"] = cam->getNearClipDistance();
+
+	if (args["farClipDistance"].is_null())
+		args["farClipDistance"] = cam->getFarClipDistance();
+
+	if (args["autoAspectRatio"].is_null())
+		args["autoAspectRatio"] = cam->getAutoAspectRatio();
+
+	if (args["lookingAt"].is_null() && lookingAt)
+		args["lookingAt"] = looking->getName();
+
+	if (args["lookAt"].is_null())
+		args["lookAt"] = { lookAtVec.x, lookAtVec.y, lookAtVec.z };
+
+	if (args["bgColor"].is_null() && args["bgColour"].is_null())
+		args["bgColor"] = { vp->getBackgroundColour().r, vp->getBackgroundColour().g, vp->getBackgroundColour().b, vp->getBackgroundColour().a };
+
+	if (args["following"].is_null() && following)
+		args["following"] = follow->getName();
+
+
+	Component::~Component();
+	Core::getInstance()->getOgreWin()->removeViewport(vp->getZOrder());
+	delete vp;
+	e_->getComponent<Transform>("Transform")->getNode()->removeAndDestroyChild(mCamNode->getName());
+	delete mCamNode;
+	delete cam;
+
+	vp = nullptr;
+	cam = nullptr;
+	mCamNode = nullptr;
+	follow = nullptr;
+
+	init(args);
 }
 
 //Coloca la direccion de la camara, sin girarla sobre su eje x, para que no "vuelque"

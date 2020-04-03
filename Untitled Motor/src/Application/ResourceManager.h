@@ -22,6 +22,8 @@ public:
 
 	json loadSceneFile(const Ogre::String& sceneName);
 
+	json getPrefabs();
+
 private:
 	ResourceManager(const Ogre::String& path);
 

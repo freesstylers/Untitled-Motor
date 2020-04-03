@@ -80,7 +80,7 @@ void Entity::addComponentFromJson(json& args)
 	}
 //if it already exists, it's being redefined (ideally only used with prefabs)
 	else {
-		map_[args["type"]]->init(args);
+		map_[args["type"]]->redefine(args);
 	}
 }
 

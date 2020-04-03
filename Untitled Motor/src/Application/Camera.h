@@ -14,6 +14,7 @@ public:
 	bool ReceiveEvent(Event& event) override;
 	void update() override;
 	void init(json& args) override;
+	void redefine(json& args) override;
 
 	void lookAt(Ogre::Vector3 point);
 	Ogre::Camera* getCam();
@@ -29,6 +30,8 @@ private:
 	Ogre::Camera* cam;
 	Ogre::Viewport* vp;
 	Ogre::SceneNode* mCamNode;
+
+	Ogre::Vector3 lookAtVec;
 };
 
 
