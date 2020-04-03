@@ -416,6 +416,26 @@ void Core::resetTimer()
 	timer->reset();
 }
 
+void Core::setFarShadowDistance(Ogre::Real dist)
+{
+	sm->setShadowFarDistance(dist);
+}
+
+void Core::setShadowTechnique(Ogre::ShadowTechnique type)
+{
+	sm->setShadowTechnique(type);
+}
+
+Ogre::Real Core::getFarShadowDistance()
+{
+	return sm->getShadowFarDistance();
+}
+
+Ogre::ShadowTechnique Core::getShadowTechnique()
+{
+	return sm->getShadowTechnique();
+}
+
 #include "Factory.h"
 
 #include "Transform.h"

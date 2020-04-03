@@ -25,10 +25,7 @@ public:
 
 	void changeScene(Ogre::String name);
 
-	void initPhysicsTestScene();
-
 	void initLoadingTestScene();
-	void testMessageSystem();
 
 	void start();
 
@@ -53,6 +50,11 @@ public:
 	float getTimeDifference(float prevTime);
 	float DeltaTime();
 	void resetTimer();
+
+	void setFarShadowDistance(Ogre::Real dist);
+	void setShadowTechnique(Ogre::ShadowTechnique type);
+	Ogre::Real getFarShadowDistance();
+	Ogre::ShadowTechnique getShadowTechnique();
 
 private:
 
