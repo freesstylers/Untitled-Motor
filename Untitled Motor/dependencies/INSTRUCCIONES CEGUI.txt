@@ -26,5 +26,3 @@
 
 6.2) Compilar en Visual. Dará un error. Buscar Ogre::Image::Box, cambiarlo a Ogre::Box
 6.3) Compilar de nuevo. No debería dar errores ya
-6.4) Hacer primero Debug o Release, y copiar los archivos generados en tanto en dependencies\cegui-0.8.7\build\bin como en dependencies\cegui-0.8.7\build\lib [CADA UNA EN SU SITIO, NO ME LO JUNTEIS] en una carpeta llamada "Debug" o "Release", según corresponda, y luego la otra. 
-(Se hace esto para facilitar la inclusion en Visual Studio).

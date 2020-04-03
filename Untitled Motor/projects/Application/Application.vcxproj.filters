@@ -20,7 +20,8 @@
     <ClCompile Include="..\..\src\Application\Mesh.cpp" />
     <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp" />
     <ClCompile Include="..\..\src\Application\SGTechniqueResolverListener.cpp" />
-    <ClCompile Include="..\..\src\Application\UIManager.cpp" />
+    <ClCompile Include="..\..\src\Application\GUI_Manager.cpp" />
+    <ClCompile Include="..\..\src\Application\GUI_Element.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="..\..\src\Application\RigidBody.h" />
     <ClInclude Include="..\..\src\Application\Mesh.h" />
     <ClInclude Include="..\..\src\Application\SGTechniqueResolverListener.h" />
-    <ClInclude Include="..\..\src\Application\UIManager.h" />
+    <ClInclude Include="..\..\src\Application\GUI_Manager.h" />
+    <ClInclude Include="..\..\src\Application\GUI_Element.h" />
   </ItemGroup>
 </Project>
