@@ -134,10 +134,6 @@ void Light::init(json& args)
 
 	light->setDirection(lightDir);
 
-
-	Ogre::Vector3 pos = e_->getComponent<Transform>("Transform")->getPosition();
-	light->setPosition(pos);
-
 	e_->getComponent<Transform>("Transform")->getNode()->attachObject(light);
 }
 
