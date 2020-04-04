@@ -113,9 +113,9 @@ void Light::init(json& args)
 		attQuadratic = args["attenuationQuadratic"];
 
 	//range is how far the light goes
-	//constant is how much it attenuates brightness (0 means no attenuation (AKA too bright), 1 means usual attenuation, higher values mean more attenuation)
-	//linear defines how it attenuates brightness linearly
-	//quadratic defines how it attenuates brightness quadratically
+	//constant is how much it attenuates brightness REGARDLESS OF DISTANCE (0 means no attenuation (AKA too bright), 1 means usual attenuation, higher values mean more attenuation)
+	//linear defines how it attenuates brightness linearly WITH DISTANCE
+	//quadratic defines how it attenuates brightness quadratically WITH DISTANCE
 	//formula: Attenuation = Constant + Linear * Distance + Quadratic * Distance^2
 
 
