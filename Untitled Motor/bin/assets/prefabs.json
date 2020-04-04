@@ -39,5 +39,16 @@
 				"isKinematic" : true
 			}
 		]
+	},
+	
+	"pointLight" :
+	{
+		"position" : [100, 100, 0],
+		"components" : [
+			{
+				"type" : "Light",
+				"lightType" : "point"
+			}
+		]
 	}
 }

@@ -48,8 +48,8 @@ void Transform::redefine(json& args)
 	if (args["scale"].is_null())
 		args["scale"] = { getScale().x, getScale().y, getScale().z };
 
-	vector<Ogre::MovableObject*> obj = node->getAttachedObjects();
-	vector<Ogre::Node*> children = node->getChildren();
+	std::vector<Ogre::MovableObject*> obj = node->getAttachedObjects();
+	std::vector<Ogre::Node*> children = node->getChildren();
 	node->getParent()->removeChild(node->getName());
 	Core::getInstance()->getSM()->destroySceneNode(node->getName());
 	node = nullptr;

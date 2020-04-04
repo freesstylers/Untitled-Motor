@@ -6,10 +6,7 @@
 #include <SDL.h>
 #include <OgreFrameListener.h>
 
-#include "AudioManager.h"
 #include "Entity.h"
-
-#include "Scene.h"
 
 class Core : public Ogre::FrameListener
 {

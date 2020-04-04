@@ -17,8 +17,6 @@ public:
 
 	void setupScene(json& j);
 
-	//Ogre::Camera* getCam();
-	//Ogre::Viewport* getVP();
 	Entity* getEntity(const std::string& name);
 
 	void start();
@@ -30,10 +28,7 @@ public:
 private:
 
 	Entity* createEntity(json& j);
-	//void createCam(json& j);
 
-	//Ogre::Camera* cam;
-	//Ogre::Viewport* vp;
 	std::map<std::string, Entity*> entities;
 
 	Ogre::String name;

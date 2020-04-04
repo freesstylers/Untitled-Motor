@@ -33,6 +33,7 @@
     <ClCompile Include="..\..\src\Application\ForcesTest.cpp" />
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
     <ClCompile Include="..\..\src\Application\JsonFactoryParser.cpp" />
+    <ClCompile Include="..\..\src\Application\Light.cpp" />
     <ClCompile Include="..\..\src\Application\Mesh.cpp" />
     <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
     <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
@@ -59,6 +60,7 @@
     <ClInclude Include="..\..\src\Application\ForcesTest.h" />
     <ClInclude Include="..\..\src\Application\InputManager.h" />
     <ClInclude Include="..\..\src\Application\JsonFactoryParser.h" />
+    <ClInclude Include="..\..\src\Application\Light.h" />
     <ClInclude Include="..\..\src\Application\Mesh.h" />
     <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
     <ClInclude Include="..\..\src\Application\ResourceManager.h" />

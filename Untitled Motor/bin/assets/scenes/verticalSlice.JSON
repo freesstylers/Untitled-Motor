@@ -40,6 +40,10 @@
 			"scale" : [4, 0.1, 4]
 		},
 		{
+			"name" : "light",
+			"prefab" : "pointLight"
+		},
+		{
 			"name" : "camera",
 			"position" : [0, 100, 500],
 			"rotation" : [0, 0, 0], 

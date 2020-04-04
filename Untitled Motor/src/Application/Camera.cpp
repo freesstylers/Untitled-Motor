@@ -5,6 +5,8 @@
 #include <OgreRenderWindow.h>
 #include "Transform.h"
 
+using namespace std;
+
 Camera::Camera(json& args): Component(args)
 {
 	

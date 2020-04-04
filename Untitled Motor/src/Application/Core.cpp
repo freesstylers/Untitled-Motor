@@ -16,9 +16,6 @@
 #include "JsonFactoryParser.h"
 #include "AudioManager.h"
 #include "EventManager.h"
-#include "TerrainRotation.h"
-#include "SimpleMovement.h"
-#include "ForcesTest.h"
 #include <iostream>
 
 #include "RigidBody.h"
@@ -285,7 +282,7 @@ void Core::setup()
 
 	sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
 	sm->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-	Core::getInstance()->getSM()->setShadowFarDistance(100);
+	Core::getInstance()->getSM()->setShadowFarDistance(1000000);
 
 	ResourceManager::getInstance()->addSceneManager(sm);
 
@@ -444,6 +441,10 @@ Ogre::ShadowTechnique Core::getShadowTechnique()
 #include "Camera.h"
 #include "AudioComponent.h"
 #include "AudioListenerComponent.h"
+#include "Light.h"
+#include "TerrainRotation.h"
+#include "SimpleMovement.h"
+#include "ForcesTest.h"
 
 class TransformFactory : public BaseFactory
 {
@@ -518,6 +519,14 @@ public:
 		return new ForcesTest(args);
 	};
 };
+class LightFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Light(args);
+	};
+};
 
 void Core::setupFactories()
 {
@@ -532,4 +541,5 @@ void Core::setupFactories()
 	j->addFactory("TerrainRotation", new TerrainRotationFactory());
 	j->addFactory("SimpleMovement", new SimpleMovementFactory());
 	j->addFactory("ForcesTest", new ForcesTestFactory());
+	j->addFactory("Light", new LightFactory());
 }
