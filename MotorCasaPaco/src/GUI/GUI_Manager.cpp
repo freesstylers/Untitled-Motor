@@ -41,7 +41,8 @@ void GUI_Manager::createRoot()
 
 void GUI_Manager::loadLayout(CEGUI::String filename)
 {
-	try {
+	try
+	{
 		CEGUI::WindowManager::getSingleton().loadLayoutFromFile(filename);
 	}
 	catch (std::exception e)

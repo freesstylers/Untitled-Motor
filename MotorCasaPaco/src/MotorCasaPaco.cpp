@@ -142,6 +142,8 @@ void MotorCasaPaco::init()
 
 void MotorCasaPaco::changeScene(Ogre::String name)
 {
+	GUI_Manager::getInstance()->loadLayout("TextDemo.layout");
+
 	SceneManager::getInstance()->changeScene(name);
 	SceneManager::getInstance()->getCurrentScene()->start();
 }
@@ -149,8 +151,6 @@ void MotorCasaPaco::changeScene(Ogre::String name)
 void MotorCasaPaco::initLoadingTestScene()
 {
 	changeScene("test");
-
-	//GUI_Manager::getInstance()->loadLayout("./assets/UI/layouts/TextDemo.layout");
 }
 
 void MotorCasaPaco::start()

@@ -52,7 +52,7 @@
 				{
 					"type" : "Camera",
 					"lookAt" : [1, 0.8, 0],
-					"bgColour" : [1, 1, 1, 1]
+					"bgColour" : [0.5, 0.5, 0.5, 1]
 				},
 				{
 					"type": "AudioListenerComponent"
