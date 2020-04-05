@@ -63,7 +63,6 @@ private:
 	void setupRoot();
 	void setup();
 	void shutdown();
-	void updateRender(); //actualiza el render de los objetos con rigidbody
 	bool checkConfig();
 
 	void setupFactories();

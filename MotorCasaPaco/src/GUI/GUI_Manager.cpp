@@ -1,10 +1,12 @@
 #include "GUI/GUI_Manager.h"
 
+#include "MotorCasaPaco.h"
+
 GUI_Manager* GUI_Manager::instance = 0;
 
 GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 {
-	CEGUI::OgreRenderer& aux = CEGUI::OgreRenderer::bootstrapSystem(*window);
+	CEGUI::OgreRenderer& aux = CEGUI::OgreRenderer::bootstrapSystem(*MotorCasaPaco::getInstance()->getOgreWin());
 	renderer = &aux;
 
 	setupResources();
@@ -32,10 +34,9 @@ GUI_Manager* GUI_Manager::getInstance()
 
 void GUI_Manager::createRoot()
 {
-	//CEGUI::Window* aux; 
 	CEGUI::WindowManager& a = CEGUI::WindowManager::getSingleton();
-	//.createWindow("Default", "root");
-	a.createWindow("DefaultWindow", "root");
+
+	root = a.createWindow("DefaultWindow", "root");
 	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(root);
 }
 

@@ -142,7 +142,7 @@ void MotorCasaPaco::init()
 
 void MotorCasaPaco::changeScene(Ogre::String name)
 {
-	GUI_Manager::getInstance()->loadLayout("TextDemo.layout");
+	GUI_Manager::getInstance()->loadLayout("SampleBrowserLoadScreen.layout");
 
 	SceneManager::getInstance()->changeScene(name);
 	SceneManager::getInstance()->getCurrentScene()->start();
@@ -280,9 +280,9 @@ void MotorCasaPaco::setup()
 	catch (const std::exception& e)
 	{
 		throw std::runtime_error("InputManager setup fail \n" + (Ogre::String)e.what() + "\n");	return;
-	}	
+	}
 
-	try { GUI_Manager::setupInstance(getOgreWin()); }
+	try { GUI_Manager::setupInstance(MotorCasaPaco::getInstance()->getOgreWin()); }
 	catch (const std::exception & e)
 	{
 		throw std::runtime_error("UIManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
@@ -378,28 +378,6 @@ Ogre::RenderWindow* MotorCasaPaco::getOgreWin()
 SDL_Window* MotorCasaPaco::getSDLWin()
 {
 	return sdlWindow;
-}
-
-void MotorCasaPaco::updateRender()
-{
-	/*
-	for (auto b : PhysicsManager::getInstance()->getBodies()) {
-		btRigidBody* body = b;
-
-		if (body && body->getMotionState()) {
-			btTransform trans;
-			body->getMotionState()->getWorldTransform(trans);
-
-			void* userPointer = body->getUserPointer();
-			if (userPointer) {
-				btQuaternion orientation = trans.getRotation();
-				Ogre::SceneNode* sceneNode = static_cast<Ogre::SceneNode*>(userPointer);
-				sceneNode->setPosition(Ogre::Vector3(trans.getOrigin().getX(), trans.getOrigin().getY(), trans.getOrigin().getZ()));
-				sceneNode->setOrientation(Ogre::Quaternion(orientation.getW(), orientation.getX(), orientation.getY(), orientation.getZ()));
-			}
-		}
-	}
-	*/
 }
 
 float MotorCasaPaco::getTime()
