@@ -24,7 +24,7 @@
     <ClCompile Include="..\..\src\Audio\AudioComponent.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioListenerComponent.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioManager.cpp" />
-    <ClCompile Include="..\..\src\Core.cpp" />
+    <ClCompile Include="..\..\src\MotorCasaPaco.cpp" />
     <ClCompile Include="..\..\src\Entity\Component.cpp" />
     <ClCompile Include="..\..\src\Entity\Entity.cpp" />
     <ClCompile Include="..\..\src\Entity\Factory.cpp" />
@@ -52,7 +52,7 @@
     <ClInclude Include="..\..\include\Audio\AudioComponent.h" />
     <ClInclude Include="..\..\include\Audio\AudioListenerComponent.h" />
     <ClInclude Include="..\..\include\Audio\AudioManager.h" />
-    <ClInclude Include="..\..\include\Core.h" />
+    <ClInclude Include="..\..\include\MotorCasaPaco.h" />
     <ClInclude Include="..\..\include\Entity\Component.h" />
     <ClInclude Include="..\..\include\Entity\Entity.h" />
     <ClInclude Include="..\..\include\Entity\Factory.h" />
@@ -157,7 +157,7 @@
     <OutDir>$(SolutionDir)bin\</OutDir>
     <TargetName>$(ProjectName)</TargetName>
     <IntDir>$(SolutionDir)interm\$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(SolutionDir)dependencies\cegui-0.8.7\build\cegui\include;$(SolutionDir)dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)include;$(SolutionDir)src;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\$(Configuration);$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

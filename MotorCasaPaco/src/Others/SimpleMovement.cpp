@@ -3,7 +3,7 @@
 #include "Entity/Transform.h"
 #include "Physics/RigidBody.h"
 #include "Entity/Entity.h"
-#include "Core.h"
+#include "MotorCasaPaco.h"
 #include "Ogre.h"
 
 SimpleMovement::SimpleMovement(json& args) : Component(args)

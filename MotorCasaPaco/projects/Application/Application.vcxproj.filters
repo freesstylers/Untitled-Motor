@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\..\src\Application.cpp" />
-    <ClCompile Include="..\..\src\Core.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioComponent.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
@@ -81,9 +80,9 @@
     <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp">
       <Filter>Others</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\MotorCasaPaco.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\Core.h" />
     <ClInclude Include="..\..\include\Audio\AudioManager.h">
       <Filter>Audio</Filter>
     </ClInclude>
@@ -165,6 +164,7 @@
     <ClInclude Include="..\..\include\Entity\Transform.h">
       <Filter>Entity</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\MotorCasaPaco.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Audio">

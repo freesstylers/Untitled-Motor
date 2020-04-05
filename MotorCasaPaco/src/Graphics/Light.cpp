@@ -1,6 +1,6 @@
 #include "Graphics/Light.h"
 
-#include "Core.h"
+#include "MotorCasaPaco.h"
 #include "Entity/Transform.h"
 
 Light::Light(json& args) : Component(args)

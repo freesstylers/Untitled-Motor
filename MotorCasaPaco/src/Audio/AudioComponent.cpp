@@ -1,5 +1,5 @@
 #include "Audio/AudioComponent.h"
-#include "Core.h"
+#include "MotorCasaPaco.h"
 #include "Entity/Transform.h"
 
 AudioComponent::AudioComponent(json& args): Component(args)

@@ -1,6 +1,6 @@
 #include "Scene/Scene.h"
 
-#include "Core.h"
+#include "MotorCasaPaco.h"
 #include <OgreViewport.h>
 #include <OgreRenderWindow.h>
 #include "Resources/ResourceManager.h"

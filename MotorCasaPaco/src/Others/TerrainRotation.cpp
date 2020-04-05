@@ -5,7 +5,7 @@
 #include "Entity/Entity.h"
 #include "Physics/RigidBody.h"
 #include "Audio/AudioManager.h"
-#include "Core.h"
+#include "MotorCasaPaco.h"
 #include "btBulletDynamicsCommon.h"
 
 TerrainRotation::TerrainRotation(json& args) :Component(args)

@@ -1,5 +1,5 @@
 #include "Graphics/Camera.h"
-#include "Core.h"
+#include "MotorCasaPaco.h"
 #include "Scene/SceneManager.h"
 #include <OgreViewport.h>
 #include <OgreRenderWindow.h>
