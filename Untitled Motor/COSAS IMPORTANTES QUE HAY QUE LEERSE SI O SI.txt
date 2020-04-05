@@ -1,0 +1,59 @@
+- He dividido los archivos en dos carpetas: include (.h) y src (.cpp). Así
+cualquiera que quiera usar el motor puede incluir los includes sin tener
+por el medio todos los .cpp, al igual que funciona cualquier librería de
+las que hemos usado. Acordaos de crear cada archivo donde toca jeje
+
+- Tanto 'src', como 'include', como los filtros de Visual siguen la misma
+estructura de carpetas para evitar ser asesinados por el profesorado de la
+asignatura.
+
+- Por ahora no se usa hasta que no convierta el motor en librería, pero el
+código del proyecto de test 'TestDemo' iría en la carpeta 'testDemo' de
+la solución.
+
+- He cambiado el nombre de 'Core' a 'MotorCasaPaco' para que quede claro que es la
+clase principal del motor al crearlo desde los juegos.
+
+- En los .h no se pueden hacer includes ni usings de librerías externas, hay que
+hacer forward declaration y luego incluirlas desde los .cpp. Exceptuando
+json.hpp, que lo he metido como archivo del proyecto para no tener que hacerle
+una interfaz por encima. Lo cual me parecía bastante absurdo siendo solo
+un archivo.
+
+- Si necesitáis heredar de alguna librería, obligatoriamente tendréis que hacer
+el include en el .h. En ese caso no podréis hacer include de esa clase desde
+los .h del proyecto, dado que se incluiría también la librería externa. En vez
+de eso, haced forward declaration de esa clase cada vez que la queráis usar en
+el resto del proyecto. Ejemplo:
+
+MiOgro.h:
+
+#include <Ogre.h>
+
+class MiOgro : Ogro {
+  un ogro
+}
+----------------------------------
+
+ClaseQueNecesitaAMiOgro.h:
+
+class MiOgro;
+
+class NecesitoOgro {
+  public:
+    MiOgro *alFinTengoMiOgro;
+  private:
+    void matarAlPutoOgro(bool true = true);
+}
+----------------------------------
+
+ClaseQueNecesitaAMiOgro.cpp:
+
+#include "MiOgro.h"
+
+void NecesitoOgro::matarAlPutoOgro(bool true = true) {
+  if (true)
+    delete alFinTengoMiOgro;
+  else
+    delete alFinTengoMiOgro;
+}

@@ -1,61 +1,201 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\src\Application\Application.cpp" />
-    <ClCompile Include="..\..\src\Application\Component.cpp" />
-    <ClCompile Include="..\..\src\Application\Entity.cpp" />
-    <ClCompile Include="..\..\src\Application\Factory.cpp" />
-    <ClCompile Include="..\..\src\Application\Core.cpp" />
-    <ClCompile Include="..\..\src\Application\ResourceManager.cpp" />
-    <ClCompile Include="..\..\src\Application\InputManager.cpp" />
-    <ClCompile Include="..\..\src\Application\PhysicsManager.cpp" />
-    <ClCompile Include="..\..\src\Application\SceneManager.cpp" />
-    <ClCompile Include="..\..\src\Application\AudioManager.cpp" />
-    <ClCompile Include="..\..\src\Application\EventManager.cpp" />
-    <ClCompile Include="..\..\src\Application\Scene.cpp" />
-    <ClCompile Include="..\..\src\Application\JsonFactoryParser.cpp" />
-    <ClCompile Include="..\..\src\Application\Transform.cpp" />
-    <ClCompile Include="..\..\src\Application\RigidBody.cpp" />
-    <ClCompile Include="..\..\src\Application\Mesh.cpp" />
-    <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp" />
-    <ClCompile Include="..\..\src\Application\SGTechniqueResolverListener.cpp" />
-    <ClCompile Include="..\..\src\Application\Camera.cpp" />
-    <ClCompile Include="..\..\src\Application\AudioComponent.cpp" />
-    <ClCompile Include="..\..\src\Application\AudioListenerComponent.cpp" />
-    <ClCompile Include="..\..\src\Application\TerrainRotation.cpp" />
-    <ClCompile Include="..\..\src\Application\SimpleMovement.cpp" />
-    <ClCompile Include="..\..\src\Application\ForcesTest.cpp" />
-    <ClCompile Include="..\..\src\Application\Light.cpp" />
-    <ClCompile Include="..\..\src\Application\GUI_Manager.cpp" />
-    <ClCompile Include="..\..\src\Application\GUI_Element.cpp" />
+    <ClCompile Include="..\..\src\Application.cpp" />
+    <ClCompile Include="..\..\src\Core.cpp" />
+    <ClCompile Include="..\..\src\Audio\AudioComponent.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\AudioListenerComponent.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Audio\AudioManager.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Events\EventManager.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Entity\Entity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Entity\Component.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Entity\Factory.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GUI\GUI_Element.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GUI\GUI_Manager.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Others\ForcesTest.cpp">
+      <Filter>Others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\Camera.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Input\InputManager.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Scene\JsonFactoryParser.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\Light.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\Mesh.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Physics\PhysicsManager.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Resources\ResourceManager.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Physics\RigidBody.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Scene\Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Scene\SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\SGTechniqueResolverListener.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Others\SimpleMovement.cpp">
+      <Filter>Others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Others\TerrainRotation.cpp">
+      <Filter>Others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Others\TestComponent.cpp">
+      <Filter>Others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Entity\Transform.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp">
+      <Filter>Others</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\Application\Component.h" />
-    <ClInclude Include="..\..\src\Application\Entity.h" />
-    <ClInclude Include="..\..\src\Application\Factory.h" />
-    <ClInclude Include="..\..\src\Application\Core.h" />
-    <ClInclude Include="..\..\src\Application\ResourceManager.h" />
-    <ClInclude Include="..\..\src\Application\InputManager.h" />
-    <ClInclude Include="..\..\src\Application\PhysicsManager.h" />
-    <ClInclude Include="..\..\src\Application\SceneManager.h" />
-    <ClInclude Include="..\..\src\Application\AudioManager.h" />
-    <ClInclude Include="..\..\src\Application\Event.h" />
-    <ClInclude Include="..\..\src\Application\EventListener.h" />
-    <ClInclude Include="..\..\src\Application\EventManager.h" />
-    <ClInclude Include="..\..\src\Application\Scene.h" />
-    <ClInclude Include="..\..\src\Application\JsonFactoryParser.h" />
-    <ClInclude Include="..\..\src\Application\Transform.h" />
-    <ClInclude Include="..\..\src\Application\RigidBody.h" />
-    <ClInclude Include="..\..\src\Application\Mesh.h" />
-    <ClInclude Include="..\..\src\Application\SGTechniqueResolverListener.h" />
-    <ClInclude Include="..\..\src\Application\Camera.h" />
-    <ClInclude Include="..\..\src\Application\AudioComponent.h" />
-    <ClInclude Include="..\..\src\Application\AudioListenerComponent.h" />
-    <ClInclude Include="..\..\src\Application\TerrainRotation.h" />
-    <ClInclude Include="..\..\src\Application\SimpleMovement.h" />
-    <ClInclude Include="..\..\src\Application\ForcesTest.h" />
-    <ClInclude Include="..\..\src\Application\Light.h" />
-    <ClInclude Include="..\..\src\Application\GUI_Manager.h" />
-    <ClInclude Include="..\..\src\Application\GUI_Element.h" />
+    <ClInclude Include="..\..\include\Core.h" />
+    <ClInclude Include="..\..\include\Audio\AudioManager.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Audio\AudioComponent.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Audio\AudioListenerComponent.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Events\Event.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Events\EventListener.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Events\EventManager.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Entity\Entity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Entity\Component.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Entity\Factory.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GUI\GUI_Element.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GUI\GUI_Manager.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Others\ForcesTest.h">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Graphics\Camera.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Input\InputManager.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Scene\JsonFactoryParser.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Graphics\Mesh.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Graphics\Light.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Physics\PhysicsManager.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Resources\ResourceManager.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Physics\RigidBody.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Scene\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Scene\SceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Graphics\SGTechniqueResolverListener.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Others\SimpleMovement.h">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Others\TerrainRotation.h">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Others\TestComponent.h">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Entity\Transform.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{321633f3-ee74-4d36-ad7f-3a81620f811d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{84fc6324-f241-47f4-9ae0-208b33bf8fd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{f275d6ca-1b10-4555-8d6d-1eea78e8f0b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{cbf034d1-4363-4126-baf1-6a99c6e10bdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{901b5d8d-c020-44a9-b7b1-e2958fe09eee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{5f2d309e-e4aa-4f04-8abe-4d067af7276b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Others">
+      <UniqueIdentifier>{54bbe2c5-e4fe-4cba-a778-ff131dfd968c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{6b87e28a-40ca-41c6-a261-fb518f8c4953}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{847e5fe9-baf8-4d13-a57b-23508e08297d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{d2c8a5db-0181-4e85-b064-7c9312a19d6a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
