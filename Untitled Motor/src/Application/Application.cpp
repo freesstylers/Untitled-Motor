@@ -1,19 +1,19 @@
 // Application.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "Entity.h"
-
+#include <json.hpp>
 
 #include <OgreException.h>
 #include <iostream>
 #include <stdexcept>
 #define NOMINMAX
 
+
+
 #include "windows.h"
 
 #include "Core.h"
 
-#include <json.hpp>
 
 using json = nlohmann::json;
 using namespace std;

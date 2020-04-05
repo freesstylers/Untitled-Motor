@@ -8,7 +8,6 @@
 #include <OgreMeshManager.h>
 #include <stdexcept>
 
-
 #include "ResourceManager.h"
 #include "InputManager.h"
 #include "PhysicsManager.h"
@@ -16,6 +15,7 @@
 #include "JsonFactoryParser.h"
 #include "AudioManager.h"
 #include "EventManager.h"
+#include "GUI_Manager.h"
 #include <iostream>
 
 #include "RigidBody.h"
@@ -43,6 +43,7 @@ Core::~Core()
 	JsonFactoryParser::clean();
 	AudioManager::clean();
 	EventManager::clean();
+	GUI_Manager::clean();
 	delete timer;
 }
 	
@@ -148,6 +149,8 @@ void Core::changeScene(Ogre::String name)
 void Core::initLoadingTestScene()
 {
 	changeScene("test");
+
+	//GUI_Manager::getInstance()->loadLayout("./assets/UI/layouts/TextDemo.layout");
 }
 
 void Core::start()
@@ -256,13 +259,14 @@ void Core::setupRoot()
 		OGRE_EXCEPT(Ogre::Exception::ERR_FILE_NOT_FOUND, "plugins.cfg", "IG2ApplicationContext::createRoot");
 	}
 
-
 	if (!(Core::getInstance()->getRoot()->restoreConfig() || Core::getInstance()->getRoot()->showConfigDialog(nullptr)))
 		return;
 }
 
 void Core::setup()
 {
+	Core::getInstance()->getRoot()->setRenderSystem(Core::getInstance()->getRoot()->getRenderSystemByName("OpenGL Rendering Subsystem"));
+
 	Core::getInstance()->getRoot()->initialise(false);
 	setupWindow(appName);
 
@@ -277,6 +281,12 @@ void Core::setup()
 	{
 		throw std::runtime_error("InputManager setup fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}	
+
+	try { GUI_Manager::setupInstance(getOgreWin()); }
+	catch (const std::exception & e)
+	{
+		throw std::runtime_error("UIManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}
 
 	sm = Core::getInstance()->getRoot()->createSceneManager();
 
@@ -344,8 +354,7 @@ void Core::setupWindow(Ogre::String windowName)
 
 	window = Core::getInstance()->getRoot()->createRenderWindow(windowName, w, h, false, &params);
 
-
-//////////por si queremos que la ventana oculte el cursor
+	//////////por si queremos que la ventana oculte el cursor
 	SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
 	SDL_ShowCursor(true);
 }

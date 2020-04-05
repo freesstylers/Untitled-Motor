@@ -1,9 +1,10 @@
 #pragma once
 
+#include <json.hpp>
+
 #include <OgreFileSystemLayer.h>
 #include "SGTechniqueResolverListener.h"
 #include <OgreRTShaderSystem.h>
-#include <json.hpp>
 
 using json = nlohmann::json;
 

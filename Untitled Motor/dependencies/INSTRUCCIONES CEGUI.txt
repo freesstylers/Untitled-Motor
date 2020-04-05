@@ -1,0 +1,28 @@
+1) Cmake con dependencies\cegui-cegui-dependencies-0ecdf3a9e49b como source, y con una carpeta llamada "build" como salida (Hacer 2 veces el configure porque Cmake)
+2) Se dejan marcadas las casillas que vienen por defecto
+3) Tras generar, Open Project -> Compilar en Visual en Release y Debug (Deberían salir todos sin errores)
+4) Dentro de la carpeta "build", se copia la carpeta "dependencies" con todo su contenido a dependencies\cegui-0.8.7
+5) Se hace Cmake con dependencies\cegui-0.8.7 como source, y una carpeta "build" como salida (Hacer 2 veces el configure porque Cmake)
+5.1) Tras configurar, buscar con la casilla Advanced marcada "Ogre"
+5.2) Se marca la casilla de CEGUI_BUILD_RENDERER_OGRE
+5.3) En ruta absoluta, en OGRE_H_BUILD_SETTINGS_PATH: ..\dependencies\ogre-1.12.4\Build\include
+5.4) En ruta absoluta, en OGRE_H_PATH: ../dependencies/ogre-1.12.4/OgreMain/include
+5.5) En ruta absoluta, en OGRE_LIB: ../dependencies/ogre-1.12.4/Build/lib/Release/OgreMain.lib
+5.6) En ruta absoluta, en OGRE_LIB_DBG: ../dependencies/ogre-1.12.4/Build/lib/Debug/OgreMain_d.lib
+6) Tras generar, buscar el archivo Config.h en cegui-0.8.7/Build/cegui/include/CEGUI y buscar "ogre". Dejar esta parte con los numeros que siguen
+
+#ifndef CEGUI_OGRE_VERSION_MAJOR
+#   define CEGUI_OGRE_VERSION_MAJOR 1
+#endif
+#ifndef CEGUI_OGRE_VERSION_MINOR
+#   define CEGUI_OGRE_VERSION_MINOR 12
+#endif
+#ifndef CEGUI_OGRE_VERSION_PATCH
+#   define CEGUI_OGRE_VERSION_PATCH 4
+#endif
+#ifndef CEGUI_OGRE_VERSION
+#   define CEGUI_OGRE_VERSION ((CEGUI_OGRE_VERSION_MAJOR << 16) | (CEGUI_OGRE_VERSION_MINOR << 8) | CEGUI_OGRE_VERSION_PATCH)
+#endif
+
+6.2) Compilar en Visual. Dará un error. Buscar Ogre::Image::Box, cambiarlo a Ogre::Box
+6.3) Compilar de nuevo. No debería dar errores ya

@@ -1,9 +1,10 @@
 #pragma once
+#include <json.hpp>
+
 #include "Entity.h"
 #include <vector>
 #include <OgreCamera.h>
 
-#include <json.hpp>
 
 using json = nlohmann::json;
 

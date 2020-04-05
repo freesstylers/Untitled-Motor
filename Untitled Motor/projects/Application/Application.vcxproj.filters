@@ -26,6 +26,8 @@
     <ClCompile Include="..\..\src\Application\SimpleMovement.cpp" />
     <ClCompile Include="..\..\src\Application\ForcesTest.cpp" />
     <ClCompile Include="..\..\src\Application\Light.cpp" />
+    <ClCompile Include="..\..\src\Application\GUI_Manager.cpp" />
+    <ClCompile Include="..\..\src\Application\GUI_Element.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\Component.h" />
@@ -53,5 +55,7 @@
     <ClInclude Include="..\..\src\Application\SimpleMovement.h" />
     <ClInclude Include="..\..\src\Application\ForcesTest.h" />
     <ClInclude Include="..\..\src\Application\Light.h" />
+    <ClInclude Include="..\..\src\Application\GUI_Manager.h" />
+    <ClInclude Include="..\..\src\Application\GUI_Element.h" />
   </ItemGroup>
 </Project>

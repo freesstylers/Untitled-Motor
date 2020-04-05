@@ -31,6 +31,7 @@
     <ClCompile Include="..\..\src\Application\EventManager.cpp" />
     <ClCompile Include="..\..\src\Application\Factory.cpp" />
     <ClCompile Include="..\..\src\Application\ForcesTest.cpp" />
+    <ClCompile Include="..\..\src\Application\GUI_Element.cpp" />
     <ClCompile Include="..\..\src\Application\InputManager.cpp" />
     <ClCompile Include="..\..\src\Application\JsonFactoryParser.cpp" />
     <ClCompile Include="..\..\src\Application\Light.cpp" />
@@ -44,6 +45,7 @@
     <ClCompile Include="..\..\src\Application\TerrainRotation.cpp" />
     <ClCompile Include="..\..\src\Application\SimpleMovement.cpp" />
     <ClCompile Include="..\..\src\Application\Transform.cpp" />
+    <ClCompile Include="..\..\src\Application\GUI_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Application\AudioComponent.h" />
@@ -58,6 +60,7 @@
     <ClInclude Include="..\..\src\Application\EventListener.h" />
     <ClInclude Include="..\..\src\Application\Factory.h" />
     <ClInclude Include="..\..\src\Application\ForcesTest.h" />
+    <ClInclude Include="..\..\src\Application\GUI_Element.h" />
     <ClInclude Include="..\..\src\Application\InputManager.h" />
     <ClInclude Include="..\..\src\Application\JsonFactoryParser.h" />
     <ClInclude Include="..\..\src\Application\Light.h" />
@@ -71,6 +74,7 @@
     <ClInclude Include="..\..\src\Application\TerrainRotation.h" />
     <ClInclude Include="..\..\src\Application\SimpleMovement.h" />
     <ClInclude Include="..\..\src\Application\Transform.h" />
+    <ClInclude Include="..\..\src\Application\GUI_Manager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -136,7 +140,7 @@
     <OutDir>$(SolutionDir)bin\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <IntDir>$(SolutionDir)interm\$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(SolutionDir)dependencies\cegui-0.8.7\build\cegui\include;$(SolutionDir)dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)dependencies\cegui-0.8.7\cegui\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\$(Configuration);$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -176,13 +180,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\btogre\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\cegui-0.8.7\build\cegui\include\CEGUI;$(SolutionDir)dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\btogre\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreMain_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreRTShaderSystem_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreBites_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cegui\CEGUIBase-0_d.lib;cegui\CEGUIExpatParser_d.lib;cegui\CEGUIOgreRenderer-0_d.lib;cegui\CEGUISILLYImageCodec_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreMain_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreRTShaderSystem_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreBites_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>cd "$(ProjectDir)..\..\scripts"
@@ -221,7 +225,7 @@ call preBuild.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\btogre\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\cegui-0.8.7\build\cegui\include\CEGUI;$(SolutionDir)dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\btogre\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -229,7 +233,7 @@ call preBuild.bat</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreMain.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreBites.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreRTShaderSystem.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics.lib;bullet\BulletCollision.lib;bullet\LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cegui\CEGUIBase-0.lib;cegui\CEGUIExpatParser.lib;cegui\CEGUIOgreRenderer-0.lib;cegui\CEGUISILLYImageCodec.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreMain.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreBites.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreRTShaderSystem.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics.lib;bullet\BulletCollision.lib;bullet\LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
       <Command>cd "$(SolutionDir)scripts"
