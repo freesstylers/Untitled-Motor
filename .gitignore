@@ -14,7 +14,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-Untitled Motor/bin/*.dll
+MotorCasaPaco/bin/*.dll
 
 # Fortran module files
 *.mod
@@ -382,13 +382,13 @@ MigrationBackup/
 
 *.vcxproj.user
 
-!Untitled Motor/dependencies/cmake-3.17.0-rc1-win64-x64/bin/*
+!MotorCasaPaco/dependencies/cmake-3.17.0-rc1-win64-x64/bin/*
 
 [Bb]uild/
 
-!Untitled Motor/dependencies/ogre-1.12.4
+!MotorCasaPaco/dependencies/ogre-1.12.4
 
-Untitled Motor/dependencies/ogre-1.12.4/build
-Untitled Motor/dependencies/ogre-1.12.4/.github
+MotorCasaPaco/dependencies/ogre-1.12.4/build
+MotorCasaPaco/dependencies/ogre-1.12.4/.github
 
-Untitled Motor/dependencies/cegui-0.8.7/dependencies
+MotorCasaPaco/dependencies/cegui-0.8.7/dependencies
