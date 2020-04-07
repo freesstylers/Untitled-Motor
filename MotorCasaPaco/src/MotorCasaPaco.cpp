@@ -142,7 +142,6 @@ void MotorCasaPaco::init()
 
 void MotorCasaPaco::changeScene(Ogre::String name)
 {
-	GUI_Manager::getInstance()->loadLayout("SampleBrowserLoadScreen.layout");
 
 	SceneManager::getInstance()->changeScene(name);
 	SceneManager::getInstance()->getCurrentScene()->start();
@@ -223,6 +222,10 @@ bool MotorCasaPaco::frameStarted(const Ogre::FrameEvent& evt)
 	SceneManager::getInstance()->getCurrentScene()->lateUpdate();
 
 	AudioManager::getInstance()->update();
+
+	deltaTime = getTimeDifference(prevTime);
+
+	GUI_Manager::getInstance()->update(deltaTime);
 
 	deltaTime = getTimeDifference(prevTime);
 

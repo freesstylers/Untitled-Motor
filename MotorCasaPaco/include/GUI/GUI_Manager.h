@@ -4,6 +4,7 @@
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include <OgreRenderWindow.h>
+#include "GUI/GUI_Element.h"
 
 class GUI_Manager
 {
@@ -18,12 +19,16 @@ public:
 	void loadLayout(CEGUI::String filename);
 	void setupDefaultResources();
 	void initResources(int code);
+	CEGUI::System& getSystem();
+	void update(float deltaTime);
+	void addChild(int type, std::string name);
 
 private:
 	GUI_Manager(Ogre::RenderWindow* window);
 
 	static GUI_Manager* instance;
 	CEGUI::OgreRenderer* renderer;
-	CEGUI::Window* root;
+	GUI_Element* root;
+	CEGUI::WindowManager* winManager;
 };
 

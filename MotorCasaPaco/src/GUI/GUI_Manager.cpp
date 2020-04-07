@@ -14,6 +14,8 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 	createRoot();
 	initResources(0);
 
+	addChild(0, "test");
+
 	//Callbacks
 }
 
@@ -35,9 +37,10 @@ GUI_Manager* GUI_Manager::getInstance()
 void GUI_Manager::createRoot()
 {
 	CEGUI::WindowManager& a = CEGUI::WindowManager::getSingleton();
-
-	root = a.createWindow("DefaultWindow", "root");
-	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(root);
+	winManager = &a;
+	
+	root = new GUI_Element(a.createWindow("DefaultWindow", "root"));
+	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(root->getWindowElement());
 }
 
 void GUI_Manager::loadLayout(CEGUI::String filename)
@@ -67,7 +70,10 @@ void GUI_Manager::initResources(int code)
 	{
 		case 1:
 			break;
-		default:
+
+
+		default: //De momento se cargan estos, para poder elegir en funcion del juego (se puede cargar de archivo incluso?)
+
 			//Schemes
 			CEGUI::SchemeManager::getSingleton().createFromFile("VanillaSkin.scheme");
 			CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
@@ -75,9 +81,16 @@ void GUI_Manager::initResources(int code)
 
 			//Mouse Cursor
 			CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
+			//CEGUI::System::getSingleton().getDefaultGUIContext().
 
 			//Fonts
 			CEGUI::FontManager::getSingleton().createFreeTypeFont("Batang", 16, true, "batang.ttf");
+
+
+			//CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultTooltipType("TaharezLook/Tooltip");
+
+
+
 			break;
 	}
 /*#ifdef _DEBUG
@@ -87,6 +100,42 @@ void GUI_Manager::initResources(int code)
 #endif*/
 }
 
+CEGUI::System& GUI_Manager::getSystem()
+{
+	CEGUI::System& aa = CEGUI::System::getSingleton();
+
+	return aa;
+}
+
+void GUI_Manager::update(float deltaTime)
+{
+	CEGUI::System::getSingleton().getDefaultGUIContext().injectTimePulse(deltaTime);
+
+	//Mas cosas a a�adir
+}
+
+void GUI_Manager::addChild(int type, std::string name)
+{
+	switch (type)
+	{
+	case 0: //FrameWindow
+	{
+		CEGUI::FrameWindow* fWnd = static_cast<CEGUI::FrameWindow*>(winManager->createWindow("TaharezLook/FrameWindow", name)); //Habria que a�adir el archivo del que proceden como opcion, en caso de usar mas de uno?
+		root->addChild(fWnd);
+	}
+		break;
+	case 1:
+	{
+
+	}
+		break;
+	default:
+	{
+	
+	}
+		break;
+	}
+}
 
 bool GUI_Manager::setupInstance(Ogre::RenderWindow* window)
 {

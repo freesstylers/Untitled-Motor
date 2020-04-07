@@ -1,31 +1,28 @@
 #pragma once
 #include "CEGUI/CEGUI.h"
-#include "Entity/Transform.h"
+#include "Entity/Transform.h" //Dejado para mantener Ogre para el vector 2, si eso
 
 
 class GUI_Element
 {
 public:
 	GUI_Element(CEGUI::Window* window);
-	//GUI_Element(json& args);
 
 	~GUI_Element();
 
 	CEGUI::Window* getWindowElement();
 
 	void setPosition(int x, int y);
+	//Ogre::Vector2 getPos();
 	int getPosX();
 	int getPosY();
 
 	void setSize(int x, int y);
-	void setPriority(int value);
-	//int getWidth();
-	//int getHeight();
-	int getPriority();
 
 	GUI_Element getChild(std::string name);
 	GUI_Element getChildIndex(int index);
-	GUI_Element addChild(const std::string& type, const std::string& name);
+	//GUI_Element addChild(CEGUI::Window* window, const std::string& name);
+	void addChild(CEGUI::Window* window);
 
 	void scale(double value);
 
@@ -39,7 +36,7 @@ public:
 
 protected:
 
-	Transform* transform;
+	//Transform* transform;
 	CEGUI::Window* elementWindow;
 };
 
