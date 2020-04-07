@@ -383,6 +383,11 @@ SDL_Window* MotorCasaPaco::getSDLWin()
 	return sdlWindow;
 }
 
+GUI_Manager* MotorCasaPaco::getGUI_Manager()
+{
+	return GUI_Manager::getInstance();
+}
+
 float MotorCasaPaco::getTime()
 {
 	return timer->getMicroseconds()/1000.0f;

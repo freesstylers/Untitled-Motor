@@ -14,8 +14,6 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 	createRoot();
 	initResources(0);
 
-	addChild(0, "test");
-
 	//Callbacks
 }
 
@@ -118,10 +116,11 @@ void GUI_Manager::addChild(int type, std::string name)
 {
 	switch (type)
 	{
-	case 0: //FrameWindow
+	case 0: //Layout
 	{
-		CEGUI::FrameWindow* fWnd = static_cast<CEGUI::FrameWindow*>(winManager->createWindow("TaharezLook/FrameWindow", name)); //Habria que a�adir el archivo del que proceden como opcion, en caso de usar mas de uno?
-		root->addChild(fWnd);
+		CEGUI::Window* layout = winManager->getSingleton().loadLayoutFromFile(name); //Habria que a�adir el archivo del que proceden como opcion, en caso de usar mas de uno?
+		CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(layout);
+	    //root->addChild(layout);
 	}
 		break;
 	case 1:

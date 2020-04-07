@@ -8,6 +8,8 @@
 
 #include "Entity/Entity.h"
 
+class GUI_Manager;
+
 class MotorCasaPaco : public Ogre::FrameListener
 {
 
@@ -41,7 +43,7 @@ public:
 	Ogre::SceneManager* getSM();
 	Ogre::RenderWindow* getOgreWin();
 	SDL_Window* getSDLWin();
-
+	GUI_Manager* getGUI_Manager();
 
 	float getTime();
 	float getTimeDifference(float prevTime);

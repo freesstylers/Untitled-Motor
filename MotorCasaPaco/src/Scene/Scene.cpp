@@ -7,6 +7,8 @@
 
 #include <functional>
 
+#include <GUI/GUI_Manager.h>
+
 using namespace std;
 
 Scene::Scene()
@@ -35,6 +37,13 @@ void Scene::setupScene(json& j)
 		for (json ent : e) {
 			if (!ent["parent"].is_null())
 				entities[ent["name"]]->setParent(ent["parent"]);
+		}
+	}
+	
+	if (!j["UI"].is_null() && j["UI"].is_array()) {
+		std::vector<json> e = j["UI"];
+		for (json UI_Elem : e) {
+			MotorCasaPaco::getInstance()->getGUI_Manager()->addChild(UI_Elem["type"], UI_Elem["route"]);
 		}
 	}
 }
