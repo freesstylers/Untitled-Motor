@@ -8,11 +8,79 @@ InputManager::InputManager()
 
 }
 
+void InputManager::InjectCEGUIInput(SDL_Event event)
+{
+	if (event.type == SDL_KEYDOWN) {
+		CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(event.key.keysym.sym));
+	}
+	else if (event.type == SDL_KEYUP) {
+		CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(event.key.keysym.sym));
+	}
+	else if (event.type == SDL_CONTROLLERBUTTONDOWN) {
+		switch (event.cbutton.button)
+		{
+		case SDL_CONTROLLER_BUTTON_A:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.A));
+			break;
+		case SDL_CONTROLLER_BUTTON_B:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.B));
+			break;
+		case SDL_CONTROLLER_BUTTON_START:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.Start));
+		break;
+		case SDL_CONTROLLER_BUTTON_DPAD_UP:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.Up));
+			break;
+		case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.Down));
+			break;
+		case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.Left));
+			break;
+		case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.Right));
+			break;
+		default:
+			break;
+		}
+
+	}
+	else if (event.type == SDL_CONTROLLERBUTTONUP) {
+		switch (event.cbutton.button)
+		{
+		case SDL_CONTROLLER_BUTTON_A:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.A));
+			break;
+		case SDL_CONTROLLER_BUTTON_B:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.B));
+			break;
+		case SDL_CONTROLLER_BUTTON_START:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.Start));
+			break;
+		case SDL_CONTROLLER_BUTTON_DPAD_UP:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.Up));
+			break;
+		case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.Down));
+			break;
+		case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.Left));
+			break;
+		case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.Right));
+			break;
+		default:
+			break;
+		}
+	}
+	
+}
+
 InputManager::~InputManager()
 {
-	for (int i = 0; i < NumControls && controllers.size() > i; i++)
-		SDL_GameControllerClose(controllers[i]);
-
+	for (int i = 0; i < NumControls && controllers.size() > i; i++) {
+		SDL_GameControllerClose(controllers[i].cReference);
+	}
 	controllers.clear();
 }
 
@@ -45,8 +113,15 @@ void InputManager::clean()
 void InputManager::setup()
 {
 	//SetUp de Mandos con variable para numero de mandos
-	for (int i = 0; i < NumControls; i++)
-		controllers.push_back(SDL_GameControllerOpen(i));	
+	for (int i = 0; i < NumControls; i++) {
+		Controller c{ SDL_GameControllerOpen(i) };
+		controllers.push_back(c);
+		c.deadZoneLX = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX, i);
+		c.deadZoneLY = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY, i);
+		c.deadZoneRX = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTX, i);
+		c.deadZoneRY = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTY, i);
+		c.initialised = true;
+	}
 	//Mapping de esquemas de controles?
 }
 
@@ -56,26 +131,8 @@ void InputManager::GeneralInputManagement(SDL_Event event)
 	switch (event.type)
 	{
 		//En principio, como se puede preguntar si X tecla o boton del mando está pulsada/o, no hace falta gestionar esos eventos
-		/*
+		
 		//Teclado
-		case SDL_KEYDOWN:
-			KeyBoardInputManagement(event);
-			break;
-		case SDL_KEYUP:
-			KeyBoardInputManagement(event);
-			break;
-		//Mando
-		case SDL_CONTROLLERBUTTONDOWN:
-			//GameControllerInputManagement(event);
-			break;
-		case SDL_CONTROLLERBUTTONUP:
-			//GameControllerInputManagement(event);
-			break;
-		case SDL_CONTROLLERAXISMOTION:
-			//GameControllerAxisManagement(event);
-			break;
-		*/
-
 		//Estos si hay que guardarlos
 		//Raton
 		case SDL_MOUSEMOTION:
@@ -98,13 +155,14 @@ void InputManager::GeneralInputManagement(SDL_Event event)
 			MouseButtonChange(event.button.button, 1);
 			break;
 		default:
+			InjectCEGUIInput(event);
 			break;
 	}
 }
 
 bool InputManager::GameControllerIsButtonDown(SDL_GameControllerButton button, int controller)
 {
-	return (SDL_GameControllerGetButton(controllers[controller], button));
+	return (SDL_GameControllerGetButton(controllers[controller].cReference, button));
 }
 
 void InputManager::MouseButtonChange(int button, int change)
@@ -148,9 +206,54 @@ void InputManager::MousePositionChange(int x, int y)
 	mousePosition.y = y;
 }
 
-int InputManager::GameControllerGetAxisMovement(SDL_GameControllerAxis axis, int controller)
+float InputManager::GameControllerGetAxisMovement(SDL_GameControllerAxis axis, bool accel, int controller)
 {
-	return SDL_GameControllerGetAxis(controllers[controller], axis);
+	Controller c = controllers[controller];
+	if (!c.initialised) return SDL_GameControllerGetAxis(controllers[controller].cReference, axis) / SDL_CONTROLLER_AXIS_MAX;
+	float x = 0;
+	switch (axis)
+	{
+	case SDL_CONTROLLER_AXIS_LEFTX:
+		x = SDL_GameControllerGetAxis(controllers[controller].cReference, axis)/SDL_CONTROLLER_AXIS_MAX;
+		if (x <= c.deadZoneLX + controllerdeadZoneRange && x >= c.deadZoneLX - controllerdeadZoneRange)
+			x = 0;
+		if (accel) {
+			if (x < 0) x = x * x * -1;
+			else x = x * x;
+		}
+		break;
+	case SDL_CONTROLLER_AXIS_RIGHTX:
+		x = SDL_GameControllerGetAxis(controllers[controller].cReference, axis) / SDL_CONTROLLER_AXIS_MAX;
+		if (x <= c.deadZoneRX + controllerdeadZoneRange && x >= c.deadZoneRX - controllerdeadZoneRange)
+			x = 0;
+		if (accel) {
+			if (x < 0) x = x * x * -1;
+			else x = x * x;
+		}
+		break;
+	case SDL_CONTROLLER_AXIS_LEFTY:
+		x = SDL_GameControllerGetAxis(controllers[controller].cReference, axis) / SDL_CONTROLLER_AXIS_MAX;
+		if (x <= c.deadZoneLY + controllerdeadZoneRange && x >= c.deadZoneLY - controllerdeadZoneRange)
+			x = 0;
+		if (accel) {
+			if (x < 0) x = x * x * -1;
+			else x = x * x;
+		}
+		break;
+	case SDL_CONTROLLER_AXIS_RIGHTY:
+		x = SDL_GameControllerGetAxis(controllers[controller].cReference, axis) / SDL_CONTROLLER_AXIS_MAX;
+		if (x <= c.deadZoneRY + controllerdeadZoneRange && x >= c.deadZoneRY - controllerdeadZoneRange)
+			x = 0;
+		if (accel) {
+			if (x < 0) x = x * x * -1;
+			else x = x * x;
+		}
+		break;
+	default:
+		break;
+	}
+	return x;
+
 }
 
 SDL_GameController* InputManager::getWhichController(SDL_Event event)
@@ -175,6 +278,30 @@ InputManager::MousePosition InputManager::getMousePosition()
 	return mousePosition;
 }
 
+CEGUI::Key::Scan InputManager::SDL_TO_CEGUI(SDL_Keycode key)
+{
+		using namespace CEGUI;
+		switch (key)
+		{
+		case SDLK_UP:		
+			return Key::ArrowUp;
+		case SDLK_DOWN:          
+			return Key::ArrowDown;
+		case SDLK_LEFT:       
+			return Key::ArrowLeft;
+		case SDLK_RIGHT:        
+			return Key::ArrowRight;
+		case SDLK_ESCAPE:       
+			return Key::Escape;
+		case SDLK_INSERT:       
+			return Key::Insert;
+		case SDLK_SPACE:        
+			return Key::Space;
+		default:				
+			return Key::Unknown;
+		}
+}
+
 InputManager::MouseWheel InputManager::getMouseWheel()
 {
 	return mouseWheel;
@@ -183,5 +310,6 @@ InputManager::MouseWheel InputManager::getMouseWheel()
 bool InputManager::IsKeyDown(SDL_Scancode key)
 {
 	const Uint8* state = SDL_GetKeyboardState(NULL);
+	
 	return state[key];
 }

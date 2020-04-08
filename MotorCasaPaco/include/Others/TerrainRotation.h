@@ -11,8 +11,5 @@ public:
 	~TerrainRotation();
 private:
 	float speed = 20;
-	float deadZoneX;
-	float deadZoneY;
-	float deadZoneRange;
 	Ogre::Vector3 rotation;
 };

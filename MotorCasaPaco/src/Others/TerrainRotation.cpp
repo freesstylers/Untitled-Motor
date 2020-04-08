@@ -15,11 +15,6 @@ TerrainRotation::TerrainRotation(json& args) :Component(args)
 
 void TerrainRotation::start()
 {
-	deadZoneX = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
-	deadZoneY = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
-	deadZoneX = deadZoneX / 32768.0;
-	deadZoneY = deadZoneY / 32768.0;
-	deadZoneRange = 0.10;
 	AudioManager::getInstance()->playMusic("./assets/sound/alma_partia.mp3", 1);
 	AudioManager::getInstance()->setVolume(0.1, 1);
 	rotation = Ogre::Vector3(0, 0, 0);
@@ -29,43 +24,13 @@ void TerrainRotation::update()
 {
 	float deltatime = MotorCasaPaco::getInstance()->DeltaTime();
 	deltatime /= 1000.f;
-	float x = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
-	float y = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
-	x = x / 32768.0;
-	y = y / 32768.0;
-
-	if (x <= deadZoneX + deadZoneRange && x >= deadZoneX - deadZoneRange) {
-		x = 0;
-		//std::cout << "Zona muerta X" << "\n";
-	}
-	/*else 		std::cout << "Zona viva X" << "\n";*/
-
-	if (y <= deadZoneY + deadZoneRange && y >= deadZoneY - deadZoneRange) {
-		y = 0;
-		//std::cout << "Zona muerta Y" << "\n";
-	}
-	//else		std::cout << "Zona viva Y" << "\n";
-
-	x *= 10;
-	y *= 10;
-
-	int xdir = 1;
-	int ydir = 1;
-
-	if (x < 0) xdir = -1;
-	if (y < 0) ydir = -1;
-
-	x = x * x;
-	y = y * y;
-
+	float x = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX, true);
+	float y = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY, true);
 
 	Transform* transform = getEntity()->getComponent<Transform>("Transform");
 
-	x = x / (10 * 10);
-	y = y / (10 * 10);
-
-	x = x * 90 * xdir;
-	y = y * 90 * ydir;
+	x = x * 90;
+	y = y * 90;
 
 	Ogre::Vector3 target(y, 0, -x);
 

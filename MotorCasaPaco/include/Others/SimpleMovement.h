@@ -18,10 +18,5 @@ public:
 	float rotateSpeed;
 	bool onlycontroller = false;
 
-private:
-	float deadZoneX;
-	float deadZoneY;
-	float deadZoneRange;
-
 };
 

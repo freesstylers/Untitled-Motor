@@ -9,9 +9,6 @@ public:
 	~ForcesTest() {};
 
 private:
-	float deadZoneX;
-	float deadZoneY;
-	float deadZoneRange;
 	float speed=20;
 };
 

@@ -23,12 +23,6 @@ void SimpleMovement::init(json& args)
 	if (!args["controller"].is_null())
 		onlycontroller = args["onlycontroller"];
 
-
-	deadZoneX = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
-	deadZoneY = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
-	deadZoneX = deadZoneX / 32768.0;
-	deadZoneY = deadZoneY / 32768.0;
-	deadZoneRange = 0.10;
 }
 
 void SimpleMovement::redefine(json& args)
@@ -60,32 +54,12 @@ void SimpleMovement::controllerMovement()
 {
 	Transform* transform = getEntity()->getComponent<Transform>("Transform");
 
-	float leftx = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX);
-	float lefty = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY);
+	float leftx = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX, false);
+	float lefty = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY, false);
 
-	float rightx = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTX);
-	float righty = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTY);
+	float rightx = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTX, false);
+	float righty = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTY, false);
 
-	leftx = leftx / 32768.0;
-	lefty = lefty / 32768.0;
-	rightx = rightx / 32768.0;
-	righty = righty / 32768.0;
-
-	if (leftx <= deadZoneX + deadZoneRange && leftx >= deadZoneX - deadZoneRange) {
-		leftx = 0;
-	}
-
-	if (lefty <= deadZoneX + deadZoneRange && lefty >= deadZoneX - deadZoneRange) {
-		lefty = 0;
-	}
-
-	if (righty <= deadZoneY + deadZoneRange && righty >= deadZoneY - deadZoneRange) {
-		righty = 0;
-	}
-
-	if (rightx <= deadZoneY + deadZoneRange && rightx >= deadZoneY - deadZoneRange) {
-		rightx = 0;
-	}
 
 	transform->translate(Ogre::Vector3(speed * leftx * MotorCasaPaco::getInstance()->DeltaTime(), 0, speed * lefty * MotorCasaPaco::getInstance()->DeltaTime()), Ogre::Node::TS_LOCAL);
 	transform->rotate(Ogre::Vector3(rotateSpeed * -righty * MotorCasaPaco::getInstance()->DeltaTime(), rotateSpeed * -rightx * MotorCasaPaco::getInstance()->DeltaTime(), 0));
