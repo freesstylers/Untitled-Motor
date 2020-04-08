@@ -81,6 +81,9 @@
       <Filter>Others</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MotorCasaPaco.cpp" />
+    <ClCompile Include="..\..\src\Scene\Skybox.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Audio\AudioManager.h">
@@ -165,6 +168,9 @@
       <Filter>Entity</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\MotorCasaPaco.h" />
+    <ClInclude Include="..\..\include\Scene\Skybox.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Audio">

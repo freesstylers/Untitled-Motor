@@ -47,6 +47,7 @@
     <ClCompile Include="..\..\src\Scene\JsonFactoryParser.cpp" />
     <ClCompile Include="..\..\src\Scene\Scene.cpp" />
     <ClCompile Include="..\..\src\Scene\SceneManager.cpp" />
+    <ClCompile Include="..\..\src\Scene\Skybox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Audio\AudioComponent.h" />
@@ -77,6 +78,7 @@
     <ClInclude Include="..\..\include\Scene\JsonFactoryParser.h" />
     <ClInclude Include="..\..\include\Scene\Scene.h" />
     <ClInclude Include="..\..\include\Scene\SceneManager.h" />
+    <ClInclude Include="..\..\include\Scene\Skybox.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
