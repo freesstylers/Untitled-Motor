@@ -20,7 +20,7 @@ private:
 	
 	void makeSky();
 
-	SkyType type;
+	SkyType skyType;
 	std::string material;
 	Ogre::Real distance;
 	bool drawFirst;

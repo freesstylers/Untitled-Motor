@@ -7,6 +7,7 @@ material sphereTest
     {
         pass
         {
+			scene_blend alpha_blend
 			lighting on
 			
             texture_unit 
@@ -28,6 +29,8 @@ material test
     {
         pass
         {
+			scene_blend alpha_blend
+			
 			lighting on
 			
             texture_unit 
@@ -66,11 +69,31 @@ material blank
     {
         pass
         {
+			scene_blend alpha_blend
 			lighting on
 			
 			ambient 1 1 1 1
 			diffuse 1 1 1 1
 			emissive 0.05 0.05 0.05 1
+		}
+	}
+}
+
+material blankSky
+{
+
+    receive_shadows off
+	
+    technique
+    {
+        pass
+        {
+			scene_blend alpha_blend
+			lighting on
+			
+			ambient 1 1 1 1
+			diffuse 1 1 1 1
+			emissive 0.5 0.78 0.34 1
 		}
 	}
 }

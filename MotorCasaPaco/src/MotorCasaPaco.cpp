@@ -437,6 +437,7 @@ Ogre::ShadowTechnique MotorCasaPaco::getShadowTechnique()
 #include "Audio/AudioComponent.h"
 #include "Audio/AudioListenerComponent.h"
 #include "Graphics/Light.h"
+#include "Scene/Skybox.h"
 #include "Others/TerrainRotation.h"
 #include "Others/SimpleMovement.h"
 #include "Others/ForcesTest.h"
@@ -522,6 +523,14 @@ public:
 		return new Light(args);
 	};
 };
+class SkyboxFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new Skybox(args);
+	};
+};
 
 void MotorCasaPaco::setupFactories()
 {
@@ -537,4 +546,5 @@ void MotorCasaPaco::setupFactories()
 	j->addFactory("SimpleMovement", new SimpleMovementFactory());
 	j->addFactory("ForcesTest", new ForcesTestFactory());
 	j->addFactory("Light", new LightFactory());
+	j->addFactory("Skybox", new SkyboxFactory());
 }

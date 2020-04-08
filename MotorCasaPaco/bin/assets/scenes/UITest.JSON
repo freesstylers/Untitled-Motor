@@ -8,9 +8,7 @@
 			"components" : [
 				{
 					"type" : "Skybox",
-					"material" : "blankSky",
-					"skyType" : "dome",
-					"drawFirst" : true
+					"material" : "blankSky"
 				}
 			]
 		},
@@ -77,6 +75,13 @@
 				}
 				
 			]
+		}
+	],
+	"UI" :
+	[
+		{
+		"type" : 0,
+		"route" : "FontDemo.layout"
 		}
 	]
 }
