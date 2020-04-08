@@ -1,9 +1,8 @@
 #pragma once
 #include "Entity/Component.h"
 
-class Ogre;
+#include <Ogre.h>
 
-class MotorCasaPaco;
 
 class Skybox :
 	public Component
