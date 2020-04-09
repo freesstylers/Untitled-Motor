@@ -80,8 +80,8 @@
 	"UI" :
 	[
 		{
-		"type" : 0,
-		"route" : "FontDemo.layout"
+		"type" : 1,
+		"route" : "Button"
 		}
 	]
 }

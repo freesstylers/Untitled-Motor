@@ -11,34 +11,34 @@ InputManager::InputManager()
 void InputManager::InjectCEGUIInput(SDL_Event event)
 {
 	if (event.type == SDL_KEYDOWN) {
-		CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(event.key.keysym.sym));
+		CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(event.key.keysym.sym));
 	}
 	else if (event.type == SDL_KEYUP) {
-		CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(event.key.keysym.sym));
+		CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(event.key.keysym.sym));
 	}
 	else if (event.type == SDL_CONTROLLERBUTTONDOWN) {
 		switch (event.cbutton.button)
 		{
 		case SDL_CONTROLLER_BUTTON_A:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.A));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.A));
 			break;
 		case SDL_CONTROLLER_BUTTON_B:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.B));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.B));
 			break;
 		case SDL_CONTROLLER_BUTTON_START:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.Start));
-		break;
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Start));
+			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_UP:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.Up));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Up));
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.Down));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Down));
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.Left));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Left));
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_TO_CEGUI(cKeyMapping.Right));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Right));
 			break;
 		default:
 			break;
@@ -49,31 +49,42 @@ void InputManager::InjectCEGUIInput(SDL_Event event)
 		switch (event.cbutton.button)
 		{
 		case SDL_CONTROLLER_BUTTON_A:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.A));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.A));
 			break;
 		case SDL_CONTROLLER_BUTTON_B:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.B));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.B));
 			break;
 		case SDL_CONTROLLER_BUTTON_START:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.Start));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Start));
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_UP:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.Up));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Up));
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_DOWN:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.Down));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Down));
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_LEFT:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.Left));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Left));
 			break;
 		case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
-			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_TO_CEGUI(cKeyMapping.Right));
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Right));
 			break;
 		default:
 			break;
 		}
 	}
-	
+	else if (event.type == SDL_MOUSEBUTTONDOWN)
+	{
+		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(SDLMouseButtonToCEGUIMouseButton(event.button.button));
+	}
+	else if (event.type == SDL_MOUSEBUTTONUP)
+	{
+		CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(SDLMouseButtonToCEGUIMouseButton(event.button.button));
+	}
+	else if (event.type == SDL_MOUSEMOTION)
+	{
+		CEGUI::System::getSingleton().getDefaultGUIContext().injectMousePosition(event.motion.x, event.motion.y);
+	}
 }
 
 InputManager::~InputManager()
@@ -148,16 +159,40 @@ void InputManager::GeneralInputManagement(SDL_Event event)
 				MouseWheelChange(0, event.wheel.x);
 			}
 			break;
-		case SDL_MOUSEBUTTONUP:
-			MouseButtonChange(event.button.button, 0);
-			break;
+
 		case SDL_MOUSEBUTTONDOWN:
-			MouseButtonChange(event.button.button, 1);
+			switch (event.button.button) {
+			case SDL_BUTTON_LEFT: 
+				break;
+			case SDL_BUTTON_MIDDLE: 
+				break;
+			case SDL_BUTTON_RIGHT: 
+				break;
+			case SDL_BUTTON_X1: 
+				break;
+			case SDL_BUTTON_X2: 
+				break;
+			}
+			break;
+		case SDL_MOUSEBUTTONUP:
+			switch (event.button.button) {
+			case SDL_BUTTON_LEFT:
+				break;
+			case SDL_BUTTON_MIDDLE:
+				break;
+			case SDL_BUTTON_RIGHT:
+				break;
+			case SDL_BUTTON_X1:
+				break;
+			case SDL_BUTTON_X2:
+				break;
+			}
 			break;
 		default:
-			InjectCEGUIInput(event);
 			break;
 	}
+
+	InjectCEGUIInput(event);
 }
 
 bool InputManager::GameControllerIsButtonDown(SDL_GameControllerButton button, int controller)
@@ -165,6 +200,8 @@ bool InputManager::GameControllerIsButtonDown(SDL_GameControllerButton button, i
 	return (SDL_GameControllerGetButton(controllers[controller].cReference, button));
 }
 
+//Al final he encontrado forma de hacer esto con SDL, asi que puerta de momento
+/*
 void InputManager::MouseButtonChange(int button, int change)
 {
 	switch (button)
@@ -190,7 +227,7 @@ void InputManager::MouseButtonChange(int button, int change)
 	default:
 		break;
 	}
-}
+}*/
 
 void InputManager::MouseWheelChange(int field, int value)
 {
@@ -200,11 +237,13 @@ void InputManager::MouseWheelChange(int field, int value)
 		mouseWheel.x = value;
 }
 
+//Al final he encontrado forma de hacer esto con SDL, asi que puerta de momento
+/*
 void InputManager::MousePositionChange(int x, int y)
 {
 	mousePosition.x = x;
 	mousePosition.y = y;
-}
+}*/
 
 float InputManager::GameControllerGetAxisMovement(SDL_GameControllerAxis axis, bool accel, int controller)
 {
@@ -268,7 +307,8 @@ SDL_GameController* InputManager::getWhichController(SDL_Event event)
 	}
 }
 
-InputManager::MouseButtons InputManager::getMouseButtons()
+//Al final he encontrado forma de hacer esto con SDL, asi que puerta de momento
+/*InputManager::MouseButtons InputManager::getMouseButtons()
 {
 	return mouseButtons;
 }
@@ -276,9 +316,9 @@ InputManager::MouseButtons InputManager::getMouseButtons()
 InputManager::MousePosition InputManager::getMousePosition()
 {
 	return mousePosition;
-}
+}*/
 
-CEGUI::Key::Scan InputManager::SDL_TO_CEGUI(SDL_Keycode key)
+CEGUI::Key::Scan InputManager::SDL_KeyCode_TO_CEGUI(SDL_Keycode key)
 {
 		using namespace CEGUI;
 		switch (key)
@@ -300,6 +340,18 @@ CEGUI::Key::Scan InputManager::SDL_TO_CEGUI(SDL_Keycode key)
 		default:				
 			return Key::Unknown;
 		}
+}
+
+CEGUI::MouseButton InputManager::SDLMouseButtonToCEGUIMouseButton(Uint8 MouseButtons)
+{
+	switch (MouseButtons) {
+	case SDL_BUTTON_LEFT: return CEGUI::MouseButton::LeftButton;
+	case SDL_BUTTON_MIDDLE: return CEGUI::MouseButton::MiddleButton;
+	case SDL_BUTTON_RIGHT: return CEGUI::MouseButton::RightButton;
+	case SDL_BUTTON_X1: return CEGUI::MouseButton::X1Button;
+	case SDL_BUTTON_X2: return CEGUI::MouseButton::X2Button;
+	}
+	return CEGUI::MouseButton::NoButton;
 }
 
 InputManager::MouseWheel InputManager::getMouseWheel()

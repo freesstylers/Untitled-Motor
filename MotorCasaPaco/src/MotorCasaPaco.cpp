@@ -149,7 +149,7 @@ void MotorCasaPaco::changeScene(Ogre::String name)
 
 void MotorCasaPaco::initLoadingTestScene()
 {
-	changeScene("test");
+	changeScene("UITest");
 }
 
 void MotorCasaPaco::start()
@@ -359,7 +359,7 @@ void MotorCasaPaco::setupWindow(Ogre::String windowName)
 
 	//////////por si queremos que la ventana oculte el cursor
 	SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
-	SDL_ShowCursor(true);
+	SDL_ShowCursor(false);
 }
 
 
