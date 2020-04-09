@@ -18,15 +18,15 @@ private:
 		SDL_Keycode X;
 		SDL_Keycode Y;
 		SDL_Keycode Start=SDLK_ESCAPE;
-		SDL_Keycode Select;
+		SDL_Keycode Back=SDLK_TAB;
 		SDL_Keycode Left=SDLK_LEFT;
 		SDL_Keycode Right=SDLK_RIGHT;
 		SDL_Keycode Up=SDLK_UP;
 		SDL_Keycode Down = SDLK_DOWN;
-		SDL_Keycode LBump;
-		SDL_Keycode RBump;
-		SDL_Keycode LTrigg;
-		SDL_Keycode RTrigg;
+		SDL_Keycode LBump=SDLK_q;
+		SDL_Keycode RBump=SDLK_e;
+		SDL_Keycode LTrigg=SDLK_1;
+		SDL_Keycode RTrigg=SDLK_2;
 	};
 
 	struct Controller {

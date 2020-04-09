@@ -25,6 +25,15 @@ void InputManager::InjectCEGUIInput(SDL_Event event)
 		case SDL_CONTROLLER_BUTTON_B:
 			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.B));
 			break;
+		case SDL_CONTROLLER_BUTTON_X:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.X));
+			break;
+		case SDL_CONTROLLER_BUTTON_Y:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Y));
+			break;
+		case SDL_CONTROLLER_BUTTON_BACK:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Back));
+			break;
 		case SDL_CONTROLLER_BUTTON_START:
 			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Start));
 			break;
@@ -40,6 +49,12 @@ void InputManager::InjectCEGUIInput(SDL_Event event)
 		case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
 			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Right));
 			break;
+		case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.LBump));
+			break;
+		case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.RBump));
+			break;
 		default:
 			break;
 		}
@@ -53,6 +68,15 @@ void InputManager::InjectCEGUIInput(SDL_Event event)
 			break;
 		case SDL_CONTROLLER_BUTTON_B:
 			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.B));
+			break;
+		case SDL_CONTROLLER_BUTTON_X:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.X));
+			break;
+		case SDL_CONTROLLER_BUTTON_Y:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Y));
+			break;
+		case SDL_CONTROLLER_BUTTON_BACK:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Back));
 			break;
 		case SDL_CONTROLLER_BUTTON_START:
 			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Start));
@@ -69,8 +93,25 @@ void InputManager::InjectCEGUIInput(SDL_Event event)
 		case SDL_CONTROLLER_BUTTON_DPAD_RIGHT:
 			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Right));
 			break;
+		case SDL_CONTROLLER_BUTTON_LEFTSHOULDER:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.LBump));
+			break;
+		case SDL_CONTROLLER_BUTTON_RIGHTSHOULDER:
+			CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.RBump));
+			break;
 		default:
 			break;
+		}
+	}
+	else if (event.type == SDL_CONTROLLERAXISMOTION) {
+		float x = GameControllerGetAxisMovement((SDL_GameControllerAxis)event.caxis.axis, false);
+		if (x != 0) {
+			if ((SDL_GameControllerAxis)event.caxis.axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT) {
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.LTrigg));
+			}
+			else if ((SDL_GameControllerAxis)event.caxis.axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT) {
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.RTrigg));
+			}
 		}
 	}
 	else if (event.type == SDL_MOUSEBUTTONDOWN)
@@ -253,46 +294,38 @@ float InputManager::GameControllerGetAxisMovement(SDL_GameControllerAxis axis, b
 	float x = (float) SDL_GameControllerGetAxis(controllers[controller].cReference, axis);
 	x = x / axisMax;
 
-	if (!c.initialised)
+	if (!c.initialised || axis==SDL_CONTROLLER_AXIS_TRIGGERLEFT || axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT)
 		return x;
 	
 	switch (axis)
 	{
 	case SDL_CONTROLLER_AXIS_LEFTX:
-		if (x <= c.deadZoneLX + controllerdeadZoneRange && x >= c.deadZoneLX - controllerdeadZoneRange) {
+		if (x <= c.deadZoneLX + controllerdeadZoneRange && x >= c.deadZoneLX - controllerdeadZoneRange)
 			x = 0;
-			std::cout << "Zona muerta X" << "\n";
-		}
 		if (accel) {
 			if (x < 0) x = x * x * -1;
 			else x = x * x;
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_RIGHTX:
-		if (x <= c.deadZoneRX + controllerdeadZoneRange && x >= c.deadZoneRX - controllerdeadZoneRange) {
+		if (x <= c.deadZoneRX + controllerdeadZoneRange && x >= c.deadZoneRX - controllerdeadZoneRange)
 			x = 0;
-			std::cout << "Zona muerta X" << "\n";
-		}
 		if (accel) {
 			if (x < 0) x = x * x * -1;
 			else x = x * x;
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_LEFTY:
-		if (x <= c.deadZoneLY + controllerdeadZoneRange && x >= c.deadZoneLY - controllerdeadZoneRange) {
+		if (x <= c.deadZoneLY + controllerdeadZoneRange && x >= c.deadZoneLY - controllerdeadZoneRange)
 			x = 0;
-			std::cout << "Zona muerta Y" << "\n";
-		}
 		if (accel) {
 			if (x < 0) x = x * x * -1;
 			else x = x * x;
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_RIGHTY:
-		if (x <= c.deadZoneRY + controllerdeadZoneRange && x >= c.deadZoneRY - controllerdeadZoneRange) {
+		if (x <= c.deadZoneRY + controllerdeadZoneRange && x >= c.deadZoneRY - controllerdeadZoneRange)
 			x = 0;
-			std::cout << "Zona muerta Y"<<"\n";
-		}
 		if (accel) {
 			if (x < 0) x = x * x * -1;
 			else x = x * x;
