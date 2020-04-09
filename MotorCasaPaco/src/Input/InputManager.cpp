@@ -125,13 +125,13 @@ void InputManager::setup()
 {
 	//SetUp de Mandos con variable para numero de mandos
 	for (int i = 0; i < NumControls; i++) {
-		Controller c{ SDL_GameControllerOpen(i) };
+		Controller c{ SDL_GameControllerOpen(i), 0, 0, 0, 0, false };
 		controllers.push_back(c);
-		c.deadZoneLX = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX, i);
-		c.deadZoneLY = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY, i);
-		c.deadZoneRX = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTX, i);
-		c.deadZoneRY = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTY, i);
-		c.initialised = true;
+		controllers.back().deadZoneLX = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX, i);
+		controllers.back().deadZoneLY = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY, i);
+		controllers.back().deadZoneRX = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTX, i);
+		controllers.back().deadZoneRY = GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTY, i);
+		controllers.back().initialised = true;
 	}
 	//Mapping de esquemas de controles?
 }
@@ -259,32 +259,40 @@ float InputManager::GameControllerGetAxisMovement(SDL_GameControllerAxis axis, b
 	switch (axis)
 	{
 	case SDL_CONTROLLER_AXIS_LEFTX:
-		if (x <= c.deadZoneLX + controllerdeadZoneRange && x >= c.deadZoneLX - controllerdeadZoneRange)
+		if (x <= c.deadZoneLX + controllerdeadZoneRange && x >= c.deadZoneLX - controllerdeadZoneRange) {
 			x = 0;
+			std::cout << "Zona muerta X" << "\n";
+		}
 		if (accel) {
 			if (x < 0) x = x * x * -1;
 			else x = x * x;
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_RIGHTX:
-		if (x <= c.deadZoneRX + controllerdeadZoneRange && x >= c.deadZoneRX - controllerdeadZoneRange)
+		if (x <= c.deadZoneRX + controllerdeadZoneRange && x >= c.deadZoneRX - controllerdeadZoneRange) {
 			x = 0;
+			std::cout << "Zona muerta X" << "\n";
+		}
 		if (accel) {
 			if (x < 0) x = x * x * -1;
 			else x = x * x;
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_LEFTY:
-		if (x <= c.deadZoneLY + controllerdeadZoneRange && x >= c.deadZoneLY - controllerdeadZoneRange)
+		if (x <= c.deadZoneLY + controllerdeadZoneRange && x >= c.deadZoneLY - controllerdeadZoneRange) {
 			x = 0;
+			std::cout << "Zona muerta Y" << "\n";
+		}
 		if (accel) {
 			if (x < 0) x = x * x * -1;
 			else x = x * x;
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_RIGHTY:
-		if (x <= c.deadZoneRY + controllerdeadZoneRange && x >= c.deadZoneRY - controllerdeadZoneRange)
+		if (x <= c.deadZoneRY + controllerdeadZoneRange && x >= c.deadZoneRY - controllerdeadZoneRange) {
 			x = 0;
+			std::cout << "Zona muerta Y"<<"\n";
+		}
 		if (accel) {
 			if (x < 0) x = x * x * -1;
 			else x = x * x;
