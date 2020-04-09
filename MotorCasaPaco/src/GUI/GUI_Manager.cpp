@@ -1,6 +1,7 @@
 #include "GUI/GUI_Manager.h"
 
 #include "MotorCasaPaco.h"
+#include <iostream>
 
 GUI_Manager* GUI_Manager::instance = 0;
 
@@ -14,7 +15,17 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 	createRoot();
 	initResources(0);
 
-	//Callbacks
+	setMouseCursor("AlfiskoSkin/MouseArrow");
+	//hideMouseCursor();
+	
+	
+	//Callbacks?
+}
+
+bool GUI_Manager::TestButtonFunction(const CEGUI::EventArgs& e)
+{
+	std::cout << "Boton funcional\n";
+	return true;
 }
 
 GUI_Manager::~GUI_Manager()
@@ -75,6 +86,7 @@ void GUI_Manager::initResources(int code)
 			//Schemes
 			CEGUI::SchemeManager::getSingleton().createFromFile("VanillaSkin.scheme");
 			CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
+			CEGUI::SchemeManager::getSingleton().createFromFile("AlfiskoSkin.scheme");
 			CEGUI::SchemeManager::getSingleton().createFromFile("Generic.scheme");
 
 			//Mouse Cursor
@@ -120,12 +132,18 @@ void GUI_Manager::addChild(int type, std::string name)
 	{
 		CEGUI::Window* layout = winManager->getSingleton().loadLayoutFromFile(name); //Habria que a�adir el archivo del que proceden como opcion, en caso de usar mas de uno?
 		CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(layout);
-	    //root->addChild(layout);
+	    root->addChild(layout);
 	}
 		break;
 	case 1:
 	{
-
+		CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(winManager->getSingleton().createWindow("TaharezLook/Button", name));
+		testButton->setText("Hello World!");
+		testButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5, 0.5), CEGUI::UDim(0.5, 0.5)));
+		testButton->setSize(CEGUI::USize(CEGUI::UDim(0.15, 0.15), CEGUI::UDim(0.15, 0.15)));		
+		testButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUI_Manager::TestButtonFunction, this)); //Esto no va, fijo que es cosa del this
+		CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(testButton);
+		root->addChild(testButton);
 	}
 		break;
 	default:
@@ -134,6 +152,21 @@ void GUI_Manager::addChild(int type, std::string name)
 	}
 		break;
 	}
+}
+
+void GUI_Manager::setMouseCursor(const std::string& imageFile)
+{
+	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage(imageFile);
+}
+
+void GUI_Manager::showMouseCursor()
+{
+	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().show();
+}
+
+void GUI_Manager::hideMouseCursor()
+{
+	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().hide();
 }
 
 bool GUI_Manager::setupInstance(Ogre::RenderWindow* window)

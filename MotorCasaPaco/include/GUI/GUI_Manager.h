@@ -22,9 +22,15 @@ public:
 	CEGUI::System& getSystem();
 	void update(float deltaTime);
 	void addChild(int type, std::string name);
+	void setMouseCursor(const std::string& imageFile);
+	void showMouseCursor();
+	void hideMouseCursor();
+
+	bool TestButtonFunction(const CEGUI::EventArgs& e);
 
 private:
 	GUI_Manager(Ogre::RenderWindow* window);
+	
 
 	static GUI_Manager* instance;
 	CEGUI::OgreRenderer* renderer;

@@ -48,9 +48,11 @@ private:
 
 	const int NumControls = 1;
 
-	struct MouseButtons { bool leftPressed = false; bool middlePressed = false; bool rightPressed = false; } mouseButtons;
+	//Al final he encontrado forma de hacer esto con SDL, asi que puerta de momento
+	/*struct MouseButtons { bool leftPressed = false; bool middlePressed = false; bool rightPressed = false; } mouseButtons;
+	struct MousePosition { int x = 0; int y = 0; } mousePosition;*/
+
 	struct MouseWheel { int x = 0; int y = 0; } mouseWheel;
-	struct MousePosition { int x = 0; int y = 0; } mousePosition;
 
 	float controllerdeadZoneRange=0.1;
 
@@ -71,21 +73,22 @@ public:
 
 	bool IsKeyDown(SDL_Scancode key);
 
-	void MouseButtonChange(int button, int change);
-
 	void MouseWheelChange(int field, int value);
 
-	void MousePositionChange(int x, int y);
+	//void MousePositionChange(int x, int y);
 
 	float GameControllerGetAxisMovement(SDL_GameControllerAxis axis, bool accel, int controller = 0);
 
 	SDL_GameController* getWhichController(SDL_Event event);
 
-	MouseButtons getMouseButtons();
+	//Al final he encontrado forma de hacer esto con SDL, asi que puerta de momento
+	/*MouseButtons getMouseButtons();
+	MousePosition getMousePosition();
+	void MouseButtonChange(int button, int change);*/
 
 	MouseWheel getMouseWheel();
 
-	MousePosition getMousePosition();
 
-	CEGUI::Key::Scan SDL_TO_CEGUI(SDL_Keycode key);
+	CEGUI::Key::Scan SDL_KeyCode_TO_CEGUI(SDL_Keycode key);
+	CEGUI::MouseButton SDLMouseButtonToCEGUIMouseButton(Uint8 MouseButtons);
 };
