@@ -209,12 +209,17 @@ void InputManager::MousePositionChange(int x, int y)
 float InputManager::GameControllerGetAxisMovement(SDL_GameControllerAxis axis, bool accel, int controller)
 {
 	Controller c = controllers[controller];
-	if (!c.initialised) return SDL_GameControllerGetAxis(controllers[controller].cReference, axis) / SDL_CONTROLLER_AXIS_MAX;
-	float x = 0;
+	
+	float axisMax = (float)SDL_JOYSTICK_AXIS_MAX;
+	float x = (float) SDL_GameControllerGetAxis(controllers[controller].cReference, axis);
+	x = x / axisMax;
+
+	if (!c.initialised)
+		return x;
+	
 	switch (axis)
 	{
 	case SDL_CONTROLLER_AXIS_LEFTX:
-		x = SDL_GameControllerGetAxis(controllers[controller].cReference, axis)/SDL_CONTROLLER_AXIS_MAX;
 		if (x <= c.deadZoneLX + controllerdeadZoneRange && x >= c.deadZoneLX - controllerdeadZoneRange)
 			x = 0;
 		if (accel) {
@@ -223,7 +228,6 @@ float InputManager::GameControllerGetAxisMovement(SDL_GameControllerAxis axis, b
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_RIGHTX:
-		x = SDL_GameControllerGetAxis(controllers[controller].cReference, axis) / SDL_CONTROLLER_AXIS_MAX;
 		if (x <= c.deadZoneRX + controllerdeadZoneRange && x >= c.deadZoneRX - controllerdeadZoneRange)
 			x = 0;
 		if (accel) {
@@ -232,7 +236,6 @@ float InputManager::GameControllerGetAxisMovement(SDL_GameControllerAxis axis, b
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_LEFTY:
-		x = SDL_GameControllerGetAxis(controllers[controller].cReference, axis) / SDL_CONTROLLER_AXIS_MAX;
 		if (x <= c.deadZoneLY + controllerdeadZoneRange && x >= c.deadZoneLY - controllerdeadZoneRange)
 			x = 0;
 		if (accel) {
@@ -241,7 +244,6 @@ float InputManager::GameControllerGetAxisMovement(SDL_GameControllerAxis axis, b
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_RIGHTY:
-		x = SDL_GameControllerGetAxis(controllers[controller].cReference, axis) / SDL_CONTROLLER_AXIS_MAX;
 		if (x <= c.deadZoneRY + controllerdeadZoneRange && x >= c.deadZoneRY - controllerdeadZoneRange)
 			x = 0;
 		if (accel) {
