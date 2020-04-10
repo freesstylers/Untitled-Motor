@@ -18,9 +18,9 @@ bool AudioComponent::ReceiveEvent(Event& event)
 
 void AudioComponent::update()
 {
-	pos.x = e_->getComponent<Transform>("Transform")->getPosition().x;
-	pos.y = e_->getComponent<Transform>("Transform")->getPosition().y;
-	pos.z = e_->getComponent<Transform>("Transform")->getPosition().z;
+	pos.x = e_->getComponent<Transform>("Transform")->getPosition().X;
+	pos.y = e_->getComponent<Transform>("Transform")->getPosition().Y;
+	pos.z = e_->getComponent<Transform>("Transform")->getPosition().Z;
 
 
 
@@ -37,9 +37,9 @@ void AudioComponent::removeEmisor() {
 
 void AudioComponent::init(json& j)
 {
-	pos.x = e_->getComponent<Transform>("Transform")->getPosition().x;
-	pos.y = e_->getComponent<Transform>("Transform")->getPosition().y;
-	pos.z = e_->getComponent<Transform>("Transform")->getPosition().z;
+	pos.x = e_->getComponent<Transform>("Transform")->getPosition().X;
+	pos.y = e_->getComponent<Transform>("Transform")->getPosition().Y;
+	pos.z = e_->getComponent<Transform>("Transform")->getPosition().Z;
 
 	
 

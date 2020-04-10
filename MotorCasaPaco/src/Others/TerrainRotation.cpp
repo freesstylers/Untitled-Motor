@@ -43,13 +43,13 @@ void TerrainRotation::update()
 	dir.normalise();
 
 	rotation += dir * speed * deltatime * speedmult * 0.5;
-	transform->setRotation(rotation);
+	transform->setRotation((Vector3)rotation);
 
 	if (InputManager::getInstance()->GameControllerIsButtonDown(SDL_CONTROLLER_BUTTON_A) && !AudioManager::getInstance()->isPlayingChannel(0)) {
 		FMOD_VECTOR vec{
-			transform->getPosition().x,
-			transform->getPosition().y,
-			transform->getPosition().z
+			transform->getPosition().X,
+			transform->getPosition().Y,
+			transform->getPosition().Z
 		};
 		AudioManager::getInstance()->playSound("./assets/sound/movie_1.mp3", 0);
 		AudioManager::getInstance()->setVolume(0.5, 0);

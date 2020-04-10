@@ -1,8 +1,8 @@
 #pragma once
-#include "Others/json.hpp"
 
 #include "Entity/Component.h"
 
+#include "Others/json.hpp"
 using json = nlohmann::json;
 
 class BaseFactory

@@ -84,6 +84,9 @@
     <ClCompile Include="..\..\src\Scene\Skybox.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Others\PacoConversions.cpp">
+      <Filter>Others</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Audio\AudioManager.h">
@@ -170,6 +173,24 @@
     <ClInclude Include="..\..\include\MotorCasaPaco.h" />
     <ClInclude Include="..\..\include\Scene\Skybox.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Others\Matrix3x3.hpp">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Others\Quaternion.hpp">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Others\Vector2.hpp">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Others\Vector3.hpp">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Others\General.h">
+      <Filter>Others</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Others\PacoConversions.h">
+      <Filter>Others</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

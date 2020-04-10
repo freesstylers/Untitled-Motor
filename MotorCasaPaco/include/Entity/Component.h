@@ -3,11 +3,9 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include "Others/json.hpp"
 #include <string>
-
-using json = nlohmann::json;
 #include "Events/EventManager.h"
+#include "Others/General.h"
 
 class Entity;
 

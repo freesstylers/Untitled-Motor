@@ -1,3 +1,5 @@
+#include <Ogre.h>
+
 #include "Entity/Transform.h"
 #include "MotorCasaPaco.h"
 
@@ -11,23 +13,23 @@ void Transform::init(json& args)
 	node = MotorCasaPaco::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode(args["name"]);
 	node->setInheritScale(false);
 
-	Ogre::Vector3 position = Ogre::Vector3(0, 0, 0);
-	Ogre::Vector3 rotation = Ogre::Vector3(0, 0, 0);
-	Ogre::Vector3 scale = Ogre::Vector3(1, 1, 1);
+	Vector3 position = Vector3(0, 0, 0);
+	Vector3 rotation = Vector3(0, 0, 0);
+	Vector3 scale = Vector3(1, 1, 1);
 	if (!args["position"].is_null()) {
-		position.x = args["position"][0];
-		position.y = args["position"][1];
-		position.z = args["position"][2];
+		position.X = args["position"][0];
+		position.Y = args["position"][1];
+		position.Z = args["position"][2];
 	}
 	if (!args["rotation"].is_null()) {
-		rotation.x = args["rotation"][0];
-		rotation.y = args["rotation"][1];
-		rotation.z = args["rotation"][2];
+		rotation.X = args["rotation"][0];
+		rotation.Y = args["rotation"][1];
+		rotation.Z = args["rotation"][2];
 	}
 	if (!args["scale"].is_null()) {
-		scale.x = args["scale"][0];
-		scale.y = args["scale"][1];
-		scale.z = args["scale"][2];
+		scale.X = args["scale"][0];
+		scale.Y = args["scale"][1];
+		scale.Z = args["scale"][2];
 	}
 
 	setPosition(position);
@@ -37,16 +39,16 @@ void Transform::init(json& args)
 
 void Transform::redefine(json& args)
 {
-	Ogre::Quaternion origRotation = getRotation();
+	Quaternion origRotation = getRotation();
 
 	if (args["name"].is_null())
 		args["name"] = node->getName();
 
 	if (args["position"].is_null())
-		args["position"] = { getPosition().x, getPosition().y, getPosition().z };
+		args["position"] = { getPosition().X, getPosition().Y, getPosition().Z };
 
 	if (args["scale"].is_null())
-		args["scale"] = { getScale().x, getScale().y, getScale().z };
+		args["scale"] = { getScale().X, getScale().Y, getScale().Z };
 
 	std::vector<Ogre::MovableObject*> obj = node->getAttachedObjects();
 	std::vector<Ogre::Node*> children = node->getChildren();
@@ -75,93 +77,87 @@ Transform::~Transform()
 	MotorCasaPaco::getInstance()->getSM()->destroySceneNode(node->getName());
 }
 
-Ogre::Vector3 Transform::getPosition() const
+Vector3 Transform::getPosition() const
 {
-	return node->getPosition();
+	return OgreToPaco(node->getPosition());
 }
-Ogre::Quaternion Transform::getRotation() const
+Quaternion Transform::getRotation() const
 {
-	return node->getOrientation();
+	return OgreToPaco(node->getOrientation());
 }
-Ogre::Vector3 Transform::getScale() const
+Vector3 Transform::getScale() const
 {
-	return node->getScale();
+	return OgreToPaco(node->getScale());
 }
 
-Ogre::Vector3 Transform::getWorldPosition() const
+Vector3 Transform::getWorldPosition() const
 {
-	return node->getParent()->convertLocalToWorldPosition(node->getPosition());
+	return OgreToPaco(node->getParent()->convertLocalToWorldPosition(node->getPosition()));
 }
-Ogre::Quaternion Transform::getWorldRotation() const
+Quaternion Transform::getWorldRotation() const
 {
-	return node->getParent()->convertLocalToWorldOrientation(node->getOrientation());
+	return OgreToPaco(node->getParent()->convertLocalToWorldOrientation(node->getOrientation()));
 }
-Ogre::Vector3 Transform::getWorldScale() const
+Vector3 Transform::getWorldScale() const
 {
 	//this might not work properly, should test it
-	return node->_getDerivedScale();
+	return OgreToPaco(node->_getDerivedScale());
 }
 
 
-void Transform::setPosition(Ogre::Vector3 pos)
+void Transform::setPosition(Vector3 pos)
 {
-	node->setPosition(pos);
+	node->setPosition(PacoToOgre(pos));
 }
-void Transform::setRotation(Ogre::Quaternion rot)
+void Transform::setRotation(Quaternion rot)
 {
-	node->setOrientation(rot);
+	node->setOrientation(PacoToOgre(rot));
 }
-void Transform::setRotation(Ogre::Vector3 rot)
+void Transform::setRotation(Vector3 rot)
 {
-	Ogre::Matrix3 mx;
-	mx.FromEulerAnglesZYX(Ogre::Radian(Ogre::Degree(rot.z)), Ogre::Radian(Ogre::Degree(rot.y)), Ogre::Radian(Ogre::Degree(rot.x)));
-	setRotation(Ogre::Quaternion(mx));
+	setRotation(Quaternion::FromEuler(rot));
 }
-void Transform::setScale(Ogre::Vector3 s)
+void Transform::setScale(Vector3 s)
 {
-	node->setScale(s);
+	node->setScale(PacoToOgre(s));
 }
 
 
-void Transform::setWorldPosition(Ogre::Vector3 pos)
+void Transform::setWorldPosition(Vector3 pos)
 {
-	node->setPosition(node->getParent()->convertWorldToLocalPosition(pos));
+	node->setPosition(node->getParent()->convertWorldToLocalPosition(PacoToOgre(pos)));
 }
-void Transform::setWorldRotation(Ogre::Quaternion rot)
+void Transform::setWorldRotation(Quaternion rot)
 {
-	node->setOrientation(node->getParent()->convertLocalToWorldOrientation(rot));
+	node->setOrientation(node->getParent()->convertLocalToWorldOrientation(PacoToOgre(rot)));
 }
-void Transform::setWorldRotation(Ogre::Vector3 rot)
+void Transform::setWorldRotation(Vector3 rot)
 {
 	//complete when hierarchy is implemented
-	Ogre::Matrix3 mx;
-	mx.FromEulerAnglesZYX(Ogre::Radian(Ogre::Degree(rot.z)), Ogre::Radian(Ogre::Degree(rot.y)), Ogre::Radian(Ogre::Degree(rot.x)));
-	setRotation(Ogre::Quaternion(mx));
+	setRotation(Quaternion::FromEuler(rot));
 }
-void Transform::setWorldScale(Ogre::Vector3 s)
+void Transform::setWorldScale(Vector3 s)
 {
 	//complete when hierarchy is implemented
-	node->setScale(s);
+	node->setScale(PacoToOgre(s));
 }
 
 
-void Transform::translate(Ogre::Vector3 pos, Ogre::Node::TransformSpace relativeTo)
+void Transform::translate(Vector3 pos, TransformSpace relativeTo)
 {
-	node->translate(pos, relativeTo);
+	node->translate(PacoToOgre(pos), (Ogre::Node::TransformSpace)relativeTo);
 }
-void Transform::rotate(Ogre::Quaternion rot, Ogre::Node::TransformSpace relativeTo)
+void Transform::rotate(Quaternion rot, TransformSpace relativeTo)
 {
-	node->rotate(rot, relativeTo);
+	node->rotate(PacoToOgre(rot), (Ogre::Node::TransformSpace)relativeTo);
 }
-void Transform::rotate(Ogre::Vector3 rot, Ogre::Node::TransformSpace relativeTo)
+void Transform::rotate(Vector3 rot, TransformSpace relativeTo)
 {
-	Ogre::Matrix3 mx;
-	mx.FromEulerAnglesZYX(Ogre::Radian(Ogre::Degree(rot.z)), Ogre::Radian(Ogre::Degree(rot.y)), Ogre::Radian(Ogre::Degree(rot.x)));
-	rotate(Ogre::Quaternion(mx), relativeTo);
+	rotate(Quaternion::FromEuler(rot), relativeTo);
 }
-void Transform::scale(Ogre::Vector3 s)
+void Transform::scale(Vector3 s)
 {
-	node->scale(s);
+	node->scale(PacoToOgre(s));
 }
 
 Ogre::SceneNode* Transform::getNode()
@@ -176,15 +172,15 @@ bool Transform::ReceiveEvent(Event& event)
 		Ogre::Node* nParent = parentEvent.parent->getComponent<Transform>("Transform")->getNode();
 		Ogre::Node* currentParent = node->getParent();
 
-		Ogre::Vector3 nodeWorldPos = currentParent->convertLocalToWorldPosition(node->getPosition());
-		Ogre::Vector3 resultPosition = nParent->convertWorldToLocalPosition(nodeWorldPos);
-		Ogre::Quaternion nodeWorldOrientation = currentParent->convertLocalToWorldOrientation(node->getOrientation());
-		Ogre::Quaternion resultOrientation = nParent->convertWorldToLocalOrientation(nodeWorldOrientation);
+		Vector3 nodeWorldPos = OgreToPaco(currentParent->convertLocalToWorldPosition(node->getPosition()));
+		Vector3 resultPosition = OgreToPaco(nParent->convertWorldToLocalPosition(PacoToOgre(nodeWorldPos)));
+		Quaternion nodeWorldOrientation = OgreToPaco(currentParent->convertLocalToWorldOrientation(node->getOrientation()));
+		Quaternion resultOrientation = OgreToPaco(nParent->convertWorldToLocalOrientation(PacoToOgre(nodeWorldOrientation)));
 
 		currentParent->removeChild(node);
 		nParent->addChild(node);
-		node->setPosition(resultPosition);
-		node->setOrientation(resultOrientation);
+		node->setPosition(PacoToOgre(resultPosition));
+		node->setOrientation(PacoToOgre(resultOrientation));
 		nParent->needUpdate(true);
 	}
 

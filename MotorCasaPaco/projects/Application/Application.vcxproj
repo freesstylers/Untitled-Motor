@@ -38,6 +38,7 @@
     <ClCompile Include="..\..\src\GUI\GUI_Manager.cpp" />
     <ClCompile Include="..\..\src\Input\InputManager.cpp" />
     <ClCompile Include="..\..\src\Others\ForcesTest.cpp" />
+    <ClCompile Include="..\..\src\Others\PacoConversions.cpp" />
     <ClCompile Include="..\..\src\Others\SimpleMovement.cpp" />
     <ClCompile Include="..\..\src\Others\TerrainRotation.cpp" />
     <ClCompile Include="..\..\src\Others\TestComponent.cpp" />
@@ -69,9 +70,15 @@
     <ClInclude Include="..\..\include\GUI\GUI_Manager.h" />
     <ClInclude Include="..\..\include\Input\InputManager.h" />
     <ClInclude Include="..\..\include\Others\ForcesTest.h" />
+    <ClInclude Include="..\..\include\Others\General.h" />
+    <ClInclude Include="..\..\include\Others\Matrix3x3.hpp" />
+    <ClInclude Include="..\..\include\Others\PacoConversions.h" />
+    <ClInclude Include="..\..\include\Others\Quaternion.hpp" />
     <ClInclude Include="..\..\include\Others\SimpleMovement.h" />
     <ClInclude Include="..\..\include\Others\TerrainRotation.h" />
     <ClInclude Include="..\..\include\Others\TestComponent.h" />
+    <ClInclude Include="..\..\include\Others\Vector2.hpp" />
+    <ClInclude Include="..\..\include\Others\Vector3.hpp" />
     <ClInclude Include="..\..\include\Physics\PhysicsManager.h" />
     <ClInclude Include="..\..\include\Physics\RigidBody.h" />
     <ClInclude Include="..\..\include\Resources\ResourceManager.h" />

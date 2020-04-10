@@ -19,9 +19,9 @@ bool AudioListenerComponent::ReceiveEvent(Event& event)
 
 void AudioListenerComponent::update()
 {
-	pos.x = e_->getComponent<Transform>("Transform")->getPosition().x;
-	pos.y = e_->getComponent<Transform>("Transform")->getPosition().y;
-	pos.z = e_->getComponent<Transform>("Transform")->getPosition().z;
+	pos.x = e_->getComponent<Transform>("Transform")->getPosition().X;
+	pos.y = e_->getComponent<Transform>("Transform")->getPosition().Y;
+	pos.z = e_->getComponent<Transform>("Transform")->getPosition().Z;
 
 	forward.x = 0;
 	forward.y = 0;
@@ -40,9 +40,9 @@ void AudioListenerComponent::update()
 
 void AudioListenerComponent::init(json& j)
 {
-	pos.x = e_->getComponent<Transform>("Transform")->getPosition().x;
-	pos.y = e_->getComponent<Transform>("Transform")->getPosition().y;
-	pos.z = e_->getComponent<Transform>("Transform")->getPosition().z;
+	pos.x = e_->getComponent<Transform>("Transform")->getPosition().X;
+	pos.y = e_->getComponent<Transform>("Transform")->getPosition().Y;
+	pos.z = e_->getComponent<Transform>("Transform")->getPosition().Z;
 
 	forward.x = 0;
 	forward.y = 0;

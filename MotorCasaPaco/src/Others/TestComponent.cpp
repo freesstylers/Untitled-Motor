@@ -14,8 +14,8 @@ TestComponent::~TestComponent()
 }
 
 void TestComponent::update() {
-	Ogre::Vector3 pos = getEntity()->getComponent<Transform>("Transform")->getWorldPosition();
-	pos.x += 0.7f;
+	Vector3 pos = getEntity()->getComponent<Transform>("Transform")->getWorldPosition();
+	pos.X += 0.7f;
 	getEntity()->getComponent<Transform>("Transform")->setWorldPosition(pos);
 }
 

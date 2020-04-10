@@ -1,5 +1,4 @@
 #pragma once
-#include <Ogre.h>
 #include "Entity/Component.h"
 
 class Transform :
@@ -10,34 +9,33 @@ public:
 	~Transform() override;
 	void init(json& args) override;
 	void redefine(json& args) override;
-	Ogre::Vector3 getPosition() const;
-	Ogre::Quaternion getRotation() const;
-	Ogre::Vector3 getScale() const;
+	Vector3 getPosition() const;
+	Quaternion getRotation() const;
+	Vector3 getScale() const;
 
-	Ogre::Vector3 getWorldPosition() const;
-	Ogre::Quaternion getWorldRotation() const;
-	Ogre::Vector3 getWorldScale() const;
+	Vector3 getWorldPosition() const;
+	Quaternion getWorldRotation() const;
+	Vector3 getWorldScale() const;
 
-	void setPosition(Ogre::Vector3 pos);
-	void setRotation(Ogre::Quaternion rot);
-	void setRotation(Ogre::Vector3 rot);
-	void setScale(Ogre::Vector3 s);
+	void setPosition(Vector3 pos);
+	void setRotation(Quaternion rot);
+	void setRotation(Vector3 rot);
+	void setScale(Vector3 s);
 
-	void setWorldPosition(Ogre::Vector3 pos);
-	void setWorldRotation(Ogre::Quaternion rot);
-	void setWorldRotation(Ogre::Vector3 rot);
-	void setWorldScale(Ogre::Vector3 s);
+	void setWorldPosition(Vector3 pos);
+	void setWorldRotation(Quaternion rot);
+	void setWorldRotation(Vector3 rot);
+	void setWorldScale(Vector3 s);
 
-	void translate(Ogre::Vector3 pos, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_LOCAL);
-	void rotate(Ogre::Quaternion rot, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_LOCAL);
-	void rotate(Ogre::Vector3 rot, Ogre::Node::TransformSpace relativeTo = Ogre::Node::TS_LOCAL);
-	void scale(Ogre::Vector3 s);
+	void translate(Vector3 pos, TransformSpace relativeTo = TransformSpace::LOCAL);
+	void rotate(Quaternion rot, TransformSpace relativeTo = TransformSpace::LOCAL);
+	void rotate(Vector3 rot, TransformSpace relativeTo = TransformSpace::LOCAL);
+	void scale(Vector3 s);
 
 	Ogre::SceneNode* getNode();
 	bool ReceiveEvent(Event& event) override;
 
 private:
-
 	Ogre::SceneNode* node;
 };
 

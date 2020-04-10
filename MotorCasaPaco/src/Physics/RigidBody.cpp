@@ -80,9 +80,9 @@ void RigidBody::physicsUpdate()
 	btTransform trans;
 	trans = body->getWorldTransform();
 
-	tr->setWorldPosition(BtOgre::Convert::toOgre(trans.getOrigin()));
-	tr->setWorldRotation(BtOgre::Convert::toOgre(trans.getRotation()));
-	tr->setScale(BtOgre::Convert::toOgre(body->getCollisionShape()->getLocalScaling()));
+	tr->setWorldPosition((Vector3)trans.getOrigin());
+	tr->setWorldRotation((Quaternion)trans.getRotation());
+	tr->setScale((Vector3)body->getCollisionShape()->getLocalScaling());
 }
 
 void RigidBody::OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2)
@@ -156,7 +156,7 @@ void RigidBody::createRigidBody(json& args)
 		}
 	}
 
-	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getOgreEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
+	body = PhysicsManager::getInstance()->createRigidBody(shape, (btVector3)e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getOgreEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
 
 	body->setUserPointer(this);
 

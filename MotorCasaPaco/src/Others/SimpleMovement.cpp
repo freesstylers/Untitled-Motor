@@ -61,8 +61,8 @@ void SimpleMovement::controllerMovement()
 	float righty = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTY, false);
 
 
-	transform->translate(Ogre::Vector3(speed * leftx * MotorCasaPaco::getInstance()->DeltaTime(), 0, speed * lefty * MotorCasaPaco::getInstance()->DeltaTime()), Ogre::Node::TS_LOCAL);
-	transform->rotate(Ogre::Vector3(rotateSpeed * -righty * MotorCasaPaco::getInstance()->DeltaTime(), rotateSpeed * -rightx * MotorCasaPaco::getInstance()->DeltaTime(), 0));
+	transform->translate(Vector3(speed * leftx * MotorCasaPaco::getInstance()->DeltaTime(), 0, speed * lefty * MotorCasaPaco::getInstance()->DeltaTime()), TransformSpace::LOCAL);
+	transform->rotate(Vector3(rotateSpeed * -righty * MotorCasaPaco::getInstance()->DeltaTime(), rotateSpeed * -rightx * MotorCasaPaco::getInstance()->DeltaTime(), 0));
 }
 
 void SimpleMovement::keyboardMovement()
@@ -70,21 +70,21 @@ void SimpleMovement::keyboardMovement()
 	Transform* transform = getEntity()->getComponent<Transform>("Transform");
 	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_RIGHT))
 	{
-		transform->rotate(Ogre::Vector3(0, -rotateSpeed * MotorCasaPaco::getInstance()->DeltaTime(), 0));
+		transform->rotate(Vector3(0, -rotateSpeed * MotorCasaPaco::getInstance()->DeltaTime(), 0));
 	}
 
 	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_LEFT))
 	{
-		transform->rotate(Ogre::Vector3(0, rotateSpeed * MotorCasaPaco::getInstance()->DeltaTime(), 0));
+		transform->rotate(Vector3(0, rotateSpeed * MotorCasaPaco::getInstance()->DeltaTime(), 0));
 	}
 
 	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_DOWN))
 	{
-		transform->translate(Ogre::Vector3(0, 0, speed * MotorCasaPaco::getInstance()->DeltaTime()), Ogre::Node::TS_LOCAL);
+		transform->translate(Vector3(0, 0, speed * MotorCasaPaco::getInstance()->DeltaTime()), TransformSpace::LOCAL);
 	}
 
 	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_UP))
 	{
-		transform->translate(Ogre::Vector3(0, 0, -speed * MotorCasaPaco::getInstance()->DeltaTime()), Ogre::Node::TS_LOCAL);
+		transform->translate(Vector3(0, 0, -speed * MotorCasaPaco::getInstance()->DeltaTime()), TransformSpace::LOCAL);
 	}
 }

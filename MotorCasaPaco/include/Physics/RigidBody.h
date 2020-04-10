@@ -45,8 +45,8 @@ private:
 	bool isStatic = false;
 	bool isKinematic = false;
 
-	Ogre::Vector3 bakPosition;
-	Ogre::Vector3 bakScale;
-	Ogre::Quaternion bakRotation;
+	Vector3 bakPosition;
+	Vector3 bakScale;
+	Quaternion bakRotation;
 	std::string shape;
 };
