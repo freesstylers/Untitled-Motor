@@ -79,39 +79,39 @@ Transform::~Transform()
 
 Vector3 Transform::getPosition() const
 {
-	return OgreToPaco(node->getPosition());
+	return (Vector3)node->getPosition();
 }
 Quaternion Transform::getRotation() const
 {
-	return OgreToPaco(node->getOrientation());
+	return (Quaternion)node->getOrientation();
 }
 Vector3 Transform::getScale() const
 {
-	return OgreToPaco(node->getScale());
+	return (Vector3)node->getScale();
 }
 
 Vector3 Transform::getWorldPosition() const
 {
-	return OgreToPaco(node->getParent()->convertLocalToWorldPosition(node->getPosition()));
+	return (Vector3)node->getParent()->convertLocalToWorldPosition(node->getPosition());
 }
 Quaternion Transform::getWorldRotation() const
 {
-	return OgreToPaco(node->getParent()->convertLocalToWorldOrientation(node->getOrientation()));
+	return (Quaternion)node->getParent()->convertLocalToWorldOrientation(node->getOrientation());
 }
 Vector3 Transform::getWorldScale() const
 {
 	//this might not work properly, should test it
-	return OgreToPaco(node->_getDerivedScale());
+	return (Vector3)node->_getDerivedScale();
 }
 
 
 void Transform::setPosition(Vector3 pos)
 {
-	node->setPosition(PacoToOgre(pos));
+	node->setPosition(pos);
 }
 void Transform::setRotation(Quaternion rot)
 {
-	node->setOrientation(PacoToOgre(rot));
+	node->setOrientation(rot);
 }
 void Transform::setRotation(Vector3 rot)
 {
@@ -119,17 +119,17 @@ void Transform::setRotation(Vector3 rot)
 }
 void Transform::setScale(Vector3 s)
 {
-	node->setScale(PacoToOgre(s));
+	node->setScale(s);
 }
 
 
 void Transform::setWorldPosition(Vector3 pos)
 {
-	node->setPosition(node->getParent()->convertWorldToLocalPosition(PacoToOgre(pos)));
+	node->setPosition(node->getParent()->convertWorldToLocalPosition(pos));
 }
 void Transform::setWorldRotation(Quaternion rot)
 {
-	node->setOrientation(node->getParent()->convertLocalToWorldOrientation(PacoToOgre(rot)));
+	node->setOrientation(node->getParent()->convertLocalToWorldOrientation(rot));
 }
 void Transform::setWorldRotation(Vector3 rot)
 {
@@ -139,25 +139,28 @@ void Transform::setWorldRotation(Vector3 rot)
 void Transform::setWorldScale(Vector3 s)
 {
 	//complete when hierarchy is implemented
-	node->setScale(PacoToOgre(s));
+	node->setScale(s);
 }
 
 
 void Transform::translate(Vector3 pos, TransformSpace relativeTo)
 {
-	node->translate(PacoToOgre(pos), (Ogre::Node::TransformSpace)relativeTo);
+	node->translate(pos, (Ogre::Node::TransformSpace)relativeTo);
 }
 void Transform::rotate(Quaternion rot, TransformSpace relativeTo)
 {
-	node->rotate(PacoToOgre(rot), (Ogre::Node::TransformSpace)relativeTo);
+	node->rotate(rot, (Ogre::Node::TransformSpace)relativeTo);
 }
 void Transform::rotate(Vector3 rot, TransformSpace relativeTo)
 {
+	Quaternion quat = Quaternion::FromEuler(rot);
 	rotate(Quaternion::FromEuler(rot), relativeTo);
+	printf("X: %f, Y: %f, Z:%f, W:%f\n", quat.X, quat.Y, quat.Z, quat.W);
+
 }
 void Transform::scale(Vector3 s)
 {
-	node->scale(PacoToOgre(s));
+	node->scale(s);
 }
 
 Ogre::SceneNode* Transform::getNode()
@@ -172,15 +175,15 @@ bool Transform::ReceiveEvent(Event& event)
 		Ogre::Node* nParent = parentEvent.parent->getComponent<Transform>("Transform")->getNode();
 		Ogre::Node* currentParent = node->getParent();
 
-		Vector3 nodeWorldPos = OgreToPaco(currentParent->convertLocalToWorldPosition(node->getPosition()));
-		Vector3 resultPosition = OgreToPaco(nParent->convertWorldToLocalPosition(PacoToOgre(nodeWorldPos)));
-		Quaternion nodeWorldOrientation = OgreToPaco(currentParent->convertLocalToWorldOrientation(node->getOrientation()));
-		Quaternion resultOrientation = OgreToPaco(nParent->convertWorldToLocalOrientation(PacoToOgre(nodeWorldOrientation)));
+		Vector3 nodeWorldPos = (Vector3) currentParent->convertLocalToWorldPosition(node->getPosition());
+		Vector3 resultPosition = (Vector3)nParent->convertWorldToLocalPosition(nodeWorldPos);
+		Quaternion nodeWorldOrientation = (Quaternion)currentParent->convertLocalToWorldOrientation(node->getOrientation());
+		Quaternion resultOrientation = (Quaternion)nParent->convertWorldToLocalOrientation(nodeWorldOrientation);
 
 		currentParent->removeChild(node);
 		nParent->addChild(node);
-		node->setPosition(PacoToOgre(resultPosition));
-		node->setOrientation(PacoToOgre(resultOrientation));
+		node->setPosition(resultPosition);
+		node->setOrientation(resultOrientation);
 		nParent->needUpdate(true);
 	}
 

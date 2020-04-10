@@ -178,7 +178,7 @@ struct Quaternion
     /**
      * Creates a new quaternion from the angle-axis representation of
      * a rotation.
-     * @param angle: The rotation angle in radians.
+     * @param angle: The rotation angle in degrees.
      * @param axis: The vector about which the rotation occurs.
      * @return: A new quaternion.
      */
@@ -197,9 +197,9 @@ struct Quaternion
      * Create a new quaternion from the euler angle representation of
      * a rotation. The z, x and y values represent rotations about those
      * axis in that respective order.
-     * @param x: The rotation about the x-axis in radians.
-     * @param y: The rotation about the y-axis in radians.
-     * @param z: The rotation about the z-axis in radians.
+     * @param x: The rotation about the x-axis in degrees.
+     * @param y: The rotation about the y-axis in degrees.
+     * @param z: The rotation about the z-axis in degrees.
      * @return: A new quaternion.
      */
     static inline Quaternion FromEuler(double x, double y, double z);
@@ -323,6 +323,11 @@ struct Quaternion
      */
     static inline Vector3 ToEuler(Quaternion rotation);
 
+    static inline double ToRadians(double degrees);
+    static inline double ToDegrees(double radians);
+    static inline Vector3 ToRadians(Vector3 vectorInDegrees);
+    static inline Vector3 ToDegrees(Vector3 vectorInRadians);
+
     /**
      * Operator overloading.
      */
@@ -378,7 +383,7 @@ Quaternion Quaternion::Identity() { return Quaternion(0, 0, 0, 1); }
 double Quaternion::Angle(Quaternion a, Quaternion b)
 {
     double dot = Dot(a, b);
-    return acos(fmin(fabs(dot), 1)) * 2;
+    return ToDegrees(acos(fmin(fabs(dot), 1)) * 2);
 }
 
 Quaternion Quaternion::Conjugate(Quaternion rotation)
@@ -393,6 +398,8 @@ double Quaternion::Dot(Quaternion lhs, Quaternion rhs)
 
 Quaternion Quaternion::FromAngleAxis(double angle, Vector3 axis)
 {
+    angle = ToRadians(angle);
+
     Quaternion q;
     double m = sqrt(axis.X * axis.X + axis.Y * axis.Y + axis.Z * axis.Z);
     double s = sin(angle / 2) / m;
@@ -410,6 +417,8 @@ Quaternion Quaternion::FromEuler(Vector3 rotation)
 
 Quaternion Quaternion::FromEuler(double x, double y, double z)
 {
+    x = ToRadians(x); y = ToRadians(y); z = ToRadians(z);
+
     double cx = cos(x * 0.5);
 	double cy = cos(y * 0.5);
 	double cz = cos(z * 0.5);
@@ -582,9 +591,11 @@ Quaternion Quaternion::SlerpUnclamped(Quaternion a, Quaternion b, double t)
 
 void Quaternion::ToAngleAxis(Quaternion rotation, double &angle, Vector3 &axis)
 {
+    double radiansAngle = ToRadians(angle);
+
     if (rotation.W > 1)
         rotation = Normalized(rotation);
-    angle = 2 * acos(rotation.W);
+    radiansAngle = 2 * acos(rotation.W);
     double s = sqrt(1 - rotation.W * rotation.W);
     if (s < 0.00001) {
         axis.X = 1;
@@ -595,6 +606,8 @@ void Quaternion::ToAngleAxis(Quaternion rotation, double &angle, Vector3 &axis)
         axis.Y = rotation.Y / s;
         axis.Z = rotation.Z / s;
     }
+
+    angle = ToDegrees(radiansAngle);
 }
 
 Vector3 Quaternion::ToEuler(Quaternion rotation)
@@ -631,7 +644,27 @@ Vector3 Quaternion::ToEuler(Quaternion rotation)
     // Roll
     v.Z = atan2(2 * rotation.W * rotation.Z + 2 * rotation.X * rotation.Y,
         1 - 2 * (rotation.Z * rotation.Z + rotation.X * rotation.X));
-    return v;
+    return ToDegrees(v);
+}
+
+inline double Quaternion::ToRadians(double degrees)
+{
+    return degrees * M_PI / 180;
+}
+
+inline double Quaternion::ToDegrees(double radians)
+{
+    return radians * 180 / M_PI;
+}
+
+inline Vector3 Quaternion::ToRadians(Vector3 vectorInDegrees)
+{
+    return vectorInDegrees * M_PI / 180;
+}
+
+inline Vector3 Quaternion::ToDegrees(Vector3 vectorInRadians)
+{
+    return vectorInRadians * 180 / M_PI;
 }
 
 struct Quaternion& Quaternion::operator+=(const double rhs)
