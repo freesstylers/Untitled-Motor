@@ -155,8 +155,6 @@ void Transform::rotate(Vector3 rot, TransformSpace relativeTo)
 {
 	Quaternion quat = Quaternion::FromEuler(rot);
 	rotate(Quaternion::FromEuler(rot), relativeTo);
-	printf("X: %f, Y: %f, Z:%f, W:%f\n", quat.X, quat.Y, quat.Z, quat.W);
-
 }
 void Transform::scale(Vector3 s)
 {
