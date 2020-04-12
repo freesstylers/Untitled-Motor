@@ -22,12 +22,6 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 	//Callbacks?
 }
 
-bool GUI_Manager::TestButtonFunction(const CEGUI::EventArgs& e)
-{
-	std::cout << "Boton funcional\n";
-	return true;
-}
-
 GUI_Manager::~GUI_Manager()
 {
 	renderer->destroySystem();
@@ -124,6 +118,11 @@ void GUI_Manager::update(float deltaTime)
 	//Mas cosas a a�adir
 }
 
+bool GUI_Manager::test(const CEGUI::EventArgs& e) {
+	std::cout << "joder";
+	return true;
+}
+
 void GUI_Manager::addChild(int type, std::string name)
 {
 	switch (type)
@@ -131,18 +130,16 @@ void GUI_Manager::addChild(int type, std::string name)
 	case 0: //Layout
 	{
 		CEGUI::Window* layout = winManager->getSingleton().loadLayoutFromFile(name); //Habria que a�adir el archivo del que proceden como opcion, en caso de usar mas de uno?
-		CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(layout);
 	    root->addChild(layout);
 	}
 		break;
 	case 1:
 	{
-		CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(winManager->getSingleton().createWindow("TaharezLook/Button", name));
+		CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(winManager->getSingleton().createWindow("TaharezLook/Button"));
 		testButton->setText("Hello World!");
 		testButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5, 0.5), CEGUI::UDim(0.5, 0.5)));
 		testButton->setSize(CEGUI::USize(CEGUI::UDim(0.15, 0.15), CEGUI::UDim(0.15, 0.15)));		
-		testButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUI_Manager::TestButtonFunction, this)); //Esto no va, fijo que es cosa del this
-		CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(testButton);
+		testButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUI_Manager::test, instance));
 		root->addChild(testButton);
 	}
 		break;
@@ -167,6 +164,16 @@ void GUI_Manager::showMouseCursor()
 void GUI_Manager::hideMouseCursor()
 {
 	CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().hide();
+}
+
+GUI_Element* GUI_Manager::getRoot()
+{
+	return root;
+}
+
+CEGUI::WindowManager* GUI_Manager::getWinManager()
+{
+	return winManager;
 }
 
 bool GUI_Manager::setupInstance(Ogre::RenderWindow* window)
