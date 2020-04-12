@@ -105,13 +105,79 @@ void InputManager::InjectCEGUIInput(SDL_Event event)
 	}
 	else if (event.type == SDL_CONTROLLERAXISMOTION) {
 		float x = GameControllerGetAxisMovement((SDL_GameControllerAxis)event.caxis.axis, false);
-		if (x != 0) {
-			if ((SDL_GameControllerAxis)event.caxis.axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT) {
+		switch ((SDL_GameControllerAxis)event.caxis.axis) {
+		case SDL_CONTROLLER_AXIS_TRIGGERLEFT:
+			if (x != 0 && !LtriggerPressed) {
+				LtriggerPressed = 1;
 				CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.LTrigg));
 			}
-			else if ((SDL_GameControllerAxis)event.caxis.axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT) {
+			else if (x == 0 && LtriggerPressed) {
+				LtriggerPressed = 0;
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.LTrigg));
+			}
+			break;
+		case SDL_CONTROLLER_AXIS_TRIGGERRIGHT:
+			if (x != 0 && !RtriggerPressed) {
+				RtriggerPressed = 1;
 				CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.RTrigg));
 			}
+			else if (x == 0 && RtriggerPressed) {
+				RtriggerPressed = 0;
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.RTrigg));
+			}
+			break;
+		case SDL_CONTROLLER_AXIS_LEFTX:
+			if (x > 0.2 && joystickPressedX < 1) {
+				if (joystickPressedX != 0) {
+					CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Left));
+				}
+				joystickPressedX = 1;
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Right));
+			}
+			else if (x < -0.2 && joystickPressedX > -1) {
+				if (joystickPressedX != 0) {
+					CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Right));
+				}
+				joystickPressedX = -1;
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Left));
+			}
+			else if (joystickPressedX != 0 && x > -0.2 && x < 0.2) {
+				if (joystickPressedX > 0) {
+					CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Right));
+				}
+				else {
+					CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Left));
+				}
+				joystickPressedX = 0;
+			}
+			break;
+		case SDL_CONTROLLER_AXIS_LEFTY:
+			if (x > 0.2 && joystickPressedY < 1) {
+				if (joystickPressedY != 0) {
+					CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Up));
+				}
+				joystickPressedY = 1;
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Down));
+			}
+			else if (x < -0.2 && joystickPressedY > -1) {
+				if (joystickPressedY != 0) {
+					CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Down));
+				}
+				joystickPressedX = -1;
+				CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyDown(SDL_KeyCode_TO_CEGUI(cKeyMapping.Up));
+			}
+			else if (joystickPressedY != 0 && x >-0.2 && x<0.2 ) {
+				if (joystickPressedY > 0) {
+					CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Down));
+				}
+				else {
+					CEGUI::System::getSingleton().getDefaultGUIContext().injectKeyUp(SDL_KeyCode_TO_CEGUI(cKeyMapping.Up));
+				}
+				joystickPressedY = 0;
+			}
+			break;
+		default:
+			break;
 		}
 	}
 	else if (event.type == SDL_MOUSEBUTTONDOWN)

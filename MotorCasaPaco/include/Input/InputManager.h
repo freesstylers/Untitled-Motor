@@ -58,6 +58,11 @@ private:
 
 	void InjectCEGUIInput(SDL_Event event);
 
+	int joystickPressedX = 0;
+	int joystickPressedY = 0;
+	int LtriggerPressed = 0;
+	int RtriggerPressed = 0;
+
 public:
 	~InputManager();
 
