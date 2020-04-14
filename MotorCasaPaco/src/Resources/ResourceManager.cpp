@@ -5,6 +5,7 @@
 #include <OgreResourceGroupManager.h>
 #include <OgreTextureManager.h>
 #include <iostream>
+#include "Graphics/SGTechniqueResolverListener.h"
 
 ResourceManager* ResourceManager::instance = 0;
 

@@ -1,6 +1,7 @@
 #include "Graphics/Mesh.h"
 #include "Entity/Transform.h"
 #include "MotorCasaPaco.h"
+#include <Ogre.h>
 
 Mesh::Mesh(json& args) : Component(args)
 {
@@ -72,7 +73,7 @@ Ogre::Entity* Mesh::getOgreEntity()	const
 
 Ogre::Mesh* Mesh::getMesh()	const
 {
-	return ogreEnt->getMesh().getPointer();
+	return ogreEnt->getMesh().get();
 }
 
 bool Mesh::isMeshAnimated() const

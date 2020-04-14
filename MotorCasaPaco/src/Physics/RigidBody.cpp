@@ -5,6 +5,7 @@
 #include "Entity/Transform.h"
 #include "Physics/PhysicsManager.h"
 #include <BtOgreExtras.h>
+#include <btBulletCollisionCommon.h>
 
 RigidBody::RigidBody(json& args) : Component(args)
 {
@@ -97,7 +98,7 @@ btRigidBody* RigidBody::getRigidBody()
 	return body;
 }
 
-void RigidBody::applyForce(ForceType type, btVector3 force, btVector3 relPos)
+void RigidBody::applyForce(ForceType type, Vector3 force, Vector3 relPos)
 {
 	body->activate(true);
 	switch (type) {

@@ -1,9 +1,10 @@
 #include "Graphics/Camera.h"
 #include "MotorCasaPaco.h"
 #include "Scene/SceneManager.h"
+#include "Entity/Transform.h"
 #include <OgreViewport.h>
 #include <OgreRenderWindow.h>
-#include "Entity/Transform.h"
+#include <OgreCamera.h>
 
 using namespace std;
 
@@ -58,9 +59,9 @@ void Camera::init(json& j)
 	}
 	if (!j["lookAt"].is_null())
 	{
-		lookAtVec.x = j["lookAt"][0];
-		lookAtVec.y = j["lookAt"][1];
-		lookAtVec.z = j["lookAt"][2];
+		lookAtVec.X = j["lookAt"][0];
+		lookAtVec.Y = j["lookAt"][1];
+		lookAtVec.Z = j["lookAt"][2];
 	}
 	if (!j["bgColor"].is_null())
 	{
@@ -126,7 +127,7 @@ void Camera::redefine(json& args)
 		args["lookingAt"] = looking->getName();
 
 	if (args["lookAt"].is_null())
-		args["lookAt"] = { lookAtVec.x, lookAtVec.y, lookAtVec.z };
+		args["lookAt"] = { lookAtVec.X, lookAtVec.Y, lookAtVec.Z };
 
 	if (args["bgColor"].is_null() && args["bgColour"].is_null())
 		args["bgColor"] = { vp->getBackgroundColour().r, vp->getBackgroundColour().g, vp->getBackgroundColour().b, vp->getBackgroundColour().a };

@@ -1,7 +1,16 @@
 #pragma once
 #include "Entity/Component.h"
-#include <OgreEntity.h>
-#include <OgreAxisAlignedBox.h>
+#include <string>
+
+namespace Ogre {
+	typedef float Real;
+	class AxisAlignedBox;
+	class Entity;
+	class Mesh;
+
+	typedef std::string _StringBase;
+	typedef _StringBase String;
+}
 
 class Mesh :
 	public Component

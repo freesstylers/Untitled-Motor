@@ -3,10 +3,11 @@
 #include "Others/json.hpp"
 
 #include <OgreFileSystemLayer.h>
-#include "Graphics/SGTechniqueResolverListener.h"
 #include <OgreRTShaderSystem.h>
 
 using json = nlohmann::json;
+
+class SGTechniqueResolverListener;
 
 class ResourceManager	//carga de recursos (por ahora)
 {

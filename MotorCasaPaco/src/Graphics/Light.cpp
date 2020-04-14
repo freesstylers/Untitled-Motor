@@ -132,8 +132,7 @@ void Light::init(json& args)
 		lightDir.normalise();
 	}
 
-	light->setDirection(lightDir);
-
+	e_->getComponent<Transform>("Transform")->getNode()->setDirection(lightDir);
 	e_->getComponent<Transform>("Transform")->getNode()->attachObject(light);
 }
 
@@ -179,15 +178,15 @@ void Light::redefine(json& args)
 
 	if (!args["lightDir"].is_null())
 	{
-		Ogre::Vector3 lightDir = Ogre::Vector3(0, 0, 0);
+		Vector3 lightDir = Vector3(0, 0, 0);
 
-		lightDir.x = args["lightDir"][0];
-		lightDir.y = args["lightDir"][1];
-		lightDir.z = args["lightDir"][2];
+		lightDir.X = args["lightDir"][0];
+		lightDir.Y = args["lightDir"][1];
+		lightDir.Z = args["lightDir"][2];
 
-		lightDir.normalise();
+		lightDir = Vector3::Normalized(lightDir);
 
-		light->setDirection(lightDir);
+		e_->getComponent<Transform>("Transform")->getNode()->setDirection(lightDir);
 	}
 
 

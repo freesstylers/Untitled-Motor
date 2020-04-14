@@ -2,6 +2,7 @@
 #include "Entity/Component.h"
 #include "Ogre.h"
 
+class btManifoldPoint;
 enum ForceType {
 	CENTRAL_IMPULSE,
 	CENTRAL_FORCE,
@@ -28,7 +29,7 @@ public:
 	void physicsUpdate() override;
 	virtual void OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2);
 	btRigidBody* getRigidBody();
-	void applyForce(ForceType type, btVector3 force, btVector3 relPos = btVector3(0,0,0));
+	void applyForce(ForceType type, Vector3 force, Vector3 relPos = Vector3(0,0,0));
 
 
 	void createRigidBody(json& args);

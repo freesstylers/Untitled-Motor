@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include "btBulletCollisionCommon.h"
 
 enum EventType {
 	TEXT,
@@ -11,6 +10,7 @@ enum EventType {
 };
 
 class btRigidBody;
+class btCollisionObject;
 
 struct Event
 {

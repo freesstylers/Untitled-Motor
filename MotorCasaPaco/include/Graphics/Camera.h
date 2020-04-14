@@ -4,7 +4,13 @@
 #define CAMERA_H
 
 #include "Entity/Component.h"
-#include <OgreCamera.h>
+
+namespace Ogre {
+	class Camera;
+	class Entity;
+	class SceneNode;
+	class Viewport;
+}
 
 class Camera : public Component
 {
@@ -24,14 +30,14 @@ private:
 
 	Entity* looking = nullptr;
 
-	Ogre::Vector3 vector;
+	Vector3 vector;
 	Entity* follow = nullptr;
 
 	Ogre::Camera* cam;
 	Ogre::Viewport* vp;
 	Ogre::SceneNode* mCamNode;
 
-	Ogre::Vector3 lookAtVec;
+	Vector3 lookAtVec;
 };
 
 
