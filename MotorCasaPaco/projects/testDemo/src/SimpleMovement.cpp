@@ -1,10 +1,9 @@
-#include "Others/SimpleMovement.h"
+#include "SimpleMovement.h"
 #include "Input/InputManager.h"
 #include "Entity/Transform.h"
 #include "Physics/RigidBody.h"
 #include "Entity/Entity.h"
 #include "MotorCasaPaco.h"
-#include "Ogre.h"
 
 SimpleMovement::SimpleMovement(json& args) : Component(args)
 {

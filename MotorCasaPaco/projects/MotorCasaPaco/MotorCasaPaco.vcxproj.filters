@@ -28,9 +28,6 @@
     <ClCompile Include="..\..\src\GUI\GUI_Manager.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Others\ForcesTest.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Graphics\Camera.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
@@ -63,15 +60,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Graphics\SGTechniqueResolverListener.cpp">
       <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Others\SimpleMovement.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Others\TerrainRotation.cpp">
-      <Filter>Others</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Others\TestComponent.cpp">
-      <Filter>Others</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Entity\Transform.cpp">
       <Filter>Entity</Filter>
@@ -124,9 +112,6 @@
     <ClInclude Include="..\..\include\GUI\GUI_Manager.h">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Others\ForcesTest.h">
-      <Filter>Others</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Graphics\Camera.h">
       <Filter>Graphics</Filter>
     </ClInclude>
@@ -159,15 +144,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Graphics\SGTechniqueResolverListener.h">
       <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Others\SimpleMovement.h">
-      <Filter>Others</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Others\TerrainRotation.h">
-      <Filter>Others</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Others\TestComponent.h">
-      <Filter>Others</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Entity\Transform.h">
       <Filter>Entity</Filter>

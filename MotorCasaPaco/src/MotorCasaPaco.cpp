@@ -423,9 +423,6 @@ Ogre::ShadowTechnique MotorCasaPaco::getShadowTechnique()
 #include "Audio/AudioListenerComponent.h"
 #include "Graphics/Light.h"
 #include "Scene/Skybox.h"
-#include "Others/TerrainRotation.h"
-#include "Others/SimpleMovement.h"
-#include "Others/ForcesTest.h"
 
 class TransformFactory : public BaseFactory
 {
@@ -476,30 +473,6 @@ public:
 	};
 };
 
-class TerrainRotationFactory : public BaseFactory
-{
-public:
-	Component* createComponent(json& args) override
-	{
-		return new TerrainRotation(args);
-	};
-};
-
-class SimpleMovementFactory : public BaseFactory
-{
-	Component* createComponent(json& args) override
-	{
-		return new SimpleMovement(args);
-	}
-};
-class ForcesTestFactory : public BaseFactory
-{
-public:
-	Component* createComponent(json& args) override
-	{
-		return new ForcesTest(args);
-	};
-};
 class LightFactory : public BaseFactory
 {
 public:
@@ -527,9 +500,6 @@ void MotorCasaPaco::setupFactories()
 	j->addFactory("Camera", new CameraFactory());
 	j->addFactory("AudioComponent", new AudioComponentFactory());
 	j->addFactory("AudioListenerComponent", new AudioListenerComponentFactory());
-	j->addFactory("TerrainRotation", new TerrainRotationFactory());
-	j->addFactory("SimpleMovement", new SimpleMovementFactory());
-	j->addFactory("ForcesTest", new ForcesTestFactory());
 	j->addFactory("Light", new LightFactory());
 	j->addFactory("Skybox", new SkyboxFactory());
 }

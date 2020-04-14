@@ -1,4 +1,4 @@
-#include "Others/TestComponent.h"
+#include "TestComponent.h"
 #include <iostream>
 #include "Entity/Entity.h"
 #include "Entity/Transform.h"
