@@ -35,8 +35,8 @@
 			"components" : [
 				{
 					"type" : "Mesh",
-					"mesh" : "barrel.mesh",
-					"material" : "blank"
+					"mesh" : "NaveWiterico.mesh",
+					"material" : "NaveWiterico"
 				},
 				{
 					"type" : "RigidBody",
