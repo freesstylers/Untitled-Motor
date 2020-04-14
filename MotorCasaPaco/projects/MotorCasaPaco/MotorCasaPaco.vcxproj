@@ -111,13 +111,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -208,6 +208,9 @@ call preBuild.bat</Command>
     <PreBuildEvent>
       <Message>Copies all necessary DLL's from the Ogre build directory (you need to build Ogre for this to work)</Message>
     </PreBuildEvent>
+    <Lib>
+      <AdditionalDependencies>cegui\CEGUIBase-0_d.lib;cegui\CEGUIExpatParser_d.lib;cegui\CEGUIOgreRenderer-0_d.lib;cegui\CEGUISILLYImageCodec_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreMain_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreRTShaderSystem_d.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Debug\OgreBites_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -253,6 +256,9 @@ call preBuild.bat</Command>
 call preBuild.bat</Command>
       <Message>Copies all necessary DLL's from the Ogre build directory (you need to build Ogre for this to work)</Message>
     </PreBuildEvent>
+    <Lib>
+      <AdditionalDependencies>cegui\CEGUIBase-0.lib;cegui\CEGUIExpatParser.lib;cegui\CEGUIOgreRenderer-0.lib;cegui\CEGUISILLYImageCodec.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreMain.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreBites.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreRTShaderSystem.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics.lib;bullet\BulletCollision.lib;bullet\LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
