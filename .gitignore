@@ -15,6 +15,7 @@
 *.so
 *.dylib
 MotorCasaPaco/bin/*.dll
+MotorCasaPaco/bin/*.lib
 
 # Fortran module files
 *.mod
