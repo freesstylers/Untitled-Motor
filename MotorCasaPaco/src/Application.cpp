@@ -54,7 +54,7 @@ MotorCasaPaco* core;
 		}
 
 
-		core->changeScene("UITest");
+		core->changeScene("verticalSlice");
 
 		core->start();
 
