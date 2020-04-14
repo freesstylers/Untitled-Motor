@@ -54,6 +54,7 @@
     <ClInclude Include="..\..\include\Audio\AudioComponent.h" />
     <ClInclude Include="..\..\include\Audio\AudioListenerComponent.h" />
     <ClInclude Include="..\..\include\Audio\AudioManager.h" />
+    <ClInclude Include="..\..\include\Input\PacoKeys.h" />
     <ClInclude Include="..\..\include\MotorCasaPaco.h" />
     <ClInclude Include="..\..\include\Entity\Component.h" />
     <ClInclude Include="..\..\include\Entity\Entity.h" />

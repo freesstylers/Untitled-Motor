@@ -1,35 +1,34 @@
 #pragma once
 
-#include "SDL_joystick.h"
-#include "SDL_keyboard.h"
-#include "SDL_keycode.h"
-#include <Vector>
-#include <SDL_gamecontroller.h>
-#include <SDL_events.h>
-#include <CEGUI/CEGUI.h>
+#include <vector>
+#include "Input/PacoKeys.h"
+
+union SDL_Event;
+struct _SDL_GameController;
+typedef struct _SDL_GameController SDL_GameController;
 
 class InputManager	//carga de recursos (por ahora)
 {
 
 private:
 	struct ControllerToKey {
-		SDL_Keycode A=SDLK_INSERT;
-		SDL_Keycode B=SDLK_RETURN;
-		SDL_Keycode X;
-		SDL_Keycode Y;
-		SDL_Keycode Start=SDLK_ESCAPE;
-		SDL_Keycode Back=SDLK_TAB;
-		SDL_Keycode Left=SDLK_LEFT;
-		SDL_Keycode Right=SDLK_RIGHT;
-		SDL_Keycode Up=SDLK_UP;
-		SDL_Keycode Down = SDLK_DOWN;
-		SDL_Keycode LBump=SDLK_q;
-		SDL_Keycode RBump=SDLK_e;
-		SDL_Keycode LTrigg=SDLK_1;
-		SDL_Keycode RTrigg=SDLK_2;
+		Keycode A=K_INSERT;
+		Keycode B=K_RETURN;
+		Keycode X;
+		Keycode Y;
+		Keycode Start=K_ESCAPE;
+		Keycode Back=K_TAB;
+		Keycode Left=K_LEFT;
+		Keycode Right=K_RIGHT;
+		Keycode Up=K_UP;
+		Keycode Down = K_DOWN;
+		Keycode LBump=K_q;
+		Keycode RBump=K_e;
+		Keycode LTrigg=K_1;
+		Keycode RTrigg=K_2;
 	};
 
-	struct Controller {
+	struct PacoController {
 		SDL_GameController* cReference=nullptr;
 		bool initialised = false;
 		float deadZoneRX=0;
@@ -42,7 +41,7 @@ private:
 
 	static InputManager* instance;
 
-	std::vector<Controller> controllers;
+	std::vector<PacoController> controllers;
 
 	ControllerToKey cKeyMapping;
 
@@ -74,15 +73,15 @@ public:
 
 	void GeneralInputManagement(SDL_Event event);
 
-	bool GameControllerIsButtonDown(SDL_GameControllerButton button, int controller = 0);
+	bool GameControllerIsButtonDown(GameControllerButton button, int controller = 0);
 
-	bool IsKeyDown(SDL_Scancode key);
+	bool IsKeyDown(Scancode key);
 
 	void MouseWheelChange(int field, int value);
 
 	//void MousePositionChange(int x, int y);
 
-	float GameControllerGetAxisMovement(SDL_GameControllerAxis axis, bool accel, int controller = 0);
+	float GameControllerGetAxisMovement(GameControllerAxis axis, bool accel, int controller = 0);
 
 	SDL_GameController* getWhichController(SDL_Event event);
 
@@ -92,8 +91,4 @@ public:
 	void MouseButtonChange(int button, int change);*/
 
 	MouseWheel getMouseWheel();
-
-
-	CEGUI::Key::Scan SDL_KeyCode_TO_CEGUI(SDL_Keycode key);
-	CEGUI::MouseButton SDLMouseButtonToCEGUIMouseButton(Uint8 MouseButtons);
 };

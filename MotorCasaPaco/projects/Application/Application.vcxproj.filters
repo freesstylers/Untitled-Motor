@@ -192,6 +192,9 @@
     <ClInclude Include="..\..\include\Others\PacoConversions.h">
       <Filter>Others</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Input\PacoKeys.h">
+      <Filter>Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Audio">

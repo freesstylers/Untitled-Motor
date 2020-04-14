@@ -54,12 +54,11 @@ void SimpleMovement::controllerMovement()
 {
 	Transform* transform = getEntity()->getComponent<Transform>("Transform");
 
-	float leftx = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTX, false);
-	float lefty = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_LEFTY, false);
+	float leftx = InputManager::getInstance()->GameControllerGetAxisMovement(CONTROLLER_AXIS_LEFTX, false);
+	float lefty = InputManager::getInstance()->GameControllerGetAxisMovement(CONTROLLER_AXIS_LEFTY, false);
 
-	float rightx = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTX, false);
-	float righty = InputManager::getInstance()->GameControllerGetAxisMovement(SDL_CONTROLLER_AXIS_RIGHTY, false);
-
+	float rightx = InputManager::getInstance()->GameControllerGetAxisMovement(CONTROLLER_AXIS_RIGHTX, false);
+	float righty = InputManager::getInstance()->GameControllerGetAxisMovement(CONTROLLER_AXIS_RIGHTY, false);
 
 	transform->translate(Vector3(speed * leftx * MotorCasaPaco::getInstance()->DeltaTime(), 0, speed * lefty * MotorCasaPaco::getInstance()->DeltaTime()), TransformSpace::LOCAL);
 	transform->rotate(Vector3(rotateSpeed * -righty * MotorCasaPaco::getInstance()->DeltaTime(), rotateSpeed * -rightx * MotorCasaPaco::getInstance()->DeltaTime(), 0));
@@ -68,22 +67,22 @@ void SimpleMovement::controllerMovement()
 void SimpleMovement::keyboardMovement()
 {
 	Transform* transform = getEntity()->getComponent<Transform>("Transform");
-	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_RIGHT))
+	if (InputManager::getInstance()->IsKeyDown(SCANCODE_RIGHT))
 	{
 		transform->rotate(Vector3(0, -rotateSpeed * MotorCasaPaco::getInstance()->DeltaTime(), 0));
 	}
 
-	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_LEFT))
+	if (InputManager::getInstance()->IsKeyDown(SCANCODE_LEFT))
 	{
 		transform->rotate(Vector3(0, rotateSpeed * MotorCasaPaco::getInstance()->DeltaTime(), 0));
 	}
 
-	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_DOWN))
+	if (InputManager::getInstance()->IsKeyDown(SCANCODE_DOWN))
 	{
 		transform->translate(Vector3(0, 0, speed * MotorCasaPaco::getInstance()->DeltaTime()), TransformSpace::LOCAL);
 	}
 
-	if (InputManager::getInstance()->IsKeyDown(SDL_SCANCODE_UP))
+	if (InputManager::getInstance()->IsKeyDown(SCANCODE_UP))
 	{
 		transform->translate(Vector3(0, 0, -speed * MotorCasaPaco::getInstance()->DeltaTime()), TransformSpace::LOCAL);
 	}
