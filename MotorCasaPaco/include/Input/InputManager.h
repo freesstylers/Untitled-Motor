@@ -28,7 +28,7 @@ private:
 		Keycode RTrigg=K_2;
 	};
 
-	struct PacoController {
+	struct Controller {
 		SDL_GameController* cReference=nullptr;
 		bool initialised = false;
 		float deadZoneRX=0;
@@ -41,7 +41,7 @@ private:
 
 	static InputManager* instance;
 
-	std::vector<PacoController> controllers;
+	std::vector<Controller> controllers;
 
 	ControllerToKey cKeyMapping;
 

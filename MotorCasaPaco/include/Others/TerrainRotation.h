@@ -1,6 +1,5 @@
 #pragma once
 #include "Entity/Component.h"
-#include "Ogre.h"
 
 class TerrainRotation : public Component
 {
@@ -11,5 +10,5 @@ public:
 	~TerrainRotation();
 private:
 	float speed = 20;
-	Ogre::Vector3 rotation;
+	Vector3 rotation;
 };

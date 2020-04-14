@@ -40,7 +40,7 @@ void SceneManager::clean()
 	delete instance;
 }
 
-Scene* SceneManager::loadScene(const Ogre::String& scene)
+Scene* SceneManager::loadScene(const std::string& scene)
 {
 	json j = ResourceManager::getInstance()->loadSceneFile(scene);
 
@@ -61,7 +61,7 @@ void SceneManager::sceneCleanup()
 	currentScene = nullptr;
 }
 
-void SceneManager::changeScene(const Ogre::String& name)
+void SceneManager::changeScene(const std::string& name)
 {
 	sceneCleanup();
 	currentScene = loadScene(name);

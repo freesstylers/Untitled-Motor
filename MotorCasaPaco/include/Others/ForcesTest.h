@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity/Component.h"
+
 class ForcesTest : public Component
 {
 public:

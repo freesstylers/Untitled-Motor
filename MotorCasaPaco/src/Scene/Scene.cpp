@@ -1,12 +1,12 @@
 #include "Scene/Scene.h"
 
-#include "MotorCasaPaco.h"
+#include <functional>
 #include <OgreViewport.h>
 #include <OgreRenderWindow.h>
+//#include <OgreCamera.h>
+
+#include "MotorCasaPaco.h"
 #include "Resources/ResourceManager.h"
-
-#include <functional>
-
 #include <GUI/GUI_Manager.h>
 
 using namespace std;

@@ -1,12 +1,9 @@
 #pragma once
-#include "Others/json.hpp"
-
-#include "Entity/Entity.h"
 #include <vector>
-#include <OgreCamera.h>
+#include <string>
 
-
-using json = nlohmann::json;
+#include "Others/json.hpp"
+#include "Entity/Entity.h"
 
 class MotorCasaPaco;
 
@@ -32,6 +29,6 @@ private:
 
 	std::map<std::string, Entity*> entities;
 
-	Ogre::String name;
+	std::string name;
 };
 

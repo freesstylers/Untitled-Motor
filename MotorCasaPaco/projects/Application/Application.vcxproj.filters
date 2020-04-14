@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\..\src\Application.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioComponent.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
@@ -86,6 +85,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Others\PacoConversions.cpp">
       <Filter>Others</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\PacoFrameListener.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -180,9 +182,6 @@
     <ClInclude Include="..\..\include\Others\Quaternion.hpp">
       <Filter>Others</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Others\Vector2.hpp">
-      <Filter>Others</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Others\Vector3.hpp">
       <Filter>Others</Filter>
     </ClInclude>
@@ -194,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Input\PacoKeys.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Graphics\PacoFrameListener.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

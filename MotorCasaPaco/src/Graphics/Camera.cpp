@@ -5,6 +5,8 @@
 #include <OgreViewport.h>
 #include <OgreRenderWindow.h>
 #include <OgreCamera.h>
+#include <OgreSceneNode.h>
+#include <OgreSceneManager.h>
 
 using namespace std;
 

@@ -1,6 +1,5 @@
 #pragma once
 #include "Entity/Component.h"
-#include "Ogre.h"
 
 class btManifoldPoint;
 enum ForceType {

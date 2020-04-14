@@ -1,10 +1,10 @@
 #pragma once
-#include "Others/json.hpp"
 
-#include "Entity/Component.h"
-
-#include "Entity/Factory.h"
 #include <map>
+
+#include "Others/json.hpp"
+#include "Entity/Component.h"
+#include "Entity/Factory.h"
 
 using json = nlohmann::json;
 

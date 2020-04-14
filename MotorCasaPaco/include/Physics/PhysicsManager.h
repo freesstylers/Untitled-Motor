@@ -1,7 +1,17 @@
 #pragma once
-#include <btBulletDynamicsCommon.h>
-#include <OgreMesh.h>
 #include <vector>
+#include "Others/General.h"
+
+namespace Ogre {
+	class Entity;
+}
+
+class btRigidBody;
+class btDynamicsWorld;
+class btCollisionConfiguration;
+class btDispatcher;
+class btBroadphaseInterface;
+class btConstraintSolver;
 
 class PhysicsManager
 {
@@ -18,8 +28,7 @@ public:
 	void stepWorld();
 	void addRigidBody(btRigidBody* body);
 
-	btRigidBody* createRigidBody(const std::string& shape, const btVector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated);
-	btRigidBody* createRigidBody(const std::string& shape, const Ogre::Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated);
+	btRigidBody* createRigidBody(const std::string& shape, const Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated);
 
 private:
 	PhysicsManager();

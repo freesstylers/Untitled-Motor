@@ -1,12 +1,19 @@
 #include "MotorCasaPaco.h"
 
-
 #include <SDL_video.h>
 #include <SDL_syswm.h>
 #include <OgreRenderWindow.h>
 #include <OgreWindowEventUtilities.h>
 #include <OgreMeshManager.h>
+#include <OgreTimer.h>
+#include <OgreMesh.h>
+#include <OgreRoot.h>
+#include <OgreRenderSystem.h>
+#include <OgreFileSystemLayer.h>
+#include <SDL.h>
+#include <OgreFrameListener.h>
 #include <stdexcept>
+#include <btBulletDynamicsCommon.h>
 
 #include "Resources/ResourceManager.h"
 #include "Input/InputManager.h"
@@ -17,16 +24,16 @@
 #include "Events/EventManager.h"
 #include "GUI/GUI_Manager.h"
 #include <iostream>
-
 #include "Physics/RigidBody.h"
+#include "Graphics/PacoFrameListener.h"
 
 using namespace std;
 MotorCasaPaco* MotorCasaPaco::instance = 0;
 
-MotorCasaPaco::MotorCasaPaco(const Ogre::String& appName) : appName(appName)
+MotorCasaPaco::MotorCasaPaco(const std::string& appName) : appName(appName)
 {
+	frameListener_ = new PacoFrameListener();
 	root = nullptr;
-	timer = new Ogre::Timer();
 }
 
 void MotorCasaPaco::sceneCleanup()
@@ -44,7 +51,10 @@ MotorCasaPaco::~MotorCasaPaco()
 	AudioManager::clean();
 	EventManager::clean();
 	GUI_Manager::clean();
-	delete timer;
+
+	delete frameListener_; frameListener_ = nullptr;
+
+	SDL_Quit();
 }
 	
 bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
@@ -61,7 +71,7 @@ bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int
 
 MotorCasaPaco* MotorCasaPaco::getInstance()
 {
-	if (instance == 0 || instance == nullptr)
+	if (instance == nullptr)
 	{
 		return nullptr;
 	}
@@ -69,7 +79,7 @@ MotorCasaPaco* MotorCasaPaco::getInstance()
 	return instance;
 }
 
-bool MotorCasaPaco::setupInstance(const Ogre::String& appName)
+bool MotorCasaPaco::setupInstance(const std::string& appName)
 {
 	if (instance == 0)
 	{
@@ -87,6 +97,8 @@ void MotorCasaPaco::clean()
 
 void MotorCasaPaco::init()
 {
+	SDL_Init(SDL_INIT_EVERYTHING);
+
 	try { ResourceManager::setupInstance("./assets/"); }
 	catch (const std::exception& e)
 	{
@@ -140,7 +152,7 @@ void MotorCasaPaco::init()
 	setupFactories();
 }
 
-void MotorCasaPaco::changeScene(Ogre::String name)
+void MotorCasaPaco::changeScene(std::string name)
 {
 
 	SceneManager::getInstance()->changeScene(name);
@@ -175,7 +187,7 @@ void MotorCasaPaco::pollEvents()
 				{
 					Ogre::RenderWindow* win = window;
 					win->windowMovedOrResized();
-					windowResized(win);
+					frameListener_->windowResized(win);
 				}
 			}
 			break;
@@ -183,7 +195,7 @@ void MotorCasaPaco::pollEvents()
 			switch (event.key.keysym.sym) {
 			case SDLK_SPACE:
 				cout << "Totaltime " << getTime() << "\n";
-				cout << "deltaTime " << deltaTime << "\n";
+				cout << "deltaTime " << DeltaTime() << "\n";
 				//spawnBox();
 				break;
 			case SDLK_p:
@@ -203,33 +215,6 @@ void MotorCasaPaco::pollEvents()
 
 	// just avoid "window not responding"
 	Ogre::WindowEventUtilities::messagePump();
-}
-
-bool MotorCasaPaco::frameStarted(const Ogre::FrameEvent& evt)
-{
-	float prevTime = getTime();
-
-	pollEvents();
-
-	SceneManager::getInstance()->getCurrentScene()->preupdate();
-
-	PhysicsManager::getInstance()->stepWorld();
-
-	SceneManager::getInstance()->getCurrentScene()->physicsUpdate();
-
-	SceneManager::getInstance()->getCurrentScene()->update();
-
-	SceneManager::getInstance()->getCurrentScene()->lateUpdate();
-
-	AudioManager::getInstance()->update();
-
-	deltaTime = getTimeDifference(prevTime);
-
-	GUI_Manager::getInstance()->update(deltaTime);
-
-	deltaTime = getTimeDifference(prevTime);
-
-	return true;
 }
 
 bool MotorCasaPaco::checkConfig()
@@ -299,7 +284,7 @@ void MotorCasaPaco::setup()
 
 	ResourceManager::getInstance()->addSceneManager(sm);
 
-	MotorCasaPaco::getInstance()->getRoot()->addFrameListener(this);
+	MotorCasaPaco::getInstance()->getRoot()->addFrameListener(frameListener_);
 }
 
 void MotorCasaPaco::shutdown()
@@ -320,7 +305,7 @@ void MotorCasaPaco::shutdown()
 }
 
 
-void MotorCasaPaco::setupWindow(Ogre::String windowName)
+void MotorCasaPaco::setupWindow(std::string windowName)
 {
 	uint32_t w, h;
 
@@ -390,25 +375,25 @@ GUI_Manager* MotorCasaPaco::getGUI_Manager()
 
 float MotorCasaPaco::getTime()
 {
-	return timer->getMicroseconds()/1000.0f;
+	return frameListener_->getTime();
 }
 
 float MotorCasaPaco::getTimeDifference(float prevTime)
 {
-	return timer->getMicroseconds()/1000.0f - prevTime;
+	return frameListener_->getTimeDifference(prevTime);
 }
 
 float MotorCasaPaco::DeltaTime()
 {
-	return deltaTime;
+	return 	frameListener_->DeltaTime();
 }
 
 void MotorCasaPaco::resetTimer()
 {
-	timer->reset();
+	frameListener_->resetTimer();
 }
 
-void MotorCasaPaco::setFarShadowDistance(Ogre::Real dist)
+void MotorCasaPaco::setFarShadowDistance(float dist)
 {
 	sm->setShadowFarDistance(dist);
 }
@@ -418,7 +403,7 @@ void MotorCasaPaco::setShadowTechnique(Ogre::ShadowTechnique type)
 	sm->setShadowTechnique(type);
 }
 
-Ogre::Real MotorCasaPaco::getFarShadowDistance()
+float MotorCasaPaco::getFarShadowDistance()
 {
 	return sm->getShadowFarDistance();
 }

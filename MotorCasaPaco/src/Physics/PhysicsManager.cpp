@@ -1,8 +1,11 @@
 #include "Physics/PhysicsManager.h"
+
 #include <BtOgreGP.h>
 #include <BtOgreExtras.h>
 #include <BtOgrePG.h>
 #include <BulletCollision/Gimpact/btGImpactShape.h>
+#include <btBulletDynamicsCommon.h>
+#include <OgreMesh.h>
 
 PhysicsManager* PhysicsManager::instance = 0;
 
@@ -30,7 +33,7 @@ void PhysicsManager::addRigidBody(btRigidBody* body)
 	world->addRigidBody(body);
 }
 
-btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const btVector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated)
+btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated)
 {
 	btTransform t;
 	t.setIdentity();
@@ -83,11 +86,6 @@ btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const btV
 	btRigidBody* body = new btRigidBody(info);
 	addRigidBody(body);
 	return body;
-}
-
-btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Ogre::Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated)
-{
-	return createRigidBody(shape, BtOgre::Convert::toBullet(pos), ent, mass, isAnimated);
 }
 
 PhysicsManager::~PhysicsManager()

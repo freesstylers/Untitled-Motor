@@ -6,7 +6,6 @@
 #include "Physics/RigidBody.h"
 #include "Audio/AudioManager.h"
 #include "MotorCasaPaco.h"
-#include "btBulletDynamicsCommon.h"
 
 TerrainRotation::TerrainRotation(json& args) :Component(args)
 {
@@ -17,7 +16,7 @@ void TerrainRotation::start()
 {
 	AudioManager::getInstance()->playMusic("./assets/sound/alma_partia.mp3", 1);
 	AudioManager::getInstance()->setVolume(0.1, 1);
-	rotation = Ogre::Vector3(0, 0, 0);
+	rotation = Vector3(0, 0, 0);
 }
 
 void TerrainRotation::update()
@@ -32,18 +31,18 @@ void TerrainRotation::update()
 	x = x * 90;
 	y = y * 90;
 
-	Ogre::Vector3 target(y, 0, -x);
+	Vector3 target(y, 0, -x);
 
-	Ogre::Vector3 dir = target - rotation;
+	Vector3 dir = target - rotation;
 
-	if (dir.length() <= 1) dir = Ogre::Vector3(0, 0, 0);
+	if (Vector3::Magnitude(dir) <= 1) dir = Vector3(0, 0, 0);
 
-	float speedmult = dir.length();
+	float speedmult = Vector3::Magnitude(dir);
 
-	dir.normalise();
+	dir = Vector3::Normalized(dir);
 
 	rotation += dir * speed * deltatime * speedmult * 0.5;
-	transform->setRotation((Vector3)rotation);
+	transform->setRotation(rotation);
 
 	if (InputManager::getInstance()->GameControllerIsButtonDown(CONTROLLER_BUTTON_A) && !AudioManager::getInstance()->isPlayingChannel(0)) {
 		transform->getPosition(); // Esto no se usa?

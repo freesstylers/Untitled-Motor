@@ -1,43 +1,40 @@
 #pragma once
 
-#include <OgreRoot.h>
-#include <OgreRenderSystem.h>
-#include <OgreFileSystemLayer.h>
-#include <SDL.h>
-#include <OgreFrameListener.h>
+#include <string>
 
 #include "Entity/Entity.h"
 
+class PacoFrameListener;
 class GUI_Manager;
 
-class MotorCasaPaco : public Ogre::FrameListener
+namespace Ogre {
+	class Root;
+	class SceneManager;
+	class RenderWindow;
+	enum ShadowTechnique;
+}
+
+class SDL_Window;
+
+class MotorCasaPaco
 {
 
 public:
 	~MotorCasaPaco();
 
 	static MotorCasaPaco* getInstance();
-	static bool setupInstance(const Ogre::String& appName);
+	static bool setupInstance(const std::string& appName);
 	static void clean();
 
 	void init();
 
-	void changeScene(Ogre::String name);
+	void changeScene(std::string name);
 
 	void initLoadingTestScene();
 
 	void start();
 
 	void pollEvents();
-
-	virtual bool frameStarted(const Ogre::FrameEvent& evt);
-	//virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-	virtual bool frameEnded(const Ogre::FrameEvent& evt) { return true; }
-	virtual void windowMoved(Ogre::RenderWindow* rw) {}
-	virtual void windowResized(Ogre::RenderWindow* rw) {}
-	virtual bool windowClosing(Ogre::RenderWindow* rw) { return true; }
-	virtual void windowClosed(Ogre::RenderWindow* rw) {}
-	virtual void windowFocusChange(Ogre::RenderWindow* rw) {}
 
 	Ogre::Root* getRoot();
 	Ogre::SceneManager* getSM();
@@ -50,18 +47,18 @@ public:
 	float DeltaTime();
 	void resetTimer();
 
-	void setFarShadowDistance(Ogre::Real dist);
+	void setFarShadowDistance(float dist);
 	void setShadowTechnique(Ogre::ShadowTechnique type);
-	Ogre::Real getFarShadowDistance();
+	float getFarShadowDistance();
 	Ogre::ShadowTechnique getShadowTechnique();
 
 private:
 
-	MotorCasaPaco(const Ogre::String& appName);
+	MotorCasaPaco(const std::string& appName);
 
 	void sceneCleanup();
 
-	void setupWindow(Ogre::String windowName);
+	void setupWindow(std::string windowName);
 	void setupRoot();
 	void setup();
 	void shutdown();
@@ -74,9 +71,9 @@ private:
 
 	SDL_Window* sdlWindow;
 	Ogre::RenderWindow* window;
-	Ogre::String appName;
-	Ogre::Timer* timer;
-	float deltaTime;
+	std::string appName;
 	static MotorCasaPaco* instance;
+
+	PacoFrameListener* frameListener_;
 };
 

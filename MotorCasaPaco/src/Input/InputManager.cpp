@@ -276,7 +276,7 @@ void InputManager::setup()
 {
 	//SetUp de Mandos con variable para numero de mandos
 	for (int i = 0; i < NumControls; i++) {
-		PacoController c{ SDL_GameControllerOpen(i), 0, 0, 0, 0, false };
+		Controller c{ SDL_GameControllerOpen(i), 0, 0, 0, 0, false };
 		controllers.push_back(c);
 		controllers.back().deadZoneLX = GameControllerGetAxisMovement(CONTROLLER_AXIS_LEFTX, i);
 		controllers.back().deadZoneLY = GameControllerGetAxisMovement(CONTROLLER_AXIS_LEFTY, i);
@@ -398,8 +398,8 @@ void InputManager::MousePositionChange(int x, int y)
 
 float InputManager::GameControllerGetAxisMovement(GameControllerAxis axis, bool accel, int controller)
 {
-	PacoController c = controllers[controller];
-	
+	Controller c = controllers[controller];
+
 	float axisMax = (float)SDL_JOYSTICK_AXIS_MAX;
 	float x = (float) SDL_GameControllerGetAxis(controllers[controller].cReference, (SDL_GameControllerAxis)axis);
 	x = x / axisMax;

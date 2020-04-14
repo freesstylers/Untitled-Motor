@@ -1,14 +1,19 @@
 #pragma once
+
+#include <string>
+
 #include "Entity/Component.h"
 
-#include <Ogre.h>
-
+namespace Ogre {
+	class Plane;
+}
 
 class Skybox :
 	public Component
 {
 public:
 	enum SkyType {BOX, DOME, PLANE};
+
 	Skybox(json& args);
 	~Skybox() override;
 	void init(json& args) override;
@@ -17,22 +22,20 @@ public:
 	void setEnabled(bool b);
 
 private:
-	
 	void makeSky();
 
 	SkyType skyType;
 	std::string material;
-	Ogre::Real distance;
+	float distance;
 	bool drawFirst;
 
-
-	Ogre::Real curvature;
-	Ogre::Real tiling;
+	float curvature;
+	float tiling;
 
 	Ogre::Plane plane;
-	Ogre::Vector3 normal;
-	Ogre::Real scale;
-	Ogre::Real bow;
+	Vector3 normal;
+	float scale;
+	float bow;
 	int xSegments;
 	int ySegments;
 };

@@ -20,10 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp" />
-    <ClCompile Include="..\..\src\Application.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioComponent.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioListenerComponent.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioManager.cpp" />
+    <ClCompile Include="..\..\src\Graphics\PacoFrameListener.cpp" />
     <ClCompile Include="..\..\src\MotorCasaPaco.cpp" />
     <ClCompile Include="..\..\src\Entity\Component.cpp" />
     <ClCompile Include="..\..\src\Entity\Entity.cpp" />
@@ -54,6 +54,7 @@
     <ClInclude Include="..\..\include\Audio\AudioComponent.h" />
     <ClInclude Include="..\..\include\Audio\AudioListenerComponent.h" />
     <ClInclude Include="..\..\include\Audio\AudioManager.h" />
+    <ClInclude Include="..\..\include\Graphics\PacoFrameListener.h" />
     <ClInclude Include="..\..\include\Input\PacoKeys.h" />
     <ClInclude Include="..\..\include\MotorCasaPaco.h" />
     <ClInclude Include="..\..\include\Entity\Component.h" />
@@ -78,7 +79,6 @@
     <ClInclude Include="..\..\include\Others\SimpleMovement.h" />
     <ClInclude Include="..\..\include\Others\TerrainRotation.h" />
     <ClInclude Include="..\..\include\Others\TestComponent.h" />
-    <ClInclude Include="..\..\include\Others\Vector2.hpp" />
     <ClInclude Include="..\..\include\Others\Vector3.hpp" />
     <ClInclude Include="..\..\include\Physics\PhysicsManager.h" />
     <ClInclude Include="..\..\include\Physics\RigidBody.h" />
@@ -111,13 +111,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>

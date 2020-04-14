@@ -1,5 +1,6 @@
-#include "Scene/Skybox.h"
+#include <Ogre.h>
 
+#include "Scene/Skybox.h"
 #include "MotorCasaPaco.h"
 
 Skybox::Skybox(json& args) : Component(args)
