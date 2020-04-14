@@ -1,5 +1,6 @@
 #include "MotorCasaPaco.h"
 
+#include <SDL.h>
 #include <SDL_video.h>
 #include <SDL_syswm.h>
 #include <OgreRenderWindow.h>
@@ -10,7 +11,6 @@
 #include <OgreRoot.h>
 #include <OgreRenderSystem.h>
 #include <OgreFileSystemLayer.h>
-#include <SDL.h>
 #include <OgreFrameListener.h>
 #include <stdexcept>
 #include <btBulletDynamicsCommon.h>
