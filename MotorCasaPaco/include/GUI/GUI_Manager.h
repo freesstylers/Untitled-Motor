@@ -25,8 +25,10 @@ public:
 	void setMouseCursor(const std::string& imageFile);
 	void showMouseCursor();
 	void hideMouseCursor();
+	bool test(const CEGUI::EventArgs& e);
 
-	bool TestButtonFunction(const CEGUI::EventArgs& e);
+	GUI_Element* getRoot();
+	CEGUI::WindowManager* getWinManager();
 
 private:
 	GUI_Manager(Ogre::RenderWindow* window);
