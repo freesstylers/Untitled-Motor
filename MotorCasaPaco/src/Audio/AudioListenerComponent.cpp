@@ -19,42 +19,42 @@ bool AudioListenerComponent::ReceiveEvent(Event& event)
 
 void AudioListenerComponent::update()
 {
-	pos.x = e_->getComponent<Transform>("Transform")->getPosition().X;
-	pos.y = e_->getComponent<Transform>("Transform")->getPosition().Y;
-	pos.z = e_->getComponent<Transform>("Transform")->getPosition().Z;
+	pos.X = e_->getComponent<Transform>("Transform")->getPosition().X;
+	pos.Y = e_->getComponent<Transform>("Transform")->getPosition().Y;
+	pos.Z = e_->getComponent<Transform>("Transform")->getPosition().Z;
 
-	forward.x = 0;
-	forward.y = 0;
-	forward.z = 0;
+	forward.X = 0;
+	forward.Y = 0;
+	forward.Z = 0;
 
-	up.x = 0;
-	up.y = 0;
-	up.z = 0;
+	up.X = 0;
+	up.Y = 0;
+	up.Z = 0;
 
-	vel.x = 0;
-	vel.y = 0;
-	vel.z = 0;
+	vel.X = 0;
+	vel.Y = 0;
+	vel.Z = 0;
 	AudioManager::getInstance()->updateListener(pos, vel, forward, up);
 }
 
 
 void AudioListenerComponent::init(json& j)
 {
-	pos.x = e_->getComponent<Transform>("Transform")->getPosition().X;
-	pos.y = e_->getComponent<Transform>("Transform")->getPosition().Y;
-	pos.z = e_->getComponent<Transform>("Transform")->getPosition().Z;
+	pos.X = e_->getComponent<Transform>("Transform")->getPosition().X;
+	pos.Y = e_->getComponent<Transform>("Transform")->getPosition().Y;
+	pos.Z = e_->getComponent<Transform>("Transform")->getPosition().Z;
 
-	forward.x = 0;
-	forward.y = 0;
-	forward.z = 0;
+	forward.X = 0;
+	forward.Y = 0;
+	forward.Z = 0;
 
-	up.x = 0;
-	up.y = 0;
-	up.z = 0;
+	up.X = 0;
+	up.Y = 0;
+	up.Z = 0;
 
-	vel.x = 0;
-	vel.y = 0;
-	vel.z = 0;
+	vel.X = 0;
+	vel.Y = 0;
+	vel.Z = 0;
 
 	AudioManager::getInstance()->updateListener(pos, vel, forward, up);
 

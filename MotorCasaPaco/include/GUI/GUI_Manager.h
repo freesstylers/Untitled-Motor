@@ -1,10 +1,17 @@
 #pragma once
-
-#include <CEGUI/Event.h>
-#include <CEGUI/CEGUI.h>
-#include <CEGUI/RendererModules/Ogre/Renderer.h>
-#include <OgreRenderWindow.h>
 #include "GUI/GUI_Element.h"
+
+namespace CEGUI {
+	class String;
+	class System;
+	class EventArgs;
+	class OgreRenderer;
+	class WindowManager;
+}
+
+namespace Ogre {
+	class RenderWindow;
+}
 
 class GUI_Manager
 {
@@ -32,7 +39,6 @@ public:
 
 private:
 	GUI_Manager(Ogre::RenderWindow* window);
-	
 
 	static GUI_Manager* instance;
 	CEGUI::OgreRenderer* renderer;

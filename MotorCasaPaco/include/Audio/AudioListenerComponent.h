@@ -14,14 +14,13 @@ public:
 	void update() override;
 	void init(json& args) override;
 
-
 private:
 
-	FMOD_VECTOR forward;
-	FMOD_VECTOR up;
+	Vector3 forward;
+	Vector3 up;
 
-	FMOD_VECTOR pos;
-	FMOD_VECTOR vel;
+	Vector3 pos;
+	Vector3 vel;
 };
 
 

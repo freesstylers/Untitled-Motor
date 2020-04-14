@@ -1,7 +1,9 @@
 #pragma once
-#include "CEGUI/CEGUI.h"
 #include "Entity/Transform.h" //Dejado para mantener Ogre para el vector 2, si eso
 
+namespace CEGUI {
+	class Window;
+}
 
 class GUI_Element
 {

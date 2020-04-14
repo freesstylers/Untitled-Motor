@@ -1,21 +1,25 @@
 #pragma once
-#include <fmod.hpp>
-#include <fmod.h>
-#include <fmod_errors.h>
+
 #include <iostream>
 #include <array>
 
-using namespace FMOD;
-using namespace std;
+#include "Others/General.h"
+
+namespace FMOD {
+	class ChannelGroup;
+	class Channel;
+	class System;
+}
+
+enum FMOD_RESULT;
 
 class AudioManager
 {
 public:
 
 	struct emisor {
-	
-		FMOD_VECTOR soundPos;
-		FMOD_VECTOR	soundVel;
+		Vector3 soundPos;
+		Vector3	soundVel;
 	};
 
 	static AudioManager* getInstance();
@@ -34,10 +38,10 @@ public:
 	bool isPlayingChannel(int nChannel);
 
 	void update();
-	void updateListener(FMOD_VECTOR position, FMOD_VECTOR velocity, FMOD_VECTOR forward, FMOD_VECTOR up);
-	void updateSound(FMOD_VECTOR position, FMOD_VECTOR velocity, int nChannel, int numObj);
+	void updateListener(Vector3 position, Vector3 velocity, Vector3 forward, Vector3 up);
+	void updateSound(Vector3 position, Vector3 velocity, int nChannel, int numObj);
 
-	int addEmisor(FMOD_VECTOR position, FMOD_VECTOR velocity);
+	int addEmisor(Vector3 position, Vector3 velocity);
 	void removeEmisor(int numObj);
 
 private:
@@ -46,9 +50,8 @@ private:
 	FMOD::System* system;
 	FMOD_RESULT result;
 
-
 	emisor emisores[32];
-	FMOD_VECTOR listenerVelocity, listenerUp, listenerForward, listenerPos;
+	Vector3 listenerVelocity, listenerUp, listenerForward, listenerPos;
 	bool activo[32];
 	FMOD::ChannelGroup* channelGroup;
 	FMOD::Channel* channels[];

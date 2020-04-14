@@ -3,6 +3,11 @@
 #include "MotorCasaPaco.h"
 #include <iostream>
 
+#include <CEGUI/Event.h>
+#include <CEGUI/CEGUI.h>
+#include <CEGUI/RendererModules/Ogre/Renderer.h>
+#include <OgreRenderWindow.h>
+
 GUI_Manager* GUI_Manager::instance = 0;
 
 GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)

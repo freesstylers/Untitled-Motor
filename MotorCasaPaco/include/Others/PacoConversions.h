@@ -28,6 +28,9 @@ class btVector3;
 class btQuaternion;
 class btMatrix3x3;
 
+// FMOD
+struct FMOD_VECTOR;
+
 // Paco
 struct Vector2;
 struct Vector3;
@@ -41,6 +44,7 @@ Ogre::Vector3 PacoToOgre(const Vector3& vector);
 Vector3 OgreToPaco(const Ogre::Vector3& vector);
 btVector3 PacoToBullet(const Vector3& vector);
 Vector3 BulletToPaco(const btVector3& vector);
+FMOD_VECTOR PacoToFMOD(const Vector3& vector);
 
 // Quaternions
 Ogre::Quaternion PacoToOgre(const Quaternion& quaternion);

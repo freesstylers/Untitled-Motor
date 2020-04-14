@@ -2,6 +2,9 @@
 #include "MotorCasaPaco.h"
 #include "Entity/Transform.h"
 
+#include <fmod.hpp>
+#include <fmod.h>
+
 AudioComponent::AudioComponent(json& args): Component(args)
 {
 	
@@ -18,15 +21,13 @@ bool AudioComponent::ReceiveEvent(Event& event)
 
 void AudioComponent::update()
 {
-	pos.x = e_->getComponent<Transform>("Transform")->getPosition().X;
-	pos.y = e_->getComponent<Transform>("Transform")->getPosition().Y;
-	pos.z = e_->getComponent<Transform>("Transform")->getPosition().Z;
+	pos.X = e_->getComponent<Transform>("Transform")->getPosition().X;
+	pos.Y = e_->getComponent<Transform>("Transform")->getPosition().Y;
+	pos.Z = e_->getComponent<Transform>("Transform")->getPosition().Z;
 
-
-
-	vel.x = 0;
-	vel.y = 0;
-	vel.z = 0;
+	vel.X = 0;
+	vel.Y = 0;
+	vel.Z = 0;
 	AudioManager::getInstance()->updateSound(pos, vel, numObj, numObj);
 }
 
@@ -37,15 +38,13 @@ void AudioComponent::removeEmisor() {
 
 void AudioComponent::init(json& j)
 {
-	pos.x = e_->getComponent<Transform>("Transform")->getPosition().X;
-	pos.y = e_->getComponent<Transform>("Transform")->getPosition().Y;
-	pos.z = e_->getComponent<Transform>("Transform")->getPosition().Z;
+	pos.X = e_->getComponent<Transform>("Transform")->getPosition().X;
+	pos.Y = e_->getComponent<Transform>("Transform")->getPosition().Y;
+	pos.Z = e_->getComponent<Transform>("Transform")->getPosition().Z;	
 
-	
-
-	vel.x = 0;
-	vel.y = 0;
-	vel.z = 0;
+	vel.X = 0;
+	vel.Y = 0;
+	vel.Z = 0;
 	numObj = AudioManager::getInstance()->addEmisor(pos, vel);
 
 	AudioManager::getInstance()->updateSound(pos, vel, numObj, numObj);

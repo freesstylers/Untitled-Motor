@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Entity/Component.h"
-#include <fmod.hpp>
-#include <fmod.h>
 #include "Audio/AudioManager.h"
 
 class AudioComponent : public Component
@@ -18,8 +16,8 @@ public:
 
 private:
 	int numObj = -1;
-	FMOD_VECTOR pos;
-	FMOD_VECTOR vel;
+	Vector3 pos;
+	Vector3 vel;
 };
 
 

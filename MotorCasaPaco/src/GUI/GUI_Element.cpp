@@ -1,4 +1,5 @@
 #include "GUI/GUI_Element.h"
+#include "CEGUI/CEGUI.h"
 
 GUI_Element::GUI_Element(CEGUI::Window* window)
 {

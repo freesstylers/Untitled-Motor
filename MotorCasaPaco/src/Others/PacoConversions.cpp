@@ -7,6 +7,7 @@
 #include "OgreMatrix3.h"
 
 #include <btBulletCollisionCommon.h>
+#include <fmod.h>
 
 
 // Vectors
@@ -27,6 +28,16 @@ btVector3 PacoToBullet(const Vector3& vector) {
 Vector3 BulletToPaco(const btVector3& vector) {
 	return Vector3(vector.getX(), vector.getY(), vector.getZ());
 }
+
+FMOD_VECTOR PacoToFMOD(const Vector3& vector) {
+	FMOD_VECTOR fVec;
+	fVec.x = vector.X;
+	fVec.y = vector.Y;
+	fVec.z = vector.Z;
+
+	return fVec;
+}
+
 
 // Quaternions
 Ogre::Quaternion PacoToOgre(const Quaternion& quaternion) {
