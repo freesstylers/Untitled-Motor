@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="GWEN/Button" name="Button" >
+        <Property name="Area" value="{{0,1123},{0,78},{0,1723},{0,178}}" />
+        <Property name="Text" value="Jugar" />
+    </Window>
+</GUILayout>
