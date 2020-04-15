@@ -1,5 +1,6 @@
 #include "GUI/GUI_Element.h"
 #include "CEGUI/CEGUI.h"
+#include "checkML.h"
 
 GUI_Element::GUI_Element(CEGUI::Window* window)
 {

@@ -1,5 +1,6 @@
 #include "Graphics/SGTechniqueResolverListener.h"
 #include "OgreTechnique.h"
+#include "checkML.h"
 
 
 SGTechniqueResolverListener::SGTechniqueResolverListener(Ogre::RTShader::ShaderGenerator* pShaderGenerator)

@@ -7,6 +7,7 @@
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include <OgreRenderWindow.h>
+#include "checkML.h"
 
 GUI_Manager* GUI_Manager::instance = 0;
 

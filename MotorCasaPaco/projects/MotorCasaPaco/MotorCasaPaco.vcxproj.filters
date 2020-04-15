@@ -173,6 +173,7 @@
     <ClInclude Include="..\..\include\Graphics\PacoFrameListener.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\checkML.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Audio">

@@ -2,6 +2,7 @@
 
 
 #include "Resources/ResourceManager.h"
+#include "checkML.h"
 
 SceneManager* SceneManager::instance = 0;
 

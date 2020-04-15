@@ -8,6 +8,7 @@
 #include <SDL_gamecontroller.h>
 #include <SDL_events.h>
 #include <CEGUI/CEGUI.h>
+#include "checkML.h"
 
 InputManager* InputManager::instance = 0;
 

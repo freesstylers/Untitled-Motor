@@ -4,6 +4,7 @@
 
 #include <fmod.hpp>
 #include <fmod.h>
+#include "checkML.h"
 
 AudioComponent::AudioComponent(json& args): Component(args)
 {

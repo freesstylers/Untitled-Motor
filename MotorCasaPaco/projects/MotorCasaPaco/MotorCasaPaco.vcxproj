@@ -79,6 +79,7 @@
     <ClInclude Include="..\..\include\Scene\Scene.h" />
     <ClInclude Include="..\..\include\Scene\SceneManager.h" />
     <ClInclude Include="..\..\include\Scene\Skybox.h" />
+    <ClInclude Include="..\..\src\checkML.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

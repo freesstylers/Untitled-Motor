@@ -7,6 +7,7 @@
 #include <OgreCamera.h>
 #include <OgreSceneNode.h>
 #include <OgreSceneManager.h>
+#include "checkML.h"
 
 using namespace std;
 
