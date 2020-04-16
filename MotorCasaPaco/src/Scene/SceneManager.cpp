@@ -64,6 +64,8 @@ void SceneManager::sceneCleanup()
 
 void SceneManager::changeScene(const std::string& name)
 {
-	sceneCleanup();
+	if(currentScene != nullptr)
+		sceneCleanup();
+
 	currentScene = loadScene(name);
 }
