@@ -146,8 +146,8 @@
     <OutDir>$(SolutionDir)bin\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <IntDir>$(SolutionDir)interm\$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(SolutionDir)dependencies\cegui-0.8.7\build\cegui\include;$(SolutionDir)dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)src;$(SolutionDir)include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\cegui-0.8.7\build\cegui\include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\src;$(SolutionDir)Untitled-Motor\MotorCasaPaco\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\$(Configuration);$(SolutionDir)libs;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\ogre-1.12.4\build\lib\$(Configuration);$(SolutionDir)Untitled-Motor\MotorCasaPaco\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\dependencies\ogre-1.12.4\Components\Bites\include;$(ProjectDir)..\..\dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(ProjectDir)..\..\dependencies\cegui-0.8.7\build\cegui\include;$(ProjectDir)..\..\dependencies\cegui-0.8.7\dependencies\include;$(ProjectDir)..\..\dependencies\cegui-0.8.7\cegui\include;$(ProjectDir)..\..\src;$(ProjectDir)..\..\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\..\dependencies\ogre-1.12.4\build\lib\$(Configuration);$(ProjectDir)..\..\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -160,8 +160,8 @@
     <OutDir>$(SolutionDir)bin</OutDir>
     <TargetName>$(ProjectName)</TargetName>
     <IntDir>$(SolutionDir)interm\$(Platform)\$(Configuration)\$(ProjectName)</IntDir>
-    <IncludePath>$(SolutionDir)dependencies\ogre-1.12.4\Components\Bites\include;$(SolutionDir)dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(SolutionDir)dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(SolutionDir)dependencies\cegui-0.8.7\build\cegui\include;$(SolutionDir)dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)include;$(SolutionDir)src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)dependencies\ogre-1.12.4\build\lib\$(Configuration);$(SolutionDir)libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\dependencies\ogre-1.12.4\Components\Bites\include;$(ProjectDir)..\..\dependencies\ogre-1.12.4\Components\RTShaderSystem\include;$(ProjectDir)..\..\dependencies\JSON_for_Modern_C++_v3.7.3\nlohmann;$(ProjectDir)..\..\dependencies\cegui-0.8.7\build\cegui\include;$(ProjectDir)..\..\dependencies\cegui-0.8.7\dependencies\include;$(ProjectDir)..\..\dependencies\cegui-0.8.7\cegui\include;$(ProjectDir)..\..\src;$(ProjectDir)..\..\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\..\dependencies\ogre-1.12.4\build\lib\$(Configuration);$(ProjectDir)..\..\libs;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -186,7 +186,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\cegui-0.8.7\build\cegui\include\CEGUI;$(SolutionDir)dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\btogre\src;$(SolutionDir)dependencies\fmod-2.00.07\include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\cegui-0.8.7\build\cegui\include\CEGUI;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\ogre-1.12.4\build\include\;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\SDL2-2.0.10\include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\btogre\src;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\fmod-2.00.07\include;$(SolutionDir)Untitled-Motor\MotorCasaPaco\dependencies\bullet3-2.89\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\cegui-0.8.7\build\cegui\include\CEGUI;$(ProjectDir)..\..\dependencies\cegui-0.8.7\dependencies\include;$(ProjectDir)..\..\dependencies\cegui-0.8.7\cegui\include;$(ProjectDir)..\..\dependencies\ogre-1.12.4\build\include\;$(ProjectDir)..\..\dependencies\ogre-1.12.4\OgreMain\include\;$(ProjectDir)..\..\dependencies\SDL2-2.0.10\include;$(ProjectDir)..\..\dependencies\bullet3-2.89\src;$(ProjectDir)..\..\dependencies\btogre\src;$(ProjectDir)..\..\dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -196,7 +196,7 @@
     </Link>
     <PreBuildEvent>
       <Command>cd "$(ProjectDir)..\..\scripts"
-call preBuild.bat</Command>
+call preBuild.bat "$(SolutionDir)bin"</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Copies all necessary DLL's from the Ogre build directory (you need to build Ogre for this to work)</Message>
@@ -234,7 +234,7 @@ call preBuild.bat</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\cegui-0.8.7\build\cegui\include\CEGUI;$(SolutionDir)dependencies\cegui-0.8.7\dependencies\include;$(SolutionDir)dependencies\cegui-0.8.7\cegui\include;$(SolutionDir)dependencies\ogre-1.12.4\build\include\;$(SolutionDir)dependencies\ogre-1.12.4\OgreMain\include\;$(SolutionDir)dependencies\SDL2-2.0.10\include;$(SolutionDir)dependencies\bullet3-2.89\src;$(SolutionDir)dependencies\btogre\src;$(SolutionDir)dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\cegui-0.8.7\build\cegui\include\CEGUI;$(ProjectDir)..\..\dependencies\cegui-0.8.7\dependencies\include;$(ProjectDir)..\..\dependencies\cegui-0.8.7\cegui\include;$(ProjectDir)..\..\dependencies\ogre-1.12.4\build\include\;$(ProjectDir)..\..\dependencies\ogre-1.12.4\OgreMain\include\;$(ProjectDir)..\..\dependencies\SDL2-2.0.10\include;$(ProjectDir)..\..\dependencies\bullet3-2.89\src;$(ProjectDir)..\..\dependencies\btogre\src;$(ProjectDir)..\..\dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -245,8 +245,8 @@ call preBuild.bat</Command>
       <AdditionalDependencies>cegui\CEGUIBase-0.lib;cegui\CEGUIExpatParser.lib;cegui\CEGUIOgreRenderer-0.lib;cegui\CEGUISILLYImageCodec.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreMain.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreBites.lib;$(SolutionDir)dependencies\ogre-1.12.4\build\lib\Release\OgreRTShaderSystem.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics.lib;bullet\BulletCollision.lib;bullet\LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>cd "$(SolutionDir)scripts"
-call preBuild.bat</Command>
+      <Command>cd "$(ProjectDir)..\..\scripts"
+call preBuild.bat "$(SolutionDir)bin"</Command>
       <Message>Copies all necessary DLL's from the Ogre build directory (you need to build Ogre for this to work)</Message>
     </PreBuildEvent>
     <Lib>
