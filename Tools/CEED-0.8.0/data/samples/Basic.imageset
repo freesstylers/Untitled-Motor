@@ -1,0 +1,25 @@
+<Imageset name="" imagefile="Basic.png" nativeHorzRes="800" nativeVertRes="600" autoScaled="False" version="2">
+    <Image name="abs_integers_mode" xPos="207" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="absolute_mode" xPos="411" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="align_hcentre" xPos="309" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="align_hleft" xPos="343" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="align_hright" xPos="275" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="align_vbottom" xPos="139" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="align_vcentre" xPos="105" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="align_vtop" xPos="71" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="application_icon" xPos="37" yPos="35" width="256" height="256" xOffset="0" yOffset="0" />
+    <Image name="focus_property_inspector_filter_box" xPos="581" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="lock_widget" xPos="547" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="lock_widget_recursively" xPos="37" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="manipulator_locked" xPos="19" yPos="1" width="16" height="16" xOffset="0" yOffset="0" />
+    <Image name="manipulator_unlocked" xPos="1" yPos="1" width="16" height="16" xOffset="0" yOffset="0" />
+    <Image name="normalise_position" xPos="513" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="normalise_size" xPos="1" yPos="19" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="rename" xPos="479" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="round_position" xPos="241" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="round_size" xPos="377" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="snap_grid" xPos="445" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="splashscreen" xPos="1" yPos="293" width="500" height="375" xOffset="0" yOffset="0" />
+    <Image name="unlock_widget" xPos="173" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+    <Image name="unlock_widget_recursively" xPos="615" yPos="1" width="32" height="32" xOffset="0" yOffset="0" />
+</Imageset>

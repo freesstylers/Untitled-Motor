@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="WindowsLook/Button" name="Button" >
+            <Property name="Area" value="{{0,63},{0,36},{0,159},{0,68}}" />
+        </Window>
+        <Window type="WindowsLook/Checkbox" name="Checkbox" >
+            <Property name="Area" value="{{0,230},{0,37},{0,358},{0,69}}" />
+        </Window>
+        <Window type="WindowsLook/Editbox" name="Editbox" >
+            <Property name="Area" value="{{0,463},{0,34},{0,719},{0,66}}" />
+        </Window>
+        <Window type="WindowsLook/RadioButton" name="RadioButton" >
+            <Property name="Area" value="{{0,825},{0,38},{0,1081},{0,70}}" />
+        </Window>
+        <Window type="WindowsLook/VerticalScrollbar" name="VerticalScrollbar" >
+            <Property name="Area" value="{{0,263},{0,101},{0,295},{1,-740}}" />
+        </Window>
+        <Window type="WindowsLook/FrameWindow" name="FrameWindow" >
+            <Property name="Area" value="{{-0.0114583,420},{0.0148148,152},{0.210417,420},{0.187037,152}}" />
+        </Window>
+        <Window type="SleekSpace/Button" name="Button2" >
+            <Property name="Area" value="{{0,202},{0,660},{0,336},{0,710}}" />
+        </Window>
+        <Window type="SleekSpace/Checkbox" name="Checkbox2" >
+            <Property name="Area" value="{{0,410},{0,650},{0,460},{0,700}}" />
+        </Window>
+        <Window type="GWEN/Button" name="Button3" >
+            <Property name="Area" value="{{0,76},{0,994},{0,126},{0,1044}}" />
+            <Property name="Text" value="aaaaa" />
+        </Window>
+        <Window type="GWEN/Editbox" name="Editbox3" >
+            <Property name="Area" value="{{0,336},{0,814},{0,712},{0,864}}" />
+        </Window>
+        <Window type="GWEN/HorizontalScrollbar" name="HorizontalScrollbar" >
+            <Property name="Area" value="{{0,842},{0,796},{0,1336},{0,846}}" />
+            <AutoWindow namePath="__auto_thumb__" >
+                <Property name="MouseInputPropagationEnabled" value="true" />
+            </AutoWindow>
+        </Window>
+        <Window type="Vanilla/Button" name="Button4" >
+            <Property name="Area" value="{{0,290},{0,960},{0,386},{0,992}}" />
+        </Window>
+        <Window type="Vanilla/Editbox" name="Editbox2" >
+            <Property name="Area" value="{{0,446},{0,960},{0,702},{0,992}}" />
+        </Window>
+        <Window type="Vanilla/RadioButton" name="RadioButton2" >
+            <Property name="Area" value="{{0,820},{0,974},{0,1076},{0,1006}}" />
+        </Window>
+        <Window type="Vanilla/VerticalScrollbar" name="VerticalScrollbar2" >
+            <Property name="Area" value="{{0,1412},{0,402},{0,1444},{1,-86}}" />
+        </Window>
+        <Window type="AlfiskoSkin/Button" name="Button5" >
+            <Property name="Area" value="{{0,172},{0,1008},{0,268},{0,1040}}" />
+        </Window>
+        <Window type="AlfiskoSkin/Editbox" name="Editbox4" >
+            <Property name="Area" value="{{0,378},{0,1020},{0,634},{0,1052}}" />
+        </Window>
+        <Window type="AlfiskoSkin/Checkbox" name="Checkbox3" >
+            <Property name="Area" value="{{0,746},{0,1022},{0,874},{0,1054}}" />
+        </Window>
+        <Window type="AlfiskoSkin/FrameWindow" name="FrameWindow2" >
+            <Property name="Area" value="{{0,1164},{0,38},{0.3,1164},{0.3,38}}" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+        </Window>
+        <Window type="AlfiskoSkin/HorizontalSlider" name="HorizontalSlider" >
+            <Property name="Area" value="{{0,1542},{0,866},{0,1798},{0,898}}" />
+        </Window>
+        <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar" >
+            <Property name="Area" value="{{0,114},{0,558},{0,370},{0,590}}" />
+            <Property name="StepSize" value="0.01" />
+            <Property name="CurrentProgress" value="0.01" />
+        </Window>
+        <Window type="AlfiskoSkin/RadioButton" name="RadioButton3" >
+            <Property name="Area" value="{{0,114},{0,486},{0,370},{0,518}}" />
+        </Window>
+        <Window type="AlfiskoSkin/VerticalScrollbar" name="VerticalScrollbar3" >
+            <Property name="Area" value="{{0,1850},{0,40},{0,1882},{1,-336}}" />
+        </Window>
+        <Window type="AlfiskoSkin/VerticalSlider" name="VerticalSlider" >
+            <Property name="Area" value="{{0,1614},{0,486},{0,1646},{0,742}}" />
+        </Window>
+        <Window type="GameMenu/Editbox" name="Editbox5" >
+            <Property name="Area" value="{{0,640},{0,592},{0,896},{0,624}}" />
+        </Window>
+        <Window type="OgreTray/Button" name="Button6" >
+            <Property name="Area" value="{{0,586},{0,690},{0,682},{0,722}}" />
+        </Window>
+        <Window type="OgreTray/Editbox" name="Editbox6" >
+            <Property name="Area" value="{{0,1012},{0,888},{0,1268},{0,920}}" />
+        </Window>
+        <Window type="OgreTray/HorizontalScrollbar" name="HorizontalScrollbar2" >
+            <Property name="Area" value="{{0,1040},{0,1020},{1,-70},{0,1052}}" />
+            <AutoWindow namePath="__auto_incbtn__" >
+                <Property name="Visible" value="false" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_decbtn__" >
+                <Property name="Visible" value="false" />
+            </AutoWindow>
+        </Window>
+        <Window type="OgreTray/Slider" name="Slider" >
+            <Property name="Area" value="{{0,80},{0,376},{0,336},{0,408}}" />
+            <AutoWindow namePath="__auto_incbtn__" >
+                <Property name="Visible" value="false" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_decbtn__" >
+                <Property name="Visible" value="false" />
+            </AutoWindow>
+        </Window>
+        <Window type="OgreTray/Spinner" name="Spinner" >
+            <Property name="Area" value="{{0,66},{0,818},{0,194},{0,850}}" />
+            <Property name="Text" value="0" />
+            <AutoWindow namePath="__auto_decbtn__" >
+                <Property name="WantsMultiClickEvents" value="false" />
+                <Property name="MouseAutoRepeatEnabled" value="true" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_incbtn__" >
+                <Property name="WantsMultiClickEvents" value="false" />
+                <Property name="MouseAutoRepeatEnabled" value="true" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_editbox__" >
+                <Property name="Text" value="0" />
+                <Property name="ValidationString" value="-?\d*" />
+            </AutoWindow>
+        </Window>
+        <Window type="GWEN/FrameWindow" name="FrameWindow4" >
+            <Property name="Area" value="{{0.234375,0},{0.35,0},{0.234375,50},{0.35,50}}" />
+            <Property name="AutoRenderingSurface" value="true" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="NonClient" value="true" />
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_closebutton__" >
+                <Property name="NonClient" value="true" />
+                <Property name="AlwaysOnTop" value="true" />
+            </AutoWindow>
+        </Window>
+        <Window type="TaharezLook/FrameWindow" name="FrameWindow3" >
+            <Property name="Area" value="{{0.447917,0},{0.191869,0},{0.59479,0},{0.348148,0}}" />
+        </Window>
+        <Window type="AlfiskoSkin/FrameWindow" name="FrameWindow5" >
+            <Property name="Area" value="{{0.347917,0},{0.366667,0},{0.558332,0},{0.535185,0}}" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="AlwaysOnTop" value="false" />
+            </AutoWindow>
+        </Window>
+    </Window>
+</GUILayout>
