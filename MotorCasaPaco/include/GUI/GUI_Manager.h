@@ -23,9 +23,8 @@ public:
 	void setupResources();
 	static void clean();
 	void createRoot();
-	void loadLayout(CEGUI::String filename);
-	void setupDefaultResources();
-	void initResources(int code);
+	void loadLayout(std::string filename);
+	void loadScheme(std::string filename);
 	CEGUI::System& getSystem();
 	void update(float deltaTime);
 	void addChild(int type, std::string name);

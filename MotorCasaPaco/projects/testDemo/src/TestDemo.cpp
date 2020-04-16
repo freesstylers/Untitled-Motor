@@ -4,7 +4,7 @@
 
 #include "windows.h"
 #include "MotorCasaPaco.h"
-
+#include "GUI/GUI_Manager.h"
 
 MotorCasaPaco* motorCasaPaco;
 

@@ -19,12 +19,6 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 	setupResources();
 
 	createRoot();
-	initResources(0);
-
-	//setMouseCursor("AlfiskoSkin/MouseArrow");
-	//hideMouseCursor();
-
-
 	//Callbacks?
 }
 
@@ -52,11 +46,12 @@ void GUI_Manager::createRoot()
 	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(root->getWindowElement());
 }
 
-void GUI_Manager::loadLayout(CEGUI::String filename)
+void GUI_Manager::loadLayout(std::string filename)
 {
 	try
 	{
-		CEGUI::WindowManager::getSingleton().loadLayoutFromFile(filename);
+		CEGUI::Window* layout = winManager->getSingleton().loadLayoutFromFile(filename); //Habria que a�adir el archivo del que proceden como opcion, en caso de usar mas de uno?
+		root->addChild(layout);
 	}
 	catch (std::exception e)
 	{
@@ -64,48 +59,16 @@ void GUI_Manager::loadLayout(CEGUI::String filename)
 	}
 }
 
-void GUI_Manager::setupDefaultResources()
+void GUI_Manager::loadScheme(std::string filename)
 {
-	CEGUI::ImageManager::setImagesetDefaultResourceGroup("Imagesets");
-	CEGUI::Font::setDefaultResourceGroup("Fonts");
-	CEGUI::Scheme::setDefaultResourceGroup("Schemes");
-	CEGUI::WidgetLookManager::setDefaultResourceGroup("LookNFeel");
-	CEGUI::WindowManager::setDefaultResourceGroup("Layouts");
-}
-
-void GUI_Manager::initResources(int code)
-{
-	switch (code)
+	try
 	{
-	case 1:
-		break;
-
-
-	default: //De momento se cargan estos, para poder elegir en funcion del juego (se puede cargar de archivo incluso?)
-
-		//Schemes
-		//CEGUI::SchemeManager::getSingleton().createFromFile("A_Toda_Pastilla.scheme");
-
-
-		//Mouse Cursor
-		//CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
-		//CEGUI::System::getSingleton().getDefaultGUIContext().
-
-		//Fonts
-		//CEGUI::FontManager::getSingleton().createFreeTypeFont("Batang", 16, true, "batang.ttf");
-
-
-		//CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultTooltipType("TaharezLook/Tooltip");
-
-
-
-		break;
+		CEGUI::SchemeManager::getSingleton().createFromFile(filename);
 	}
-	/*#ifdef _DEBUG
-		fpsText = new UIElement(root->getElement()->createChild("TaharezLook/StaticText", "FPSText"));
-		fpsText->setPosition(0.9f, 0.0f);
-		fpsText->setSize(0.1f, 0.1f);
-	#endif*/
+	catch (std::exception e)
+	{
+		//Javi, las excepciones
+	}
 }
 
 CEGUI::System& GUI_Manager::getSystem()
@@ -133,8 +96,6 @@ void GUI_Manager::addChild(int type, std::string name)
 	{
 	case 0: //Layout
 	{
-		CEGUI::Window* layout = winManager->getSingleton().loadLayoutFromFile(name); //Habria que a�adir el archivo del que proceden como opcion, en caso de usar mas de uno?
-		root->addChild(layout);
 	}
 	break;
 	case 1:
@@ -149,7 +110,7 @@ void GUI_Manager::addChild(int type, std::string name)
 	break;
 	default:
 	{
-
+		loadLayout(name);
 	}
 	break;
 	}
