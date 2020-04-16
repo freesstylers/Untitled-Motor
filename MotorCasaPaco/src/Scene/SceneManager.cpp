@@ -2,6 +2,7 @@
 
 
 #include "Resources/ResourceManager.h"
+#include "checkML.h"
 
 SceneManager* SceneManager::instance = 0;
 
@@ -63,6 +64,8 @@ void SceneManager::sceneCleanup()
 
 void SceneManager::changeScene(const std::string& name)
 {
-	sceneCleanup();
+	if(currentScene != nullptr)
+		sceneCleanup();
+
 	currentScene = loadScene(name);
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="GWEN/Button" name="Button" >
+            <Property name="Area" value="{{0,1200},{0,137.14},{0,1800},{0,287.14}}" />
+            <Property name="Font" value="shump-48" />
+            <Property name="Text" value="JUGAR" />
+        </Window>
+        <Window type="GWEN/Button" name="Button2" >
+            <Property name="Area" value="{{0,1200},{0,355.71},{0,1800},{0,505.71}}" />
+            <Property name="Font" value="shump-48" />
+            <Property name="Text" value="AJUSTES" />
+        </Window>
+        <Window type="GWEN/Button" name="Button3" >
+            <Property name="Area" value="{{0,1200},{0,574.28},{0,1800},{0,724.28}}" />
+            <Property name="Text" value="ACERCA DE" />
+        </Window>
+        <Window type="GWEN/Button" name="Button4" >
+            <Property name="Area" value="{{0,1200},{0,792.85},{0,1800},{0,942.85}}" />
+            <Property name="Text" value="SALIR" />
+        </Window>
+        <Window type="GWEN/StaticText" name="StaticText" >
+            <Property name="Area" value="{{0,240},{0,850},{0.355209,240},{0.198148,850}}" />
+            <Property name="Text" value="HIGH SCORE: 00000" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FF494949" />
+            <Property name="FrameEnabled" value="true" />
+            <Property name="BackgroundEnabled" value="true" />
+            <AutoWindow namePath="__auto_hscrollbar__" >
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+            <AutoWindow namePath="__auto_vscrollbar__" >
+                <Property name="VerticalScrollbar" value="true" />
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+        </Window>
+    </Window>
+</GUILayout>

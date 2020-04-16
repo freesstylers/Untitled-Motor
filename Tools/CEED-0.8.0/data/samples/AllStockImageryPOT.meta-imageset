@@ -1,0 +1,10 @@
+<MetaImageset output="AllStockImageryPOT.imageset" onlyPOT="true">
+    <Imageset path="datafiles0_8/imagesets/AlfiskoSkin.imageset" />
+    <Imageset path="datafiles0_8/imagesets/DriveIcons.imageset" />
+    <Imageset path="datafiles0_8/imagesets/FairChar.imageset" />
+    <Imageset path="datafiles0_8/imagesets/TaharezLook.imageset" />
+    <Imageset path="datafiles0_8/imagesets/OgreTray.imageset" />
+    <Imageset path="datafiles0_8/imagesets/Vanilla.imageset" />
+    <Imageset path="datafiles0_8/imagesets/WindowsLook.imageset" />
+</MetaImageset>
+

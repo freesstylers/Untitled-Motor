@@ -7,6 +7,7 @@
 #include <CEGUI/CEGUI.h>
 #include <CEGUI/RendererModules/Ogre/Renderer.h>
 #include <OgreRenderWindow.h>
+#include "checkML.h"
 
 GUI_Manager* GUI_Manager::instance = 0;
 
@@ -20,10 +21,10 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 	createRoot();
 	initResources(0);
 
-	setMouseCursor("AlfiskoSkin/MouseArrow");
+	//setMouseCursor("AlfiskoSkin/MouseArrow");
 	//hideMouseCursor();
-	
-	
+
+
 	//Callbacks?
 }
 
@@ -46,7 +47,7 @@ void GUI_Manager::createRoot()
 {
 	CEGUI::WindowManager& a = CEGUI::WindowManager::getSingleton();
 	winManager = &a;
-	
+
 	root = new GUI_Element(a.createWindow("DefaultWindow", "root"));
 	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(root->getWindowElement());
 }
@@ -76,37 +77,35 @@ void GUI_Manager::initResources(int code)
 {
 	switch (code)
 	{
-		case 1:
-			break;
+	case 1:
+		break;
 
 
-		default: //De momento se cargan estos, para poder elegir en funcion del juego (se puede cargar de archivo incluso?)
+	default: //De momento se cargan estos, para poder elegir en funcion del juego (se puede cargar de archivo incluso?)
 
-			//Schemes
-			CEGUI::SchemeManager::getSingleton().createFromFile("VanillaSkin.scheme");
-			CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
-			CEGUI::SchemeManager::getSingleton().createFromFile("AlfiskoSkin.scheme");
-			CEGUI::SchemeManager::getSingleton().createFromFile("Generic.scheme");
-
-			//Mouse Cursor
-			CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
-			//CEGUI::System::getSingleton().getDefaultGUIContext().
-
-			//Fonts
-			CEGUI::FontManager::getSingleton().createFreeTypeFont("Batang", 16, true, "batang.ttf");
+		//Schemes
+		//CEGUI::SchemeManager::getSingleton().createFromFile("A_Toda_Pastilla.scheme");
 
 
-			//CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultTooltipType("TaharezLook/Tooltip");
+		//Mouse Cursor
+		//CEGUI::System::getSingleton().getDefaultGUIContext().getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
+		//CEGUI::System::getSingleton().getDefaultGUIContext().
+
+		//Fonts
+		//CEGUI::FontManager::getSingleton().createFreeTypeFont("Batang", 16, true, "batang.ttf");
+
+
+		//CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultTooltipType("TaharezLook/Tooltip");
 
 
 
-			break;
+		break;
 	}
-/*#ifdef _DEBUG
-	fpsText = new UIElement(root->getElement()->createChild("TaharezLook/StaticText", "FPSText"));
-	fpsText->setPosition(0.9f, 0.0f);
-	fpsText->setSize(0.1f, 0.1f);
-#endif*/
+	/*#ifdef _DEBUG
+		fpsText = new UIElement(root->getElement()->createChild("TaharezLook/StaticText", "FPSText"));
+		fpsText->setPosition(0.9f, 0.0f);
+		fpsText->setSize(0.1f, 0.1f);
+	#endif*/
 }
 
 CEGUI::System& GUI_Manager::getSystem()
@@ -135,24 +134,24 @@ void GUI_Manager::addChild(int type, std::string name)
 	case 0: //Layout
 	{
 		CEGUI::Window* layout = winManager->getSingleton().loadLayoutFromFile(name); //Habria que a�adir el archivo del que proceden como opcion, en caso de usar mas de uno?
-	    root->addChild(layout);
+		root->addChild(layout);
 	}
-		break;
+	break;
 	case 1:
 	{
-		CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(winManager->getSingleton().createWindow("TaharezLook/Button"));
+		/*CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(winManager->getSingleton().createWindow("TaharezLook/Button"));
 		testButton->setText("Hello World!");
 		testButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5, 0.5), CEGUI::UDim(0.5, 0.5)));
-		testButton->setSize(CEGUI::USize(CEGUI::UDim(0.15, 0.15), CEGUI::UDim(0.15, 0.15)));		
+		testButton->setSize(CEGUI::USize(CEGUI::UDim(0.15, 0.15), CEGUI::UDim(0.15, 0.15)));
 		testButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUI_Manager::test, instance));
-		root->addChild(testButton);
+		root->addChild(testButton);*/
 	}
-		break;
+	break;
 	default:
 	{
-	
+
 	}
-		break;
+	break;
 	}
 }
 

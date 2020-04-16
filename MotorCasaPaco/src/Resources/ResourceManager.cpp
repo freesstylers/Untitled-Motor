@@ -6,6 +6,7 @@
 #include <OgreTextureManager.h>
 #include <iostream>
 #include "Graphics/SGTechniqueResolverListener.h"
+#include "checkML.h"
 
 ResourceManager* ResourceManager::instance = 0;
 

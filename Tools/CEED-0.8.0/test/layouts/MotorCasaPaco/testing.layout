@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Vanilla/Button" name="Button" >
+            <Property name="Area" value="{{0,194},{0,149},{0,290},{0,181}}" />
+        </Window>
+        <Window type="Vanilla/RadioButton" name="RadioButton" >
+            <Property name="Area" value="{{0,520},{0,221},{0,776},{0,253}}" />
+        </Window>
+        <Window type="Vanilla/VerticalScrollbar" name="VerticalScrollbar" >
+            <Property name="Area" value="{{0,0},{0,0},{0,32},{1,0}}" />
+        </Window>
+        <Window type="AlfiskoSkin/ProgressBar" name="ProgressBar" >
+            <Property name="Area" value="{{0,525},{0,425},{0,781},{0,457}}" />
+            <Property name="StepSize" value="0.01" />
+            <Property name="CurrentProgress" value="0.01" />
+        </Window>
+        <Window type="AlfiskoSkin/VerticalSlider" name="VerticalSlider" >
+            <Property name="Area" value="{{0,377},{0,259},{0,409},{0,515}}" />
+        </Window>
+        <Window type="OgreTray/Titlebar" name="Titlebar" >
+            <Property name="Area" value="{{0,457},{0,68},{0,713},{0,100}}" />
+            <Property name="AlwaysOnTop" value="true" />
+        </Window>
+        <Window type="GameMenu/Editbox" name="Editbox" >
+            <Property name="Area" value="{{0,542},{0,312},{0,798},{0,344}}" />
+        </Window>
+        <Window type="TaharezLook/AlternateProgressBar" name="AlternateProgressBar" >
+            <Property name="Area" value="{{0.078125,0},{0.159722,0},{0.078125,256},{0.159722,32}}" />
+            <Property name="StepSize" value="0.01" />
+        </Window>
+        <Window type="TaharezLook/Button" name="Button2" >
+            <Property name="Area" value="{{0.222656,0},{0.326389,0},{0.222656,96},{0.326389,32}}" />
+        </Window>
+        <Window type="TaharezLook/Checkbox" name="Checkbox" >
+            <Property name="Area" value="{{0.160156,0},{0.458333,0},{0.160156,128},{0.458333,32}}" />
+        </Window>
+        <Window type="TaharezLook/ComboDropList" name="ComboDropList" >
+            <Property name="Area" value="{{0.699219,0},{0.25,0},{0.699219,256},{0.25,256}}" />
+            <Property name="Visible" value="false" />
+            <AutoWindow namePath="__auto_hscrollbar__" >
+                <AutoWindow namePath="__auto_incbtn__" >
+                    <Property name="RestoreOldCapture" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_decbtn__" >
+                    <Property name="RestoreOldCapture" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="RestoreOldCapture" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+            <AutoWindow namePath="__auto_vscrollbar__" >
+                <AutoWindow namePath="__auto_incbtn__" >
+                    <Property name="RestoreOldCapture" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_decbtn__" >
+                    <Property name="RestoreOldCapture" value="true" />
+                </AutoWindow>
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="RestoreOldCapture" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+        </Window>
+        <Window type="TaharezLook/ComboEditbox" name="ComboEditbox" >
+            <Property name="Area" value="{{-0.0171878,0},{0.266666,0},{-0.0171878,256},{0.930555,32}}" />
+        </Window>
+        <Window type="GWEN/Button" name="Button3" >
+            <Property name="Area" value="{{0,120},{0,23},{0,327},{0,97}}" />
+        </Window>
+    </Window>
+</GUILayout>

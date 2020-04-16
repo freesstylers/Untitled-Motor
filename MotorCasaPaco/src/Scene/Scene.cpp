@@ -8,6 +8,7 @@
 #include "MotorCasaPaco.h"
 #include "Resources/ResourceManager.h"
 #include <GUI/GUI_Manager.h>
+#include "checkML.h"
 
 using namespace std;
 
@@ -30,6 +31,10 @@ void Scene::setupScene(json& j)
 	if (!j["entities"].is_null() && j["entities"].is_array()) {
 		std::vector<json> e = j["entities"];
 		for (json ent : e) {
+
+			if (entities.find(ent["name"]) == entities.end())
+				entities.erase(ent["name"]);
+
 			entities[ent["name"]] = createEntity(ent);
 		}
 

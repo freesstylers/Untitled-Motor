@@ -45,8 +45,8 @@ private:
 	json prefabs;
 
 
-	Ogre::RTShader::ShaderGenerator* shaderGenerator;
-	SGTechniqueResolverListener* materialMgrListener;
+	Ogre::RTShader::ShaderGenerator* shaderGenerator = nullptr;
+	SGTechniqueResolverListener* materialMgrListener = nullptr;
 
 	static ResourceManager* instance;
 };

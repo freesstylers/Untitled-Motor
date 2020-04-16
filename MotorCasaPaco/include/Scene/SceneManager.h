@@ -26,6 +26,6 @@ private:
 	SceneManager();
 	static SceneManager* instance;
 	
-	Scene* currentScene;
+	Scene* currentScene = nullptr;
 };
 

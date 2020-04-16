@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<Imageset autoScaled="" imagefile="A_Toda_Pastilla.png" name="A_Toda_Pastilla" nativeHorzRes="1920" nativeVertRes="1080" version="2">
+    <Image height="49" name="Close_Normal" width="50" xPos="2" yPos="2" />
+    <Image height="53" name="Close_Hover" width="54" xPos="55" yPos="0" />
+    <Image height="53" name="Close_ClickHover" width="54" xPos="113" yPos="0" />
+    <Image height="49" name="Close_Click" width="50" xPos="170" yPos="2" />
+    <Image height="54" name="Settings_Normal" width="51" xPos="2" yPos="59" />
+    <Image height="60" name="Settings_Hover" width="57" xPos="56" yPos="56" />
+    <Image height="60" name="Settings_ClickHover" width="57" xPos="116" yPos="56" />
+    <Image height="54" name="Settings_Click" width="51" xPos="178" yPos="58" />
+    <Image height="55" name="Play_Normal" width="91" xPos="2" yPos="120" />
+    <Image height="59" name="Play_Hover" width="95" xPos="96" yPos="119" />
+    <Image height="59" name="Play_ClickHover" width="95" xPos="196" yPos="118" />
+    <Image height="55" name="Play_Click" width="91" xPos="296" yPos="120" />
+</Imageset>
