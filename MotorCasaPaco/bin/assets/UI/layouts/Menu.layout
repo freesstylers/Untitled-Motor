@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <GUILayout version="4" >
-    <Window type="DefaultWindow" name="DefaultWindow" >
+    <Window type="DefaultWindow" name="MainMenu" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="A_Toda_Pastilla/Play" name="Play" >
-            <Property name="Area" value="{{0,860},{0,423},{0,1068},{0,535}}" />
+            <Property name="Area" value="{{0,592},{0,553},{0,724},{0,611}}" />
         </Window>
         <Window type="A_Toda_Pastilla/Close" name="Close" >
-            <Property name="Area" value="{{0,1629},{0,74},{0,1797},{0,208}}" />
+            <Property name="Area" value="{{0,1183},{0,22},{0,1247},{0,86}}" />
         </Window>
         <Window type="A_Toda_Pastilla/Settings" name="Settings" >
-            <Property name="Area" value="{{0,1487},{0,516},{0,1659},{0,672}}" />
+            <Property name="Area" value="{{0,19},{0,24},{0,109},{0,114}}" />
         </Window>
     </Window>
 </GUILayout>

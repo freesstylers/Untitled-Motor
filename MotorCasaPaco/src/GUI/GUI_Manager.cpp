@@ -9,6 +9,8 @@
 #include <OgreRenderWindow.h>
 #include "checkML.h"
 
+#include <functional>
+
 GUI_Manager* GUI_Manager::instance = 0;
 
 GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
@@ -90,6 +92,11 @@ bool GUI_Manager::test(const CEGUI::EventArgs& e) {
 	return true;
 }
 
+void GUI_Manager::setEvents(CEGUI::PushButton* button, std::function<bool(CEGUI::EventArgs e)> event)
+{
+	button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(event.target, instance));
+}
+
 void GUI_Manager::addChild(int type, std::string name)
 {
 	switch (type)
@@ -100,12 +107,12 @@ void GUI_Manager::addChild(int type, std::string name)
 	break;
 	case 1:
 	{
-		/*CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(winManager->getSingleton().createWindow("TaharezLook/Button"));
+		CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(winManager->getSingleton().createWindow("TaharezLook/Button"));
 		testButton->setText("Hello World!");
 		testButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5, 0.5), CEGUI::UDim(0.5, 0.5)));
 		testButton->setSize(CEGUI::USize(CEGUI::UDim(0.15, 0.15), CEGUI::UDim(0.15, 0.15)));
 		testButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUI_Manager::test, instance));
-		root->addChild(testButton);*/
+		root->addChild(testButton);
 	}
 	break;
 	default:
@@ -114,6 +121,18 @@ void GUI_Manager::addChild(int type, std::string name)
 	}
 	break;
 	}
+}
+
+CEGUI::PushButton* GUI_Manager::getPushButton(std::string name)
+{
+	CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(root->getWindowElement()->getChild(name));
+	return button;
+}
+
+CEGUI::Window* GUI_Manager::getWindow(std::string name)
+{
+	CEGUI::Window* window = static_cast<CEGUI::PushButton*>(root->getWindowElement()->getChild(name));
+	return window;
 }
 
 void GUI_Manager::setMouseCursor(const std::string& imageFile)

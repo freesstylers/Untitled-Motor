@@ -7,6 +7,7 @@ namespace CEGUI {
 	class EventArgs;
 	class OgreRenderer;
 	class WindowManager;
+	class PushButton;
 }
 
 namespace Ogre {
@@ -28,10 +29,13 @@ public:
 	CEGUI::System& getSystem();
 	void update(float deltaTime);
 	void addChild(int type, std::string name);
+	CEGUI::PushButton* getPushButton(std::string name);
+	CEGUI::Window* getWindow(std::string name);
 	void setMouseCursor(const std::string& imageFile);
 	void showMouseCursor();
 	void hideMouseCursor();
 	bool test(const CEGUI::EventArgs& e);
+	void setEvents(CEGUI::PushButton* button, std::function<bool(CEGUI::EventArgs e)> event);
 
 	GUI_Element* getRoot();
 	CEGUI::WindowManager* getWinManager();
