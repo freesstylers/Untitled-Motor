@@ -42,6 +42,11 @@ void Entity::lateUpdate()
 	}
 }
 
+Entity::~Entity()
+{
+
+}
+
 bool Entity::hasComponent(const std::string& tag) {
 	return (map_.find(tag) != map_.end());
 }

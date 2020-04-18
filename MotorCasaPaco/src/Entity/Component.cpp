@@ -11,7 +11,7 @@ Component::Component(json& args) {
 }
 
 Component::~Component() {
-	e_ = nullptr;
+	//e_ = nullptr;
 }
 
 void Component::setEntity(Entity* e) { e_ = e; }

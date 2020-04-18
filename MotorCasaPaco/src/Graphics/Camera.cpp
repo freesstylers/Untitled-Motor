@@ -20,10 +20,6 @@ Camera::~Camera()
 {
 	Component::~Component();
 	MotorCasaPaco::getInstance()->getOgreWin()->removeViewport(vp->getZOrder());
-	delete vp;
-	e_->getComponent<Transform>("Transform")->getNode()->removeAndDestroyChild(mCamNode->getName());
-	delete mCamNode;
-	delete cam;
 }
 
 bool Camera::ReceiveEvent(Event& event)

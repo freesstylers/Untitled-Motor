@@ -52,8 +52,6 @@ void Mesh::redefine(json& args)
 
 Mesh::~Mesh()
 {
-	Component::~Component();
-	e_->getComponent<Transform>("Transform")->getNode()->detachObject(ogreEnt);
 	delete ogreEnt;
 }
 

@@ -25,6 +25,7 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 GUI_Manager::~GUI_Manager()
 {
 	renderer->destroySystem();
+	delete root;
 }
 
 GUI_Manager* GUI_Manager::getInstance()

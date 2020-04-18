@@ -11,6 +11,10 @@ JsonFactoryParser::JsonFactoryParser() {
 
 JsonFactoryParser::~JsonFactoryParser()
 {
+	for (std::pair<std::string, BaseFactory*> i : map) {
+		delete i.second;
+	}
+	map.clear();
 }
 
 JsonFactoryParser* JsonFactoryParser::getInstance()

@@ -15,7 +15,8 @@ RigidBody::RigidBody(json& args) : Component(args)
 RigidBody::~RigidBody()
 {
 	Component::~Component();
-	PhysicsManager::getInstance()->getWorld()->removeRigidBody(body);
+	btDynamicsWorld* w = PhysicsManager::getInstance()->getWorld();
+	w->removeRigidBody(body);
 	delete body->getCollisionShape();
 	delete body;
 }

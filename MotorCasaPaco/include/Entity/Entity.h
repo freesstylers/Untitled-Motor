@@ -25,6 +25,8 @@ public:
 	void update();
 	void lateUpdate();
 
+	~Entity();
+
 	template <typename T>
 	T* getComponent(const std::string& tag) {
 		if (!hasComponent(tag))
