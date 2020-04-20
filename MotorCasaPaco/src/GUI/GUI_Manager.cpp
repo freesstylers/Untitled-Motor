@@ -108,12 +108,12 @@ void GUI_Manager::addChild(int type, std::string name)
 	break;
 	case 1:
 	{
-		CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(winManager->getSingleton().createWindow("TaharezLook/Button"));
+		/*CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(winManager->getSingleton().createWindow("TaharezLook/Button"));
 		testButton->setText("Hello World!");
 		testButton->setPosition(CEGUI::UVector2(CEGUI::UDim(0.5, 0.5), CEGUI::UDim(0.5, 0.5)));
 		testButton->setSize(CEGUI::USize(CEGUI::UDim(0.15, 0.15), CEGUI::UDim(0.15, 0.15)));
 		testButton->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(&GUI_Manager::test, instance));
-		root->addChild(testButton);
+		root->addChild(testButton);*/
 	}
 	break;
 	default:

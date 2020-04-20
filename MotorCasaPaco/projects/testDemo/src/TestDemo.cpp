@@ -5,8 +5,10 @@
 #include "windows.h"
 #include "MotorCasaPaco.h"
 #include "GUI/GUI_Manager.h"
+#include "Menu.h"
 
 MotorCasaPaco* motorCasaPaco;
+
 
 #ifdef  _DEBUG
 int main(int argc, char* argv[])
@@ -44,7 +46,13 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	motorCasaPaco->getGUI_Manager()->getInstance()->setMouseCursor("A_Toda_Pastilla/Mouse_Arrow");
 
 
-	//CEGUI::PushButton* b = motorCasaPaco->getGUI_Manager()->getInstance()->getPushButton("MainMenu/Play");
+	CEGUI::PushButton* b = motorCasaPaco->getGUI_Manager()->getInstance()->getPushButton("MainMenu/Play");
+
+	Menu* men = new Menu(motorCasaPaco->getGUI_Manager());
+
+	
+
+	//motorCasaPaco->getGUI_Manager()->getInstance()->setEvents(b, &test, this);
 	//CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(motorCasaPaco->getGUI_Manager()->getInstance()->getRoot()->getChild("MainMenu/Play"));
 	//CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(motorCasaPaco->getGUI_Manager()->getInstance()->getRoot()->getChild("MainMenu/Play"));
 
