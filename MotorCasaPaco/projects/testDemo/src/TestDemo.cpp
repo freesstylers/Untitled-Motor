@@ -49,8 +49,7 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	CEGUI::PushButton* b = motorCasaPaco->getGUI_Manager()->getInstance()->getPushButton("MainMenu/Play");
 
 	Menu* men = new Menu(motorCasaPaco->getGUI_Manager());
-
-	
+	men->setEvent(0, b);
 
 	//motorCasaPaco->getGUI_Manager()->getInstance()->setEvents(b, &test, this);
 	//CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(motorCasaPaco->getGUI_Manager()->getInstance()->getRoot()->getChild("MainMenu/Play"));

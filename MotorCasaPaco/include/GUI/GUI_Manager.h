@@ -37,8 +37,7 @@ public:
 	void hideMouseCursor();
 	bool test(const CEGUI::EventArgs& e);
 
-	template<typename T>
-	void setEvents(CEGUI::PushButton* button, bool (T::* function)(const CEGUI::EventArgs&), T* obj);
+	void setEvents(CEGUI::PushButton* button, std::function<bool(const CEGUI::EventArgs&)> function);
 
 	GUI_Element* getRoot();
 	CEGUI::WindowManager* getWinManager();

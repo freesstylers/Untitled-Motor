@@ -30,7 +30,7 @@
     <ClCompile Include="src\TerrainRotation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Menu.cpp">
+    <ClCompile Include="src\Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,7 +47,7 @@
     <ClInclude Include="src\SimpleMovement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Menu.h">
+    <ClInclude Include="src\Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

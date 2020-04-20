@@ -92,10 +92,9 @@ bool GUI_Manager::test(const CEGUI::EventArgs& e) {
 	return true;
 }
 
-template<typename T>
-void GUI_Manager::setEvents(CEGUI::PushButton* button, bool (T::* function)(const CEGUI::EventArgs&), T* obj)
+void GUI_Manager::setEvents(CEGUI::PushButton* button, std::function<bool(const CEGUI::EventArgs&)> function)
 {
-	button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(function, obj));
+	button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(function));
 }
 
 void GUI_Manager::addChild(int type, std::string name)

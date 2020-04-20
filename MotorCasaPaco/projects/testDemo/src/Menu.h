@@ -1,4 +1,6 @@
 #pragma once
+
+#include <string>
 #include "MotorCasaPaco.h"
 #include "GUI/GUI_Manager.h"
 
@@ -10,5 +12,8 @@ public:
 	void setEvent(int code, CEGUI::PushButton* button);
 
 	GUI_Manager* manager;
+
+private:
+	std::string testString_ = "probandOoOo\n";
 };
 
