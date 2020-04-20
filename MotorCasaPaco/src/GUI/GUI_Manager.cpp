@@ -9,6 +9,8 @@
 #include <OgreRenderWindow.h>
 #include "checkML.h"
 
+#include <functional>
+
 GUI_Manager* GUI_Manager::instance = 0;
 
 GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
@@ -91,6 +93,11 @@ bool GUI_Manager::test(const CEGUI::EventArgs& e) {
 	return true;
 }
 
+void GUI_Manager::setEvents(CEGUI::PushButton* button, std::function<bool(const CEGUI::EventArgs&)> function)
+{
+	button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(function));
+}
+
 void GUI_Manager::addChild(int type, std::string name)
 {
 	switch (type)
@@ -115,6 +122,18 @@ void GUI_Manager::addChild(int type, std::string name)
 	}
 	break;
 	}
+}
+
+CEGUI::PushButton* GUI_Manager::getPushButton(std::string name)
+{
+	CEGUI::PushButton* button = static_cast<CEGUI::PushButton*>(root->getWindowElement()->getChild(name));
+	return button;
+}
+
+CEGUI::Window* GUI_Manager::getWindow(std::string name)
+{
+	CEGUI::Window* window = static_cast<CEGUI::PushButton*>(root->getWindowElement()->getChild(name));
+	return window;
 }
 
 void GUI_Manager::setMouseCursor(const std::string& imageFile)
