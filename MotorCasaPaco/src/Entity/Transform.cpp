@@ -73,8 +73,11 @@ void Transform::redefine(json& args)
 Transform::~Transform()
 {
 	Component::~Component();
-	node->removeAndDestroyAllChildren();
-	node->getParent()->removeChild(node->getName());
+
+	if (node == nullptr)
+		return;
+
+	node->detachAllObjects();
 	MotorCasaPaco::getInstance()->getSM()->destroySceneNode(node->getName());
 }
 

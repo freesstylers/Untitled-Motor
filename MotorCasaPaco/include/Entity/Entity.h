@@ -70,7 +70,7 @@ private:
 	std::vector<uptr_cmp> components_;
 	std::map<std::string, Component*> map_;
 
-	Entity* parent_;
+	Entity* parent_ = nullptr;
 	std::map<std::string, Entity*> children_;
 
 	Scene* scene_;

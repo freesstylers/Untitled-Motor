@@ -36,6 +36,6 @@ public:
 	bool ReceiveEvent(Event& event) override;
 
 private:
-	Ogre::SceneNode* node;
+	Ogre::SceneNode* node = nullptr;
 };
 
