@@ -19,7 +19,7 @@ Scene::Scene()
 Scene::~Scene()
 {
 	MotorCasaPaco::getInstance()->getOgreWin()->removeAllViewports();
-	//delete cam;
+	MotorCasaPaco::getInstance()->getSM()->destroyAllCameras();
 	for (std::pair<std::string, Entity*> i : entities) {
 		delete i.second;
 	}
