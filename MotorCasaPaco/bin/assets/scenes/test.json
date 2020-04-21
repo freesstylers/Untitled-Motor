@@ -88,5 +88,25 @@
 				}
 			]
 		}
+	],
+	
+	"UI" :
+	[
+		{
+			"type" : "layout", 
+			"name" : "Menu.layout"
+		},
+		{
+			"type" : "entity",
+			"name" : "UI",
+			"components" : 
+			[
+				{
+					"type": "ChangeSceneButtonComponent",
+					"buttonName" : "MainMenu/Play",
+					"sceneName" : "verticalSlice"
+				}				
+			]
+		}
 	]
 }
