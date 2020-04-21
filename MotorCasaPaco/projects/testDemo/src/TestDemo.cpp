@@ -63,7 +63,7 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	JsonFactoryParser::getInstance()->addFactory("SimpleMovement", new SimpleMovementFactory());
 	JsonFactoryParser::getInstance()->addFactory("TerrainRotation", new TerrainRotationFactory());
 
-	motorCasaPaco->changeScene("UITest");
+	motorCasaPaco->changeScene("test");
 
 	motorCasaPaco->getGUI_Manager()->getInstance()->loadScheme("A_Toda_Pastilla.scheme");
 	motorCasaPaco->getGUI_Manager()->getInstance()->loadLayout("Menu.layout");
