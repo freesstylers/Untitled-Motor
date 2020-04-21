@@ -7,8 +7,29 @@
 #include "GUI/GUI_Manager.h"
 #include "Menu.h"
 
-MotorCasaPaco* motorCasaPaco;
+#include "Scene/JsonFactoryParser.h"
 
+#include "SimpleMovement.h"
+#include "TerrainRotation.h"
+
+class SimpleMovementFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new SimpleMovement(args);
+	};
+};
+class TerrainRotationFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new TerrainRotation(args);
+	};
+};
+
+MotorCasaPaco* motorCasaPaco;
 
 #ifdef  _DEBUG
 int main(int argc, char* argv[])
@@ -38,6 +59,9 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 		delete motorCasaPaco;
 		return 0;
 	}
+
+	JsonFactoryParser::getInstance()->addFactory("SimpleMovement", new SimpleMovementFactory());
+	JsonFactoryParser::getInstance()->addFactory("TerrainRotation", new TerrainRotationFactory());
 
 	motorCasaPaco->changeScene("UITest");
 
