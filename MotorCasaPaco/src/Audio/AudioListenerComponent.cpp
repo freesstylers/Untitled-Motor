@@ -2,6 +2,8 @@
 #include "MotorCasaPaco.h"
 #include "Entity/Transform.h"
 #include "Graphics/Camera.h"
+#include <fmod.hpp>
+#include <fmod.h>
 #include "checkML.h"
 
 AudioListenerComponent::AudioListenerComponent(json& args): Component(args)

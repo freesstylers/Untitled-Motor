@@ -64,6 +64,12 @@ void EventManager::UnregisterListener(EventListener* listener, EventType eventTy
 		it->second.erase(std::remove(it->second.begin(), it->second.end(), listener), it->second.end());
 }
 
+void EventManager::UnregisterListenerForAll(EventListener* listener)
+{
+	for (auto foobar : _listeners)
+		foobar.second.erase(std::remove(foobar.second.begin(), foobar.second.end(), listener), foobar.second.end());
+}
+
 void EventManager::ClearListeners(EventType eventType)
 {
 	// Look for the EvenType on the map, and only then try to clear all its listeners
@@ -77,4 +83,5 @@ EventManager::EventManager()
 
 EventManager::~EventManager()
 {
+	_listeners.clear();
 }

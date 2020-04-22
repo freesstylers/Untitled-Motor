@@ -37,6 +37,11 @@ void Camera::update()
 	}
 }
 
+
+
+
+
+
 void Camera::init(json& j)
 {
 	int camNearClipDist = 1;
@@ -93,10 +98,8 @@ void Camera::init(json& j)
 	cam->setFarClipDistance(camFarClipDist);
 	cam->setAutoAspectRatio(autoAspectRatio);
 
-	//Create a child scene node for the camera
-	mCamNode = e_->getComponent<Transform>("Transform")->getNode()->createChildSceneNode("nCam");
-	mCamNode->attachObject(cam);
-	mCamNode->setPosition(camPos);
+	e_->getComponent<Transform>("Transform")->getNode()->attachObject(cam);
+	e_->getComponent<Transform>("Transform")->getNode()->setPosition(camPos);
 
 	Camera::lookAt(lookAtVec);
 	
@@ -138,13 +141,10 @@ void Camera::redefine(json& args)
 	Component::~Component();
 	MotorCasaPaco::getInstance()->getOgreWin()->removeViewport(vp->getZOrder());
 	delete vp;
-	e_->getComponent<Transform>("Transform")->getNode()->removeAndDestroyChild(mCamNode->getName());
-	delete mCamNode;
-	delete cam;
+	MotorCasaPaco::getInstance()->getSM()->destroyCamera(cam->getName());
 
 	vp = nullptr;
 	cam = nullptr;
-	mCamNode = nullptr;
 	follow = nullptr;
 
 	init(args);

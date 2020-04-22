@@ -11,7 +11,6 @@ using json = nlohmann::json;
 class JsonFactoryParser
 {
 public:
-	typedef std::function<Component* (const std::string&, json&)> ComponentCallback;
 
 	~JsonFactoryParser();
 

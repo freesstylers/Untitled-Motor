@@ -4,6 +4,8 @@
 #include <OgreConfigFile.h>
 #include <OgreResourceGroupManager.h>
 #include <OgreTextureManager.h>
+#include <OgreFileSystemLayer.h>
+#include <OgreRTShaderSystem.h>
 #include <iostream>
 #include "Graphics/SGTechniqueResolverListener.h"
 #include "checkML.h"
@@ -20,7 +22,7 @@ ResourceManager* ResourceManager::getInstance()
 	return instance;
 }
 
-bool ResourceManager::setupInstance(const Ogre::String& path)
+bool ResourceManager::setupInstance(const std::string& path)
 {
 	if (instance == 0)
 	{
@@ -63,7 +65,7 @@ void ResourceManager::addSceneManager(Ogre::SceneManager* sm)
 	shaderGenerator->addSceneManager(sm);
 }
 
-json ResourceManager::loadSceneFile(const Ogre::String& sceneName)
+json ResourceManager::loadSceneFile(const std::string& sceneName)
 {
 	json j;
 	std::ifstream i(path + "scenes/" + sceneName + ".json");
@@ -91,7 +93,7 @@ void ResourceManager::locateOgreResources()
 	// load resource paths from config file
 	Ogre::ConfigFile cf;
 
-	Ogre::String resourcesPath = FSLayer->getConfigFilePath("resources.cfg");
+	std::string resourcesPath = FSLayer->getConfigFilePath("resources.cfg");
 	if (Ogre::FileSystemLayer::fileExists(resourcesPath))
 	{
 		cf.load(resourcesPath);
@@ -218,7 +220,7 @@ void ResourceManager::loadOgreResources()
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
-void ResourceManager::loadPrefabFile(const Ogre::String& fileDir)
+void ResourceManager::loadPrefabFile(const std::string& fileDir)
 {
 	std::ifstream i(fileDir);
 

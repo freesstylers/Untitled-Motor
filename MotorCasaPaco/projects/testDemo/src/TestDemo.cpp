@@ -7,8 +7,39 @@
 #include "GUI/GUI_Manager.h"
 #include "Menu.h"
 
-MotorCasaPaco* motorCasaPaco;
+#include "Scene/JsonFactoryParser.h"
 
+#include "SimpleMovement.h"
+#include "TerrainRotation.h"
+#include "ChangeSceneButtonComponent.h"
+
+class SimpleMovementFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new SimpleMovement(args);
+	};
+};
+class TerrainRotationFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new TerrainRotation(args);
+	};
+};
+
+class ChangeSceneButtonComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ChangeSceneButtonComponent(args);
+	};
+};
+
+MotorCasaPaco* motorCasaPaco;
 
 #ifdef  _DEBUG
 int main(int argc, char* argv[])
@@ -39,8 +70,15 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 		return 0;
 	}
 
-	motorCasaPaco->changeScene("UITest");
+	JsonFactoryParser::getInstance()->addFactory("SimpleMovement", new SimpleMovementFactory());
+	JsonFactoryParser::getInstance()->addFactory("TerrainRotation", new TerrainRotationFactory());
+	JsonFactoryParser::getInstance()->addFactory("ChangeSceneButtonComponent", new ChangeSceneButtonComponentFactory());
 
+	motorCasaPaco->getGUI_Manager()->getInstance()->loadScheme("A_Toda_Pastilla.scheme");
+	motorCasaPaco->getGUI_Manager()->getInstance()->setMouseCursor("A_Toda_Pastilla/Mouse_Arrow");
+
+	motorCasaPaco->changeScene("test");
+	/*
 	motorCasaPaco->getGUI_Manager()->getInstance()->loadScheme("A_Toda_Pastilla.scheme");
 	motorCasaPaco->getGUI_Manager()->getInstance()->loadLayout("Menu.layout");
 	motorCasaPaco->getGUI_Manager()->getInstance()->setMouseCursor("A_Toda_Pastilla/Mouse_Arrow");
@@ -50,6 +88,7 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 
 	Menu* men = new Menu(motorCasaPaco->getGUI_Manager());
 	men->setEvent(0, b);
+	*/
 
 	//motorCasaPaco->getGUI_Manager()->getInstance()->setEvents(b, &test, this);
 	//CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(motorCasaPaco->getGUI_Manager()->getInstance()->getRoot()->getChild("MainMenu/Play"));

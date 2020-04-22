@@ -73,8 +73,11 @@ void Transform::redefine(json& args)
 Transform::~Transform()
 {
 	Component::~Component();
-	node->removeAndDestroyAllChildren();
-	node->getParent()->removeChild(node->getName());
+
+	if (node == nullptr)
+		return;
+
+	node->detachAllObjects();
 	MotorCasaPaco::getInstance()->getSM()->destroySceneNode(node->getName());
 }
 
@@ -130,7 +133,7 @@ void Transform::setWorldPosition(Vector3 pos)
 }
 void Transform::setWorldRotation(Quaternion rot)
 {
-	node->setOrientation(node->getParent()->convertLocalToWorldOrientation(rot));
+	node->setOrientation(node->getParent()->convertWorldToLocalOrientation(rot));
 }
 void Transform::setWorldRotation(Vector3 rot)
 {

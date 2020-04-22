@@ -67,12 +67,12 @@ void RigidBody::preupdate()
 	bakScale = tr->getWorldScale();
 	btTransform trans;
 	body->getMotionState()->getWorldTransform(trans);
-	trans.setOrigin(BtOgre::Convert::toBullet(tr->getWorldPosition()));
-	trans.setRotation(BtOgre::Convert::toBullet(tr->getWorldRotation()));
+	trans.setOrigin(tr->getWorldPosition());
+	trans.setRotation(tr->getWorldRotation());
 	body->getMotionState()->setWorldTransform(trans);
 	body->setWorldTransform(trans);
 
-	body->getCollisionShape()->setLocalScaling(BtOgre::Convert::toBullet(bakScale));
+	body->getCollisionShape()->setLocalScaling(bakScale);
 	PhysicsManager::getInstance()->getWorld()->updateSingleAabb(body);
 }
 
