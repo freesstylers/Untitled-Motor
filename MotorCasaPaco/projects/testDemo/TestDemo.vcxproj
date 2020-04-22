@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClCompile Include="src\ForcesTest.cpp" />
     <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\ChangeSceneButtonComponent.cpp" />
     <ClCompile Include="src\SimpleMovement.cpp" />
     <ClCompile Include="src\TerrainRotation.cpp" />
     <ClCompile Include="src\TestComponent.cpp" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="src\ForcesTest.h" />
     <ClInclude Include="src\Menu.h" />
+    <ClInclude Include="src\ChangeSceneButtonComponent.h" />
     <ClInclude Include="src\SimpleMovement.h" />
     <ClInclude Include="src\TerrainRotation.h" />
     <ClInclude Include="src\TestComponent.h" />

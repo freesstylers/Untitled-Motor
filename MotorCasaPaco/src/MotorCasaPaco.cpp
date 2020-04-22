@@ -195,21 +195,6 @@ void MotorCasaPaco::pollEvents()
 				}
 			}
 			break;
-		case SDL_KEYDOWN:
-			switch (event.key.keysym.sym) {
-			case SDLK_SPACE:
-				cout << "Totaltime " << getTime() << "\n";
-				cout << "deltaTime " << DeltaTime() << "\n";
-				//spawnBox();
-				break;
-			case SDLK_p:
-				resetTimer();
-			case SDLK_v:
-				//spawnSphere();
-				break;
-			default:
-				break;
-			}
 		default:
 			//llamar a InputManager
 			InputManager::getInstance()->GeneralInputManagement(event);	//Se podr�a ir a pincho de forma mas especifica llamando directamente al de boton, tecla, etc
@@ -218,7 +203,7 @@ void MotorCasaPaco::pollEvents()
 	}
 
 	// just avoid "window not responding"
-	Ogre::WindowEventUtilities::messagePump();
+	//Ogre::WindowEventUtilities::messagePump();
 }
 
 bool MotorCasaPaco::checkConfig()

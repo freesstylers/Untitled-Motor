@@ -35,7 +35,6 @@ private:
 
 	Ogre::Camera* cam;
 	Ogre::Viewport* vp;
-	Ogre::SceneNode* mCamNode;
 
 	Vector3 lookAtVec;
 };

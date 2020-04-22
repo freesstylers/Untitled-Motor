@@ -16,6 +16,7 @@ public:
 	void setupScene(json& j);
 
 	Entity* getEntity(const std::string& name);
+	Entity* createEntity(json& j);
 
 	void start();
 	void preupdate();
@@ -25,7 +26,7 @@ public:
 
 private:
 
-	Entity* createEntity(json& j);
+	
 
 	std::map<std::string, Entity*> entities;
 

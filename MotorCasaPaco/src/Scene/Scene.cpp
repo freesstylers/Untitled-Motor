@@ -19,7 +19,7 @@ Scene::Scene()
 Scene::~Scene()
 {
 	MotorCasaPaco::getInstance()->getOgreWin()->removeAllViewports();
-	//delete cam;
+	MotorCasaPaco::getInstance()->getSM()->destroyAllCameras();
 	for (std::pair<std::string, Entity*> i : entities) {
 		delete i.second;
 	}
@@ -50,8 +50,15 @@ void Scene::setupScene(json& j)
 	
 	if (!j["UI"].is_null() && j["UI"].is_array()) {
 		std::vector<json> e = j["UI"];
+
 		for (json UI_Elem : e) {
-			MotorCasaPaco::getInstance()->getGUI_Manager()->addChild(UI_Elem["type"], UI_Elem["route"]);
+			if (UI_Elem["type"] == "layout")
+				MotorCasaPaco::getInstance()->getGUI_Manager()->loadLayout(UI_Elem["name"]);
+
+			else if (UI_Elem["type"] == "entity")
+			{
+				entities[UI_Elem["name"]] = createEntity(UI_Elem);
+			}
 		}
 	}
 }
