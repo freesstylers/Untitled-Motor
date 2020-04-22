@@ -93,7 +93,6 @@ void RigidBody::OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* o
 	Entity* e1 = static_cast<RigidBody*>(obj1->getUserPointer())->e_;
 	Entity* e2 = static_cast<RigidBody*>(obj2->getUserPointer())->e_;
 	RigidBodyCollisionEvent event(e1, e2);
-	EventManager::getInstance()->RegisterListener(getEntity(), EventType::RIGIDBODY_COLLISION); //rexistrar a entidade que alberga o componente para mandalo mesaxe os demais componentes desta
 	EventManager::getInstance()->EmitEvent(event);
 }
 
