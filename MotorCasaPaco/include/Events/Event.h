@@ -39,17 +39,17 @@ public:
 	btRigidBody* rb;
 };
 
+class Entity;
 struct RigidBodyCollisionEvent : public Event {
 public:
-	inline RigidBodyCollisionEvent(const btCollisionObject* obj1, const btCollisionObject* obj2) :Event(EventType::RIGIDBODY_COLLISION) {
+	inline RigidBodyCollisionEvent(Entity* obj1, Entity* obj2) :Event(EventType::RIGIDBODY_COLLISION) {
 		this->obj1 = obj1;
 		this->obj2 = obj2;
 	}
-	const btCollisionObject* obj1;
-	const btCollisionObject* obj2;
+	Entity* obj1;
+	Entity* obj2;
 };
 
-class Entity;
 struct SetParentEvent : public Event {
 public:
 	inline SetParentEvent(Entity* parent) : Event(EventType::SETPARENT) {
