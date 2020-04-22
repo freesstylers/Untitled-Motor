@@ -20,10 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp" />
-    <ClCompile Include="..\..\include\Events\EventListener.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioComponent.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioListenerComponent.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioManager.cpp" />
+    <ClCompile Include="..\..\src\Events\EventListener.cpp" />
     <ClCompile Include="..\..\src\Graphics\PacoFrameListener.cpp" />
     <ClCompile Include="..\..\src\MotorCasaPaco.cpp" />
     <ClCompile Include="..\..\src\Entity\Component.cpp" />

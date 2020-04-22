@@ -77,7 +77,7 @@
     <ClCompile Include="..\..\src\Graphics\PacoFrameListener.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\include\Events\EventListener.cpp">
+    <ClCompile Include="..\..\src\Events\EventListener.cpp">
       <Filter>Events</Filter>
     </ClCompile>
   </ItemGroup>
