@@ -1,8 +1,8 @@
 #include "Scene/SceneManager.h"
-
-
 #include "Resources/ResourceManager.h"
 #include "checkML.h"
+#include "MotorCasaPaco.h"
+#include <OgreRoot.h>
 
 SceneManager* SceneManager::instance = 0;
 
@@ -64,8 +64,14 @@ void SceneManager::sceneCleanup()
 
 void SceneManager::changeScene(const std::string& name)
 {
-	if(currentScene != nullptr)
+	if (currentScene != nullptr)
+	{
 		sceneCleanup();
+
+		delete MotorCasaPaco::getInstance()->getSM();
+
+		MotorCasaPaco::getInstance()->getRoot()->createSceneManager();
+	}
 
 	currentScene = loadScene(name);
 }

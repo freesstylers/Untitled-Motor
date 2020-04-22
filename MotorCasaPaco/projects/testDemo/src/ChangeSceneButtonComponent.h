@@ -3,7 +3,6 @@
 #define CHANGESCENECOMPONENT_H
 #include "Entity/Component.h"
 #include "GUI/GUI_Manager.h"
-#include "MotorCasaPaco.h"
 
 class ChangeSceneButtonComponent: public Component
 {

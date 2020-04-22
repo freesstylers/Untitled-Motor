@@ -1,4 +1,8 @@
 #include "ChangeSceneButtonComponent.h"
+#include "MotorCasaPaco.h"
+
+class Ogre::Root;
+class Ogre::SceneManager;
 
 ChangeSceneButtonComponent::ChangeSceneButtonComponent(json& args) : Component(args)
 {
