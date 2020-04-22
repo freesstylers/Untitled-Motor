@@ -1,5 +1,7 @@
 #include "Physics/RigidBody.h"
 
+#include <BulletCollision/Gimpact/btGImpactShape.h>
+
 #include "Entity/Entity.h"
 #include "Graphics/Mesh.h"
 #include "Entity/Transform.h"
@@ -74,6 +76,9 @@ void RigidBody::preupdate()
 
 	body->getCollisionShape()->setLocalScaling(bakScale);
 	PhysicsManager::getInstance()->getWorld()->updateSingleAabb(body);
+
+	if (shape == "mesh" && !isKinematic && !isStatic)
+		dynamic_cast<btGImpactMeshShape*>(body->getCollisionShape())->updateBound();
 }
 
 void RigidBody::physicsUpdate()

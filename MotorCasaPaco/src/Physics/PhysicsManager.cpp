@@ -1,9 +1,11 @@
 #include "Physics/PhysicsManager.h"
+#include "Physics/MeshStrider.h"
 
 #include <BtOgreGP.h>
 #include <BtOgreExtras.h>
 #include <BtOgrePG.h>
 #include <BulletCollision/Gimpact/btGImpactShape.h>
+#include <BulletCollision/Gimpact/btGImpactCollisionAlgorithm.h>
 #include <btBulletDynamicsCommon.h>
 #include <OgreMesh.h>
 
@@ -12,7 +14,9 @@ PhysicsManager* PhysicsManager::instance = 0;
 PhysicsManager::PhysicsManager()
 {
 	config = new btDefaultCollisionConfiguration();
-	dispatcher = new btCollisionDispatcher(config);
+	btCollisionDispatcher* interm = new btCollisionDispatcher(config);
+	btGImpactCollisionAlgorithm::registerAlgorithm(interm);
+	dispatcher = interm;
 	broadphase = new btDbvtBroadphase();
 	solver = new btSequentialImpulseConstraintSolver();
 	world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, config);
@@ -56,7 +60,11 @@ btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Vec
 			colShape = convert.createCylinder();
 		}
 		else {
-			colShape = convert.createConvex();
+			MeshStrider* aux = new MeshStrider(ent->getMesh().getPointer());
+			btGImpactMeshShape* interm = new btGImpactMeshShape(aux);
+			interm->updateBound();
+
+			colShape = interm;
 		}
 	}
 	else {
@@ -74,7 +82,11 @@ btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Vec
 			colShape = convert.createCylinder();
 		}
 		else {
-			colShape = convert.createConvex();
+			MeshStrider* aux = new MeshStrider(ent->getMesh().getPointer());
+			btGImpactMeshShape* interm = new btGImpactMeshShape(aux);
+			interm->updateBound();
+
+			colShape = interm;
 		}
 	}
 

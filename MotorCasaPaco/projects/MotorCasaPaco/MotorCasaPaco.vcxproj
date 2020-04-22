@@ -39,6 +39,7 @@
     <ClCompile Include="..\..\src\GUI\GUI_Manager.cpp" />
     <ClCompile Include="..\..\src\Input\InputManager.cpp" />
     <ClCompile Include="..\..\src\Others\PacoConversions.cpp" />
+    <ClCompile Include="..\..\src\Physics\MeshStrider.cpp" />
     <ClCompile Include="..\..\src\Physics\PhysicsManager.cpp" />
     <ClCompile Include="..\..\src\Physics\RigidBody.cpp" />
     <ClCompile Include="..\..\src\Resources\ResourceManager.cpp" />
@@ -73,6 +74,7 @@
     <ClInclude Include="..\..\include\Others\PacoConversions.h" />
     <ClInclude Include="..\..\include\Others\Quaternion.hpp" />
     <ClInclude Include="..\..\include\Others\Vector3.hpp" />
+    <ClInclude Include="..\..\include\Physics\MeshStrider.h" />
     <ClInclude Include="..\..\include\Physics\PhysicsManager.h" />
     <ClInclude Include="..\..\include\Physics\RigidBody.h" />
     <ClInclude Include="..\..\include\Resources\ResourceManager.h" />
