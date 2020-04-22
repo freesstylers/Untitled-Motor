@@ -91,7 +91,6 @@ void RigidBody::physicsUpdate()
 void RigidBody::OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2)
 {
 	RigidBodyCollisionEvent event(obj1, obj2);
-	EventManager::getInstance()->RegisterListener(getEntity(), EventType::RIGIDBODY_COLLISION); //rexistrar a entidade que alberga o componente para mandalo mesaxe os demais componentes desta
 	EventManager::getInstance()->EmitEvent(event);
 }
 

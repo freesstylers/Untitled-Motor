@@ -25,11 +25,7 @@ public:
 	void lateUpdate();
 
 private:
-
-	
-
 	std::map<std::string, Entity*> entities;
-
 	std::string name;
 };
 
