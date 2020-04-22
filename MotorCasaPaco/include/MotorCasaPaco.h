@@ -6,6 +6,10 @@
 
 class PacoFrameListener;
 class GUI_Manager;
+class ResourceManager;
+class SceneManager;
+class InputManager;
+class AudioManager;
 
 namespace Ogre {
 	class Root;
@@ -41,6 +45,10 @@ public:
 	Ogre::RenderWindow* getOgreWin();
 	SDL_Window* getSDLWin();
 	GUI_Manager* getGUI_Manager();
+	ResourceManager* getResourceManager();
+	SceneManager* getSceneManager();
+	InputManager* getInputManager();
+	AudioManager* getAudioManager();
 
 	float getTime();
 	float getTimeDifference(float prevTime);

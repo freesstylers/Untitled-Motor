@@ -2,8 +2,13 @@
 
 #include "Others/json.hpp"
 
-#include <OgreFileSystemLayer.h>
-#include <OgreRTShaderSystem.h>
+namespace Ogre {
+	class FileSystemLayer;
+	namespace RTShader {
+		class ShaderGenerator;
+	};
+	class SceneManager;
+}
 
 using json = nlohmann::json;
 
@@ -15,32 +20,32 @@ public:
 	~ResourceManager();
 
 	static ResourceManager* getInstance();
-	static bool setupInstance(const Ogre::String& path);
+	static bool setupInstance(const std::string& path);
 	static void clean();
 
 	void setup();
 
 	void addSceneManager(Ogre::SceneManager* sm);
 
-	json loadSceneFile(const Ogre::String& sceneName);
+	json loadSceneFile(const std::string& sceneName);
 
 	json getPrefabs();
 
 private:
-	ResourceManager(const Ogre::String& path);
+	ResourceManager(const std::string& path);
 
 	void locateOgreResources();
 	void loadOgreResources();
 
 
-	void loadPrefabFile(const Ogre::String& fileDir);
+	void loadPrefabFile(const std::string& fileDir);
 
 	bool initRTShaderSystem();
 	void wipeRTShaderSystem();
 
 	Ogre::FileSystemLayer* FSLayer;
-	Ogre::String path;
-	Ogre::String RTShaderLibPath;
+	std::string path;
+	std::string RTShaderLibPath;
 
 	json prefabs;
 

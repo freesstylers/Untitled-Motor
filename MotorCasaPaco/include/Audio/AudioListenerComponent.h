@@ -1,8 +1,5 @@
 #pragma once
-
 #include "Entity/Component.h"
-#include <fmod.hpp>
-#include <fmod.h>
 #include "Audio/AudioManager.h"
 
 class AudioListenerComponent : public Component

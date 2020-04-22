@@ -362,6 +362,26 @@ GUI_Manager* MotorCasaPaco::getGUI_Manager()
 	return GUI_Manager::getInstance();
 }
 
+ResourceManager* MotorCasaPaco::getResourceManager()
+{
+	return ResourceManager::getInstance();
+}
+
+SceneManager* MotorCasaPaco::getSceneManager()
+{
+	return SceneManager::getInstance();
+}
+
+InputManager* MotorCasaPaco::getInputManager()
+{
+	return InputManager::getInstance();
+}
+
+AudioManager* MotorCasaPaco::getAudioManager()
+{
+	return AudioManager::getInstance();
+}
+
 float MotorCasaPaco::getTime()
 {
 	return frameListener_->getTime();
