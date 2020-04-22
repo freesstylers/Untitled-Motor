@@ -3,6 +3,7 @@
 #include <functional>
 #include <OgreViewport.h>
 #include <OgreRenderWindow.h>
+#include <OgreSceneManager.h>
 //#include <OgreCamera.h>
 
 #include "MotorCasaPaco.h"
