@@ -25,7 +25,7 @@ public:
 	void update();
 	void lateUpdate();
 
-	~Entity();
+	virtual ~Entity();
 
 	template <typename T>
 	T* getComponent(const std::string& tag) {

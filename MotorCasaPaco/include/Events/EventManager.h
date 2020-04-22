@@ -29,6 +29,12 @@ public:
 	void UnregisterListener(EventListener* listener, EventType eventType);
 
 	/**
+	Unregisters a listener to stop receiving any kind of event
+	It does NOT call its destructor nor deletes the instance.
+	*/
+	void UnregisterListenerForAll(EventListener* listener);
+
+	/**
 	 Unregisters ALL listeners to stop receiving the events of the given type
 	 It does NOT call their destructors nor deletes the instances.
 	 */

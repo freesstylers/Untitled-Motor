@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\dependencies\btogre\src\BtOgre.cpp" />
+    <ClCompile Include="..\..\include\Events\EventListener.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioComponent.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioListenerComponent.cpp" />
     <ClCompile Include="..\..\src\Audio\AudioManager.cpp" />

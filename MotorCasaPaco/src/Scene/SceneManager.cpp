@@ -67,10 +67,7 @@ void SceneManager::changeScene(const std::string& name)
 	if (currentScene != nullptr)
 	{
 		sceneCleanup();
-
-		delete MotorCasaPaco::getInstance()->getSM();
-
-		MotorCasaPaco::getInstance()->getRoot()->createSceneManager();
+		MotorCasaPaco::getInstance()->getSM()->clearScene();
 	}
 
 	currentScene = loadScene(name);

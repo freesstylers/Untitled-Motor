@@ -9,6 +9,8 @@ public:
 	Receives the events emitted by the EventEmitters this listener is
 	registered on.
 	 */
+
+	virtual ~EventListener();
 	virtual bool ReceiveEvent(Event &event) = 0;
 };
 

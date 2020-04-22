@@ -44,7 +44,8 @@ void Entity::lateUpdate()
 
 Entity::~Entity()
 {
-
+	for (int i = 0; i < components_.size(); i++)
+		components_[i].reset(nullptr);
 }
 
 bool Entity::hasComponent(const std::string& tag) {
