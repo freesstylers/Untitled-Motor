@@ -24,6 +24,7 @@ public:
 	static bool setupInstance(Ogre::RenderWindow* window);
 	void setupResources();
 	static void clean();
+	void clear();
 	void createRoot();
 	void loadLayout(std::string filename);
 	void loadScheme(std::string filename);

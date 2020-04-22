@@ -3,6 +3,7 @@
 #include "checkML.h"
 #include "MotorCasaPaco.h"
 #include <OgreRoot.h>
+#include "GUI/GUI_Manager.h"
 
 SceneManager* SceneManager::instance = 0;
 
@@ -58,6 +59,7 @@ Scene* SceneManager::getCurrentScene()
 
 void SceneManager::sceneCleanup()
 {
+	GUI_Manager::getInstance()->clear();
 	delete currentScene;
 	currentScene = nullptr;
 }

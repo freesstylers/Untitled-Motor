@@ -185,3 +185,11 @@ void GUI_Manager::clean()
 {
 	delete instance;
 }
+
+void GUI_Manager::clear()
+{
+	//getRoot()->getWindowElement()->destroy();
+	delete root;
+	
+	createRoot();
+}
