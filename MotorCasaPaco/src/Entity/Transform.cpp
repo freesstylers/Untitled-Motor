@@ -133,7 +133,7 @@ void Transform::setWorldPosition(Vector3 pos)
 }
 void Transform::setWorldRotation(Quaternion rot)
 {
-	node->setOrientation(node->getParent()->convertLocalToWorldOrientation(rot));
+	node->setOrientation(node->getParent()->convertWorldToLocalOrientation(rot));
 }
 void Transform::setWorldRotation(Vector3 rot)
 {
