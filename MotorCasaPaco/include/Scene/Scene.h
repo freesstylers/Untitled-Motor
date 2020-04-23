@@ -17,6 +17,7 @@ public:
 
 	Entity* getEntity(const std::string& name);
 	Entity* createEntity(json& j);
+	Entity* addEntity(std::string name);
 
 	void start();
 	void preupdate();
@@ -27,5 +28,6 @@ public:
 private:
 	std::map<std::string, Entity*> entities;
 	std::string name;
+	int addedEntitiesCounter = 0;
 };
 

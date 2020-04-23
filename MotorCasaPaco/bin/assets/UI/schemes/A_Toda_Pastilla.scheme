@@ -7,4 +7,6 @@
   <FalagardMapping lookNFeel="A_Toda_Pastilla/Play"			renderer="Core/Button"			targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/Play" />
   <FalagardMapping lookNFeel="A_Toda_Pastilla/Settings"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/Settings" />
   <FalagardMapping lookNFeel="A_Toda_Pastilla/Close"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/Close" />
+  <FalagardMapping lookNFeel="A_Toda_Pastilla/LeftArrow"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/LeftArrow" />
+  <FalagardMapping lookNFeel="A_Toda_Pastilla/RightArrow"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/RightArrow" />
 </GUIScheme>

@@ -77,10 +77,22 @@ void Scene::start() {
 	for (pair<string, Entity*> e : entities) {
 		e.second->start();
 	}
+	addedEntitiesCounter=0;
 }
 
 void Scene::preupdate()
 {
+	auto i = entities.begin();
+	while (i != entities.end()) {
+		auto aux = i;
+		aux++;
+		if (!((*i).second)->getActive()) {
+			delete (*i).second;
+			entities.erase(i);
+		}
+		i = aux;
+	}
+
 	for (pair<string, Entity*> e : entities) {
 		e.second->preupdate();
 	}
@@ -139,5 +151,17 @@ Entity* Scene::createEntity(json& j)
 		}
 	}
 
+	return ent;
+}
+
+Entity* Scene::addEntity(std::string name)
+{
+	Entity* ent;
+	if (getEntity(name) != nullptr) {
+		ent = new Entity(this, name + "_" + std::to_string(addedEntitiesCounter));
+	}
+	else ent = new Entity(this, name);
+	entities[ent->getName()] = ent;
+	addedEntitiesCounter++;
 	return ent;
 }

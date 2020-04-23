@@ -166,6 +166,8 @@ void Entity::init(json& args)
 	modArgs["type"] = "Transform";
 
 	addComponentFromJson(modArgs);
+
+	setActive(true);
 }
 
 bool Entity::ReceiveEvent(Event& event)
