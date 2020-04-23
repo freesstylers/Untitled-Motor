@@ -163,4 +163,5 @@ Entity* Scene::addEntity(std::string name)
 	else ent = new Entity(this, name);
 	entities[ent->getName()] = ent;
 	addedEntitiesCounter++;
+	return ent;
 }
