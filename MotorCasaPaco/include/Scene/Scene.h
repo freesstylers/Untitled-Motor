@@ -17,7 +17,7 @@ public:
 
 	Entity* getEntity(const std::string& name);
 	Entity* createEntity(json& j);
-	void addEntity(string name);
+	void addEntity(std::string name);
 
 	void start();
 	void preupdate();

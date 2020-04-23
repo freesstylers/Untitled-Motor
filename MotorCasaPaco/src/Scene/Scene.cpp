@@ -154,7 +154,7 @@ Entity* Scene::createEntity(json& j)
 	return ent;
 }
 
-void Scene::addEntity(string name)
+void Scene::addEntity(std::string name)
 {
 	Entity* ent;
 	if (getEntity(name) != nullptr) {
