@@ -52,7 +52,10 @@ void Mesh::redefine(json& args)
 
 Mesh::~Mesh()
 {
-	delete ogreEnt;
+	Ogre::SceneNode* sn = ogreEnt->getParentSceneNode();
+	if(sn!=nullptr)
+		sn->detachAllObjects();
+	MotorCasaPaco::getInstance()->getSM()->destroyEntity(ogreEnt->getName());
 }
 
 Ogre::AxisAlignedBox Mesh::getAABB()	const

@@ -79,6 +79,8 @@ Transform::~Transform()
 
 	node->detachAllObjects();
 	MotorCasaPaco::getInstance()->getSM()->destroySceneNode(node->getName());
+	node = nullptr;
+
 }
 
 Vector3 Transform::getPosition() const
