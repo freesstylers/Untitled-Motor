@@ -9,7 +9,8 @@ SceneManager* SceneManager::instance = 0;
 
 SceneManager::~SceneManager()
 {
-	sceneCleanup();
+	delete currentScene;
+	currentScene = nullptr;
 }
 
 SceneManager::SceneManager()

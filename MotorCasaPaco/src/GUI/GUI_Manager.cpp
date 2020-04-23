@@ -21,7 +21,6 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 	setupResources();
 
 	createRoot();
-	//Callbacks?
 }
 
 GUI_Manager::~GUI_Manager()
@@ -58,7 +57,7 @@ void GUI_Manager::loadLayout(std::string filename)
 	}
 	catch (std::exception e)
 	{
-		//Javi, las excepciones
+
 	}
 }
 
@@ -70,7 +69,7 @@ void GUI_Manager::loadScheme(std::string filename)
 	}
 	catch (std::exception e)
 	{
-		//Javi, las excepciones
+
 	}
 }
 
@@ -188,7 +187,6 @@ void GUI_Manager::clean()
 
 void GUI_Manager::clear()
 {
-	//getRoot()->getWindowElement()->destroy();
 	delete root;
 	
 	createRoot();

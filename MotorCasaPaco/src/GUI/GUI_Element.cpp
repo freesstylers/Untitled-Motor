@@ -9,7 +9,6 @@ GUI_Element::GUI_Element(CEGUI::Window* window)
 
 GUI_Element::~GUI_Element()
 {
-	delete elementWindow;
 }
 
 CEGUI::Window* GUI_Element::getWindowElement()

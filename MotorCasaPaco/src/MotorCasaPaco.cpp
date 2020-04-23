@@ -45,20 +45,24 @@ void MotorCasaPaco::sceneCleanup()
 MotorCasaPaco::~MotorCasaPaco()
 {
 	SceneManager::clean();
+	GUI_Manager::clean();
+
 
 	ResourceManager::clean();
+
+	delete root;
+
 	InputManager::clean();
 	PhysicsManager::clean();
 	JsonFactoryParser::clean();
 	AudioManager::clean();
 	EventManager::clean();
-	GUI_Manager::clean();
+
 
 	delete frameListener_; frameListener_ = nullptr;
 
 	SDL_Quit();
 
-	delete root;
 }
 	
 bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
