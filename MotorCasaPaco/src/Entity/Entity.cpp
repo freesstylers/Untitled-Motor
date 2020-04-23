@@ -11,7 +11,8 @@
 
 using namespace std;
 
-Entity::Entity(Scene* scene, const std::string& name): scene_(scene), name_(name)
+Entity::Entity(Scene* scene, const std::string& name, const std::string& tag): scene_(scene), 
+	name_(name), tag_(tag)
 {
 	
 }
@@ -98,6 +99,16 @@ void Entity::setName(const std::string& name) {
 
 string const Entity::getName() {
 	return name_;
+}
+
+void Entity::setTag(const std::string& tag)
+{
+	tag_ = tag;
+}
+
+string const Entity::getTag()
+{
+	return tag_;
 }
 
 void Entity::setActive(bool state) {
