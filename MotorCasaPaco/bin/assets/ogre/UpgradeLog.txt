@@ -1,0 +1,9 @@
+Creating resource group General
+Creating resource group Internal
+Creating resource group Autodetect
+Registering ResourceManager for type Material
+Registering ResourceManager for type Skeleton
+Registering ResourceManager for type Mesh
+Exception caught: Cannot find serializer implementation for current version [MeshSerializer_v1.100]Unregistering ResourceManager for type Mesh
+Unregistering ResourceManager for type Skeleton
+Unregistering ResourceManager for type Material
