@@ -96,7 +96,7 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 
 	motorCasaPaco->start();
 
-	delete motorCasaPaco;
+	MotorCasaPaco::clean();
 
 	return 0;
 }
