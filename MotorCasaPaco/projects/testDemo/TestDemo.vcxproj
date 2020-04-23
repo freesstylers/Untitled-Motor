@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ExitButtonComponent.cpp" />
     <ClCompile Include="src\ForcesTest.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\ChangeSceneButtonComponent.cpp" />
@@ -163,6 +164,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ExitButtonComponent.h" />
     <ClInclude Include="src\ForcesTest.h" />
     <ClInclude Include="src\Menu.h" />
     <ClInclude Include="src\ChangeSceneButtonComponent.h" />

@@ -37,7 +37,7 @@ public:
 	void initLoadingTestScene();
 
 	void start();
-
+	void exit();
 	void pollEvents();
 
 	Ogre::Root* getRoot();

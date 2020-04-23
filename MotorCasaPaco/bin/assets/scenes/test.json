@@ -105,7 +105,11 @@
 					"type": "ChangeSceneButtonComponent",
 					"buttonName" : "MainMenu/Play",
 					"sceneName" : "verticalSlice"
-				}				
+				},
+				{
+					"type": "ExitButtonComponent",
+					"buttonName" : "MainMenu/Close"
+				}
 			]
 		}
 	]

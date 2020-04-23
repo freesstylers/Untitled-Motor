@@ -177,6 +177,11 @@ void MotorCasaPaco::start()
 	MotorCasaPaco::getInstance()->getRoot()->startRendering();
 }
 
+void MotorCasaPaco::exit()
+{
+	MotorCasaPaco::getInstance()->getRoot()->queueEndRendering();
+}
+
 void MotorCasaPaco::pollEvents()
 {
 	if (sdlWindow == nullptr)

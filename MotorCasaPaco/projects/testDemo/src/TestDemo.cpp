@@ -12,6 +12,7 @@
 #include "SimpleMovement.h"
 #include "TerrainRotation.h"
 #include "ChangeSceneButtonComponent.h"
+#include "ExitButtonComponent.h"
 
 class SimpleMovementFactory : public BaseFactory
 {
@@ -36,6 +37,15 @@ public:
 	Component* createComponent(json& args) override
 	{
 		return new ChangeSceneButtonComponent(args);
+	};
+};
+
+class ExitButtonComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ExitButtonComponent(args);
 	};
 };
 
@@ -73,6 +83,7 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	JsonFactoryParser::getInstance()->addFactory("SimpleMovement", new SimpleMovementFactory());
 	JsonFactoryParser::getInstance()->addFactory("TerrainRotation", new TerrainRotationFactory());
 	JsonFactoryParser::getInstance()->addFactory("ChangeSceneButtonComponent", new ChangeSceneButtonComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("ExitButtonComponent", new ExitButtonComponentFactory());
 
 	motorCasaPaco->getGUI_Manager()->getInstance()->loadScheme("A_Toda_Pastilla.scheme");
 	motorCasaPaco->getGUI_Manager()->getInstance()->loadScheme("GWEN.scheme");
