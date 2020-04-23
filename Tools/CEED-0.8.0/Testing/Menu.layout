@@ -5,13 +5,44 @@
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="A_Toda_Pastilla/Play" name="Play" >
-            <Property name="Area" value="{{0,592},{0,553},{0,724},{0,611}}" />
+            <Property name="Area" value="{{0,545},{0,563},{0,718},{0,685}}" />
         </Window>
         <Window type="A_Toda_Pastilla/Close" name="Close" >
-            <Property name="Area" value="{{0,1183},{0,22},{0,1247},{0,86}}" />
+            <Property name="Area" value="{{0,1203},{0,10},{0,1267},{0,74}}" />
         </Window>
         <Window type="A_Toda_Pastilla/Settings" name="Settings" >
-            <Property name="Area" value="{{0,19},{0,24},{0,109},{0,114}}" />
+            <Property name="Area" value="{{0,231},{0,516},{0,321},{0,606}}" />
+        </Window>
+        <Window type="GWEN/StaticText" name="Score" >
+            <Property name="Area" value="{{0,212},{0,51},{1,-836},{1,-631}}" />
+            <Property name="Text" value="0000000" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="BackgroundEnabled" value="false" />
+            <AutoWindow namePath="__auto_hscrollbar__" >
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+            <AutoWindow namePath="__auto_vscrollbar__" >
+                <Property name="VerticalScrollbar" value="true" />
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+        </Window>
+        <Window type="GWEN/StaticImage" name="Cup" >
+            <Property name="Area" value="{{0,65},{0,11},{1,-1111},{1,-595}}" />
+            <Property name="Image" value="A_Toda_Pastilla/ScoreCup" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="BackgroundEnabled" value="false" />
+        </Window>
+        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow" >
+            <Property name="Area" value="{{0,869},{0,220},{0,969},{0,320}}" />
+        </Window>
+        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow" >
+            <Property name="Area" value="{{0,307},{0,222},{0,407},{0,322}}" />
         </Window>
     </Window>
 </GUILayout>

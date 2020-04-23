@@ -33,6 +33,9 @@ public:
 	void addChild(int type, std::string name);
 	CEGUI::PushButton* getPushButton(std::string name);
 	CEGUI::Window* getWindow(std::string name);
+	CEGUI::Window* getStaticText(std::string name);
+	void changeText(CEGUI::Window* window, std::string text);
+	void appendText(CEGUI::Window* window, std::string text, bool space);
 	void setMouseCursor(const std::string& imageFile);
 	void showMouseCursor();
 	void hideMouseCursor();

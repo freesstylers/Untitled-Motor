@@ -1,4 +1,5 @@
-<Imageset autoScaled="" imagefile="A_Toda_Pastilla.png" name="A_Toda_Pastilla" nativeHorzRes="1920" nativeVertRes="1080" version="2">
+<?xml version="1.0" encoding="UTF-8"?>
+<Imageset version="2" name="A_Toda_Pastilla" imagefile="A_Toda_Pastilla.png" nativeHorzRes="800" nativeVertRes="600" autoScaled="vertical" >
     <Image height="49" name="Close_Normal" width="50" xPos="2" yPos="2" />
     <Image height="53" name="Close_Hover" width="54" xPos="55" yPos="0" />
     <Image height="53" name="Close_ClickHover" width="54" xPos="113" yPos="0" />
@@ -15,4 +16,13 @@
     <Image height="24" name="Mouse_Move" width="24" xPos="248" yPos="2" />
     <Image height="20" name="Mouse_Resize" width="20" xPos="278" yPos="5" />
     <Image height="22" name="Mouse_Text" width="11" xPos="308" yPos="3" />
+    <Image height="55" name="RightArrow_1" width="47" xPos="2" yPos="181" />
+    <Image height="57" name="RightArrow_2" width="49" xPos="53" yPos="180" />
+    <Image height="57" name="RightArrow_3" width="49" xPos="104" yPos="179" />
+    <Image height="55" name="RightArrow_4" width="47" xPos="156" yPos="180" />
+    <Image height="55" name="LeftArrow_4" width="47" xPos="210" yPos="180" />
+    <Image height="56" name="LeftArrow_3" width="49" xPos="260" yPos="180" />
+    <Image height="57" name="LeftArrow_2" width="49" xPos="311" yPos="180" />
+    <Image height="55" name="LeftArrow_1" width="47" xPos="364" yPos="181" />
+    <Image height="120" name="ScoreCup" width="70" xPos="2" yPos="243" />
 </Imageset>

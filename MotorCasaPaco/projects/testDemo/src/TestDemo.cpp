@@ -75,24 +75,10 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	JsonFactoryParser::getInstance()->addFactory("ChangeSceneButtonComponent", new ChangeSceneButtonComponentFactory());
 
 	motorCasaPaco->getGUI_Manager()->getInstance()->loadScheme("A_Toda_Pastilla.scheme");
+	motorCasaPaco->getGUI_Manager()->getInstance()->loadScheme("GWEN.scheme");
 	motorCasaPaco->getGUI_Manager()->getInstance()->setMouseCursor("A_Toda_Pastilla/Mouse_Arrow");
 
 	motorCasaPaco->changeScene("test");
-	/*
-	motorCasaPaco->getGUI_Manager()->getInstance()->loadScheme("A_Toda_Pastilla.scheme");
-	motorCasaPaco->getGUI_Manager()->getInstance()->loadLayout("Menu.layout");
-	motorCasaPaco->getGUI_Manager()->getInstance()->setMouseCursor("A_Toda_Pastilla/Mouse_Arrow");
-
-
-	CEGUI::PushButton* b = motorCasaPaco->getGUI_Manager()->getInstance()->getPushButton("MainMenu/Play");
-
-	Menu* men = new Menu(motorCasaPaco->getGUI_Manager());
-	men->setEvent(0, b);
-	*/
-
-	//motorCasaPaco->getGUI_Manager()->getInstance()->setEvents(b, &test, this);
-	//CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(motorCasaPaco->getGUI_Manager()->getInstance()->getRoot()->getChild("MainMenu/Play"));
-	//CEGUI::PushButton* testButton = static_cast<CEGUI::PushButton*>(motorCasaPaco->getGUI_Manager()->getInstance()->getRoot()->getChild("MainMenu/Play"));
 
 	motorCasaPaco->start();
 

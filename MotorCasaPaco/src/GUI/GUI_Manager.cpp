@@ -21,6 +21,7 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 	setupResources();
 
 	createRoot();
+	//Callbacks?
 }
 
 GUI_Manager::~GUI_Manager()
@@ -57,7 +58,7 @@ void GUI_Manager::loadLayout(std::string filename)
 	}
 	catch (std::exception e)
 	{
-
+		//Javi, las excepciones
 	}
 }
 
@@ -69,7 +70,7 @@ void GUI_Manager::loadScheme(std::string filename)
 	}
 	catch (std::exception e)
 	{
-
+		//Javi, las excepciones
 	}
 }
 
@@ -129,9 +130,37 @@ CEGUI::PushButton* GUI_Manager::getPushButton(std::string name)
 	return button;
 }
 
+CEGUI::Window* GUI_Manager::getStaticText(std::string name)
+{
+	return root->getWindowElement()->getChild(name);
+}
+
+void GUI_Manager::changeText(CEGUI::Window* window, std::string text)
+{
+	window->setText(text);
+}
+
+void GUI_Manager::appendText(CEGUI::Window* window, std::string text, bool space)
+{
+	if (space)
+	{
+		std::string aux;
+		aux = window->getText().c_str();
+		aux = aux + " " + text;
+		window->setText(aux);
+	}
+	else
+	{
+		std::string aux;
+		aux = window->getText().c_str();
+		aux = aux + text;
+		window->setText(aux);
+	}
+}
+
 CEGUI::Window* GUI_Manager::getWindow(std::string name)
 {
-	CEGUI::Window* window = static_cast<CEGUI::PushButton*>(root->getWindowElement()->getChild(name));
+	CEGUI::Window* window = static_cast<CEGUI::Window*>(root->getWindowElement()->getChild(name));
 	return window;
 }
 
@@ -187,7 +216,8 @@ void GUI_Manager::clean()
 
 void GUI_Manager::clear()
 {
+	//getRoot()->getWindowElement()->destroy();
 	delete root;
-	
+
 	createRoot();
 }
