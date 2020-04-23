@@ -154,11 +154,13 @@ Entity* Scene::createEntity(json& j)
 	return ent;
 }
 
-void Scene::addEntity(Entity* ent)
+void Scene::addEntity(string name)
 {
-	if (getEntity(ent->getName()) != nullptr) {
-		ent->setName(ent->getName() + "_" + std::to_string(addedEntitiesCounter));
+	Entity* ent;
+	if (getEntity(name) != nullptr) {
+		ent = new Entity(this, name + "_" + std::to_string(addedEntitiesCounter));
 	}
+	else ent = new Entity(this, name);
 	entities[ent->getName()] = ent;
 	addedEntitiesCounter++;
 }
