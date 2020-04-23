@@ -147,6 +147,10 @@ void Transform::setWorldScale(Vector3 s)
 	//complete when hierarchy is implemented
 	node->setScale(s);
 }
+void Transform::setInheritedRotation(bool set)
+{
+	node->setInheritOrientation(set);
+}
 
 
 void Transform::translate(Vector3 pos, TransformSpace relativeTo)

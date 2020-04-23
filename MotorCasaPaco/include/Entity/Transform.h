@@ -26,6 +26,7 @@ public:
 	void setWorldRotation(Quaternion rot);
 	void setWorldRotation(Vector3 rot);
 	void setWorldScale(Vector3 s);
+	void setInheritedRotation(bool set);
 
 	void translate(Vector3 pos, TransformSpace relativeTo = TransformSpace::LOCAL);
 	void rotate(Quaternion rot, TransformSpace relativeTo = TransformSpace::LOCAL);
