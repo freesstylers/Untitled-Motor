@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity/Component.h"
 #include "Audio/AudioManager.h"
+#include <OgreCamera.h>
 
 class AudioListenerComponent : public Component
 {
