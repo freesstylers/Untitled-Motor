@@ -140,6 +140,16 @@ void RigidBody::applyForce(ForceType type, Vector3 force, Vector3 relPos)
 	}
 }
 
+void RigidBody::setGravity(Vector3 grav)
+{
+	body->setGravity(grav);
+}
+
+Vector3 RigidBody::getGravity()
+{
+	return Vector3(body->getGravity().x(), body->getGravity().y(), body->getGravity().z());
+}
+
 void RigidBody::createRigidBody(json& args)
 {
 	//default rigidbody shape is mesh
@@ -163,6 +173,14 @@ void RigidBody::createRigidBody(json& args)
 	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getOgreEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
 
 	body->setUserPointer(this);
+
+	if (!args["gravity"].is_null()) {
+		float x, y, z;
+		x = args["gravity"][0];
+		y = args["gravity"][1];
+		z = args["gravity"][2];
+		body->setGravity(Vector3(x, y, z));
+	}
 
 	if (!args["isStatic"].is_null() && args["isStatic"])
 	{

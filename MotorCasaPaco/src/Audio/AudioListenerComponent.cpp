@@ -26,13 +26,11 @@ void AudioListenerComponent::update()
 	pos.Y = e_->getComponent<Transform>("Transform")->getPosition().Y;
 	pos.Z = e_->getComponent<Transform>("Transform")->getPosition().Z;
 
-	forward.X = 0;
-	forward.Y = 0;
-	forward.Z = 0;
+	forward = -1 * e_->getComponent<Camera>("Camera")->getCam()->getRealDirection();
 
-	up.X = 0;
-	up.Y = 0;
-	up.Z = 0;
+	up.X = e_->getComponent<Camera>("Camera")->getCam()->getRealUp().x;
+	up.Y = e_->getComponent<Camera>("Camera")->getCam()->getRealUp().y;
+	up.Z = e_->getComponent<Camera>("Camera")->getCam()->getRealUp().z;
 
 	vel.X = 0;
 	vel.Y = 0;

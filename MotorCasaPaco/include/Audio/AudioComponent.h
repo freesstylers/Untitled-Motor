@@ -2,6 +2,7 @@
 
 #include "Entity/Component.h"
 #include "Audio/AudioManager.h"
+#include <string>
 
 class AudioComponent : public Component
 {
@@ -18,6 +19,7 @@ private:
 	int numObj = -1;
 	Vector3 pos;
 	Vector3 vel;
+	std::string audioRoute;
 };
 
 

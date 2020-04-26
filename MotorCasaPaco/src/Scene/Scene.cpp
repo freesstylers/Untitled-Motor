@@ -121,7 +121,13 @@ void Scene::lateUpdate()
 
 Entity* Scene::createEntity(json& j)
 {
-	Entity* ent = new Entity(this, j["name"]);
+	
+	std::string tag = "Untagged";
+	if (!j["tag"].is_null()) {
+		std::string aux = j["tag"];
+		tag = aux;
+	}
+	Entity* ent = new Entity(this, j["name"], tag);
 
 
 	if (!j["prefab"].is_null() && j["prefab"].is_string()) {
@@ -132,6 +138,7 @@ Entity* Scene::createEntity(json& j)
 
 		if (!prefab.is_null()) {
 			prefab["name"] = j["name"];
+			prefab["tag"] = tag;
 			ent->init(prefab);
 
 			if (!prefab["components"].is_null() && prefab["components"].is_array()) {
@@ -154,13 +161,13 @@ Entity* Scene::createEntity(json& j)
 	return ent;
 }
 
-Entity* Scene::addEntity(std::string name)
+Entity* Scene::addEntity(std::string name, std::string tag)
 {
 	Entity* ent;
 	if (getEntity(name) != nullptr) {
-		ent = new Entity(this, name + "_" + std::to_string(addedEntitiesCounter));
+		ent = new Entity(this, name + "_" + std::to_string(addedEntitiesCounter), tag);
 	}
-	else ent = new Entity(this, name);
+	else ent = new Entity(this, name, tag);
 	entities[ent->getName()] = ent;
 	addedEntitiesCounter++;
 	return ent;

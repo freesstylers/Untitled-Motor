@@ -23,6 +23,7 @@ public:
 	void redefine(json& args) override;
 
 	void lookAt(Ogre::Vector3 point);
+	Vector3 getLookAt();
 	Ogre::Camera* getCam();
 private:
 	bool lookingAt = false;

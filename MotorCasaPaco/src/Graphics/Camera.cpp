@@ -160,3 +160,7 @@ Ogre::Camera* Camera::getCam()
 {
 	return cam;
 }
+Vector3 Camera::getLookAt()
+{
+	return OgreToPaco(cam->getDerivedDirection());
+}
