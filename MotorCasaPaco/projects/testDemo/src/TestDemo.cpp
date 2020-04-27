@@ -17,6 +17,14 @@
 #include "FormatResolutionChangeComponent.h"
 #include "ApplyGraphicChangesComponent.h"
 #include "ChangeVyncComponent.h"
+#include "FSAAChangeComponent.h"
+#include "ShadowsChangeComponent.h"
+#include "ApplyAdvancedGraphicChangesComponent.h"
+#include "RevertGraphicChangesComponent.h"
+
+#include "RevertAdvancedGraphicChangesComponent.h"
+#include "ChangeGammaComponent.h"
+#include "ChangeGraphicSceneComponent.h"
 
 class SimpleMovementFactory : public BaseFactory
 {
@@ -89,6 +97,69 @@ public:
 	};
 };
 
+class FSAAChangeComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new FSAAChangeComponent(args);
+	};
+};
+
+class ShadowsChangeComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ShadowsChangeComponent(args);
+	};
+};
+
+class ApplyAdvancedGraphicChangesComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ApplyAdvancedGraphicChangesComponent(args);
+	};
+};
+
+class RevertGraphicChangesComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new RevertGraphicChangesComponent(args);
+	};
+};
+
+class RevertAdvancedGraphicChangesComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new RevertAdvancedGraphicChangesComponent(args);
+	};
+};
+
+class ChangeGammaComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ChangeGammaComponent(args);
+	};
+};
+
+class ChangeGraphicSceneComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ChangeGraphicSceneComponent(args);
+	};
+};
+
 MotorCasaPaco* motorCasaPaco;
 
 #ifdef  _DEBUG
@@ -128,6 +199,13 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	JsonFactoryParser::getInstance()->addFactory("FormatResolutionChangeComponent", new FormatResolutionChangeComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("ApplyGraphicChangesComponent", new ApplyGraphicChangesComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("ChangeVSyncComponent", new ChangeVSyncComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("FSAAChangeComponent", new FSAAChangeComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("ShadowsChangeComponent", new ShadowsChangeComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("ApplyAdvancedGraphicChangesComponent", new ApplyAdvancedGraphicChangesComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("RevertGraphicChangesComponent", new RevertGraphicChangesComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("RevertAdvancedGraphicChangesComponent", new RevertAdvancedGraphicChangesComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("ChangeGammaComponent", new ChangeGammaComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("ChangeGraphicSceneComponent", new ChangeGraphicSceneComponentFactory());
 
 	MotorCasaPaco::getInstance()->getGUI_Manager()->getInstance()->setupDefaultResources();
 

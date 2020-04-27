@@ -9,6 +9,7 @@ namespace CEGUI {
 	class WindowManager;
 	class PushButton;
 	class EventArgs;
+	class Window;
 }
 
 namespace Ogre {
@@ -40,10 +41,11 @@ public:
 	void showMouseCursor();
 	void hideMouseCursor();
 	bool test(const CEGUI::EventArgs& e);
-	void updateScreenSize(int width, int height, bool fontLittle);
+	void updateScreenSize(int width, int height);
 	void setEvents(CEGUI::PushButton* button, std::function<bool(const CEGUI::EventArgs&)> function);
 	void loadFont(std::string name);
 	void setupDefaultResources();
+	void setDefaultFont(int value);
 	GUI_Element* getRoot();
 	CEGUI::WindowManager* getWinManager();
 

@@ -121,10 +121,6 @@
 					"type": "ChangeSceneButtonComponent",
 					"buttonName" : "MainMenu/Settings",
 					"sceneName" : "GraphicOptions"
-				},
-				{
-					"type": "ExitButtonComponent",
-					"buttonName" : "MainMenu/Close"
 				}
 			]
 		}
