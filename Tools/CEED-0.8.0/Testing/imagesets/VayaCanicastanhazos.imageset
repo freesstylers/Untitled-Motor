@@ -1,0 +1,8 @@
+<Imageset autoScaled="" imagefile="VayaCanicastanhazos.png" name="VayaCanicastanhazos" nativeHorzRes="800" nativeVertRes="600" version="2">
+    <Image height="369" name="Logo" width="499" xPos="2" yPos="1092" />
+    <Image height="1080" name="Fondo" width="1920" xPos="0" yPos="0" />
+    <Image height="23" name="Mouse_Arrow" width="13" xPos="513" yPos="1096" />
+    <Image height="24" name="Mouse_Move" width="23" xPos="536" yPos="1095" />
+    <Image height="20" name="Mouse_Resize" width="21" xPos="566" yPos="1098" />
+    <Image height="21" name="Mouse_Text" width="23" xPos="590" yPos="1097" />
+</Imageset>

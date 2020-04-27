@@ -93,9 +93,39 @@ bool GUI_Manager::test(const CEGUI::EventArgs& e) {
 	return true;
 }
 
+void GUI_Manager::updateScreenSize(int width, int height, bool fontLittle)
+{
+	if (fontLittle)
+	{
+		//CEGUI::FontManager::getSingleton().createFromFile("shump-little.font");
+		CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("shump-little");
+	}
+	else
+	{
+		CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("shump-normal");
+	}
+
+	CEGUI::System::getSingleton().getRenderer()->setDisplaySize(CEGUI::Size<float>(width, height));
+}
+
 void GUI_Manager::setEvents(CEGUI::PushButton* button, std::function<bool(const CEGUI::EventArgs&)> function)
 {
 	button->subscribeEvent(CEGUI::PushButton::EventClicked, CEGUI::Event::Subscriber(function));
+}
+
+void GUI_Manager::loadFont(std::string name)
+{
+	CEGUI::FontManager::getSingleton().createFromFile(name);
+}
+
+void GUI_Manager::setupDefaultResources()
+{
+	loadScheme("A_Toda_Pastilla.scheme");
+	loadScheme("GWEN.scheme");
+	setMouseCursor("A_Toda_Pastilla/Mouse_Arrow");
+	loadFont("shump-normal.font");
+	loadFont("shump-little.font");
+	CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("shump-normal");
 }
 
 void GUI_Manager::addChild(int type, std::string name)

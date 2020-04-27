@@ -13,6 +13,10 @@
 #include "TerrainRotation.h"
 #include "ChangeSceneButtonComponent.h"
 #include "ExitButtonComponent.h"
+#include "ChangeFullScreenComponent.h"
+#include "FormatResolutionChangeComponent.h"
+#include "ApplyGraphicChangesComponent.h"
+#include "ChangeVyncComponent.h"
 
 class SimpleMovementFactory : public BaseFactory
 {
@@ -46,6 +50,42 @@ public:
 	Component* createComponent(json& args) override
 	{
 		return new ExitButtonComponent(args);
+	};
+};
+
+class ChangeFullScreenComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ChangeFullScreenComponent(args);
+	};
+};
+
+class FormatResolutionChangeComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new FormatResolutionChangeComponent(args);
+	};
+};
+
+class ApplyGraphicChangesComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ApplyGraphicChangesComponent(args);
+	};
+};
+
+class ChangeVSyncComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ChangeVSyncComponent(args);
 	};
 };
 
@@ -84,10 +124,12 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	JsonFactoryParser::getInstance()->addFactory("TerrainRotation", new TerrainRotationFactory());
 	JsonFactoryParser::getInstance()->addFactory("ChangeSceneButtonComponent", new ChangeSceneButtonComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("ExitButtonComponent", new ExitButtonComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("ChangeFullScreenComponent", new ChangeFullScreenComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("FormatResolutionChangeComponent", new FormatResolutionChangeComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("ApplyGraphicChangesComponent", new ApplyGraphicChangesComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("ChangeVSyncComponent", new ChangeVSyncComponentFactory());
 
-	motorCasaPaco->getGUI_Manager()->getInstance()->loadScheme("A_Toda_Pastilla.scheme");
-	motorCasaPaco->getGUI_Manager()->getInstance()->loadScheme("GWEN.scheme");
-	motorCasaPaco->getGUI_Manager()->getInstance()->setMouseCursor("A_Toda_Pastilla/Mouse_Arrow");
+	MotorCasaPaco::getInstance()->getGUI_Manager()->getInstance()->setupDefaultResources();
 
 	motorCasaPaco->changeScene("test");
 

@@ -94,7 +94,7 @@
 	[
 		{
 			"type" : "layout", 
-			"name" : "Menu.layout"
+			"name" : "MainMenu.layout"
 		},
 		{
 			"type" : "entity",
@@ -111,6 +111,23 @@
 					"buttonName" : "MainMenu/Close"
 				}
 			]
+		},
+		{
+			"type" : "entity",
+			"name" : "UI_2",
+			"components" : 
+			[
+				{
+					"type": "ChangeSceneButtonComponent",
+					"buttonName" : "MainMenu/Settings",
+					"sceneName" : "GraphicOptions"
+				},
+				{
+					"type": "ExitButtonComponent",
+					"buttonName" : "MainMenu/Close"
+				}
+			]
 		}
+
 	]
 }

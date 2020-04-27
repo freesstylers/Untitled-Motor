@@ -15,6 +15,9 @@ namespace Ogre {
 	class Root;
 	class SceneManager;
 	class RenderWindow;
+	struct ConfigOption;
+	typedef std::map<std::string, std::string> NameValuePairList;
+	typedef std::map< std::string, ConfigOption > ConfigOptionMap;
 	enum ShadowTechnique;
 }
 
@@ -55,6 +58,33 @@ public:
 	float DeltaTime();
 	void resetTimer();
 
+	void resize(int width, int height);
+	void setFullScreenOn();
+	void setFullScreenOff();
+	bool getFullScreen();
+	void setFullScreen(bool value);
+	bool getVSync();
+	std::string getVSync(bool value);
+	void setVSync(bool value);
+	void setVSync(std::string value);
+	void setVSyncOn();
+	void setVSyncOff();
+	void writeGraphicOptions();
+	Ogre::ConfigOptionMap getGraphicsConfiguration();
+	Ogre::ConfigOptionMap getBackupGraphicsConfiguration();
+	std::string getScreenProportion();
+	std::string getFullScreen(bool value);
+	void setScreenProportion(std::string value);
+	void setScreenProportion(int height);
+	std::string getResolution();
+	void setResolution(std::string value);
+	void updateGraphicTexts();
+	void updateAdvancedGraphicTexts();
+
+	void changeGraphicComponents();
+	void changeAdvancedGraphicComponents();
+
+
 	void setFarShadowDistance(float dist);
 	void setShadowTechnique(Ogre::ShadowTechnique type);
 	float getFarShadowDistance();
@@ -81,7 +111,18 @@ private:
 	Ogre::RenderWindow* window;
 	std::string appName;
 	static MotorCasaPaco* instance;
-
 	PacoFrameListener* frameListener_;
+
+	void storeGraphicsConfiguration();
+
+	//Screen Stuff
+	Ogre::ConfigOptionMap CurrentGraphicsConfiguration;
+	Ogre::ConfigOptionMap BackupGraphicsConfiguration;
+	bool fullScreen;
+	bool vSync;
+	int screen_width;
+	int screen_height;
+	std::string screen_proportion;
+	std::string video_mode;
 };
 

@@ -904,4 +904,731 @@
       </Layer>
     </StateImagery>
   </WidgetLook>
+
+<WidgetLook name="A_Toda_Pastilla/Revert">
+    <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF2E72B2" name="HoverTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FFFFFFFF" name="PushedTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF777777" name="DisabledTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="CentreAligned" name="VertLabelFormatting" />
+    <PropertyDefinition initialValue="CentreAligned" name="HorzLabelFormatting" />
+    <PropertyDefinition initialValue="" name="NormalImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="HoverImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="PushedImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="DisabledImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="VertImageFormatting" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="HorzImageFormatting" redrawOnWrite="true" />
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <VertFormatProperty name="VertLabelFormatting" />
+        <HorzFormatProperty name="HorzLabelFormatting" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Normal" name="A_Toda_Pastilla/Revert_Normal" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="NormalImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Hover" name="A_Toda_Pastilla/Revert_Hover" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="HoverImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Clicked" name="A_Toda_Pastilla/Revert_Clicked" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="PushedImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+        <Section section="label">
+          <ColourProperty name="PushedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="PushedOff">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+
+  <WidgetLook name="A_Toda_Pastilla/AdvancedOptions">
+    <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF2E72B2" name="HoverTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FFFFFFFF" name="PushedTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF777777" name="DisabledTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="CentreAligned" name="VertLabelFormatting" />
+    <PropertyDefinition initialValue="CentreAligned" name="HorzLabelFormatting" />
+    <PropertyDefinition initialValue="" name="NormalImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="HoverImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="PushedImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="DisabledImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="VertImageFormatting" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="HorzImageFormatting" redrawOnWrite="true" />
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <VertFormatProperty name="VertLabelFormatting" />
+        <HorzFormatProperty name="HorzLabelFormatting" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Normal" name="A_Toda_Pastilla/AdvancedOptions_Normal" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="NormalImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Hover" name="A_Toda_Pastilla/AdvancedOptions_Hover" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="HoverImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Clicked" name="A_Toda_Pastilla/AdvancedOptions_Clicked" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="PushedImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+        <Section section="label">
+          <ColourProperty name="PushedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="PushedOff">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+
+
+  <WidgetLook name="A_Toda_Pastilla/Apply">
+    <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF2E72B2" name="HoverTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FFFFFFFF" name="PushedTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF777777" name="DisabledTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="CentreAligned" name="VertLabelFormatting" />
+    <PropertyDefinition initialValue="CentreAligned" name="HorzLabelFormatting" />
+    <PropertyDefinition initialValue="" name="NormalImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="HoverImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="PushedImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="DisabledImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="VertImageFormatting" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="HorzImageFormatting" redrawOnWrite="true" />
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <VertFormatProperty name="VertLabelFormatting" />
+        <HorzFormatProperty name="HorzLabelFormatting" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Normal" name="A_Toda_Pastilla/Apply_Normal" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="NormalImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Hover" name="A_Toda_Pastilla/Apply_Hover" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="HoverImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Clicked" name="A_Toda_Pastilla/Apply_Clicked" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="PushedImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+        <Section section="label">
+          <ColourProperty name="PushedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="PushedOff">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+
+  
+  <WidgetLook name="A_Toda_Pastilla/Back">
+    <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF2E72B2" name="HoverTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FFFFFFFF" name="PushedTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF777777" name="DisabledTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="CentreAligned" name="VertLabelFormatting" />
+    <PropertyDefinition initialValue="CentreAligned" name="HorzLabelFormatting" />
+    <PropertyDefinition initialValue="" name="NormalImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="HoverImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="PushedImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="DisabledImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="VertImageFormatting" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="HorzImageFormatting" redrawOnWrite="true" />
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <VertFormatProperty name="VertLabelFormatting" />
+        <HorzFormatProperty name="HorzLabelFormatting" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Normal" name="A_Toda_Pastilla/Back_Normal" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="NormalImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Hover" name="A_Toda_Pastilla/Back_Hover" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="HoverImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Clicked" name="A_Toda_Pastilla/Back_Clicked" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="PushedImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+        <Section section="label">
+          <ColourProperty name="PushedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="PushedOff">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
+
 </Falagard>

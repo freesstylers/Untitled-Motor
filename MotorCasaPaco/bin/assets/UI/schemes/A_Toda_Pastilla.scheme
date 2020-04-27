@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <GUIScheme name="A_Toda_Pastilla"	version="5">
   <Imageset filename="A_Toda_Pastilla.imageset" />
-  <Font filename="shump-10.font" />
+  <Font filename="shump-normal.font" />
   <LookNFeel filename="A_Toda_Pastilla.looknfeel" />
   <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
   <FalagardMapping lookNFeel="A_Toda_Pastilla/Play"			renderer="Core/Button"			targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/Play" />
@@ -9,4 +9,9 @@
   <FalagardMapping lookNFeel="A_Toda_Pastilla/Close"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/Close" />
   <FalagardMapping lookNFeel="A_Toda_Pastilla/LeftArrow"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/LeftArrow" />
   <FalagardMapping lookNFeel="A_Toda_Pastilla/RightArrow"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/RightArrow" />
+  <FalagardMapping lookNFeel="A_Toda_Pastilla/Revert"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/Revert" />
+  <FalagardMapping lookNFeel="A_Toda_Pastilla/Back"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/Back" />
+  <FalagardMapping lookNFeel="A_Toda_Pastilla/Apply"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/Apply" />
+  <FalagardMapping lookNFeel="A_Toda_Pastilla/AdvancedOptions"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/AdvancedOptions" />
+
 </GUIScheme>

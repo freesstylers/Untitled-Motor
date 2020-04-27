@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<GUIScheme name="VayaCanicastanhazos"	version="5">
+  <Imageset filename="VayaCanicastanhazos.imageset" />
+  <Font filename="shump-10.font" />
+  <LookNFeel filename="VayaCanicastanhazos.looknfeel" />
+  <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
+    <FalagardMapping lookNFeel="VayaCanicastanhazos/Mouse_Text"			renderer="Core/Button"			targetType="CEGUI/PushButton"		windowType="VayaCanicastanhazos/Mouse_Text" />
+
+</GUIScheme>

@@ -40,9 +40,10 @@ public:
 	void showMouseCursor();
 	void hideMouseCursor();
 	bool test(const CEGUI::EventArgs& e);
-
+	void updateScreenSize(int width, int height, bool fontLittle);
 	void setEvents(CEGUI::PushButton* button, std::function<bool(const CEGUI::EventArgs&)> function);
-
+	void loadFont(std::string name);
+	void setupDefaultResources();
 	GUI_Element* getRoot();
 	CEGUI::WindowManager* getWinManager();
 

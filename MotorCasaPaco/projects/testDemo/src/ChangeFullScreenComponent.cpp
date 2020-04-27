@@ -1,0 +1,48 @@
+#include "ChangeFullScreenComponent.h"
+#include "MotorCasaPaco.h"
+
+ChangeFullScreenComponent::ChangeFullScreenComponent(json& args): Component(args)
+{
+
+}
+
+ChangeFullScreenComponent::~ChangeFullScreenComponent()
+{
+	Component::~Component();
+}
+
+bool ChangeFullScreenComponent::function(const CEGUI::EventArgs& e)
+{
+	if (MotorCasaPaco::getInstance()->getFullScreen())
+	{ 
+		MotorCasaPaco::getInstance()->setFullScreen(false);
+		GUI_Manager::getInstance()->changeText(textToChange, "No");
+	}
+	else
+	{ 
+		MotorCasaPaco::getInstance()->setFullScreen(true);
+		GUI_Manager::getInstance()->changeText(textToChange, "Si");
+	}
+
+	return true;
+}
+
+void ChangeFullScreenComponent::init(json& j)
+{
+	if (!j["button_1_Name"].is_null() && !j["button_2_Name"].is_null() && !j["textToChange"].is_null())
+	{
+		auto helperFunction = std::bind(&ChangeFullScreenComponent::function, this, std::placeholders::_1);
+		GUI_Manager::getInstance()->setEvents(GUI_Manager::getInstance()->getPushButton(j["button_1_Name"]), helperFunction);
+		GUI_Manager::getInstance()->setEvents(GUI_Manager::getInstance()->getPushButton(j["button_2_Name"]), helperFunction);
+		textToChange = GUI_Manager::getInstance()->getStaticText(j["textToChange"]);
+
+		if (MotorCasaPaco::getInstance()->getFullScreen())
+		{
+			GUI_Manager::getInstance()->changeText(textToChange, "Si");
+		}
+		else
+		{
+			GUI_Manager::getInstance()->changeText(textToChange, "No");
+		}
+	}
+}

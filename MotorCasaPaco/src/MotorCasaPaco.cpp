@@ -14,6 +14,7 @@
 #include <OgreFrameListener.h>
 #include <stdexcept>
 #include <btBulletDynamicsCommon.h>
+#include <OgreViewport.h>
 
 #include "Resources/ResourceManager.h"
 #include "Input/InputManager.h"
@@ -251,8 +252,6 @@ void MotorCasaPaco::setupRoot()
 
 void MotorCasaPaco::setup()
 {
-	MotorCasaPaco::getInstance()->getRoot()->setRenderSystem(MotorCasaPaco::getInstance()->getRoot()->getRenderSystemByName("OpenGL Rendering Subsystem"));
-
 	MotorCasaPaco::getInstance()->getRoot()->initialise(false);
 	setupWindow(appName);
 
@@ -302,25 +301,16 @@ void MotorCasaPaco::shutdown()
 	}
 }
 
-
 void MotorCasaPaco::setupWindow(std::string windowName)
 {
-	uint32_t w, h;
-
-	Ogre::ConfigOptionMap ropts = MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->getConfigOptions();
-
-	std::istringstream mode(ropts["Video Mode"].currentValue);
-	Ogre::String token;
-	mode >> w;
-	mode >> token;
-	mode >> h;
+	storeGraphicsConfiguration();
 
 	if (!SDL_WasInit(SDL_INIT_VIDEO))
 		SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-	Uint32 flags = SDL_WINDOW_RESIZABLE;
+	Uint32 flags = SDL_WINDOW_RESIZABLE, SDL_WINDOW_ALLOW_HIGHDPI;
 
-	sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
+	sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_width, screen_height, flags);
 
 	SDL_SysWMinfo wmInfo;
 	SDL_VERSION(&wmInfo.version);
@@ -332,13 +322,16 @@ void MotorCasaPaco::setupWindow(std::string windowName)
 
 	Ogre::NameValuePairList params;
 
-	params["FSAA"] = ropts["FSAA"].currentValue;
-	params["vsync"] = ropts["VSync"].currentValue;
-	params["gamma"] = ropts["sRGB Gamma Conversion"].currentValue;
+	params["FSAA"] = CurrentGraphicsConfiguration["FSAA"].currentValue;
+	params["vsync"] = CurrentGraphicsConfiguration["VSync"].currentValue;
+	params["gamma"] = CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue;
 
 	params["externalWindowHandle"] = Ogre::StringConverter::toString(size_t(wmInfo.info.win.window));
 
-	window = MotorCasaPaco::getInstance()->getRoot()->createRenderWindow(windowName, w, h, false, &params);
+	window = MotorCasaPaco::getInstance()->getRoot()->createRenderWindow(windowName, screen_width, screen_height, false, &params);
+	
+	cout << screen_width << " " << screen_height << "\n";
+
 
 	//////////por si queremos que la ventana oculte el cursor
 	SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
@@ -409,6 +402,276 @@ float MotorCasaPaco::DeltaTime()
 void MotorCasaPaco::resetTimer()
 {
 	frameListener_->resetTimer();
+}
+
+void MotorCasaPaco::resize(int width, int height)
+{
+	SDL_SetWindowSize(sdlWindow, width, height);
+	//window->resize(width, height);
+	window->windowMovedOrResized();
+//	getOgreWin()->getViewport(0)->setDimensions(0,0,width, height);
+
+	if (width < 1280)
+	GUI_Manager::getInstance()->updateScreenSize(width, height, true);
+	else
+	GUI_Manager::getInstance()->updateScreenSize(width, height, false);
+}
+
+void MotorCasaPaco::setFullScreenOn()
+{
+	SDL_SetWindowFullscreen(sdlWindow, SDL_WINDOW_FULLSCREEN);
+	resize(screen_width, screen_height);
+	MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->setConfigOption("Full Screen", "Yes");
+}
+
+void MotorCasaPaco::setFullScreenOff()
+{
+	resize(screen_width, screen_height);
+	!SDL_SetWindowFullscreen(sdlWindow, !SDL_WINDOW_FULLSCREEN);
+	MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->setConfigOption("Full Screen", "No");
+}
+
+bool MotorCasaPaco::getFullScreen()
+{
+	return fullScreen;
+}
+
+void MotorCasaPaco::setFullScreen(bool value)
+{
+	fullScreen = value;
+}
+
+bool MotorCasaPaco::getVSync()
+{
+	return vSync;
+}
+
+std::string MotorCasaPaco::getVSync(bool value)
+{
+	std::string r;
+
+	if (value)
+		r = "Yes";
+	else
+		r = "No";
+
+	return r;
+}
+
+void MotorCasaPaco::setVSync(bool value)
+{
+	vSync = value;
+}
+
+void MotorCasaPaco::setVSync(std::string value)
+{
+	if (value == "Yes")
+		vSync = true;
+	else if (value == "No")
+		vSync = false;
+}
+
+void MotorCasaPaco::setVSyncOn()
+{
+	SDL_GL_SetSwapInterval(1);
+	MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->setConfigOption("VSync", "Yes");
+}
+
+void MotorCasaPaco::setVSyncOff()
+{
+	SDL_GL_SetSwapInterval(0);
+	MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->setConfigOption("VSync", "No");
+}
+
+void MotorCasaPaco::writeGraphicOptions()
+{
+	ofstream outputFile;
+
+	#ifdef  _DEBUG
+		outputFile.open("window_d.cfg");
+	#else
+		outputFile.open("window.cfg");
+	#endif
+
+	outputFile << "Render System=OpenGL Rendering Subsystem\n";
+	outputFile << "\n";
+	outputFile << "[OpenGL Rendering Subsystem]\n"; //Espacio antes de /n?
+	outputFile << "Colour Depth=32\n"; //Esta no se puede cambiar
+	outputFile << "Display Frequency=N/A\n";
+	outputFile << "FSAA=" << CurrentGraphicsConfiguration["FSAA"].currentValue << "\n"; //El 0 es opcion, pero aun no esta hecha
+	outputFile << "Full Screen=" << CurrentGraphicsConfiguration["Full Screen"].currentValue << "\n"; //El 0 es opcion, pero aun no esta hecha
+
+	outputFile << "RTT Preferred Mode = FBO\n"; //Unica opcion?
+
+	outputFile << "VSync=" << CurrentGraphicsConfiguration["VSync"].currentValue << "\n";
+
+	outputFile << "VSync Interval=1\n"; //Esto que hace xd
+
+	outputFile << "Video Mode=" << CurrentGraphicsConfiguration["Video Mode"].currentValue << "\n";
+	outputFile << "sRGB Gamma Conversion=" << CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue << "\n";
+	outputFile << "\n";
+
+	outputFile.close();
+}
+
+Ogre::ConfigOptionMap MotorCasaPaco::getGraphicsConfiguration()
+{
+	return CurrentGraphicsConfiguration;
+}
+
+Ogre::ConfigOptionMap MotorCasaPaco::getBackupGraphicsConfiguration()
+{
+	return BackupGraphicsConfiguration;
+}
+
+std::string MotorCasaPaco::getScreenProportion()
+{
+	return screen_proportion;
+}
+
+std::string MotorCasaPaco::getFullScreen(bool value)
+{
+	std::string r;
+
+	if (value)
+		r = "Yes";
+	else
+		r = "No";
+
+	return r;
+}
+
+void MotorCasaPaco::setScreenProportion(std::string value)
+{
+	screen_proportion = value;
+}
+
+void MotorCasaPaco::setScreenProportion(int height)
+{
+	if (height == 1024)
+		screen_proportion = "5 : 4";
+	else if (height == 1050 || height == 800)
+		screen_proportion = "16 : 10";
+	else if (height == 1080 || height == 900 || height == 720)
+		screen_proportion = "16 : 9";
+	else if (height == 872 || height == 768 || height == 624 || height == 600 || height == 480)
+		screen_proportion = "4 : 3";
+}
+
+std::string MotorCasaPaco::getResolution()
+{
+	return video_mode;
+}
+
+void MotorCasaPaco::setResolution(std::string value)
+{
+	video_mode = value;
+
+	std::stringstream mode(value);
+
+	Ogre::String token;
+	mode >> screen_width;
+	mode >> token;
+	mode >> screen_height;
+
+	MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->setConfigOption("Video Mode", video_mode);
+}
+
+void MotorCasaPaco::updateGraphicTexts()
+{
+	//ChangeTexts in Layout
+/*
+ResText = GUI_Manager::getInstance()->getStaticText(j["ResText"]);
+GUI_Manager::getInstance()->changeText(ForText, currentFormat);
+*/
+}
+
+void MotorCasaPaco::updateAdvancedGraphicTexts()
+{
+}
+
+void MotorCasaPaco::changeGraphicComponents()
+{
+	//FullScreen
+	if (CurrentGraphicsConfiguration["Full Screen"].currentValue != getFullScreen(fullScreen))
+	{
+		if (fullScreen) //A Pantalla Completa
+		{
+			setFullScreenOn();
+			CurrentGraphicsConfiguration["Full Screen"].currentValue = "Yes";
+		}
+		else //A Modo Ventana
+		{
+			setFullScreenOff();
+			CurrentGraphicsConfiguration["Full Screen"].currentValue = "No";
+		}
+	}
+
+	if (CurrentGraphicsConfiguration["Video Mode"].currentValue != video_mode)
+	{
+		if (fullScreen)
+		{
+			setFullScreenOff();
+			resize(screen_width, screen_height);
+			setFullScreenOn();
+		}
+		else
+		{
+			resize(screen_width, screen_height);
+		}
+
+		CurrentGraphicsConfiguration["Video Mode"].currentValue = video_mode;
+
+	}
+
+	if (CurrentGraphicsConfiguration["VSync"].currentValue != getVSync(vSync))
+	{
+		if (vSync)
+		{
+			setVSyncOn();
+			CurrentGraphicsConfiguration["VSync"].currentValue = "Yes";
+		}
+		else
+		{
+			setVSyncOff();
+			CurrentGraphicsConfiguration["VSync"].currentValue = "No";
+		}
+		//Mensaje de reiniciar aplicacion?
+		//Tooltip en menú?
+	}
+
+	updateGraphicTexts();
+}
+
+void MotorCasaPaco::changeAdvancedGraphicComponents()
+{
+	/*
+	
+	Stuff
+
+	*/
+	updateAdvancedGraphicTexts();
+}
+
+void MotorCasaPaco::storeGraphicsConfiguration()
+{
+	CurrentGraphicsConfiguration = MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->getConfigOptions();
+	BackupGraphicsConfiguration = CurrentGraphicsConfiguration;
+
+	if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "Yes")
+		fullScreen = true;
+	else if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "No")
+		fullScreen = false;
+
+	std::istringstream mode(CurrentGraphicsConfiguration["Video Mode"].currentValue);
+	video_mode = CurrentGraphicsConfiguration["Video Mode"].currentValue;
+
+	Ogre::String token;
+	mode >> screen_width;
+	mode >> token;
+	mode >> screen_height;
+
+	setScreenProportion(screen_height);
 }
 
 void MotorCasaPaco::setFarShadowDistance(float dist)

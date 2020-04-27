@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Imageset version="2" name="A_Toda_Pastilla" imagefile="A_Toda_Pastilla.png" nativeHorzRes="800" nativeVertRes="600" autoScaled="vertical" >
+<Imageset autoScaled="vertical" imagefile="A_Toda_Pastilla.png" name="A_Toda_Pastilla" nativeHorzRes="800" nativeVertRes="600" version="2">
     <Image height="49" name="Close_Normal" width="50" xPos="2" yPos="2" />
     <Image height="53" name="Close_Hover" width="54" xPos="55" yPos="0" />
     <Image height="53" name="Close_ClickHover" width="54" xPos="113" yPos="0" />
@@ -25,4 +24,22 @@
     <Image height="57" name="LeftArrow_2" width="49" xPos="311" yPos="180" />
     <Image height="55" name="LeftArrow_1" width="47" xPos="364" yPos="181" />
     <Image height="120" name="ScoreCup" width="70" xPos="2" yPos="243" />
+    <Image height="199" name="Logo" width="450" xPos="78" yPos="248" />
+    <Image height="1076" name="Fondo" width="1915" xPos="1" yPos="459" />
+    <Image height="50" name="Apply_Disabled" width="230" xPos="540" yPos="242" />
+    <Image height="50" name="Apply_Clicked" width="230" xPos="541" yPos="297" />
+    <Image height="50" name="Apply_Hover" width="230" xPos="538" yPos="352" />
+    <Image height="50" name="Apply_Normal" width="230" xPos="540" yPos="405" />
+    <Image height="50" name="Revert_Disabled" width="230" xPos="782" yPos="243" />
+    <Image height="50" name="Revert_Clicked" width="230" xPos="783" yPos="298" />
+    <Image height="50" name="Revert_Hover" width="230" xPos="780" yPos="353" />
+    <Image height="50" name="Revert_Normal" width="230" xPos="782" yPos="406" />
+    <Image height="50" name="Back_Clicked" width="230" xPos="1023" yPos="296" />
+    <Image height="50" name="Back_Disabled" width="230" xPos="1022" yPos="241" />
+    <Image height="50" name="Back_Normal" width="230" xPos="1022" yPos="404" />
+    <Image height="50" name="Back_Hover" width="230" xPos="1020" yPos="351" />
+    <Image height="50" name="AdvancedOptions_Disabled" width="533" xPos="537" yPos="21" />
+    <Image height="50" name="AdvancedOptions_Clicked" width="533" xPos="539" yPos="76" />
+    <Image height="50" name="AdvancedOptions_Hover" width="533" xPos="532" yPos="131" />
+    <Image height="51" name="AdvancedOptions_Normal" width="533" xPos="537" yPos="184" />
 </Imageset>
