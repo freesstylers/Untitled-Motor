@@ -686,7 +686,7 @@ void MotorCasaPaco::updateGraphicTexts(CEGUI::Window* fullscreen, CEGUI::Window*
 
 void MotorCasaPaco::updateAdvancedGraphicTexts(CEGUI::Window* fsaa, CEGUI::Window* gamma, CEGUI::Window* shadows_)
 {
-	if (CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue == "Yes")
+	/*if (CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue == "Yes")
 		GUI_Manager::getInstance()->changeText(gamma, "Si");
 	else
 		GUI_Manager::getInstance()->changeText(gamma, CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue);
@@ -696,7 +696,7 @@ void MotorCasaPaco::updateAdvancedGraphicTexts(CEGUI::Window* fsaa, CEGUI::Windo
 	GUI_Manager::getInstance()->changeText(shadows_, shadows);
 
 	Event evt = Event(EventType::RESET_GRAPHIC_INFO);
-	EventManager::getInstance()->EmitEvent(evt);
+	EventManager::getInstance()->EmitEvent(evt);*/
 }
 
 
