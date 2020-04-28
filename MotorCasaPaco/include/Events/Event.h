@@ -6,7 +6,6 @@ enum EventType {
 	TEXT,
 	RIGIDBODY_INFO,
 	RIGIDBODY_COLLISION,
-	SETPARENT,
 };
 
 class btRigidBody;
@@ -48,13 +47,4 @@ public:
 	}
 	Entity* obj1;
 	Entity* obj2;
-};
-
-struct SetParentEvent : public Event {
-public:
-	inline SetParentEvent(Entity* parent) : Event(EventType::SETPARENT) {
-		this->parent = parent;
-	};
-
-	Entity* parent;
 };

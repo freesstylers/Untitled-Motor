@@ -39,3 +39,37 @@ void Component::update() { }
 void Component::lateUpdate() { }
 
 void Component::render() { }
+
+void Component::setActive(bool active) {
+	active_ = active;
+
+	if (activeOnHierarchy_) {
+		if (activeOnHierarchy_ && active_) onActivated();
+		else if (!activeOnHierarchy_) onDeactivated();
+	}
+}
+
+void Component::setActiveOnHierarchy(bool active) {
+	activeOnHierarchy_ = active;
+
+	if (active_) {
+		if (activeOnHierarchy_ && active_) onActivated();
+		else if (!activeOnHierarchy_) onDeactivated();
+	}
+}
+
+const bool Component::isActive()
+{
+	return active_;
+}
+
+const bool Component::isActiveOnHierarchy()
+{
+	return activeOnHierarchy_;
+}
+
+void Component::onSetParent(Entity* parent) { }
+
+void Component::onActivated() { }
+
+void Component::onDeactivated() { }

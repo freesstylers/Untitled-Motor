@@ -16,7 +16,6 @@ class btConstraintSolver;
 class PhysicsManager
 {
 public:
-	~PhysicsManager();
 
 	static PhysicsManager* getInstance();
 	static bool setupInstance();
@@ -27,11 +26,15 @@ public:
 	void initWorld();
 	void stepWorld();
 	void addRigidBody(btRigidBody* body);
+	void setActive(bool active);
 
 	btRigidBody* createRigidBody(const std::string& shape, const Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated);
 
 private:
 	PhysicsManager();
+	~PhysicsManager();
+
+	bool active_ = true;
 
 	btDynamicsWorld* world=nullptr;
 	btCollisionConfiguration* config=nullptr;

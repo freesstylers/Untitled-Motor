@@ -111,12 +111,37 @@ string const Entity::getTag()
 	return tag_;
 }
 
-void Entity::setActive(bool state) {
-	isActive_ = state;
+void Entity::setActive(bool active) {
+	active_ = active;
+
+	if (activeOnHierarchy_) {
+		for (auto child : children_)
+			child.second->setActiveOnHierarchy(active);
+
+		for (auto& comp : components_)
+			comp.get()->setActiveOnHierarchy(active);
+	}
 }
 
-bool const Entity::getActive() {
-	return isActive_;
+void Entity::setActiveOnHierarchy(bool active) {
+	activeOnHierarchy_ = active;
+
+	if (active_) {
+		for (auto child : children_)
+			child.second->setActiveOnHierarchy(active);
+
+		for (auto& comp : components_)
+			comp.get()->setActiveOnHierarchy(active);
+	}
+}
+
+bool const Entity::isActive() {
+	return active_;
+}
+
+const bool Entity::isActiveOnHierarchy()
+{
+	return activeOnHierarchy_;
 }
 
 Scene* Entity::getScene()
@@ -156,9 +181,8 @@ bool Entity::setParent(std::string name) {
 
 	parent_ = nParent;
 
-	SetParentEvent parentEvent(nParent);
 	for (std::pair<string, Component*> comp : map_)
-		comp.second->ReceiveEvent(parentEvent);
+		comp.second->onSetParent(nParent);
 
 	return true;
 }

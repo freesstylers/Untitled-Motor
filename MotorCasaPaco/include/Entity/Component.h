@@ -29,11 +29,24 @@ public:
 	virtual void lateUpdate();
 	virtual void render();
 
+	void setActive(bool active);
+	void setActiveOnHierarchy(bool active);
+
+	const bool isActive();
+	const bool isActiveOnHierarchy();
+
+	virtual void onSetParent(Entity* parent);
+	virtual void onActivated();
+	virtual void onDeactivated();
+
 	virtual bool ReceiveEvent(Event& event) override { return false; };
 
 protected:
 	std::string tag_;
 	Entity* e_;
+
+private:
+	bool active_ = true, activeOnHierarchy_ = true;
 };
 
 #endif // !COMPONENT_H

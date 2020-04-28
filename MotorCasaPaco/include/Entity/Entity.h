@@ -49,8 +49,11 @@ public:
 	void setTag(const std::string& tag);
 	std::string const getTag();
 
-	void setActive(bool state);
-	bool const getActive();
+	void setActive(bool active);
+	void setActiveOnHierarchy(bool active);
+
+	const bool isActive();
+	const bool isActiveOnHierarchy();
 
 	Scene* getScene();
 
@@ -68,7 +71,7 @@ public:
 protected:
 
 private:
-	bool isActive_;
+	bool active_ = true, activeOnHierarchy_ = true;
 	std::string name_;
 	std::string tag_;
 	std::vector<uptr_cmp> components_;

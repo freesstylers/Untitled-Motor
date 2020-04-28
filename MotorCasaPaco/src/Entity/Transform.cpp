@@ -176,24 +176,19 @@ Ogre::SceneNode* Transform::getNode()
 	return node;
 }
 
-bool Transform::ReceiveEvent(Event& event)
+void Transform::onSetParent(Entity* parent)
 {
-	if (event.type == EventType::SETPARENT) {
-		SetParentEvent parentEvent = static_cast<SetParentEvent&>(event);
-		Ogre::Node* nParent = parentEvent.parent->getComponent<Transform>("Transform")->getNode();
-		Ogre::Node* currentParent = node->getParent();
+	Ogre::Node* nParent = parent->getComponent<Transform>("Transform")->getNode();
+	Ogre::Node* currentParent = node->getParent();
 
-		Vector3 nodeWorldPos = (Vector3) currentParent->convertLocalToWorldPosition(node->getPosition());
-		Vector3 resultPosition = (Vector3)nParent->convertWorldToLocalPosition(nodeWorldPos);
-		Quaternion nodeWorldOrientation = (Quaternion)currentParent->convertLocalToWorldOrientation(node->getOrientation());
-		Quaternion resultOrientation = (Quaternion)nParent->convertWorldToLocalOrientation(nodeWorldOrientation);
+	Vector3 nodeWorldPos = (Vector3)currentParent->convertLocalToWorldPosition(node->getPosition());
+	Vector3 resultPosition = (Vector3)nParent->convertWorldToLocalPosition(nodeWorldPos);
+	Quaternion nodeWorldOrientation = (Quaternion)currentParent->convertLocalToWorldOrientation(node->getOrientation());
+	Quaternion resultOrientation = (Quaternion)nParent->convertWorldToLocalOrientation(nodeWorldOrientation);
 
-		currentParent->removeChild(node);
-		nParent->addChild(node);
-		node->setPosition(resultPosition);
-		node->setOrientation(resultOrientation);
-		nParent->needUpdate(true);
-	}
-
-	return false;
+	currentParent->removeChild(node);
+	nParent->addChild(node);
+	node->setPosition(resultPosition);
+	node->setOrientation(resultOrientation);
+	nParent->needUpdate(true);
 }

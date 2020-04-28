@@ -86,7 +86,7 @@ void Scene::preupdate()
 	while (i != entities.end()) {
 		auto aux = i;
 		aux++;
-		if (!((*i).second)->getActive()) {
+		if (!((*i).second)->isActive()) {
 			delete (*i).second;
 			entities.erase(i);
 		}

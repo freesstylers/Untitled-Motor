@@ -25,12 +25,20 @@ void PhysicsManager::initWorld()
 
 void PhysicsManager::stepWorld()
 {
+	if (!active_)
+		return;
+
 	world->stepSimulation(1.0 / 60.0, 10);
 }
 
 void PhysicsManager::addRigidBody(btRigidBody* body)
 {
 	world->addRigidBody(body);
+}
+
+void PhysicsManager::setActive(bool active)
+{
+	this->active_ = active;
 }
 
 btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated)

@@ -34,7 +34,8 @@ public:
 	void scale(Vector3 s);
 
 	Ogre::SceneNode* getNode();
-	bool ReceiveEvent(Event& event) override;
+
+	void onSetParent(Entity* parent) override;
 
 private:
 	Ogre::SceneNode* node = nullptr;

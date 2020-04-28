@@ -26,6 +26,7 @@ public:
 	void redefine(json& args) override;
 	void preupdate() override;
 	void physicsUpdate() override;
+
 	virtual void OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2);
 	btRigidBody* getRigidBody();
 	void applyForce(ForceType type, Vector3 force, Vector3 relPos = Vector3(0,0,0));
