@@ -29,7 +29,7 @@ bool ChangeFullScreenComponent::function(const CEGUI::EventArgs& e)
 
 bool ChangeFullScreenComponent::ReceiveEvent(Event& event)
 {
-	if (event.type == EventType::RESET_GRAPHIC_INFO) {
+	if (event.type == "RESET_GRAPHIC_INFO") {
 		if (MotorCasaPaco::getInstance()->getFullScreen())
 		{
 			GUI_Manager::getInstance()->changeText(textToChange, "Si");
@@ -60,6 +60,6 @@ void ChangeFullScreenComponent::init(json& j)
 			GUI_Manager::getInstance()->changeText(textToChange, "No");
 		}
 
-		EventManager::getInstance()->RegisterListener(this, EventType::RESET_GRAPHIC_INFO);
+		EventManager::getInstance()->RegisterListener(this, "RESET_GRAPHIC_INFO");
 	}
 }

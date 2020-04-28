@@ -212,7 +212,7 @@ bool FormatResolutionChangeComponent::functionForMore(const CEGUI::EventArgs& e)
 
 bool FormatResolutionChangeComponent::ReceiveEvent(Event& event)
 {
-	if (event.type == EventType::RESET_GRAPHIC_INFO) {
+	if (event.type == "RESET_GRAPHIC_INFO") {
 		currentFormat = MotorCasaPaco::getInstance()->getScreenProportion();
 		currentRes = MotorCasaPaco::getInstance()->getResolution();
 		currentPos = getCurrentPos(currentFormat, currentRes);
@@ -302,6 +302,6 @@ void FormatResolutionChangeComponent::init(json& j)
 		GUI_Manager::getInstance()->changeText(ResText, currentRes);
 		GUI_Manager::getInstance()->changeText(ForText, currentFormat);
 
-		EventManager::getInstance()->RegisterListener(this, EventType::RESET_GRAPHIC_INFO);
+		EventManager::getInstance()->RegisterListener(this, "RESET_GRAPHIC_INFO");
 	}
 }

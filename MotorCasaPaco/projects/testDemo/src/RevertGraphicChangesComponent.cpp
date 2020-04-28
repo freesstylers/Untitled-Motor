@@ -15,7 +15,7 @@ bool RevertGraphicChangesComponent::function(const CEGUI::EventArgs& e)
 {
 	MotorCasaPaco::getInstance()->revertGraphicChanges();
 	
-	Event evt = Event(EventType::RESET_GRAPHIC_INFO);
+	Event evt = Event("RESET_GRAPHIC_INFO");
 	EventManager::getInstance()->EmitEvent(evt);
 
 	return true;
