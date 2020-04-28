@@ -37,10 +37,44 @@
 			"components" : 
 			[
 				{
-					"type": "ChangeSceneButtonComponent",
+					"type": "ChangeGraphicSceneComponent",
 					"buttonName" : "AdvancedGraphicOptions/Back",
-					"sceneName" : "GraphicOptions"
+					"sceneName" : "GraphicOptions",
+					"advanced": "Si"
+				},
+				{
+					"type": "ApplyAdvancedGraphicChangesComponent",
+					"button" : "AdvancedGraphicOptions/Apply"
+				},
+				{
+					"type": "FSAAChangeComponent",
+					"button_More" : "AdvancedGraphicOptions/RightArrow_1",
+					"button_Less" : "AdvancedGraphicOptions/LeftArrow_1",
+					"textToChange" : "AdvancedGraphicOptions/Text_Selector_1"
+				},
+				{
+					"type": "ChangeGammaComponent",
+					"button_More" : "AdvancedGraphicOptions/RightArrow_2",
+					"button_Less" : "AdvancedGraphicOptions/LeftArrow_2",
+					"textToChange" : "AdvancedGraphicOptions/Text_Selector_2"
+				},
+
+				{
+					"type": "ShadowsChangeComponent",
+					"button_More" : "AdvancedGraphicOptions/RightArrow_3",
+					"button_Less" : "AdvancedGraphicOptions/LeftArrow_3",
+					"textToChange" : "AdvancedGraphicOptions/Text_Selector_3"
+				},
+				{
+					"type": "RevertAdvancedGraphicChangesComponent",
+					"button" : "AdvancedGraphicOptions/Revert",
+					"fsaa" : "AdvancedGraphicOptions/Text_Selector_1",
+					"gamma" : "AdvancedGraphicOptions/Text_Selector_2",
+					"shadows" : "AdvancedGraphicOptions/Text_Selector_3"
 				}
+
+
+
 			]
 		}
 	]

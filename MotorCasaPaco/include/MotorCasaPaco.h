@@ -21,6 +21,10 @@ namespace Ogre {
 	enum ShadowTechnique;
 }
 
+namespace CEGUI {
+	class Window;
+}
+
 class SDL_Window;
 
 class MotorCasaPaco
@@ -70,20 +74,28 @@ public:
 	void setVSyncOn();
 	void setVSyncOff();
 	void writeGraphicOptions();
-	Ogre::ConfigOptionMap getGraphicsConfiguration();
-	Ogre::ConfigOptionMap getBackupGraphicsConfiguration();
+	json writeExtraOptions();
 	std::string getScreenProportion();
 	std::string getFullScreen(bool value);
 	void setScreenProportion(std::string value);
 	void setScreenProportion(int height);
 	std::string getResolution();
 	void setResolution(std::string value);
-	void updateGraphicTexts();
-	void updateAdvancedGraphicTexts();
+	void updateGraphicTexts(CEGUI::Window* fullscreen, CEGUI::Window* screeProportion, CEGUI::Window* resolution, CEGUI::Window* vsync);
+	void updateAdvancedGraphicTexts(CEGUI::Window* fsaa, CEGUI::Window* gamma, CEGUI::Window* shadows); //To be updated?
+	int getScreenWidth();
+	std::string getFSAA();
+	void setFSAA(int value);
+	void setFSAA(std::string value);
+	bool getGamma();
+	void setGamma(bool value);
+	std::string getShadows();
+	void setShadows(std::string value);
 
 	void changeGraphicComponents();
 	void changeAdvancedGraphicComponents();
-
+	void revertGraphicChanges();
+	void revertAdvancedGraphicChanges();
 
 	void setFarShadowDistance(float dist);
 	void setShadowTechnique(Ogre::ShadowTechnique type);
@@ -101,7 +113,7 @@ private:
 	void setup();
 	void shutdown();
 	bool checkConfig();
-
+	void extraConfig(json& j);
 	void setupFactories();
 
 	Ogre::Root* root;
@@ -120,9 +132,15 @@ private:
 	Ogre::ConfigOptionMap BackupGraphicsConfiguration;
 	bool fullScreen;
 	bool vSync;
+	bool gamma;
 	int screen_width;
 	int screen_height;
 	std::string screen_proportion;
 	std::string video_mode;
+	std::string fsaa;
+	std::string shadows;
+	std::string BackupShadows;
+	json ExtraConfig;
+	json BackupExtraConfig;
 };
 

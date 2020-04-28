@@ -66,8 +66,12 @@ void EventManager::UnregisterListener(EventListener* listener, EventType eventTy
 
 void EventManager::UnregisterListenerForAll(EventListener* listener)
 {
-	for (auto foobar : _listeners)
-		foobar.second.erase(std::remove(foobar.second.begin(), foobar.second.end(), listener), foobar.second.end());
+	std::map<EventType, std::vector<EventListener*>>::iterator it = _listeners.begin();
+	while (it != _listeners.end())
+	{
+		it->second.erase(std::remove(it->second.begin(), it->second.end(), listener), it->second.end());
+		it++;
+	}
 }
 
 void EventManager::ClearListeners(EventType eventType)

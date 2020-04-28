@@ -149,14 +149,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ApplyAdvancedGraphicChangesComponent.cpp" />
     <ClCompile Include="src\ApplyGraphicChangesComponent.cpp" />
     <ClCompile Include="src\ChangeFullScreenComponent.cpp" />
+    <ClCompile Include="src\ChangeGammaComponent.cpp" />
+    <ClCompile Include="src\ChangeGraphicSceneComponent.cpp" />
     <ClCompile Include="src\ChangeVyncComponent.cpp" />
     <ClCompile Include="src\ExitButtonComponent.cpp" />
     <ClCompile Include="src\ForcesTest.cpp" />
     <ClCompile Include="src\FormatResolutionChangeComponent.cpp" />
+    <ClCompile Include="src\FSAAChangeComponent.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\ChangeSceneButtonComponent.cpp" />
+    <ClCompile Include="src\RevertAdvancedGraphicChangesComponent.cpp" />
+    <ClCompile Include="src\RevertGraphicChangesComponent.cpp" />
+    <ClCompile Include="src\ShadowsChangeComponent.cpp" />
     <ClCompile Include="src\SimpleMovement.cpp" />
     <ClCompile Include="src\TerrainRotation.cpp" />
     <ClCompile Include="src\TestComponent.cpp" />
@@ -168,14 +175,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ApplyAdvancedGraphicChangesComponent.h" />
     <ClInclude Include="src\ApplyGraphicChangesComponent.h" />
     <ClInclude Include="src\ChangeFullScreenComponent.h" />
+    <ClInclude Include="src\ChangeGammaComponent.h" />
+    <ClInclude Include="src\ChangeGraphicSceneComponent.h" />
     <ClInclude Include="src\ChangeVyncComponent.h" />
     <ClInclude Include="src\ExitButtonComponent.h" />
     <ClInclude Include="src\ForcesTest.h" />
     <ClInclude Include="src\FormatResolutionChangeComponent.h" />
+    <ClInclude Include="src\FSAAChangeComponent.h" />
     <ClInclude Include="src\Menu.h" />
     <ClInclude Include="src\ChangeSceneButtonComponent.h" />
+    <ClInclude Include="src\RevertAdvancedGraphicChangesComponent.h" />
+    <ClInclude Include="src\RevertGraphicChangesComponent.h" />
+    <ClInclude Include="src\ShadowsChangeComponent.h" />
     <ClInclude Include="src\SimpleMovement.h" />
     <ClInclude Include="src\TerrainRotation.h" />
     <ClInclude Include="src\TestComponent.h" />

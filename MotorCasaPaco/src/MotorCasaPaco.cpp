@@ -197,12 +197,12 @@ void MotorCasaPaco::pollEvents()
 			break;
 		case SDL_WINDOWEVENT:
 			if (event.window.windowID == SDL_GetWindowID(sdlWindow)) {
-				if (event.window.event == SDL_WINDOWEVENT_RESIZED)
+				/*if (event.window.event == SDL_WINDOWEVENT_RESIZED)
 				{
 					Ogre::RenderWindow* win = window;
 					win->windowMovedOrResized();
 					frameListener_->windowResized(win);
-				}
+				}*/
 			}
 			break;
 		default:
@@ -223,6 +223,75 @@ bool MotorCasaPaco::checkConfig()
 		return MotorCasaPaco::getInstance()->getRoot()->showConfigDialog(nullptr);
 	}
 	else return true;
+}
+
+void MotorCasaPaco::extraConfig(json& j)
+{
+	if (!j["Shadows"].is_null())
+	{
+		if (j["Shadows"] == "No")
+		{
+			sm->setShadowTechnique(Ogre::SHADOWTYPE_NONE);
+		}
+		else
+		{
+			sm->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+			MotorCasaPaco::getInstance()->getSM()->setShadowFarDistance(1000000);
+
+			if (j["Shadows"] == "Bajo")
+			{
+				sm->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+			}
+			else if (j["Shadows"] == "Medio")
+			{
+				sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+			}
+			else if (j["Shadows"] == "Alto")
+			{
+				sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+			}
+		}
+		
+		std::string interm = j["Shadows"];
+		shadows = interm;
+	}
+
+	if (!j["DrawDistance"].is_null())
+	{
+		if (j["DrawDistance"] == "Bajo")
+		{
+		}
+		else if (j["DrawDistance"] == "Normal")
+		{
+		}
+		else if (j["DrawDistance"] == "Alto")
+		{
+		}
+	}
+
+	if (!j["Reflections"].is_null() && j["Reflections"] != "No")
+	{
+		if (j["Reflections"] == "Bajo")
+		{
+		}
+		else if (j["Reflections"] == "Normal")
+		{
+		}
+		else if (j["Reflections"] == "Alto")
+		{
+		}
+	}
+
+	if (!j["Filter"].is_null() && j["Filter"] != "No")
+	{
+		//Filtro
+	}
+
+
+	if (!j["ShowFPS"].is_null() && j["ShowFPS"] != "No")
+	{
+		//Show FPS
+	}
 }
 
 
@@ -275,9 +344,23 @@ void MotorCasaPaco::setup()
 
 	sm = MotorCasaPaco::getInstance()->getRoot()->createSceneManager();
 
-	sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
-	sm->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-	MotorCasaPaco::getInstance()->getSM()->setShadowFarDistance(1000000);
+	json j;
+	std::ifstream i("config.cfg");
+
+	if (i.is_open())
+	{
+		i >> j;
+		i.close();
+	}
+	else
+	{
+		std::cout << "File not found: config.cfg\n";
+	}
+
+	BackupExtraConfig = j;
+	ExtraConfig = j;
+
+	extraConfig(j);
 
 	ResourceManager::getInstance()->addSceneManager(sm);
 
@@ -308,7 +391,7 @@ void MotorCasaPaco::setupWindow(std::string windowName)
 	if (!SDL_WasInit(SDL_INIT_VIDEO))
 		SDL_InitSubSystem(SDL_INIT_VIDEO);
 
-	Uint32 flags = SDL_WINDOW_RESIZABLE, SDL_WINDOW_ALLOW_HIGHDPI;
+	Uint32 flags = SDL_WINDOW_ALLOW_HIGHDPI; //SDL_WINDOW_RESIZABLE
 
 	sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screen_width, screen_height, flags);
 
@@ -329,9 +412,6 @@ void MotorCasaPaco::setupWindow(std::string windowName)
 	params["externalWindowHandle"] = Ogre::StringConverter::toString(size_t(wmInfo.info.win.window));
 
 	window = MotorCasaPaco::getInstance()->getRoot()->createRenderWindow(windowName, screen_width, screen_height, false, &params);
-	
-	cout << screen_width << " " << screen_height << "\n";
-
 
 	//////////por si queremos que la ventana oculte el cursor
 	SDL_SetWindowGrab(sdlWindow, SDL_bool(false));
@@ -411,10 +491,9 @@ void MotorCasaPaco::resize(int width, int height)
 	window->windowMovedOrResized();
 //	getOgreWin()->getViewport(0)->setDimensions(0,0,width, height);
 
-	if (width < 1280)
-	GUI_Manager::getInstance()->updateScreenSize(width, height, true);
-	else
-	GUI_Manager::getInstance()->updateScreenSize(width, height, false);
+	GUI_Manager::getInstance()->setDefaultFont(width);
+
+	GUI_Manager::getInstance()->updateScreenSize(width, height);
 }
 
 void MotorCasaPaco::setFullScreenOn()
@@ -494,34 +573,43 @@ void MotorCasaPaco::writeGraphicOptions()
 	#endif
 
 	outputFile << "Render System=OpenGL Rendering Subsystem\n";
-	outputFile << "\n";
-	outputFile << "[OpenGL Rendering Subsystem]\n"; //Espacio antes de /n?
-	outputFile << "Colour Depth=32\n"; //Esta no se puede cambiar
-	outputFile << "Display Frequency=N/A\n";
+	outputFile << "[OpenGL Rendering Subsystem]\n";
+	outputFile << "Colour Depth=32\n"; //Unica opcion
+	outputFile << "Display Frequency=N/A\n"; //Unica opcion
 	outputFile << "FSAA=" << CurrentGraphicsConfiguration["FSAA"].currentValue << "\n"; //El 0 es opcion, pero aun no esta hecha
 	outputFile << "Full Screen=" << CurrentGraphicsConfiguration["Full Screen"].currentValue << "\n"; //El 0 es opcion, pero aun no esta hecha
-
-	outputFile << "RTT Preferred Mode = FBO\n"; //Unica opcion?
-
+	outputFile << "RTT Preferred Mode=FBO\n"; //Unica opcion
 	outputFile << "VSync=" << CurrentGraphicsConfiguration["VSync"].currentValue << "\n";
-
 	outputFile << "VSync Interval=1\n"; //Esto que hace xd
-
 	outputFile << "Video Mode=" << CurrentGraphicsConfiguration["Video Mode"].currentValue << "\n";
 	outputFile << "sRGB Gamma Conversion=" << CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue << "\n";
-	outputFile << "\n";
 
 	outputFile.close();
 }
 
-Ogre::ConfigOptionMap MotorCasaPaco::getGraphicsConfiguration()
+json MotorCasaPaco::writeExtraOptions()
 {
-	return CurrentGraphicsConfiguration;
-}
+	ofstream outputFile;
 
-Ogre::ConfigOptionMap MotorCasaPaco::getBackupGraphicsConfiguration()
-{
-	return BackupGraphicsConfiguration;
+	outputFile.open("config.cfg");
+
+	outputFile << "{\n";
+	outputFile << "\"Shadows\" : \"" << "Medio" << "\",\n";
+	outputFile << "\"DrawDistance\" : \"" << "Medio" << "\",\n";
+	outputFile << "\"Reflections\" : \"" << "No" << "\",\n";
+	outputFile << "\"Filter\" : \"" << "No" << "\",\n";
+	outputFile << "\"ShowFPS\" : \"" << "No" << "\"\n";
+	outputFile << "}";
+
+	outputFile.close();
+
+	json j;
+	std::ifstream i("config.cfg");
+
+	i >> j;
+	i.close();
+
+	return j;
 }
 
 std::string MotorCasaPaco::getScreenProportion()
@@ -574,20 +662,114 @@ void MotorCasaPaco::setResolution(std::string value)
 	mode >> token;
 	mode >> screen_height;
 
-	MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->setConfigOption("Video Mode", video_mode);
+	//MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->setConfigOption("Video Mode", video_mode);
 }
 
-void MotorCasaPaco::updateGraphicTexts()
+void MotorCasaPaco::updateGraphicTexts(CEGUI::Window* fullscreen, CEGUI::Window* screeProportion, CEGUI::Window* resolution, CEGUI::Window* vsync)
 {
-	//ChangeTexts in Layout
-/*
-ResText = GUI_Manager::getInstance()->getStaticText(j["ResText"]);
-GUI_Manager::getInstance()->changeText(ForText, currentFormat);
-*/
+	/*if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "Yes")
+		GUI_Manager::getInstance()->changeText(fullscreen, "Si");
+	else
+	GUI_Manager::getInstance()->changeText(fullscreen, CurrentGraphicsConfiguration["Full Screen"].currentValue);*/
+
+	//GUI_Manager::getInstance()->changeText(screeProportion, screen_proportion);
+	//GUI_Manager::getInstance()->changeText(resolution, CurrentGraphicsConfiguration["Video Mode"].currentValue);
+	//
+	//if (CurrentGraphicsConfiguration["VSync"].currentValue == "Yes")
+	//	GUI_Manager::getInstance()->changeText(vsync, "Si");
+	//else
+	//	GUI_Manager::getInstance()->changeText(vsync, CurrentGraphicsConfiguration["VSync"].currentValue);
+
+	//Event evt = Event(EventType::RESET_GRAPHIC_INFO);
+	//EventManager::getInstance()->EmitEvent(evt);
 }
 
-void MotorCasaPaco::updateAdvancedGraphicTexts()
+void MotorCasaPaco::updateAdvancedGraphicTexts(CEGUI::Window* fsaa, CEGUI::Window* gamma, CEGUI::Window* shadows_)
 {
+	/*if (CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue == "Yes")
+		GUI_Manager::getInstance()->changeText(gamma, "Si");
+	else
+		GUI_Manager::getInstance()->changeText(gamma, CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue);
+
+	GUI_Manager::getInstance()->changeText(fsaa, "X " + CurrentGraphicsConfiguration["FSAA"].currentValue);
+
+	GUI_Manager::getInstance()->changeText(shadows_, shadows);
+
+	Event evt = Event(EventType::RESET_GRAPHIC_INFO);
+	EventManager::getInstance()->EmitEvent(evt);*/
+}
+
+
+int MotorCasaPaco::getScreenWidth()
+{
+	return screen_width;
+}
+
+std::string MotorCasaPaco::getFSAA()
+{
+	return fsaa;
+}
+
+void MotorCasaPaco::setFSAA(int value)
+{
+	switch (value)
+	{
+	case 0:
+	{
+		fsaa = "0";
+	}
+	break;
+	case 2:
+	{
+		fsaa = "2";
+	}
+	break;
+	case 4:
+	{
+		fsaa = "4";
+	}
+	break;
+	case 8:
+	{
+		fsaa = "8";
+	}
+	break;
+	}
+
+	CurrentGraphicsConfiguration["FSAA"].currentValue = fsaa;
+}
+
+void MotorCasaPaco::setFSAA(std::string value)
+{
+	fsaa = value;
+	CurrentGraphicsConfiguration["FSAA"].currentValue = fsaa;
+}
+
+bool MotorCasaPaco::getGamma()
+{
+	return gamma;
+}
+
+void MotorCasaPaco::setGamma(bool value)
+{
+	std::string v;
+	if (value)
+		v = "Yes";
+	else
+		v = "No";
+
+	gamma = value;
+	CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue = v;
+}
+
+std::string MotorCasaPaco::getShadows()
+{
+	return shadows;
+}
+
+void MotorCasaPaco::setShadows(std::string value)
+{
+	shadows = value;
 }
 
 void MotorCasaPaco::changeGraphicComponents()
@@ -640,7 +822,8 @@ void MotorCasaPaco::changeGraphicComponents()
 		//Tooltip en menú?
 	}
 
-	updateGraphicTexts();
+	writeGraphicOptions();
+	BackupGraphicsConfiguration = CurrentGraphicsConfiguration;
 }
 
 void MotorCasaPaco::changeAdvancedGraphicComponents()
@@ -650,7 +833,49 @@ void MotorCasaPaco::changeAdvancedGraphicComponents()
 	Stuff
 
 	*/
-	updateAdvancedGraphicTexts();
+	BackupGraphicsConfiguration = CurrentGraphicsConfiguration;
+	ExtraConfig	= writeExtraOptions();
+}
+
+void MotorCasaPaco::revertGraphicChanges()
+{
+	CurrentGraphicsConfiguration = BackupGraphicsConfiguration;
+
+	video_mode = CurrentGraphicsConfiguration["Video Mode"].currentValue;
+	
+	std::stringstream mode(video_mode);
+
+	Ogre::String token;
+	mode >> screen_width;
+	mode >> token;
+	mode >> screen_height;
+
+	setScreenProportion(screen_height);
+
+	if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "Yes")
+		fullScreen = true;
+	else if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "No")
+		fullScreen = false;
+
+	if (CurrentGraphicsConfiguration["VSync"].currentValue == "Yes")
+		vSync = true;
+	else if (CurrentGraphicsConfiguration["VSync"].currentValue == "No")
+		vSync = false;
+}
+
+void MotorCasaPaco::revertAdvancedGraphicChanges()
+{
+	CurrentGraphicsConfiguration = BackupGraphicsConfiguration;
+
+	fsaa = CurrentGraphicsConfiguration["FSAA"].currentValue;
+
+	if (CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue == "Yes")
+		gamma = true;
+	else
+		gamma = false;
+
+	ExtraConfig = BackupExtraConfig;
+	extraConfig(ExtraConfig);
 }
 
 void MotorCasaPaco::storeGraphicsConfiguration()
@@ -662,6 +887,8 @@ void MotorCasaPaco::storeGraphicsConfiguration()
 		fullScreen = true;
 	else if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "No")
 		fullScreen = false;
+
+	fsaa = CurrentGraphicsConfiguration["FSAA"].currentValue;
 
 	std::istringstream mode(CurrentGraphicsConfiguration["Video Mode"].currentValue);
 	video_mode = CurrentGraphicsConfiguration["Video Mode"].currentValue;

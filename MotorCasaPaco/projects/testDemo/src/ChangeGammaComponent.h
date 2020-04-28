@@ -1,15 +1,15 @@
 #pragma once
-#ifndef CHANGEFULLSCREENCOMPONENT_H
-#define CHANGEFULLSCREENCOMPONENT_H
+#ifndef CHANGEGAMMACOMPONENT_H
+#define CHANGEGAMMACOMPONENT_H
 #include "Entity/Component.h"
 #include "GUI/GUI_Manager.h"
 
-class ChangeFullScreenComponent : public Component
+class ChangeGammaComponent : public Component
 {
 
 public:
-	ChangeFullScreenComponent(json& args);
-	~ChangeFullScreenComponent();
+	ChangeGammaComponent(json& args);
+	~ChangeGammaComponent();
 	void init(json& j) override;
 	bool function(const CEGUI::EventArgs& e);
 	bool ReceiveEvent(Event& event) override;

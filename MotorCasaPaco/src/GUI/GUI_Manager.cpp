@@ -93,18 +93,8 @@ bool GUI_Manager::test(const CEGUI::EventArgs& e) {
 	return true;
 }
 
-void GUI_Manager::updateScreenSize(int width, int height, bool fontLittle)
+void GUI_Manager::updateScreenSize(int width, int height)
 {
-	if (fontLittle)
-	{
-		//CEGUI::FontManager::getSingleton().createFromFile("shump-little.font");
-		CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("shump-little");
-	}
-	else
-	{
-		CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("shump-normal");
-	}
-
 	CEGUI::System::getSingleton().getRenderer()->setDisplaySize(CEGUI::Size<float>(width, height));
 }
 
@@ -123,9 +113,18 @@ void GUI_Manager::setupDefaultResources()
 	loadScheme("A_Toda_Pastilla.scheme");
 	loadScheme("GWEN.scheme");
 	setMouseCursor("A_Toda_Pastilla/Mouse_Arrow");
+	loadFont("shump-big.font");
 	loadFont("shump-normal.font");
-	loadFont("shump-little.font");
-	CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("shump-normal");
+
+	GUI_Manager::getInstance()->setDefaultFont(MotorCasaPaco::getInstance()->getScreenWidth());
+}
+
+void GUI_Manager::setDefaultFont(int value)
+{
+	if (value >= 1280)
+		CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("shump-big");
+	else
+		CEGUI::System::getSingleton().getDefaultGUIContext().setDefaultFont("shump-normal");
 }
 
 void GUI_Manager::addChild(int type, std::string name)

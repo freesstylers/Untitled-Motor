@@ -6,6 +6,7 @@ enum EventType {
 	TEXT,
 	RIGIDBODY_INFO,
 	RIGIDBODY_COLLISION,
+	RESET_GRAPHIC_INFO
 };
 
 class btRigidBody;

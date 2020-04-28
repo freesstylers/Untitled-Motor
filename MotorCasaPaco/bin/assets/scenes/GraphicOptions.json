@@ -71,18 +71,20 @@
 					"button_1_Name" : "GraphicOptions/RightArrow_5",
 					"button_2_Name" : "GraphicOptions/LeftArrow_5",
 					"textToChange" : "GraphicOptions/Text_Selector_5"
-				}
-			]
-		},
-		{
-			"type" : "entity",
-			"name" : "UI_2",
-			"components" : 
-			[
+				},
 				{
-					"type": "ChangeSceneButtonComponent",
+					"type": "ChangeGraphicSceneComponent",
 					"buttonName" : "GraphicOptions/AdvancedOptions",
-					"sceneName" : "AdvancedGraphicOptions"
+					"sceneName" : "AdvancedGraphicOptions",
+					"advanced": "No"
+				},
+				{
+					"type": "RevertGraphicChangesComponent",
+					"button" : "GraphicOptions/Revert",
+					"fullscreen" : "GraphicOptions/Text_Selector_2",
+					"resolution" : "GraphicOptions/Text_Selector_4",
+					"screenProportion" : "GraphicOptions/Text_Selector_3",
+					"vsync" : "GraphicOptions/Text_Selector_5"
 				}
 			]
 		}

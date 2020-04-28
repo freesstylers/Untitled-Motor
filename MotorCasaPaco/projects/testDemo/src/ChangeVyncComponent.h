@@ -12,6 +12,8 @@ public:
 	~ChangeVSyncComponent();
 	void init(json& j) override;
 	bool function(const CEGUI::EventArgs& e);
+	bool ReceiveEvent(Event& event) override;
+
 private:
 	CEGUI::Window* textToChange;
 };
