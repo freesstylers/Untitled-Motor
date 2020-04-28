@@ -14,7 +14,10 @@ RevertAdvancedGraphicChangesComponent::~RevertAdvancedGraphicChangesComponent()
 bool RevertAdvancedGraphicChangesComponent::function(const CEGUI::EventArgs& e)
 {
 	MotorCasaPaco::getInstance()->revertAdvancedGraphicChanges();
-	MotorCasaPaco::getInstance()->updateAdvancedGraphicTexts(fsaa, gamma, shadows);
+
+	Event evt = Event(EventType::RESET_GRAPHIC_INFO);
+	EventManager::getInstance()->EmitEvent(evt);
+	
 	return true;
 }
 
