@@ -695,7 +695,8 @@ void MotorCasaPaco::updateAdvancedGraphicTexts(CEGUI::Window* fsaa, CEGUI::Windo
 
 	GUI_Manager::getInstance()->changeText(shadows_, shadows);
 
-	Event evt = Event(EventType::RESET_GRAPHIC_INFO);
+	Event evt = Event(
+:RESET_GRAPHIC_INFO);
 	EventManager::getInstance()->EmitEvent(evt);*/
 }
 

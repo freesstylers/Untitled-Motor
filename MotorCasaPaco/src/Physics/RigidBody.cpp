@@ -26,7 +26,7 @@ void RigidBody::init(json& args)//mandar unha mesaxe a outros componentes (por e
 	createRigidBody(args);
 
 	RigidBodyInfoEvent event(body);
-	EventManager::getInstance()->RegisterListener(getEntity(), EventType::RIGIDBODY_INFO); //rexistrar a entidade que alberga o componente para mandalo mesaxe os demais componentes desta
+	EventManager::getInstance()->RegisterListener(getEntity(), "RIGIDBODY_INFO"); //rexistrar a entidade que alberga o componente para mandalo mesaxe os demais componentes desta
 	EventManager::getInstance()->EmitEvent(event);
 	EventManager::getInstance()->ClearListeners(event.type);
 }

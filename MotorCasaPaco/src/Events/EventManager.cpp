@@ -36,7 +36,7 @@ void EventManager::clean()
 void EventManager::EmitEvent(Event& event)
 {
 	// Only emit the event if there are registered listeners for that event type
-	map<EventType, vector<EventListener*>>::iterator it = _listeners.find(event.type);
+	map<std::string, vector<EventListener*>>::iterator it = _listeners.find(event.type);
 	if (it != _listeners.end())
 		for (EventListener* listener : it->second) {
 			if (listener->ReceiveEvent(event))
@@ -44,29 +44,35 @@ void EventManager::EmitEvent(Event& event)
 		}
 }
 
-void EventManager::RegisterListener(EventListener* listener, EventType eventType)
+void EventManager::EmitEvent(std::string eventType) {
+	Event e = Event(eventType);
+	EmitEvent(e);
+}
+
+
+void EventManager::RegisterListener(EventListener* listener, std::string eventType)
 {
 	// Look for the EvenType on the map, insert it if it doesn't exist already
-	map<EventType, vector<EventListener*>>::iterator it = _listeners.find(eventType);
+	map<std::string, vector<EventListener*>>::iterator it = _listeners.find(eventType);
 	if (it == _listeners.end())
-		_listeners.insert(pair<EventType, vector<EventListener*>>(eventType, vector<EventListener*>({ listener })));
+		_listeners.insert(pair<std::string, vector<EventListener*>>(eventType, vector<EventListener*>({ listener })));
 
 	// Only add the listener if it has not already been added before
 	else if (find(it->second.begin(), it->second.end(), listener) == it->second.end())
 		it->second.push_back(listener);
 }
 
-void EventManager::UnregisterListener(EventListener* listener, EventType eventType)
+void EventManager::UnregisterListener(EventListener* listener, std::string eventType)
 {
 	// Look for the EvenType on the map, and only then try to remove the listener
-	map<EventType, vector<EventListener*>>::iterator it = _listeners.find(eventType);
+	map<std::string, vector<EventListener*>>::iterator it = _listeners.find(eventType);
 	if (it != _listeners.end())
 		it->second.erase(std::remove(it->second.begin(), it->second.end(), listener), it->second.end());
 }
 
 void EventManager::UnregisterListenerForAll(EventListener* listener)
 {
-	std::map<EventType, std::vector<EventListener*>>::iterator it = _listeners.begin();
+	std::map<std::string, std::vector<EventListener*>>::iterator it = _listeners.begin();
 	while (it != _listeners.end())
 	{
 		it->second.erase(std::remove(it->second.begin(), it->second.end(), listener), it->second.end());
@@ -74,10 +80,10 @@ void EventManager::UnregisterListenerForAll(EventListener* listener)
 	}
 }
 
-void EventManager::ClearListeners(EventType eventType)
+void EventManager::ClearListeners(std::string eventType)
 {
 	// Look for the EvenType on the map, and only then try to clear all its listeners
-	map<EventType, vector<EventListener*>>::iterator it = _listeners.find(eventType);
+	map<std::string, vector<EventListener*>>::iterator it = _listeners.find(eventType);
 	it->second.clear();
 }
 

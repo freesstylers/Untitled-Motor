@@ -126,13 +126,11 @@ void Entity::setActive(bool active) {
 void Entity::setActiveOnHierarchy(bool active) {
 	activeOnHierarchy_ = active;
 
-	if (active_) {
-		for (auto child : children_)
-			child.second->setActiveOnHierarchy(active);
+	for (auto child : children_)
+		child.second->setActiveOnHierarchy(active);
 
-		for (auto& comp : components_)
-			comp.get()->setActiveOnHierarchy(active);
-	}
+	for (auto& comp : components_)
+		comp.get()->setActiveOnHierarchy(active);
 }
 
 bool const Entity::isActive() {

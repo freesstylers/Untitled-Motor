@@ -18,15 +18,21 @@ public:
 	void EmitEvent(Event& event);
 
 	/**
+	 Creates a generic event using the given eventType
+	 propagates it among all its listeners until one of them returns TRUE
+	 */
+	void EmitEvent(std::string eventType);
+
+	/**
 	 Registers a listener to receive the events of the given type
 	 */
-	void RegisterListener(EventListener *listener, EventType eventType);
+	void RegisterListener(EventListener *listener, std::string eventType);
 
 	/**
 	 Unregisters a listener to stop receiving the events of the given type
 	 It does NOT call its destructor nor deletes the instance.
 	 */
-	void UnregisterListener(EventListener* listener, EventType eventType);
+	void UnregisterListener(EventListener* listener, std::string eventType);
 
 	/**
 	Unregisters a listener to stop receiving any kind of event
@@ -38,13 +44,13 @@ public:
 	 Unregisters ALL listeners to stop receiving the events of the given type
 	 It does NOT call their destructors nor deletes the instances.
 	 */
-	void ClearListeners(EventType type);
+	void ClearListeners(std::string type);
 
 private:
 	EventManager();
 	~EventManager();
 	static EventManager* instance;
 
-	std::map<EventType, std::vector<EventListener*>> _listeners;
+	std::map<std::string, std::vector<EventListener*>> _listeners;
 	
 };
