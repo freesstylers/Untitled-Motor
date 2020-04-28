@@ -8,7 +8,8 @@ ChangeFullScreenComponent::ChangeFullScreenComponent(json& args): Component(args
 
 ChangeFullScreenComponent::~ChangeFullScreenComponent()
 {
-	Component::~Component();
+	//EventManager::getInstance()->UnregisterListenerForAll(this);
+	//Component::~Component();
 }
 
 bool ChangeFullScreenComponent::function(const CEGUI::EventArgs& e)
@@ -23,8 +24,22 @@ bool ChangeFullScreenComponent::function(const CEGUI::EventArgs& e)
 		MotorCasaPaco::getInstance()->setFullScreen(true);
 		GUI_Manager::getInstance()->changeText(textToChange, "Si");
 	}
-
 	return true;
+}
+
+bool ChangeFullScreenComponent::ReceiveEvent(Event& event)
+{
+	if (event.type == EventType::RESET_GRAPHIC_INFO) {
+		if (MotorCasaPaco::getInstance()->getFullScreen())
+		{
+			GUI_Manager::getInstance()->changeText(textToChange, "Si");
+		}
+		else
+		{
+			GUI_Manager::getInstance()->changeText(textToChange, "No");
+		}
+	}
+	return false;
 }
 
 void ChangeFullScreenComponent::init(json& j)
@@ -44,5 +59,7 @@ void ChangeFullScreenComponent::init(json& j)
 		{
 			GUI_Manager::getInstance()->changeText(textToChange, "No");
 		}
+
+		EventManager::getInstance()->RegisterListener(this, EventType::RESET_GRAPHIC_INFO);
 	}
 }

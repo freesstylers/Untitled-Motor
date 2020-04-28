@@ -8,7 +8,8 @@ ShadowsChangeComponent::ShadowsChangeComponent(json& args): Component(args)
 
 ShadowsChangeComponent::~ShadowsChangeComponent()
 {
-	Component::~Component();
+	//EventManager::getInstance()->UnregisterListenerForAll(this);
+	//Component::~Component();
 }
 
 bool ShadowsChangeComponent::functionMore(const CEGUI::EventArgs& e)
@@ -46,6 +47,15 @@ bool ShadowsChangeComponent::functionLess(const CEGUI::EventArgs& e)
 	return true;
 }
 
+bool ShadowsChangeComponent::ReceiveEvent(Event& event)
+{
+	if (event.type == EventType::RESET_GRAPHIC_INFO) {
+		GUI_Manager::getInstance()->changeText(textToChange, MotorCasaPaco::getInstance()->getShadows());
+		currenPos = getCurrenPos(MotorCasaPaco::getInstance()->getShadows());
+	}
+	return false;
+}
+
 int ShadowsChangeComponent::getCurrenPos(std::string shadow)
 {
 	if (shadow == "No")
@@ -79,5 +89,7 @@ void ShadowsChangeComponent::init(json& j)
 		currenPos = getCurrenPos(MotorCasaPaco::getInstance()->getShadows());
 
 		GUI_Manager::getInstance()->changeText(textToChange, MotorCasaPaco::getInstance()->getShadows());
+
+		EventManager::getInstance()->RegisterListener(this, EventType::RESET_GRAPHIC_INFO);
 	}
 }

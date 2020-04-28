@@ -31,7 +31,8 @@ FormatResolutionChangeComponent::FormatResolutionChangeComponent(json& args): Co
 
 FormatResolutionChangeComponent::~FormatResolutionChangeComponent()
 {
-	Component::~Component();
+	//EventManager::getInstance()->UnregisterListenerForAll(this);
+	//Component::~Component();
 }
 
 bool FormatResolutionChangeComponent::functionResLess(const CEGUI::EventArgs& e)
@@ -209,6 +210,18 @@ bool FormatResolutionChangeComponent::functionForMore(const CEGUI::EventArgs& e)
 	return true;
 }
 
+bool FormatResolutionChangeComponent::ReceiveEvent(Event& event)
+{
+	if (event.type == EventType::RESET_GRAPHIC_INFO) {
+		currentFormat = MotorCasaPaco::getInstance()->getScreenProportion();
+		currentRes = MotorCasaPaco::getInstance()->getResolution();
+		currentPos = getCurrentPos(currentFormat, currentRes);
+		GUI_Manager::getInstance()->changeText(ResText, currentRes);
+		GUI_Manager::getInstance()->changeText(ForText, currentFormat);
+	}
+	return false;
+}
+
 int FormatResolutionChangeComponent::getCurrentPos(std::string currentFormat_, std::string currentRes_)
 {
 
@@ -288,5 +301,7 @@ void FormatResolutionChangeComponent::init(json& j)
 		currentPos = getCurrentPos(currentFormat, currentRes);
 		GUI_Manager::getInstance()->changeText(ResText, currentRes);
 		GUI_Manager::getInstance()->changeText(ForText, currentFormat);
+
+		EventManager::getInstance()->RegisterListener(this, EventType::RESET_GRAPHIC_INFO);
 	}
 }

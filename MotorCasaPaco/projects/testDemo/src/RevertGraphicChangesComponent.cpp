@@ -14,7 +14,10 @@ RevertGraphicChangesComponent::~RevertGraphicChangesComponent()
 bool RevertGraphicChangesComponent::function(const CEGUI::EventArgs& e)
 {
 	MotorCasaPaco::getInstance()->revertGraphicChanges();
-	MotorCasaPaco::getInstance()->updateGraphicTexts(fullscreen, screenProportion, resolution, vsync);
+	
+	Event evt = Event(EventType::RESET_GRAPHIC_INFO);
+	EventManager::getInstance()->EmitEvent(evt);
+
 	return true;
 }
 

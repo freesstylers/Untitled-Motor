@@ -8,7 +8,8 @@ ChangeGammaComponent::ChangeGammaComponent(json& args): Component(args)
 
 ChangeGammaComponent::~ChangeGammaComponent()
 {
-	Component::~Component();
+	//EventManager::getInstance()->UnregisterListenerForAll(this);
+	//Component::~Component();
 }
 
 bool ChangeGammaComponent::function(const CEGUI::EventArgs& e)
@@ -25,6 +26,21 @@ bool ChangeGammaComponent::function(const CEGUI::EventArgs& e)
 	}
 
 	return true;
+}
+
+bool ChangeGammaComponent::ReceiveEvent(Event& event)
+{
+	if (event.type == EventType::RESET_GRAPHIC_INFO) {
+		if (MotorCasaPaco::getInstance()->getGamma())
+		{
+			GUI_Manager::getInstance()->changeText(textToChange, "Si");
+		}
+		else
+		{
+			GUI_Manager::getInstance()->changeText(textToChange, "No");
+		}
+	}
+	return false;
 }
 
 void ChangeGammaComponent::init(json& j)
@@ -44,5 +60,8 @@ void ChangeGammaComponent::init(json& j)
 		{
 			GUI_Manager::getInstance()->changeText(textToChange, "No");
 		}
+
+		EventManager::getInstance()->RegisterListener(this, EventType::RESET_GRAPHIC_INFO);
+
 	}
 }

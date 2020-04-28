@@ -13,6 +13,8 @@ public:
 	void init(json& j) override;
 	bool functionMore(const CEGUI::EventArgs& e);
 	bool functionLess(const CEGUI::EventArgs& e);
+	bool ReceiveEvent(Event& event) override;
+
 private:
 	int getCurrenPos(std::string fsaa);
 	CEGUI::Window* textToChange;

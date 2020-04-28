@@ -18,6 +18,9 @@ public:
 	bool functionForLess(const CEGUI::EventArgs& e);
 	bool functionForMore(const CEGUI::EventArgs& e);
 
+	bool ReceiveEvent(Event& event) override;
+
+
 private:
 
 	int getCurrentPos(std::string currentFormat_, std::string currentRes_);

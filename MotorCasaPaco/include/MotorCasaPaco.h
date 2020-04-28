@@ -75,8 +75,6 @@ public:
 	void setVSyncOff();
 	void writeGraphicOptions();
 	json writeExtraOptions();
-	Ogre::ConfigOptionMap getGraphicsConfiguration();
-	Ogre::ConfigOptionMap getBackupGraphicsConfiguration();
 	std::string getScreenProportion();
 	std::string getFullScreen(bool value);
 	void setScreenProportion(std::string value);

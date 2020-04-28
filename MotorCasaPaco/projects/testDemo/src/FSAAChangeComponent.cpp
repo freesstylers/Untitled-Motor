@@ -8,7 +8,8 @@ FSAAChangeComponent::FSAAChangeComponent(json& args): Component(args)
 
 FSAAChangeComponent::~FSAAChangeComponent()
 {
-	Component::~Component();
+	//EventManager::getInstance()->UnregisterListenerForAll(this);
+	//Component::~Component();
 }
 
 bool FSAAChangeComponent::functionMore(const CEGUI::EventArgs& e)
@@ -46,6 +47,15 @@ bool FSAAChangeComponent::functionLess(const CEGUI::EventArgs& e)
 	return true;
 }
 
+bool FSAAChangeComponent::ReceiveEvent(Event& event)
+{
+	if (event.type == EventType::RESET_GRAPHIC_INFO) {
+		GUI_Manager::getInstance()->changeText(textToChange, "X " + MotorCasaPaco::getInstance()->getFSAA());
+		getCurrenPos(MotorCasaPaco::getInstance()->getFSAA());
+	}
+	return false;
+}
+
 int FSAAChangeComponent::getCurrenPos(std::string fsaa)
 {
 	if (fsaa == "0")
@@ -77,5 +87,7 @@ void FSAAChangeComponent::init(json& j)
 		textToChange = GUI_Manager::getInstance()->getStaticText(j["textToChange"]);
 		currenPos = getCurrenPos(MotorCasaPaco::getInstance()->getFSAA());
 		GUI_Manager::getInstance()->changeText(textToChange, "X " + MotorCasaPaco::getInstance()->getFSAA());
+
+		EventManager::getInstance()->RegisterListener(this, EventType::RESET_GRAPHIC_INFO);
 	}
 }

@@ -28,6 +28,5 @@ void RevertAdvancedGraphicChangesComponent::init(json& j)
 		fsaa = GUI_Manager::getInstance()->getStaticText(j["fsaa"]);
 		gamma = GUI_Manager::getInstance()->getStaticText(j["gamma"]);
 		shadows = GUI_Manager::getInstance()->getStaticText(j["shadows"]);
-
 	}
 }
