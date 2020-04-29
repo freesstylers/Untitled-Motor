@@ -10,6 +10,7 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
             <Property name="BackgroundEnabled" value="false" />
+            <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Logo" >
             <Property name="Area" value="{{0,34},{0,60},{1,-1016},{1,-488}}" />
@@ -17,6 +18,7 @@
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="true" />
             <Property name="BackgroundEnabled" value="true" />
+            <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/Button" name="Nivel1" >
             <Property name="Area" value="{{0,972},{0,30},{0,1212},{0,130}}" />
