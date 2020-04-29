@@ -11,18 +11,10 @@
 
 using namespace std;
 
-Entity::Entity(Scene* scene, const std::string& name, const std::string& tag): scene_(scene), 
-	name_(name), tag_(tag)
+Entity::Entity(Scene* scene, const std::string& name, const std::string& tag, const bool enabled): scene_(scene), 
+	name_(name), tag_(tag), enabled_(enabled)
 {
 	
-}
-
-void Entity::start() {
-	int length = components_.size();
-	for (int i = 0; i < length; i++)
-	{
-		components_[i]->start();
-	}
 }
 
 void Entity::update()
@@ -75,6 +67,11 @@ void Entity::physicsUpdate()
 void Entity::addComponentFromJson(json& args)
 {
 	string tag = args["type"];
+
+	bool compEnabled = true;
+	if (!args["enabled"].is_null() && args["enabled"] == "false")
+		compEnabled = false;
+
 //if it doesn't exist, it's created
 	if (!hasComponent(args["type"])) {
 		Component* c(JsonFactoryParser::getInstance()->getComponentFromJSON(args["type"], args));
@@ -111,10 +108,22 @@ string const Entity::getTag()
 	return tag_;
 }
 
-void Entity::setActive(bool active) {
-	active_ = active;
+void Entity::setEnabled(bool enabled) {
+	enabled_ = enabled;
 
 	if (activeOnHierarchy_) {
+		for (auto child : children_)
+			child.second->setActiveOnHierarchy(enabled);
+
+		for (auto& comp : components_)
+			comp.get()->setActiveOnHierarchy(enabled);
+	}
+}
+
+void Entity::setActiveOnHierarchy(bool active) {
+	activeOnHierarchy_ = active;
+
+	if (enabled_) {
 		for (auto child : children_)
 			child.second->setActiveOnHierarchy(active);
 
@@ -123,18 +132,13 @@ void Entity::setActive(bool active) {
 	}
 }
 
-void Entity::setActiveOnHierarchy(bool active) {
-	activeOnHierarchy_ = active;
-
-	for (auto child : children_)
-		child.second->setActiveOnHierarchy(active);
-
-	for (auto& comp : components_)
-		comp.get()->setActiveOnHierarchy(active);
+bool const Entity::isActive() {
+	return enabled_ && activeOnHierarchy_;
 }
 
-bool const Entity::isActive() {
-	return active_;
+const bool Entity::isEnabled()
+{
+	return enabled_;
 }
 
 const bool Entity::isActiveOnHierarchy()
@@ -192,15 +196,12 @@ void Entity::clearParent() {
 	parent_ = nullptr;
 }
 
-void Entity::init(json& args)
-{
+void Entity::init(json& args) {
 //Creates a transform component. Required by default.
 	json modArgs = args;
 	modArgs["type"] = "Transform";
 
 	addComponentFromJson(modArgs);
-
-	setActive(true);
 }
 
 bool Entity::ReceiveEvent(Event& event)

@@ -18,6 +18,8 @@ public:
 	Entity* getEntity(const std::string& name);
 	Entity* createEntity(json& j);
 	Entity* addEntity(std::string name, std::string tag = "Untagged");
+	bool deleteEntity(const std::string name);
+
 
 	void start();
 	void preupdate();
@@ -27,7 +29,10 @@ public:
 
 private:
 	std::map<std::string, Entity*> entities;
+	std::vector<Entity*> entitiesWithoutParent_; // Used recursively enable all entities on start
 	std::string name;
 	int addedEntitiesCounter = 0;
+
+	void recursivelyActivateEntities(Entity* ent);
 };
 

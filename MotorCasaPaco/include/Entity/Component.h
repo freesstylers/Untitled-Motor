@@ -29,10 +29,12 @@ public:
 	virtual void lateUpdate();
 	virtual void render();
 
-	void setActive(bool active);
+	/* DO NOT CALL MANUALLY, use 'setEnabled()' instead */
 	void setActiveOnHierarchy(bool active);
+	void setEnabled(bool enabled);
 
 	const bool isActive();
+	const bool isEnabled();
 	const bool isActiveOnHierarchy();
 
 	virtual void onSetParent(Entity* parent);
@@ -46,7 +48,8 @@ protected:
 	Entity* e_;
 
 private:
-	bool active_ = true, activeOnHierarchy_ = true;
+	bool enabled_ = true, activeOnHierarchy_ = true;
+	bool startWasCalled_ = false;
 };
 
 #endif // !COMPONENT_H

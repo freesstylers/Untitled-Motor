@@ -27,8 +27,7 @@ Scene::~Scene()
 	entities.clear();
 }
 
-void Scene::setupScene(json& j)
-{
+void Scene::setupScene(json& j) {
 	std::string interm = j["name"];
 	name = interm;
 
@@ -46,6 +45,8 @@ void Scene::setupScene(json& j)
 		for (json ent : e) {
 			if (!ent["parent"].is_null())
 				entities[ent["name"]]->setParent(ent["parent"]);
+			else
+				entitiesWithoutParent_.push_back(entities[ent["name"]]);
 		}
 	}
 	
@@ -59,8 +60,21 @@ void Scene::setupScene(json& j)
 			else if (UI_Elem["type"] == "entity")
 			{
 				entities[UI_Elem["name"]] = createEntity(UI_Elem);
+				entitiesWithoutParent_.push_back(entities[UI_Elem["name"]]);
 			}
 		}
+	}
+}
+
+void Scene::recursivelyActivateEntities(Entity* ent) {
+	ent->setEnabled(ent->isEnabled());
+	
+	auto children = ent->getChildren();
+
+	std::map<std::string, Entity*>::iterator it = children.begin();
+	while (it != children.end()) {
+		recursivelyActivateEntities(it->second);
+		it++;
 	}
 }
 
@@ -74,48 +88,38 @@ Entity* Scene::getEntity(const std::string& name)
 }
 
 void Scene::start() {
-	for (pair<string, Entity*> e : entities) {
-		e.second->start();
-	}
+	for (Entity* e : entitiesWithoutParent_)
+		recursivelyActivateEntities(e);
+	entitiesWithoutParent_.clear();
+
 	addedEntitiesCounter=0;
 }
 
 void Scene::preupdate()
 {
-	auto i = entities.begin();
-	while (i != entities.end()) {
-		auto aux = i;
-		aux++;
-		if (!((*i).second)->isActive()) {
-			delete (*i).second;
-			entities.erase(i);
-		}
-		i = aux;
-	}
-
 	for (pair<string, Entity*> e : entities) {
-		e.second->preupdate();
+		if (e.second->isActive()) e.second->preupdate();
 	}
 }
 
 void Scene::physicsUpdate()
 {
 	for (pair<string, Entity*> e : entities) {
-		e.second->physicsUpdate();
+		if (e.second->isActive()) e.second->physicsUpdate();
 	}
 }
 
 void Scene::update()
 {
 	for (pair<string, Entity*> e : entities) {
-		e.second->update();
+		if (e.second->isActive()) e.second->update();
 	}
 }
 
 void Scene::lateUpdate()
 {
 	for (pair<string, Entity*> e : entities) {
-		e.second->lateUpdate();
+		if (e.second->isActive()) e.second->lateUpdate();
 	}
 }
 
@@ -127,8 +131,12 @@ Entity* Scene::createEntity(json& j)
 		std::string aux = j["tag"];
 		tag = aux;
 	}
-	Entity* ent = new Entity(this, j["name"], tag);
 
+	bool entEnabled = true;
+	if (!j["enabled"].is_null() && j["enabled"] == "false")
+		entEnabled = false;
+
+	Entity* ent = new Entity(this, j["name"], tag, entEnabled);
 
 	if (!j["prefab"].is_null() && j["prefab"].is_string()) {
 
@@ -161,8 +169,7 @@ Entity* Scene::createEntity(json& j)
 	return ent;
 }
 
-Entity* Scene::addEntity(std::string name, std::string tag)
-{
+Entity* Scene::addEntity(std::string name, std::string tag) {
 	Entity* ent;
 	if (getEntity(name) != nullptr) {
 		ent = new Entity(this, name + "_" + std::to_string(addedEntitiesCounter), tag);
@@ -171,4 +178,16 @@ Entity* Scene::addEntity(std::string name, std::string tag)
 	entities[ent->getName()] = ent;
 	addedEntitiesCounter++;
 	return ent;
+}
+
+bool Scene::deleteEntity(const std::string name) {
+	auto it = entities.find(name);
+	if (it != entities.end()) {
+		delete it->second;
+		entities.erase(it);
+		
+		return true;
+	}
+	
+	return false;
 }

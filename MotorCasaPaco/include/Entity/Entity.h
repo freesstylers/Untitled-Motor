@@ -18,8 +18,7 @@ using uptr_cmp = std::unique_ptr<Component>;
 
 class Entity: public EventListener {
 public:
-	Entity(Scene* scene, const std::string& name, const std::string& tag);
-	void start();
+	Entity(Scene* scene, const std::string& name, const std::string& tag, const bool enabled = true);
 	void preupdate();
 	void physicsUpdate();
 	void update();
@@ -49,10 +48,12 @@ public:
 	void setTag(const std::string& tag);
 	std::string const getTag();
 
-	void setActive(bool active);
+	/* DO NOT CALL MANUALLY, use 'setEnabled()' instead */
 	void setActiveOnHierarchy(bool active);
+	void setEnabled(bool active);
 
 	const bool isActive();
+	const bool isEnabled();
 	const bool isActiveOnHierarchy();
 
 	Scene* getScene();
@@ -71,7 +72,7 @@ public:
 protected:
 
 private:
-	bool active_ = true, activeOnHierarchy_ = true;
+	bool enabled_ = true, activeOnHierarchy_ = true;
 	std::string name_;
 	std::string tag_;
 	std::vector<uptr_cmp> components_;

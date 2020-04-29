@@ -8,6 +8,9 @@ using namespace std;
 Component::Component(json& args) {
 	std::string str = args["type"];
 	tag_ = str;
+
+	if (!args["enabled"].is_null() && args["enabled"] == "false")
+		enabled_ = false;
 }
 
 Component::~Component() {
@@ -40,31 +43,51 @@ void Component::lateUpdate() { }
 
 void Component::render() { }
 
-void Component::setActive(bool active) {
-	active_ = active;
+void Component::setEnabled(bool enabled) {
+	if (startWasCalled_ && enabled == enabled_)
+		return;
+
+	enabled_ = enabled;
 
 	if (activeOnHierarchy_) {
-		if (activeOnHierarchy_ && active_) onActivated();
-		else if (!activeOnHierarchy_) onDeactivated();
+		if (enabled_) {
+			if (!startWasCalled_) {
+				start();
+				startWasCalled_ = true;
+			}
+			onActivated();
+		}
+		else if (startWasCalled_) onDeactivated();
 	}
 }
 
 void Component::setActiveOnHierarchy(bool active) {
+	if (startWasCalled_ && active == activeOnHierarchy_)
+		return;
+
 	activeOnHierarchy_ = active;
 
-	if (active_) {
-		if (activeOnHierarchy_ && active_) onActivated();
-		else if (!activeOnHierarchy_) onDeactivated();
+	if (enabled_) {
+		if (activeOnHierarchy_) {
+			if (!startWasCalled_) {
+				start();
+				startWasCalled_ = true;
+			}
+			onActivated();
+		}
+		else if (startWasCalled_) onDeactivated();
 	}
 }
 
-const bool Component::isActive()
-{
-	return active_;
+const bool Component::isActive() {
+	return enabled_ && activeOnHierarchy_;
 }
 
-const bool Component::isActiveOnHierarchy()
-{
+const bool Component::isEnabled() {
+	return enabled_;
+}
+
+const bool Component::isActiveOnHierarchy() {
 	return activeOnHierarchy_;
 }
 
