@@ -1,5 +1,6 @@
 #include "ApplyGraphicChangesComponent.h"
 #include "MotorCasaPaco.h"
+#include "Audio/AudioManager.h"
 
 ApplyGraphicChangesComponent::ApplyGraphicChangesComponent(json& args): Component(args)
 {
@@ -14,6 +15,7 @@ ApplyGraphicChangesComponent::~ApplyGraphicChangesComponent()
 bool ApplyGraphicChangesComponent::function(const CEGUI::EventArgs& e)
 {
 	MotorCasaPaco::getInstance()->changeGraphicComponents();
+	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
 	return true;
 }
 

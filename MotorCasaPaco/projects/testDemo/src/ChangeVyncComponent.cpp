@@ -1,5 +1,6 @@
 #include "ChangeVyncComponent.h"
 #include "MotorCasaPaco.h"
+#include "Audio/AudioManager.h"
 
 ChangeVSyncComponent::ChangeVSyncComponent(json& args): Component(args)
 {
@@ -24,6 +25,8 @@ bool ChangeVSyncComponent::function(const CEGUI::EventArgs& e)
 		MotorCasaPaco::getInstance()->setVSync(true);
 		GUI_Manager::getInstance()->changeText(textToChange, "Si");
 	}
+
+	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }

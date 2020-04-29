@@ -1,5 +1,6 @@
 #include "ChangeFullScreenComponent.h"
 #include "MotorCasaPaco.h"
+#include "Audio/AudioManager.h"
 
 ChangeFullScreenComponent::ChangeFullScreenComponent(json& args): Component(args)
 {
@@ -24,6 +25,9 @@ bool ChangeFullScreenComponent::function(const CEGUI::EventArgs& e)
 		MotorCasaPaco::getInstance()->setFullScreen(true);
 		GUI_Manager::getInstance()->changeText(textToChange, "Si");
 	}
+
+	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
+
 	return true;
 }
 

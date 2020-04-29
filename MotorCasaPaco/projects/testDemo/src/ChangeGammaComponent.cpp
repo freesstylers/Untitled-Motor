@@ -1,5 +1,6 @@
 #include "ChangeGammaComponent.h"
 #include "MotorCasaPaco.h"
+#include "Audio/AudioManager.h"
 
 ChangeGammaComponent::ChangeGammaComponent(json& args): Component(args)
 {
@@ -24,6 +25,8 @@ bool ChangeGammaComponent::function(const CEGUI::EventArgs& e)
 		MotorCasaPaco::getInstance()->setGamma(true);
 		GUI_Manager::getInstance()->changeText(textToChange, "Si");
 	}
+
+	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }
