@@ -17,7 +17,7 @@ public:
 
 	Entity* getEntity(const std::string& name);
 	Entity* createEntity(json& j);
-	Entity* addEntity(std::string name, std::string tag = "Untagged");
+	Entity* addEntity(std::string name, std::string tag = "Untagged", bool callStart = true);
 	bool deleteEntity(const std::string name);
 
 
