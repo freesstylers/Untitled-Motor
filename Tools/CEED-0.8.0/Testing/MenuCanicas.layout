@@ -35,8 +35,12 @@
             <Property name="Text" value="Nivel 4" />
         </Window>
         <Window type="GWEN/Button" name="Exit" >
-            <Property name="Area" value="{{0,1023},{0,540},{0,1167},{0,640}}" />
-            <Property name="Text" value="Exit" />
+            <Property name="Area" value="{{0,1008},{0,540},{0,1174},{0,640}}" />
+            <Property name="Text" value="SALIR" />
+        </Window>
+        <Window type="GWEN/Button" name="Settings" >
+            <Property name="Area" value="{{0.700781,-862},{0.873611,-64},{0.888281,-862},{0.968056,-64}}" />
+            <Property name="Text" value="OPCIONES" />
         </Window>
     </Window>
 </GUILayout>

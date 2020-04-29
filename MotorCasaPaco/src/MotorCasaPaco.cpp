@@ -665,42 +665,6 @@ void MotorCasaPaco::setResolution(std::string value)
 	//MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->setConfigOption("Video Mode", video_mode);
 }
 
-void MotorCasaPaco::updateGraphicTexts(CEGUI::Window* fullscreen, CEGUI::Window* screeProportion, CEGUI::Window* resolution, CEGUI::Window* vsync)
-{
-	/*if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "Yes")
-		GUI_Manager::getInstance()->changeText(fullscreen, "Si");
-	else
-	GUI_Manager::getInstance()->changeText(fullscreen, CurrentGraphicsConfiguration["Full Screen"].currentValue);*/
-
-	//GUI_Manager::getInstance()->changeText(screeProportion, screen_proportion);
-	//GUI_Manager::getInstance()->changeText(resolution, CurrentGraphicsConfiguration["Video Mode"].currentValue);
-	//
-	//if (CurrentGraphicsConfiguration["VSync"].currentValue == "Yes")
-	//	GUI_Manager::getInstance()->changeText(vsync, "Si");
-	//else
-	//	GUI_Manager::getInstance()->changeText(vsync, CurrentGraphicsConfiguration["VSync"].currentValue);
-
-	//Event evt = Event(EventType::RESET_GRAPHIC_INFO);
-	//EventManager::getInstance()->EmitEvent(evt);
-}
-
-void MotorCasaPaco::updateAdvancedGraphicTexts(CEGUI::Window* fsaa, CEGUI::Window* gamma, CEGUI::Window* shadows_)
-{
-	/*if (CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue == "Yes")
-		GUI_Manager::getInstance()->changeText(gamma, "Si");
-	else
-		GUI_Manager::getInstance()->changeText(gamma, CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue);
-
-	GUI_Manager::getInstance()->changeText(fsaa, "X " + CurrentGraphicsConfiguration["FSAA"].currentValue);
-
-	GUI_Manager::getInstance()->changeText(shadows_, shadows);
-
-	Event evt = Event(
-:RESET_GRAPHIC_INFO);
-	EventManager::getInstance()->EmitEvent(evt);*/
-}
-
-
 int MotorCasaPaco::getScreenWidth()
 {
 	return screen_width;

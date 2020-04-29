@@ -4,6 +4,7 @@
   <Font filename="shump-10.font" />
   <LookNFeel filename="VayaCanicastanhazos.looknfeel" />
   <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
-    <FalagardMapping lookNFeel="VayaCanicastanhazos/Mouse_Text"			renderer="Core/Button"			targetType="CEGUI/PushButton"		windowType="VayaCanicastanhazos/Mouse_Text" />
+<FalagardMapping lookNFeel="VayaCanicastanhazos/LeftArrow"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="VayaCanicastanhazos/LeftArrow" />
+  <FalagardMapping lookNFeel="VayaCanicastanhazos/RightArrow"			renderer="Core/Button"		targetType="CEGUI/PushButton"		windowType="VayaCanicastanhazos/RightArrow" />
 
 </GUIScheme>

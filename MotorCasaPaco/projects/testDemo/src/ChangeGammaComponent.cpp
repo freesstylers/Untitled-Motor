@@ -1,5 +1,6 @@
 #include "ChangeGammaComponent.h"
 #include "MotorCasaPaco.h"
+#include "Audio/AudioManager.h"
 
 ChangeGammaComponent::ChangeGammaComponent(json& args): Component(args)
 {
@@ -25,12 +26,14 @@ bool ChangeGammaComponent::function(const CEGUI::EventArgs& e)
 		GUI_Manager::getInstance()->changeText(textToChange, "Si");
 	}
 
+	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
+
 	return true;
 }
 
 bool ChangeGammaComponent::ReceiveEvent(Event& event)
 {
-	if (event.type == EventType::RESET_GRAPHIC_INFO) {
+	if (event.type == "RESET_GRAPHIC_INFO") {
 		if (MotorCasaPaco::getInstance()->getGamma())
 		{
 			GUI_Manager::getInstance()->changeText(textToChange, "Si");
@@ -61,7 +64,7 @@ void ChangeGammaComponent::init(json& j)
 			GUI_Manager::getInstance()->changeText(textToChange, "No");
 		}
 
-		EventManager::getInstance()->RegisterListener(this, EventType::RESET_GRAPHIC_INFO);
+		EventManager::getInstance()->RegisterListener(this, "RESET_GRAPHIC_INFO");
 
 	}
 }

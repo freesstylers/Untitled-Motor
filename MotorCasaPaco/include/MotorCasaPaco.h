@@ -81,8 +81,6 @@ public:
 	void setScreenProportion(int height);
 	std::string getResolution();
 	void setResolution(std::string value);
-	void updateGraphicTexts(CEGUI::Window* fullscreen, CEGUI::Window* screeProportion, CEGUI::Window* resolution, CEGUI::Window* vsync);
-	void updateAdvancedGraphicTexts(CEGUI::Window* fsaa, CEGUI::Window* gamma, CEGUI::Window* shadows); //To be updated?
 	int getScreenWidth();
 	std::string getFSAA();
 	void setFSAA(int value);

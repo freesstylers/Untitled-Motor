@@ -6,7 +6,7 @@
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="GWEN/StaticImage" name="Fondo" >
             <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
-            <Property name="Image" value="A_Toda_Pastilla/Fondo" />
+            <Property name="Image" value="VayaCanicastanhazos/Fondo" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
             <Property name="BackgroundEnabled" value="false" />
@@ -328,36 +328,6 @@
                 </AutoWindow>
             </AutoWindow>
         </Window>
-        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow_5" >
-            <Property name="Area" value="{{0.913281,0},{0.577778,0},{0.952344,0},{0.647222,0}}" />
-        </Window>
-        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow_4" >
-            <Property name="Area" value="{{0.913281,0},{0.473611,0},{0.952344,0},{0.543056,0}}" />
-        </Window>
-        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow_3" >
-            <Property name="Area" value="{{0.913281,0},{0.369444,0},{0.952344,0},{0.438889,0}}" />
-        </Window>
-        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow_2" >
-            <Property name="Area" value="{{0.913281,0},{0.265278,0},{0.952344,0},{0.334722,0}}" />
-        </Window>
-        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow_1" >
-            <Property name="Area" value="{{0.913281,0},{0.161111,0},{0.952344,0},{0.230556,0}}" />
-        </Window>
-        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow_5" >
-            <Property name="Area" value="{{0.604688,0},{0.577778,0},{0.64375,0},{0.647222,0}}" />
-        </Window>
-        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow_4" >
-            <Property name="Area" value="{{0.604688,0},{0.473611,0},{0.64375,0},{0.543056,0}}" />
-        </Window>
-        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow_3" >
-            <Property name="Area" value="{{0.604688,0},{0.369444,0},{0.64375,0},{0.438889,0}}" />
-        </Window>
-        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow_2" >
-            <Property name="Area" value="{{0.604688,0},{0.265278,0},{0.64375,0},{0.334722,0}}" />
-        </Window>
-        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow_1" >
-            <Property name="Area" value="{{0.604688,0},{0.161111,0},{0.64375,0},{0.230556,0}}" />
-        </Window>
         <Window type="GWEN/Button" name="Apply" >
             <Property name="Area" value="{{0.109375,0},{0.873611,0},{0.296875,0},{0.968056,0}}" />
             <Property name="Text" value="Aplicar" />
@@ -373,6 +343,36 @@
         <Window type="GWEN/Button" name="AdvancedOptions" >
             <Property name="Area" value="{{0.296876,0},{0.730556,0},{0.702345,0},{0.825001,0}}" />
             <Property name="Text" value="OPCIONES AVANZADAS" />
+        </Window>
+        <Window type="VayaCanicastanhazos/LeftArrow" name="LeftArrow_1" >
+            <Property name="Area" value="{{0.604688,0},{0.161111,0},{0.64375,0},{0.230556,0}}" />
+        </Window>
+        <Window type="VayaCanicastanhazos/LeftArrow" name="LeftArrow_2" >
+            <Property name="Area" value="{{0.604688,0},{0.265278,0},{0.64375,0},{0.334722,0}}" />
+        </Window>
+        <Window type="VayaCanicastanhazos/LeftArrow" name="LeftArrow_3" >
+            <Property name="Area" value="{{0.604688,0},{0.369444,0},{0.64375,0},{0.438889,0}}" />
+        </Window>
+        <Window type="VayaCanicastanhazos/LeftArrow" name="LeftArrow_4" >
+            <Property name="Area" value="{{0.604688,0},{0.473611,0},{0.64375,0},{0.543056,0}}" />
+        </Window>
+        <Window type="VayaCanicastanhazos/LeftArrow" name="LeftArrow_5" >
+            <Property name="Area" value="{{0.604688,0},{0.577778,0},{0.64375,0},{0.647222,0}}" />
+        </Window>
+        <Window type="VayaCanicastanhazos/RightArrow" name="RightArrow_1" >
+            <Property name="Area" value="{{0.913281,0},{0.161111,0},{0.952344,0},{0.230556,0}}" />
+        </Window>
+        <Window type="VayaCanicastanhazos/RightArrow" name="RightArrow_2" >
+            <Property name="Area" value="{{0.913281,0},{0.265278,0},{0.952344,0},{0.334722,0}}" />
+        </Window>
+        <Window type="VayaCanicastanhazos/RightArrow" name="RightArrow_3" >
+            <Property name="Area" value="{{0.913281,0},{0.369444,0},{0.952344,0},{0.438889,0}}" />
+        </Window>
+        <Window type="VayaCanicastanhazos/RightArrow" name="RightArrow_4" >
+            <Property name="Area" value="{{0.913281,0},{0.473611,0},{0.952344,0},{0.543056,0}}" />
+        </Window>
+        <Window type="VayaCanicastanhazos/RightArrow" name="RightArrow_5" >
+            <Property name="Area" value="{{0.913281,0},{0.577778,0},{0.952344,0},{0.647222,0}}" />
         </Window>
     </Window>
 </GUILayout>

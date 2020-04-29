@@ -1,7 +1,8 @@
 <?xml version="1.0" ?>
 <Falagard version="7">
 
-<WidgetLook name="VayaCanicastanhazos/Mouse_Text">
+
+<WidgetLook name="VayaCanicastanhazos/LeftArrow">
     <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
     <PropertyDefinition initialValue="FF2E72B2" name="HoverTextColour" redrawOnWrite="true" />
     <PropertyDefinition initialValue="FFFFFFFF" name="PushedTextColour" redrawOnWrite="true" />
@@ -50,7 +51,7 @@
             <UnifiedDim scale="1" type="Height" />
           </Dim>
         </Area>
-        <Image component="Normal" name="VayaCanicastanhazos/Mouse_Text" />
+        <Image component="Normal" name="VayaCanicastanhazos/LeftArrow_1" />
       </FrameComponent>
       <ImageryComponent>
         <Area>
@@ -88,7 +89,7 @@
             <UnifiedDim scale="1" type="Height" />
           </Dim>
         </Area>
-        <Image component="Hover" name="VayaCanicastanhazos/Mouse_Text" />
+        <Image component="Hover" name="VayaCanicastanhazos/LeftArrow_2" />
       </FrameComponent>
       <ImageryComponent>
         <Area>
@@ -126,7 +127,7 @@
             <UnifiedDim scale="1" type="Height" />
           </Dim>
         </Area>
-        <Image component="Clicked" name="VayaCanicastanhazos/Mouse_Text" />
+        <Image component="Clicked" name="VayaCanicastanhazos/LeftArrow_3" />
       </FrameComponent>
       <ImageryComponent>
         <Area>
@@ -182,4 +183,184 @@
     </StateImagery>
   </WidgetLook>
 
+  <WidgetLook name="VayaCanicastanhazos/RightArrow">
+    <PropertyDefinition initialValue="FF525252" name="NormalTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF2E72B2" name="HoverTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FFFFFFFF" name="PushedTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="FF777777" name="DisabledTextColour" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="CentreAligned" name="VertLabelFormatting" />
+    <PropertyDefinition initialValue="CentreAligned" name="HorzLabelFormatting" />
+    <PropertyDefinition initialValue="" name="NormalImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="HoverImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="PushedImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="" name="DisabledImage" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="VertImageFormatting" redrawOnWrite="true" />
+    <PropertyDefinition initialValue="Stretched" name="HorzImageFormatting" redrawOnWrite="true" />
+    <ImagerySection name="label">
+      <TextComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <VertFormatProperty name="VertLabelFormatting" />
+        <HorzFormatProperty name="HorzLabelFormatting" />
+      </TextComponent>
+    </ImagerySection>
+    <ImagerySection name="normal">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Normal" name="VayaCanicastanhazos/RightArrow_1" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="NormalImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="hover">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Hover" name="VayaCanicastanhazos/RightArrow_2" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="HoverImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <ImagerySection name="pushed">
+      <FrameComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <Image component="Clicked" name="VayaCanicastanhazos/RightArrow_3" />
+      </FrameComponent>
+      <ImageryComponent>
+        <Area>
+          <Dim type="LeftEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="TopEdge">
+            <AbsoluteDim value="0" />
+          </Dim>
+          <Dim type="Width">
+            <UnifiedDim scale="1" type="Width" />
+          </Dim>
+          <Dim type="Height">
+            <UnifiedDim scale="1" type="Height" />
+          </Dim>
+        </Area>
+        <ImageProperty name="PushedImage" />
+        <VertFormatProperty name="VertImageFormatting" />
+        <HorzFormatProperty name="HorzImageFormatting" />
+      </ImageryComponent>
+    </ImagerySection>
+    <StateImagery name="Normal">
+      <Layer>
+        <Section section="normal" />
+        <Section section="label">
+          <ColourProperty name="NormalTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Hover">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="Pushed">
+      <Layer>
+        <Section section="pushed" />
+        <Section section="label">
+          <ColourProperty name="PushedTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+    <StateImagery name="PushedOff">
+      <Layer>
+        <Section section="hover" />
+        <Section section="label">
+          <ColourProperty name="HoverTextColour" />
+        </Section>
+      </Layer>
+    </StateImagery>
+  </WidgetLook>
 </Falagard>

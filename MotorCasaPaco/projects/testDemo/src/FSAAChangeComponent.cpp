@@ -1,5 +1,6 @@
 #include "FSAAChangeComponent.h"
 #include "MotorCasaPaco.h"
+#include "Audio/AudioManager.h"
 
 FSAAChangeComponent::FSAAChangeComponent(json& args): Component(args)
 {
@@ -25,7 +26,7 @@ bool FSAAChangeComponent::functionMore(const CEGUI::EventArgs& e)
 
 	MotorCasaPaco::getInstance()->setFSAA(values[currenPos]);
 	GUI_Manager::getInstance()->changeText(textToChange, "X " + values[currenPos]);
-
+	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }
@@ -43,13 +44,14 @@ bool FSAAChangeComponent::functionLess(const CEGUI::EventArgs& e)
 
 	MotorCasaPaco::getInstance()->setFSAA(values[currenPos]);
 	GUI_Manager::getInstance()->changeText(textToChange, "X " + values[currenPos]);
+	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }
 
 bool FSAAChangeComponent::ReceiveEvent(Event& event)
 {
-	if (event.type == EventType::RESET_GRAPHIC_INFO) {
+	if (event.type == "RESET_GRAPHIC_INFO") {
 		GUI_Manager::getInstance()->changeText(textToChange, "X " + MotorCasaPaco::getInstance()->getFSAA());
 		getCurrenPos(MotorCasaPaco::getInstance()->getFSAA());
 	}
@@ -88,6 +90,6 @@ void FSAAChangeComponent::init(json& j)
 		currenPos = getCurrenPos(MotorCasaPaco::getInstance()->getFSAA());
 		GUI_Manager::getInstance()->changeText(textToChange, "X " + MotorCasaPaco::getInstance()->getFSAA());
 
-		EventManager::getInstance()->RegisterListener(this, EventType::RESET_GRAPHIC_INFO);
+		EventManager::getInstance()->RegisterListener(this, "RESET_GRAPHIC_INFO");
 	}
 }

@@ -1,5 +1,6 @@
 #include "RevertGraphicChangesComponent.h"
 #include "MotorCasaPaco.h"
+#include "Audio/AudioManager.h"
 
 RevertGraphicChangesComponent::RevertGraphicChangesComponent(json& args): Component(args)
 {
@@ -14,8 +15,9 @@ RevertGraphicChangesComponent::~RevertGraphicChangesComponent()
 bool RevertGraphicChangesComponent::function(const CEGUI::EventArgs& e)
 {
 	MotorCasaPaco::getInstance()->revertGraphicChanges();
-	
-	Event evt = Event(EventType::RESET_GRAPHIC_INFO);
+	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
+
+	Event evt = Event("RESET_GRAPHIC_INFO");
 	EventManager::getInstance()->EmitEvent(evt);
 
 	return true;

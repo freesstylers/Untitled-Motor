@@ -1,5 +1,6 @@
 #include "ShadowsChangeComponent.h"
 #include "MotorCasaPaco.h"
+#include "Audio/AudioManager.h"
 
 ShadowsChangeComponent::ShadowsChangeComponent(json& args): Component(args)
 {
@@ -26,6 +27,7 @@ bool ShadowsChangeComponent::functionMore(const CEGUI::EventArgs& e)
 	MotorCasaPaco::getInstance()->setShadows(values[currenPos]);
 	GUI_Manager::getInstance()->changeText(textToChange, values[currenPos]);
 
+	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }
@@ -44,12 +46,14 @@ bool ShadowsChangeComponent::functionLess(const CEGUI::EventArgs& e)
 	MotorCasaPaco::getInstance()->setShadows(values[currenPos]);
 	GUI_Manager::getInstance()->changeText(textToChange, values[currenPos]);
 
+	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
+
 	return true;
 }
 
 bool ShadowsChangeComponent::ReceiveEvent(Event& event)
 {
-	if (event.type == EventType::RESET_GRAPHIC_INFO) {
+	if (event.type == "RESET_GRAPHIC_INFO") {
 		GUI_Manager::getInstance()->changeText(textToChange, MotorCasaPaco::getInstance()->getShadows());
 		currenPos = getCurrenPos(MotorCasaPaco::getInstance()->getShadows());
 	}
@@ -90,6 +94,6 @@ void ShadowsChangeComponent::init(json& j)
 
 		GUI_Manager::getInstance()->changeText(textToChange, MotorCasaPaco::getInstance()->getShadows());
 
-		EventManager::getInstance()->RegisterListener(this, EventType::RESET_GRAPHIC_INFO);
+		EventManager::getInstance()->RegisterListener(this, "RESET_GRAPHIC_INFO");
 	}
 }
