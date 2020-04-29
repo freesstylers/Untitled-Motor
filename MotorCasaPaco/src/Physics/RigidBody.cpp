@@ -88,6 +88,16 @@ void RigidBody::physicsUpdate()
 	tr->setScale((Vector3)body->getCollisionShape()->getLocalScaling());
 }
 
+void RigidBody::onActivated()
+{
+	PhysicsManager::getInstance()->getWorld()->addRigidBody(body);
+}
+
+void RigidBody::onDeactivated()
+{
+	PhysicsManager::getInstance()->getWorld()->removeRigidBody(body);
+}
+
 void RigidBody::OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2)
 {
 	Entity* e1 = static_cast<RigidBody*>(obj1->getUserPointer())->e_;
@@ -170,7 +180,7 @@ void RigidBody::createRigidBody(json& args)
 		}
 	}
 
-	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getOgreEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated());
+	body = PhysicsManager::getInstance()->createRigidBody(shape, e_->getComponent<Transform>("Transform")->getPosition(), e_->getComponent<Mesh>("Mesh")->getOgreEntity(), mass, e_->getComponent<Mesh>("Mesh")->isMeshAnimated(), false);
 
 	body->setUserPointer(this);
 

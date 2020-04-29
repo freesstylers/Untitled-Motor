@@ -28,7 +28,7 @@ public:
 	void addRigidBody(btRigidBody* body);
 	void setActive(bool active);
 
-	btRigidBody* createRigidBody(const std::string& shape, const Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated);
+	btRigidBody* createRigidBody(const std::string& shape, const Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated, const bool& addToWorld = true);
 
 private:
 	PhysicsManager();

@@ -22,7 +22,7 @@ void Entity::update()
 	int length = components_.size();
 	for (int i = 0; i < length; i++)
 	{
-		components_[i]->update();
+		if (components_[i]->isActive()) components_[i]->update();
 	}
 }
 
@@ -31,7 +31,7 @@ void Entity::lateUpdate()
 	int length = components_.size();
 	for (int i = 0; i < length; i++)
 	{
-		components_[i]->lateUpdate();
+		if (components_[i]->isActive()) components_[i]->lateUpdate();
 	}
 }
 
@@ -51,7 +51,7 @@ void Entity::preupdate()
 	int length = components_.size();
 	for (int i = 0; i < length; i++)
 	{
-		components_[i]->preupdate();
+		if (components_[i]->isActive()) components_[i]->preupdate();
 	}
 }
 
@@ -60,7 +60,7 @@ void Entity::physicsUpdate()
 	int length = components_.size();
 	for (int i = 0; i < length; i++)
 	{
-		components_[i]->physicsUpdate();
+		if (components_[i]->isActive()) components_[i]->physicsUpdate();
 	}
 }
 
@@ -68,11 +68,7 @@ void Entity::addComponentFromJson(json& args)
 {
 	string tag = args["type"];
 
-	bool compEnabled = true;
-	if (!args["enabled"].is_null() && args["enabled"] == "false")
-		compEnabled = false;
-
-//if it doesn't exist, it's created
+	//if it doesn't exist, it's created
 	if (!hasComponent(args["type"])) {
 		Component* c(JsonFactoryParser::getInstance()->getComponentFromJSON(args["type"], args));
 		if (c == nullptr)
@@ -112,23 +108,23 @@ void Entity::setEnabled(bool enabled) {
 	enabled_ = enabled;
 
 	if (activeOnHierarchy_) {
-		for (auto child : children_)
-			child.second->setActiveOnHierarchy(enabled);
-
 		for (auto& comp : components_)
 			comp.get()->setActiveOnHierarchy(enabled);
+
+		for (auto child : children_)
+			child.second->setActiveOnHierarchy(enabled);
 	}
 }
 
 void Entity::setActiveOnHierarchy(bool active) {
 	activeOnHierarchy_ = active;
 
-	if (enabled_) {
-		for (auto child : children_)
-			child.second->setActiveOnHierarchy(active);
-
+	if (!activeOnHierarchy_ || enabled_) {
 		for (auto& comp : components_)
 			comp.get()->setActiveOnHierarchy(active);
+
+		for (auto child : children_)
+			child.second->setActiveOnHierarchy(active);
 	}
 }
 
@@ -156,7 +152,7 @@ Entity* Entity::getParent()
 	return parent_;
 }
 
-std::map<string, Entity*> Entity::getChildren()
+std::map<string, Entity*>& Entity::getChildren()
 {
 	return children_;
 }
@@ -178,8 +174,7 @@ bool Entity::setParent(std::string name) {
 	if (parent_ != nullptr)
 		parent_->getChildren().erase(name);
 
-	if (nParent->getChild(name_) == nullptr)
-		nParent->getChildren().insert(std::pair<string, Entity*>(name_, this));
+	nParent->getChildren()[name_] = this;
 
 	parent_ = nParent;
 

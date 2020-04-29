@@ -26,6 +26,8 @@ public:
 	void redefine(json& args) override;
 	void preupdate() override;
 	void physicsUpdate() override;
+	void onActivated() override;
+	void onDeactivated() override;
 
 	virtual void OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2);
 	btRigidBody* getRigidBody();

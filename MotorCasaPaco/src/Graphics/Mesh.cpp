@@ -28,7 +28,6 @@ void Mesh::init(json& args)
 	isAnimated = ((!args["isAnimated"].is_null()) && (args["isAnimated"]));
 
 	ogreEnt->setCastShadows(castShadow);
-
 	e_->getComponent<Transform>("Transform")->getNode()->attachObject(ogreEnt);
 }
 
@@ -48,6 +47,16 @@ void Mesh::redefine(json& args)
 		args["isAnimated"] = isAnimated;
 
 	init(args);
+}
+
+void Mesh::onActivated()
+{
+	ogreEnt->setVisible(true);
+}
+
+void Mesh::onDeactivated()
+{
+	ogreEnt->setVisible(false);
 }
 
 Mesh::~Mesh()
@@ -82,3 +91,4 @@ bool Mesh::isMeshAnimated() const
 {
 	return isAnimated;
 }
+

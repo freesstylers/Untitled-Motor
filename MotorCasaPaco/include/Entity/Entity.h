@@ -59,7 +59,7 @@ public:
 	Scene* getScene();
 
 	Entity* getParent();
-	std::map<std::string, Entity*> getChildren();
+	std::map<std::string, Entity*>& getChildren();
 	Entity* getChild(std::string name);
 
 	bool setParent(std::string name);

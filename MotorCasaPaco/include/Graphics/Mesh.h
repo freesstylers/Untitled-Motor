@@ -19,6 +19,8 @@ public:
 	Mesh(json& args);
 	void init(json& args) override;
 	void redefine(json& args) override;
+	void onActivated() override;
+	void onDeactivated() override;
 	~Mesh() override;
 
 	Ogre::AxisAlignedBox getAABB()	const;

@@ -87,6 +87,72 @@
 					"rotateSpeed": 1.0
 				}
 			]
+		},
+		{
+			"name" : "testParent1",
+			"enabled" : "true",
+			"position" : [0, 0, 0],
+			"rotation" : [0, 0, 0], 
+			"scale" : [1, 1, 1],
+			"components" : [
+				{
+					"type" : "TestComponent",
+					"enabled" : "false"
+				}
+			]
+		},
+		{
+			"name" : "testParent2",
+			"enabled" : "true",
+			"position" : [0, 0, 0],
+			"rotation" : [0, 0, 0], 
+			"scale" : [1, 1, 1],
+			"parent" : "testParent1",
+			"components" : [
+				{
+					"type" : "TestComponent",
+					"enabled" : "false"
+				}
+			]
+		},
+		{
+			"name" : "testParent3",
+			"enabled" : "true",
+			"position" : [0, 0, 0],
+			"rotation" : [0, 0, 0], 
+			"scale" : [1, 1, 1],
+			"parent" : "testParent2",
+			"components" : [
+				{
+					"type" : "TestComponent"
+				}
+			]
+		},
+		{
+			"name" : "testParent4",
+			"enabled" : "true",
+			"position" : [0, 0, 0],
+			"rotation" : [0, 0, 0], 
+			"scale" : [1, 1, 1],
+			"parent" : "testParent3",
+			"components" : [
+				{
+					"type" : "TestComponent"
+				}
+			]
+		},
+		{
+			"name" : "testParent4-2",
+			"enabled" : "false",
+			"position" : [0, 0, 0],
+			"rotation" : [0, 0, 0], 
+			"scale" : [1, 1, 1],
+			"parent" : "testParent3",
+			"components" : [
+				{
+					"type" : "TestComponent"
+				}
+			]
 		}
 	],
 	

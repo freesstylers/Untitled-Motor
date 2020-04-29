@@ -41,7 +41,7 @@ void PhysicsManager::setActive(bool active)
 	this->active_ = active;
 }
 
-btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated)
+btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated, const bool& addToWorld)
 {
 	btTransform t;
 	t.setIdentity();
@@ -92,7 +92,10 @@ btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Vec
 	btMotionState* motion = new btDefaultMotionState(t);
 	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, colShape, inertia);
 	btRigidBody* body = new btRigidBody(info);
-	addRigidBody(body);
+	
+	if (addToWorld)
+		addRigidBody(body);
+	
 	return body;
 }
 

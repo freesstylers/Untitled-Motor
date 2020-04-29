@@ -6,6 +6,9 @@ class TestComponent : public Component
 public:
 	TestComponent(json& args);
 	~TestComponent() override;
+
+	void start() override;
+	void onActivated() override;
 	bool ReceiveEvent(Event& event) override;
 	void update() override;
 

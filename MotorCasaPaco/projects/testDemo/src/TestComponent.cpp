@@ -6,11 +6,22 @@
 
 TestComponent::TestComponent(json& args): Component(args)
 {
+	//std::cout << "Entity '" << getEntity()->getName() << "' constructor." << std::endl;
 }
 
 TestComponent::~TestComponent()
 {
 	Component::~Component();
+}
+
+void TestComponent::start()
+{
+	std::cout << "Entity '" << getEntity()->getName() << "' start." << std::endl;
+}
+
+void TestComponent::onActivated()
+{
+	std::cout << "Entity '" << getEntity()->getName() << "' onActivated." << std::endl;
 }
 
 void TestComponent::update() {

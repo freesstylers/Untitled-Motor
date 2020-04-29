@@ -21,6 +21,7 @@
 #include "ShadowsChangeComponent.h"
 #include "ApplyAdvancedGraphicChangesComponent.h"
 #include "RevertGraphicChangesComponent.h"
+#include "TestComponent.h"
 
 #include "RevertAdvancedGraphicChangesComponent.h"
 #include "ChangeGammaComponent.h"
@@ -160,6 +161,15 @@ public:
 	};
 };
 
+class TestComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new TestComponent(args);
+	};
+};
+
 MotorCasaPaco* motorCasaPaco;
 
 #ifdef  _DEBUG
@@ -206,6 +216,7 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	JsonFactoryParser::getInstance()->addFactory("RevertAdvancedGraphicChangesComponent", new RevertAdvancedGraphicChangesComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("ChangeGammaComponent", new ChangeGammaComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("ChangeGraphicSceneComponent", new ChangeGraphicSceneComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("TestComponent", new TestComponentFactory());
 
 	MotorCasaPaco::getInstance()->getGUI_Manager()->getInstance()->setupDefaultResources();
 	MotorCasaPaco::getInstance()->getGUI_Manager()->loadScheme("A_Toda_Pastilla.scheme");
