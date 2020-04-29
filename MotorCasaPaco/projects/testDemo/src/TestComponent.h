@@ -13,5 +13,9 @@ public:
 	void update() override;
 
 	int value = 0;
+
+private:
+	Entity* refEntity = nullptr;
+	std::string refEntityName;
 };
 

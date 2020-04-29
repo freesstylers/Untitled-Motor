@@ -97,21 +97,21 @@
 			"components" : [
 				{
 					"type" : "TestComponent",
-					"enabled" : "false"
+					"enabled" : "true",
+					"refEntity" : "ball"
 				}
 			]
 		},
 		{
 			"name" : "testParent2",
-			"enabled" : "true",
+			"enabled" : "false",
 			"position" : [0, 0, 0],
 			"rotation" : [0, 0, 0], 
 			"scale" : [1, 1, 1],
 			"parent" : "testParent1",
 			"components" : [
 				{
-					"type" : "TestComponent",
-					"enabled" : "false"
+					"type" : "TestComponent"
 				}
 			]
 		},
