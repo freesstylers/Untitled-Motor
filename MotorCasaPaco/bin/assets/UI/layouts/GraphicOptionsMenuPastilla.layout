@@ -108,9 +108,10 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticText" name="Title_Text" >
-            <Property name="Area" value="{{0.273438,0},{0.0277778,0},{0.726563,0},{0.113889,0}}" />
+            <Property name="Area" value="{{0.273438,0},{0.0277778,0},{0.726563,0},{0.113889,6}}" />
             <Property name="Text" value="Configuración Gráfica" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="TextColours" value="tl:FFFFFFFF tr:FFFFFFFF bl:FFFFFFFF br:FFFFFFFF" />
             <Property name="FrameEnabled" value="false" />
             <Property name="HorzFormatting" value="CentreAligned" />
             <Property name="BackgroundEnabled" value="false" />

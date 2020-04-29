@@ -110,9 +110,7 @@ void GUI_Manager::loadFont(std::string name)
 
 void GUI_Manager::setupDefaultResources()
 {
-	loadScheme("A_Toda_Pastilla.scheme");
 	loadScheme("GWEN.scheme");
-	setMouseCursor("A_Toda_Pastilla/Mouse_Arrow");
 	loadFont("shump-big.font");
 	loadFont("shump-normal.font");
 	loadFont("shump-little.font");

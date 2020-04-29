@@ -5,4 +5,12 @@
     <Image height="24" name="Mouse_Move" width="23" xPos="536" yPos="1095" />
     <Image height="20" name="Mouse_Resize" width="21" xPos="566" yPos="1098" />
     <Image height="21" name="Mouse_Text" width="23" xPos="590" yPos="1097" />
+    <Image height="55" name="LeftArrow_1" width="47" xPos="870" yPos="1133" />
+    <Image height="55" name="LeftArrow_4" width="47" xPos="716" yPos="1132" />
+    <Image height="56" name="LeftArrow_3" width="49" xPos="766" yPos="1132" />
+    <Image height="55" name="RightArrow_1" width="47" xPos="508" yPos="1133" />
+    <Image height="57" name="RightArrow_2" width="49" xPos="559" yPos="1132" />
+    <Image height="55" name="RightArrow_4" width="47" xPos="662" yPos="1132" />
+    <Image height="57" name="LeftArrow_2" width="49" xPos="817" yPos="1132" />
+    <Image height="57" name="RightArrow_3" width="49" xPos="610" yPos="1131" />
 </Imageset>
