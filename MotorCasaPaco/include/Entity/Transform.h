@@ -45,6 +45,11 @@ public:
 	void detachObject(std::string& name);
 	void detachNode(std::string& name);
 
+	void rotateAroundPivot(Vector3 rot, Ogre::SceneNode* pivot);
+	void rotateAroundPivot(Quaternion rot, Ogre::SceneNode* pivot);
+	void rotateAroundPivot(Vector3 rot, Entity* pivot);
+	void rotateAroundPivot(Quaternion rot, Entity* pivot);
+
 	Ogre::SceneNode* getNode();
 
 	void onSetParent(Entity* parent) override;

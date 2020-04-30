@@ -198,6 +198,46 @@ void Transform::scale(Vector3 s)
 	node->scale(s);
 }
 
+void Transform::rotateAroundPivot(Vector3 rot, Ogre::SceneNode* pivot)
+{
+	rotateAroundPivot(Quaternion::FromEuler(rot), pivot);
+}
+
+void Transform::rotateAroundPivot(Quaternion rot, Ogre::SceneNode* pivot)
+{
+	Vector3 pos = getWorldPosition();
+	std::string auxName = "auxiliaryNode" + std::to_string(rand() % 10000);
+	Ogre::SceneNode* aux = MotorCasaPaco::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode(auxName);
+
+	aux->setPosition(pivot->getPosition());
+
+	Ogre::SceneNode* parent = node->getParentSceneNode();
+	parent->removeChild(node->getName());
+	aux->addChild(node);
+
+	setWorldPosition(pos);
+
+	aux->rotate(rot, Ogre::Node::TS_PARENT);
+
+	pos = getWorldPosition();
+
+	aux->removeChild(node->getName());
+	parent->addChild(node);
+	MotorCasaPaco::getInstance()->getSM()->getRootSceneNode()->removeAndDestroyChild(auxName);
+
+	setWorldPosition(pos);
+}
+
+void Transform::rotateAroundPivot(Vector3 rot, Entity* pivot)
+{
+	rotateAroundPivot(Quaternion::FromEuler(rot), pivot->getTransform()->getNode());
+}
+
+void Transform::rotateAroundPivot(Quaternion rot, Entity* pivot)
+{
+	rotateAroundPivot(rot, pivot->getTransform()->getNode());
+}
+
 Ogre::SceneNode* Transform::getNode()
 {
 	return node;

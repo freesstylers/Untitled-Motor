@@ -1,15 +1,17 @@
 #pragma once
-#include "Others/json.hpp"
-
 #include <map>
 #include <string>
 #include <memory>
+
+#include "Others/json.hpp"
+
 #include "Entity/Component.h"
 #include "Entity/Factory.h"
 
 using json = nlohmann::json;
 
 class Scene;
+class Transform;
 
 #include "Events/EventListener.h"
 #include "Events/EventManager.h"
@@ -68,6 +70,8 @@ public:
 	void init(json& args);
 	
 	bool ReceiveEvent(Event& event) override;
+
+	Transform* getTransform();
 
 protected:
 

@@ -209,3 +209,8 @@ bool Entity::ReceiveEvent(Event& event)
 	
 	return false;
 }
+
+Transform* Entity::getTransform()
+{
+	return getComponent<Transform>("Transform");
+}
