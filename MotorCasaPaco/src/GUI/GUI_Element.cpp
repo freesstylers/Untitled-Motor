@@ -18,17 +18,38 @@ CEGUI::Window* GUI_Element::getWindowElement()
 
 void GUI_Element::setPosition(int x, int y)
 {
-	elementWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(x, 0.0f), CEGUI::UDim(y, 0.0f)));
+	elementWindow->setPosition(CEGUI::UVector2(CEGUI::UDim(0, x), CEGUI::UDim(0, y)));
 }
+
+/*CEGUI::UVector2 GUI_Element::getPos()
+{
+	CEGUI::UVector2 v2 = elementWindow->getPosition();
+
+	return v2;
+}*/
 
 int GUI_Element::getPosX()
 {
+	/*
+	float screen_x = 0;
+	while (p_wnd->getParent())
+	{
+		float parent_w = p_wnd->getParentPixelWidth();
+		const UDim& posX = p_wnd->getXPosition();
+		screen_x += parent_w * posX.d_scale + posX.d_offset;
+		p_wnd = p_wnd->getParent();
+	}
+	return screen_x;
+	*/
+	float screen_x = 0;
+
 	CEGUI::UVector2 v2 = elementWindow->getPosition();
 	return (v2.d_x.d_offset);
 }
 
 int GUI_Element::getPosY()
 {
+
 	CEGUI::UVector2 v2 = elementWindow->getPosition();
 	return (v2.d_y.d_offset);
 }

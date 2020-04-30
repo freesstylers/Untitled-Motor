@@ -3,6 +3,7 @@
 
 namespace CEGUI {
 	class Window;
+//	class UVector2;
 }
 
 class GUI_Element
@@ -15,7 +16,7 @@ public:
 	CEGUI::Window* getWindowElement();
 
 	void setPosition(int x, int y);
-	//Ogre::Vector2 getPos();
+	//CEGUI::UVector2 getPos();
 	int getPosX();
 	int getPosY();
 

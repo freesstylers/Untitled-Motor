@@ -175,6 +175,11 @@
 				{
 					"type": "ExitButtonComponent",
 					"buttonName" : "MainMenu/Close"
+				},
+				{
+					"type": "MenuControllerInputComponent",
+					"buttons" :
+					["MainMenu/Close"]
 				}
 			]
 		},
@@ -190,6 +195,5 @@
 				}
 			]
 		}
-
 	]
 }
