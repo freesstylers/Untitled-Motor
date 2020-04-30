@@ -13,7 +13,7 @@
 			]
 		},
 		{
-			"name" : "marble21",
+			"name" : "ball",
 			"prefab" : "marble",
 			"position" : [1, 20, 0],
 			"rotation" : [0, 0, 0],
@@ -27,8 +27,8 @@
 		},
 		{
 			"name" : "barrel",
-			"position" : [30, 40, 0],
-			"rotation" : [70, 0, 70],
+			"position" : [100, 60, 0],
+			"rotation" : [90, 0, 0],
 			"scale" : [10, 10, 10],
 			"components" : [
 				{
@@ -39,8 +39,11 @@
 				{
 					"type" : "RigidBody",
 					"shape" : "mesh",
-					"mass" : 100,
+					"mass" : 0,
 					"disableDeactivation" : true
+				},
+				{
+					"type" : "TerrainRotation"
 				}
 			]
 		},
