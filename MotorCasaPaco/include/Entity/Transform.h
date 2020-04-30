@@ -33,6 +33,9 @@ public:
 	void rotate(Vector3 rot, TransformSpace relativeTo = TransformSpace::LOCAL);
 	void scale(Vector3 s);
 
+	void attachObject(Ogre::MovableObject* obj);
+	void detachObject(Ogre::String& name);
+
 	Ogre::SceneNode* getNode();
 
 	void onSetParent(Entity* parent) override;

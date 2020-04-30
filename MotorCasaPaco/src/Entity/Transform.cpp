@@ -153,6 +153,17 @@ void Transform::setInheritedRotation(bool set)
 }
 
 
+void Transform::attachObject(Ogre::MovableObject* obj)
+{
+	node->attachObject(obj);
+}
+
+void Transform::detachObject(Ogre::String& name)
+{
+	node->detachObject(name);
+}
+
+
 void Transform::translate(Vector3 pos, TransformSpace relativeTo)
 {
 	node->translate(pos, (Ogre::Node::TransformSpace)relativeTo);
