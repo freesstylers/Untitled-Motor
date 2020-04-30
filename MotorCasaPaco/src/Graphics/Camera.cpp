@@ -30,7 +30,7 @@ bool Camera::ReceiveEvent(Event& event)
 void Camera::update()
 {
 	if (lookingAt) {
-		Camera::lookAt(looking->getComponent<Transform>("Transform")->getNode()->getPosition());
+		Camera::lookAt(Vector3(looking->getComponent<Transform>("Transform")->getNode()->getPosition()));
 	}
 	if (following) {
 		e_->getComponent<Transform>("Transform")->getNode()->setPosition(follow->getComponent<Transform>("Transform")->getNode()->getPosition() + vector);
