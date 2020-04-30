@@ -179,7 +179,13 @@
 				{
 					"type": "MenuControllerInputComponent",
 					"buttons" :
-					["MainMenu/Close"]
+					[
+					 "MainMenu/Settings",
+					 "MainMenu/LeftArrow",
+					 "MainMenu/Play",
+					 "MainMenu/RightArrow",
+					 "MainMenu/Close"
+					]
 				}
 			]
 		},

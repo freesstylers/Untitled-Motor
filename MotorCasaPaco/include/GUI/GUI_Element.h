@@ -17,8 +17,13 @@ public:
 
 	void setPosition(int x, int y);
 	//CEGUI::UVector2 getPos();
-	int getPosX();
-	int getPosY();
+	float getPosXScale();
+	float getPosXAbsolute();
+	float getPosYScale();
+	float getPosYAbsolute();
+
+	float getCenterPointXAbsolute();
+	float getCenterPointYAbsolute();
 
 	void setSize(int x, int y);
 

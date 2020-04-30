@@ -17,6 +17,11 @@ public:
 private:
 	int posX = 0;
 	int posY = 0;
+
+	std::vector<float> positionsX;
+	std::vector<float> positionsY;
+	int tam;
+	int currenPos;
 };
 
 #endif

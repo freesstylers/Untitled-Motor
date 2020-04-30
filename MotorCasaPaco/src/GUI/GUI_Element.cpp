@@ -28,30 +28,47 @@ void GUI_Element::setPosition(int x, int y)
 	return v2;
 }*/
 
-int GUI_Element::getPosX()
+float GUI_Element::getPosXScale()
 {
-	/*
-	float screen_x = 0;
-	while (p_wnd->getParent())
-	{
-		float parent_w = p_wnd->getParentPixelWidth();
-		const UDim& posX = p_wnd->getXPosition();
-		screen_x += parent_w * posX.d_scale + posX.d_offset;
-		p_wnd = p_wnd->getParent();
-	}
-	return screen_x;
-	*/
-	float screen_x = 0;
-
 	CEGUI::UVector2 v2 = elementWindow->getPosition();
-	return (v2.d_x.d_offset);
+	return (v2.d_x.d_scale);
 }
 
-int GUI_Element::getPosY()
+float GUI_Element::getPosYScale()
 {
 
 	CEGUI::UVector2 v2 = elementWindow->getPosition();
-	return (v2.d_y.d_offset);
+	return (v2.d_y.d_scale);
+}
+
+float GUI_Element::getPosXAbsolute()
+{
+	return elementWindow->getOuterRectClipper().d_min.d_x;
+}
+
+float GUI_Element::getPosYAbsolute()
+{
+	return elementWindow->getOuterRectClipper().d_min.d_y;
+}
+
+float GUI_Element::getCenterPointXAbsolute()
+{
+	float i = elementWindow->getOuterRectClipper().d_min.d_x;
+	float j = elementWindow->getOuterRectClipper().d_max.d_x;
+
+	float k = (i + j) / 2;
+
+	return k;
+}
+
+float GUI_Element::getCenterPointYAbsolute()
+{
+	float i = elementWindow->getOuterRectClipper().d_min.d_y;
+	float j = elementWindow->getOuterRectClipper().d_max.d_y;
+
+	float k = (i + j) / 2;
+
+	return k;
 }
 
 /*Ogre::Vector2 GUI_Element::getPos()
