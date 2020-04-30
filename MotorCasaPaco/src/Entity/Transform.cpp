@@ -1,8 +1,9 @@
-#include <Ogre.h>
 
 #include "Entity/Transform.h"
 #include "MotorCasaPaco.h"
 #include "checkML.h"
+
+#include <Ogre.h>
 
 Transform::Transform(json& args) : Component(args)
 {
@@ -158,9 +159,24 @@ void Transform::attachObject(Ogre::MovableObject* obj)
 	node->attachObject(obj);
 }
 
-void Transform::detachObject(Ogre::String& name)
+void Transform::attachNode(Ogre::Node* n)
+{
+	node->addChild(n);
+}
+
+void Transform::attachNode(Ogre::SceneNode* n)
+{
+	node->addChild(n);
+}
+
+void Transform::detachObject(std::string& name)
 {
 	node->detachObject(name);
+}
+
+void Transform::detachNode(std::string& name)
+{
+	node->removeChild(name);
 }
 
 

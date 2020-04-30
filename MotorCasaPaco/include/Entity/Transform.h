@@ -1,6 +1,12 @@
 #pragma once
 #include "Entity/Component.h"
 
+namespace Ogre {
+	class MovableObject;
+	class Node;
+	class SceneNode;
+}
+
 class Transform :
 	public Component
 {
@@ -33,8 +39,11 @@ public:
 	void rotate(Vector3 rot, TransformSpace relativeTo = TransformSpace::LOCAL);
 	void scale(Vector3 s);
 
+	void attachNode(Ogre::Node* node);
+	void attachNode(Ogre::SceneNode* node);
 	void attachObject(Ogre::MovableObject* obj);
-	void detachObject(Ogre::String& name);
+	void detachObject(std::string& name);
+	void detachNode(std::string& name);
 
 	Ogre::SceneNode* getNode();
 
