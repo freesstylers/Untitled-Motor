@@ -15,7 +15,8 @@ public:
 	bool ReceiveEvent(Event& event) override;
 	void update();
 private:
-
+	int posX = 0;
+	int posY = 0;
 };
 
 #endif

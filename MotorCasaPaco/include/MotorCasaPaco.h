@@ -82,6 +82,7 @@ public:
 	std::string getResolution();
 	void setResolution(std::string value);
 	int getScreenWidth();
+	int getScreenHeight();
 	std::string getFSAA();
 	void setFSAA(int value);
 	void setFSAA(std::string value);

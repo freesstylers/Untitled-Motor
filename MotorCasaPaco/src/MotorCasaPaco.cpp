@@ -670,6 +670,11 @@ int MotorCasaPaco::getScreenWidth()
 	return screen_width;
 }
 
+int MotorCasaPaco::getScreenHeight()
+{
+	return screen_height;
+}
+
 std::string MotorCasaPaco::getFSAA()
 {
 	return fsaa;

@@ -1,6 +1,7 @@
 #include "MenuControllerInputComponent.h"
 #include "MotorCasaPaco.h"
 #include "Audio/AudioManager.h"
+#include "Input/InputManager.h"
 
 MenuControllerInputComponent::MenuControllerInputComponent(json& args): Component(args)
 {
@@ -25,6 +26,18 @@ bool MenuControllerInputComponent::ReceiveEvent(Event& event)
 
 void MenuControllerInputComponent::update()
 {
+	posX += InputManager::getInstance()->GameControllerGetAxisMovement(GameControllerAxis::CONTROLLER_AXIS_LEFTX, true) * 10;
+	posY += InputManager::getInstance()->GameControllerGetAxisMovement(GameControllerAxis::CONTROLLER_AXIS_LEFTY, true) * 10;
+	MotorCasaPaco::getInstance()->getGUI_Manager()->injectPosition(posX, posY);
+
+	if (MotorCasaPaco::getInstance()->getInputManager()->GameControllerIsButtonDown(GameControllerButton::CONTROLLER_BUTTON_A))
+	{
+		MotorCasaPaco::getInstance()->getGUI_Manager()->injectLeftMouseButtonDown();
+	}
+	else
+	{
+		MotorCasaPaco::getInstance()->getGUI_Manager()->injectLeftMouseButtonUp();
+	}
 }
 
 void MenuControllerInputComponent::init(json& j)
@@ -37,6 +50,11 @@ void MenuControllerInputComponent::init(json& j)
 
 			int i = MotorCasaPaco::getInstance()->getGUI_Manager()->getRoot()->getChild(name).getPosX();
 			int j = MotorCasaPaco::getInstance()->getGUI_Manager()->getRoot()->getChild(name).getPosY();
+			
+			posX = MotorCasaPaco::getInstance()->getScreenWidth()/2;
+			posY = MotorCasaPaco::getInstance()->getScreenHeight()/2;
+
+			MotorCasaPaco::getInstance()->getGUI_Manager()->injectPosition(posX, posY);
 
 			std::cout << i << " " << j << "\n";
 		}
