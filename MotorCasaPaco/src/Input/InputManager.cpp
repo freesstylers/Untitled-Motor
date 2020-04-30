@@ -279,10 +279,10 @@ void InputManager::setup()
 	for (int i = 0; i < NumControls; i++) {
 		Controller c{ SDL_GameControllerOpen(i), 0, 0, 0, 0, false };
 		controllers.push_back(c);
-		controllers.back().deadZoneLX = GameControllerGetAxisMovement(CONTROLLER_AXIS_LEFTX, i);
-		controllers.back().deadZoneLY = GameControllerGetAxisMovement(CONTROLLER_AXIS_LEFTY, i);
-		controllers.back().deadZoneRX = GameControllerGetAxisMovement(CONTROLLER_AXIS_RIGHTX, i);
-		controllers.back().deadZoneRY = GameControllerGetAxisMovement(CONTROLLER_AXIS_RIGHTY, i);
+		controllers.back().deadZoneLX = 8000;
+		controllers.back().deadZoneLY = 8000;
+		controllers.back().deadZoneRX = 8000;
+		controllers.back().deadZoneRY = 8000;
 		controllers.back().initialised = true;
 	}
 	//Mapping de esquemas de controles?
@@ -411,7 +411,7 @@ float InputManager::GameControllerGetAxisMovement(GameControllerAxis axis, bool 
 	switch ((SDL_GameControllerAxis)axis)
 	{
 	case SDL_CONTROLLER_AXIS_LEFTX:
-		if (x <= c.deadZoneLX + controllerdeadZoneRange && x >= c.deadZoneLX - controllerdeadZoneRange)
+		if (x <= (c.deadZoneLX / axisMax) && x >= -(c.deadZoneLX / axisMax))
 			x = 0;
 		if (accel) {
 			if (x < 0) x = x * x * -1;
@@ -419,7 +419,7 @@ float InputManager::GameControllerGetAxisMovement(GameControllerAxis axis, bool 
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_RIGHTX:
-		if (x <= c.deadZoneRX + controllerdeadZoneRange && x >= c.deadZoneRX - controllerdeadZoneRange)
+		if (x <= (c.deadZoneRX / axisMax) && x >= -(c.deadZoneRX / axisMax))
 			x = 0;
 		if (accel) {
 			if (x < 0) x = x * x * -1;
@@ -427,7 +427,7 @@ float InputManager::GameControllerGetAxisMovement(GameControllerAxis axis, bool 
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_LEFTY:
-		if (x <= c.deadZoneLY + controllerdeadZoneRange && x >= c.deadZoneLY - controllerdeadZoneRange)
+		if (x <= (c.deadZoneLY / axisMax) && x >= -(c.deadZoneLY / axisMax))
 			x = 0;
 		if (accel) {
 			if (x < 0) x = x * x * -1;
@@ -435,7 +435,7 @@ float InputManager::GameControllerGetAxisMovement(GameControllerAxis axis, bool 
 		}
 		break;
 	case SDL_CONTROLLER_AXIS_RIGHTY:
-		if (x <= c.deadZoneRY + controllerdeadZoneRange && x >= c.deadZoneRY - controllerdeadZoneRange)
+		if (x <= (c.deadZoneRY / axisMax) && x >= -(c.deadZoneRY / axisMax))
 			x = 0;
 		if (accel) {
 			if (x < 0) x = x * x * -1;
