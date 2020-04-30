@@ -49,8 +49,6 @@ public:
 	GUI_Element* getRoot();
 	CEGUI::WindowManager* getWinManager();
 	void injectPosition(int x, int y);
-	void injectLeftMouseButtonDown();
-	void injectLeftMouseButtonUp();
 
 private:
 	GUI_Manager(Ogre::RenderWindow* window);

@@ -32,11 +32,11 @@ void MenuControllerInputComponent::update()
 
 	if (MotorCasaPaco::getInstance()->getInputManager()->GameControllerIsButtonDown(GameControllerButton::CONTROLLER_BUTTON_A))
 	{
-		MotorCasaPaco::getInstance()->getGUI_Manager()->injectLeftMouseButtonDown();
+		MotorCasaPaco::getInstance()->getInputManager()->injectLeftMouseButtonDown();
 	}
 	else
 	{
-		MotorCasaPaco::getInstance()->getGUI_Manager()->injectLeftMouseButtonUp();
+		MotorCasaPaco::getInstance()->getInputManager()->injectLeftMouseButtonUp();
 	}
 }
 

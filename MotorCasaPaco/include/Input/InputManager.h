@@ -91,4 +91,7 @@ public:
 	void MouseButtonChange(int button, int change);*/
 
 	MouseWheel getMouseWheel();
+
+	void injectLeftMouseButtonDown();
+	void injectLeftMouseButtonUp();
 };

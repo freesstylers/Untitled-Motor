@@ -224,16 +224,6 @@ void GUI_Manager::injectPosition(int x, int y)
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMousePosition(x, y);
 }
 
-void GUI_Manager::injectLeftMouseButtonDown()
-{
-	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::MouseButton::LeftButton);
-}
-
-void GUI_Manager::injectLeftMouseButtonUp()
-{
-	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::MouseButton::LeftButton);
-}
-
 bool GUI_Manager::setupInstance(Ogre::RenderWindow* window)
 {
 	if (instance == 0)

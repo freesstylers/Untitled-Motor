@@ -483,3 +483,13 @@ bool InputManager::IsKeyDown(Scancode key)
 
 	return state[(SDL_Scancode)key];
 }
+
+void InputManager::injectLeftMouseButtonDown()
+{
+	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonDown(CEGUI::MouseButton::LeftButton);
+}
+
+void InputManager::injectLeftMouseButtonUp()
+{
+	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::MouseButton::LeftButton);
+}
