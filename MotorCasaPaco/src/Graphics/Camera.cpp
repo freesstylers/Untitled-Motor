@@ -151,7 +151,7 @@ void Camera::redefine(json& args)
 }
 
 //Coloca la direccion de la camara, sin girarla sobre su eje x, para que no "vuelque"
-void Camera::lookAt(Ogre::Vector3 point)
+void Camera::lookAt(Vector3 point)
 {
 	cam->lookAt(point);
 }

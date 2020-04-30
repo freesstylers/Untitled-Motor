@@ -23,7 +23,7 @@ void TerrainRotation::update()
 
 	getEntity()->getTransform()->rotateAroundPivot(Vector3(0, 1, 1), marble);
 
-	getEntity()->getTransform()->lookAt(marble->getTransform()->getWorldPosition(), TransformSpace::WORLD, Vector3(0, 1, 0));
+	getEntity()->getTransform()->lookAt(marble->getTransform()->getWorldPosition());
 	//float deltatime = MotorCasaPaco::getInstance()->DeltaTime();
 	//deltatime /= 1000.f;
 	//float x = InputManager::getInstance()->GameControllerGetAxisMovement(CONTROLLER_AXIS_LEFTX, true);

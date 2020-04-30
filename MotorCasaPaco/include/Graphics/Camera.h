@@ -22,7 +22,7 @@ public:
 	void init(json& args) override;
 	void redefine(json& args) override;
 
-	void lookAt(Ogre::Vector3 point);
+	void lookAt(Vector3 point);
 	Vector3 getLookAt();
 	Ogre::Camera* getCam();
 private:
