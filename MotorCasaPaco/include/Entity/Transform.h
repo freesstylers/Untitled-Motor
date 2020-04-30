@@ -50,6 +50,8 @@ public:
 	void rotateAroundPivot(Vector3 rot, Entity* pivot);
 	void rotateAroundPivot(Quaternion rot, Entity* pivot);
 
+	void lookAt(Vector3 dir, TransformSpace relativeTo = TransformSpace::LOCAL, Vector3 localDir = Vector3(0, 0, -1));
+
 	Ogre::SceneNode* getNode();
 
 	void onSetParent(Entity* parent) override;

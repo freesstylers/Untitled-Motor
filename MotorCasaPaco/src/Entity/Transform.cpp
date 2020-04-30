@@ -238,6 +238,11 @@ void Transform::rotateAroundPivot(Quaternion rot, Entity* pivot)
 	rotateAroundPivot(rot, pivot->getTransform()->getNode());
 }
 
+void Transform::lookAt(Vector3 dir, TransformSpace relativeTo, Vector3 localDir)
+{
+	node->lookAt(dir, Ogre::Node::TransformSpace(relativeTo), localDir);
+}
+
 Ogre::SceneNode* Transform::getNode()
 {
 	return node;
