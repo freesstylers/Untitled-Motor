@@ -98,14 +98,6 @@ void RigidBody::onDeactivated()
 	PhysicsManager::getInstance()->getWorld()->removeRigidBody(body);
 }
 
-void RigidBody::OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2)
-{
-	Entity* e1 = static_cast<RigidBody*>(obj1->getUserPointer())->e_;
-	Entity* e2 = static_cast<RigidBody*>(obj2->getUserPointer())->e_;
-	RigidBodyCollisionEvent event(e1, e2);
-	EventManager::getInstance()->EmitEvent(event);
-}
-
 btRigidBody* RigidBody::getRigidBody()
 {
 	return body;

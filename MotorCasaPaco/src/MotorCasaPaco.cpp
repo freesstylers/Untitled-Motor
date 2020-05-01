@@ -14,6 +14,8 @@
 #include <OgreFrameListener.h>
 #include <stdexcept>
 #include <btBulletDynamicsCommon.h>
+#include <btBulletCollisionCommon.h>
+
 #include <OgreViewport.h>
 
 #include "Resources/ResourceManager.h"
@@ -71,10 +73,22 @@ bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int
 	//Chamar a funcion de colision do componente rigidbody
 	RigidBody* rb1;
 	RigidBody* rb2;
-	rb1 = static_cast<RigidBody*>(obj1->getCollisionObject()->getUserPointer());
-	rb1->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
-	rb2 = static_cast<RigidBody*>(obj2->getCollisionObject()->getUserPointer());
-	rb2->OnCollisionEnter(cp, obj1->getCollisionObject(), obj2->getCollisionObject());
+	void* point1 = obj1->getCollisionObject()->getUserPointer();
+	void* point2 = obj1->getCollisionObject()->getUserPointer();
+
+	if (point1 == nullptr || point2 == nullptr) return false;
+
+	rb1 = static_cast<RigidBody*>(point1);
+	if (rb1->getEntity() == nullptr)
+		return false;
+
+	rb2 = static_cast<RigidBody*>(point2);
+	if (rb2->getEntity() == nullptr)
+		return false;
+
+	rb1->getEntity()->OnCollision(rb2->getEntity());
+	rb2->getEntity()->OnCollision(rb1->getEntity());
+
 	return false;
 }
 

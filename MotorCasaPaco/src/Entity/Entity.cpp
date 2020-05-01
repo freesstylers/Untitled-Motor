@@ -35,6 +35,14 @@ void Entity::lateUpdate()
 	}
 }
 
+void Entity::OnCollision(Entity* other)
+{int length = components_.size();
+	for (int i = 0; i < length; i++)
+	{
+		if (components_[i]->isActive()) components_[i]->OnCollision(other);
+	}
+}
+
 Entity::~Entity()
 {
 	for (int i = 0; i < components_.size(); i++)

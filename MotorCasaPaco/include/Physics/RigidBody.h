@@ -29,7 +29,6 @@ public:
 	void onActivated() override;
 	void onDeactivated() override;
 
-	virtual void OnCollisionEnter(btManifoldPoint& cp, const btCollisionObject* obj1, const btCollisionObject* obj2);
 	btRigidBody* getRigidBody();
 	void applyForce(ForceType type, Vector3 force, Vector3 relPos = Vector3(0,0,0));
 	void setGravity(Vector3 grav);

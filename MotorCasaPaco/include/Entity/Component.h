@@ -29,6 +29,8 @@ public:
 	virtual void lateUpdate();
 	virtual void render();
 
+	virtual void OnCollision(Entity* other);
+
 	/* DO NOT CALL MANUALLY, use 'setEnabled()' instead */
 	void setActiveOnHierarchy(bool active);
 	void setEnabled(bool enabled);

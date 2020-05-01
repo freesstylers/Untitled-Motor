@@ -43,6 +43,8 @@ void Component::lateUpdate() { }
 
 void Component::render() { }
 
+void Component::OnCollision(Entity* other){ }
+
 void Component::setEnabled(bool enabled) {
 	if (startWasCalled_ && enabled == enabled_)
 		return;

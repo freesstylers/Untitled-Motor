@@ -26,6 +26,8 @@ public:
 	void update();
 	void lateUpdate();
 
+	void OnCollision(Entity* other);
+
 	virtual ~Entity();
 
 	template <typename T>
