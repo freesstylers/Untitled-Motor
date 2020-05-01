@@ -72,7 +72,10 @@
     <ClCompile Include="src\ChangeGraphicSceneComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MenuControllerInputComponent.cpp">
+    <ClCompile Include="src\MainMenuControllerInputComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OptionsMenuControllerInputComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -131,7 +134,10 @@
     <ClInclude Include="src\ChangeGraphicSceneComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\MenuControllerInputComponent.h">
+    <ClInclude Include="src\MainMenuControllerInputComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OptionsMenuControllerInputComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

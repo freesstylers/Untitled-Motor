@@ -85,6 +85,30 @@
 					"resolution" : "GraphicOptions/Text_Selector_4",
 					"screenProportion" : "GraphicOptions/Text_Selector_3",
 					"vsync" : "GraphicOptions/Text_Selector_5"
+				},
+				{
+					"type": "OptionsMenuControllerInputComponent",
+					"DownButtons" :
+					[
+					 "GraphicOptions/Apply",
+					 "GraphicOptions/Revert",
+					 "GraphicOptions/Back"
+					],
+					"TopButtons" :
+					[
+					 "GraphicOptions/LeftArrow_5",
+					 "GraphicOptions/RightArrow_5",
+					 "GraphicOptions/LeftArrow_4",
+					 "GraphicOptions/RightArrow_4",
+					 "GraphicOptions/LeftArrow_3",
+					 "GraphicOptions/RightArrow_3",
+					 "GraphicOptions/LeftArrow_2",
+					 "GraphicOptions/RightArrow_2",
+					 "GraphicOptions/LeftArrow_1",
+					 "GraphicOptions/RightArrow_1"
+					],
+					"extraButton": "GraphicOptions/AdvancedOptions",
+					"delay" : 150
 				}
 			]
 		}

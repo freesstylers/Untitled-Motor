@@ -27,7 +27,8 @@
 #include "ChangeGammaComponent.h"
 #include "ChangeGraphicSceneComponent.h"
 
-#include "MenuControllerInputComponent.h"
+#include "MainMenuControllerInputComponent.h"
+#include "OptionsMenuControllerInputComponent.h"
 
 class SimpleMovementFactory : public BaseFactory
 {
@@ -172,12 +173,21 @@ public:
 	};
 };
 
-class MenuControllerInputComponentFactory : public BaseFactory
+class MainMenuControllerInputComponentFactory : public BaseFactory
 {
 public:
 	Component* createComponent(json& args) override
 	{
-		return new MenuControllerInputComponent(args);
+		return new MainMenuControllerInputComponent(args);
+	};
+};
+
+class OptionsMenuControllerInputComponentFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new OptionsMenuControllerInputComponent(args);
 	};
 };
 
@@ -228,7 +238,8 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	JsonFactoryParser::getInstance()->addFactory("ChangeGammaComponent", new ChangeGammaComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("ChangeGraphicSceneComponent", new ChangeGraphicSceneComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("TestComponent", new TestComponentFactory());
-	JsonFactoryParser::getInstance()->addFactory("MenuControllerInputComponent", new MenuControllerInputComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("MainMenuControllerInputComponent", new MainMenuControllerInputComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("OptionsMenuControllerInputComponent", new OptionsMenuControllerInputComponentFactory());
 
 	MotorCasaPaco::getInstance()->getGUI_Manager()->getInstance()->setupDefaultResources();
 	MotorCasaPaco::getInstance()->getGUI_Manager()->loadScheme("A_Toda_Pastilla.scheme");

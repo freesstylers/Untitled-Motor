@@ -177,7 +177,7 @@
 					"buttonName" : "MainMenu/Close"
 				},
 				{
-					"type": "MenuControllerInputComponent",
+					"type": "MainMenuControllerInputComponent",
 					"buttons" :
 					[
 					 "MainMenu/Settings",
@@ -185,7 +185,8 @@
 					 "MainMenu/Play",
 					 "MainMenu/RightArrow",
 					 "MainMenu/Close"
-					]
+					],
+					"delay" : 150
 				}
 			]
 		},

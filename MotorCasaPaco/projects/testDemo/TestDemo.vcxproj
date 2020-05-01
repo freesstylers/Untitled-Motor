@@ -159,9 +159,10 @@
     <ClCompile Include="src\ForcesTest.cpp" />
     <ClCompile Include="src\FormatResolutionChangeComponent.cpp" />
     <ClCompile Include="src\FSAAChangeComponent.cpp" />
+    <ClCompile Include="src\OptionsMenuControllerInputComponent.cpp" />
+    <ClCompile Include="src\MainMenuControllerInputComponent.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\ChangeSceneButtonComponent.cpp" />
-    <ClCompile Include="src\MenuControllerInputComponent.cpp" />
     <ClCompile Include="src\RevertAdvancedGraphicChangesComponent.cpp" />
     <ClCompile Include="src\RevertGraphicChangesComponent.cpp" />
     <ClCompile Include="src\ShadowsChangeComponent.cpp" />
@@ -186,9 +187,10 @@
     <ClInclude Include="src\ForcesTest.h" />
     <ClInclude Include="src\FormatResolutionChangeComponent.h" />
     <ClInclude Include="src\FSAAChangeComponent.h" />
+    <ClInclude Include="src\OptionsMenuControllerInputComponent.h" />
+    <ClInclude Include="src\MainMenuControllerInputComponent.h" />
     <ClInclude Include="src\Menu.h" />
     <ClInclude Include="src\ChangeSceneButtonComponent.h" />
-    <ClInclude Include="src\MenuControllerInputComponent.h" />
     <ClInclude Include="src\RevertAdvancedGraphicChangesComponent.h" />
     <ClInclude Include="src\RevertGraphicChangesComponent.h" />
     <ClInclude Include="src\ShadowsChangeComponent.h" />
