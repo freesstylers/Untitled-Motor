@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="GWEN/StaticImage" name="Background" >
+            <Property name="Area" value="{{0.35,0},{0.2,0},{0.71,0},{0.75,0}}" />
+            <Property name="Image" value="GWEN/Input.Button.Hovered.Middle.Middle" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="BackgroundEnabled" value="false" />
+            <Property name="RiseOnClickEnabled" value="false" />
+        </Window>
+        <Window type="GWEN/Button" name="Return" >
+            <Property name="Area" value="{{0.375,0},{0.25,0},{0.686719,0},{0.319444,0}}" />
+            <Property name="Text" value="VOLVER" />
+        </Window>
+        <Window type="GWEN/Button" name="Settings" >
+            <Property name="Area" value="{{0.375,0},{0.38,0},{0.685156,0},{0.449444,0}}" />
+            <Property name="Text" value="OPCIONES" />
+        </Window>
+        <Window type="GWEN/Button" name="MainMenu" >
+            <Property name="Area" value="{{0.375,0},{0.51,0},{0.684375,0},{0.579444,0}}" />
+            <Property name="Text" value="VOLVER AL MENÚ" />
+        </Window>
+        <Window type="GWEN/Button" name="Exit" >
+            <Property name="Area" value="{{0.375,0},{0.64,0},{0.689062,0},{0.709444,0}}" />
+            <Property name="Text" value="SALIR DEL JUEGO" />
+        </Window>
+    </Window>
+</GUILayout>
