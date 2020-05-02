@@ -92,8 +92,9 @@ void AudioManager::clean()
 
 AudioManager::~AudioManager()
 {
-    //channelGroup->release();
-    //system->release();
+    channelGroup->release();
+    system->close();
+    system->release();
  
 }
 
