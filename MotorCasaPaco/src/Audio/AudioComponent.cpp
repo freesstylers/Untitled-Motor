@@ -51,7 +51,7 @@ void AudioComponent::init(json& j)
 	AudioManager::getInstance()->updateSound(pos, vel, numObj, numObj);
 
 
-	AudioManager::getInstance()->playSound("assets/sound/rock.wav",numObj);
+	AudioManager::getInstance()->playMusic("assets/sound/rock.wav",numObj);
 
 	if (!j["audio"].is_null()) {
 		j["audio"] = audioRoute;

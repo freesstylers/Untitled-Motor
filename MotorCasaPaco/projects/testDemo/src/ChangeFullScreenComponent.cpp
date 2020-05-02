@@ -26,7 +26,7 @@ bool ChangeFullScreenComponent::function(const CEGUI::EventArgs& e)
 		GUI_Manager::getInstance()->changeText(textToChange, "Si");
 	}
 
-	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }

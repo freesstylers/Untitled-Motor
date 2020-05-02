@@ -23,7 +23,7 @@ bool ChangeGraphicSceneComponent::function(const CEGUI::EventArgs& e)
 
 	MotorCasaPaco::getInstance()->changeScene(sceneToLoad);
 	
-	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }

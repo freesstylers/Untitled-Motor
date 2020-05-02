@@ -26,7 +26,7 @@ bool FSAAChangeComponent::functionMore(const CEGUI::EventArgs& e)
 
 	MotorCasaPaco::getInstance()->setFSAA(values[currenPos]);
 	GUI_Manager::getInstance()->changeText(textToChange, "X " + values[currenPos]);
-	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }
@@ -44,7 +44,7 @@ bool FSAAChangeComponent::functionLess(const CEGUI::EventArgs& e)
 
 	MotorCasaPaco::getInstance()->setFSAA(values[currenPos]);
 	GUI_Manager::getInstance()->changeText(textToChange, "X " + values[currenPos]);
-	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }
