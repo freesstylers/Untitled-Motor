@@ -192,3 +192,7 @@ bool Scene::deleteEntity(const std::string name) {
 	
 	return false;
 }
+
+string Scene::getName() const {
+	return name;
+}
