@@ -19,7 +19,7 @@ public:
 	Entity* createEntity(json& j);
 	Entity* addEntity(std::string name, std::string tag = "Untagged", bool callStart = true);
 	bool deleteEntity(const std::string name);
-	string getName() const;
+	std::string getName() const;
 
 	void start();
 	void preupdate();
