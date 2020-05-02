@@ -27,8 +27,8 @@
 #include "ChangeGammaComponent.h"
 #include "ChangeGraphicSceneComponent.h"
 
-#include "MainMenuControllerInputComponent.h"
-#include "OptionsMenuControllerInputComponent.h"
+#include "MainMenuInputComponent.h"
+#include "OptionsMenuInputComponent.h"
 
 class SimpleMovementFactory : public BaseFactory
 {
@@ -173,21 +173,21 @@ public:
 	};
 };
 
-class MainMenuControllerInputComponentFactory : public BaseFactory
+class MainMenuInputComponentFactory : public BaseFactory
 {
 public:
 	Component* createComponent(json& args) override
 	{
-		return new MainMenuControllerInputComponent(args);
+		return new MainMenuInputComponent(args);
 	};
 };
 
-class OptionsMenuControllerInputComponentFactory : public BaseFactory
+class OptionsMenuInputComponentFactory : public BaseFactory
 {
 public:
 	Component* createComponent(json& args) override
 	{
-		return new OptionsMenuControllerInputComponent(args);
+		return new OptionsMenuInputComponent(args);
 	};
 };
 
@@ -238,8 +238,8 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	JsonFactoryParser::getInstance()->addFactory("ChangeGammaComponent", new ChangeGammaComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("ChangeGraphicSceneComponent", new ChangeGraphicSceneComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("TestComponent", new TestComponentFactory());
-	JsonFactoryParser::getInstance()->addFactory("MainMenuControllerInputComponent", new MainMenuControllerInputComponentFactory());
-	JsonFactoryParser::getInstance()->addFactory("OptionsMenuControllerInputComponent", new OptionsMenuControllerInputComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("MainMenuInputComponent", new MainMenuInputComponentFactory());
+	JsonFactoryParser::getInstance()->addFactory("OptionsMenuInputComponent", new OptionsMenuInputComponentFactory());
 
 	MotorCasaPaco::getInstance()->getGUI_Manager()->getInstance()->setupDefaultResources();
 	MotorCasaPaco::getInstance()->getGUI_Manager()->loadScheme("A_Toda_Pastilla.scheme");

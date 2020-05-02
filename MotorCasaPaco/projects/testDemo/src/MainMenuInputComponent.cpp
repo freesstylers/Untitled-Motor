@@ -1,34 +1,34 @@
-#include "MainMenuControllerInputComponent.h"
+#include "MainMenuInputComponent.h"
 #include "MotorCasaPaco.h"
 #include "Audio/AudioManager.h"
 #include "Input/InputManager.h"
 
-MainMenuControllerInputComponent::MainMenuControllerInputComponent(json& args): Component(args)
+MainMenuInputComponent::MainMenuInputComponent(json& args): Component(args)
 {
 
 }
 
-MainMenuControllerInputComponent::~MainMenuControllerInputComponent()
+MainMenuInputComponent::~MainMenuInputComponent()
 {
 	//EventManager::getInstance()->UnregisterListenerForAll(this);
 	//Component::~Component();
 }
 
-bool MainMenuControllerInputComponent::function(const CEGUI::EventArgs& e)
+bool MainMenuInputComponent::function(const CEGUI::EventArgs& e)
 {
 	return true;
 }
 
-bool MainMenuControllerInputComponent::ReceiveEvent(Event& event)
+bool MainMenuInputComponent::ReceiveEvent(Event& event)
 {
 	return false;
 }
 
-void MainMenuControllerInputComponent::update()
+void MainMenuInputComponent::update()
 {
 	if (MotorCasaPaco::getInstance()->getTimeDifference(currentTime) > delay)
 	{
-		if (InputManager::getInstance()->GameControllerGetAxisMovement(GameControllerAxis::CONTROLLER_AXIS_LEFTX, true) < -0.7 || InputManager::getInstance()->GameControllerIsButtonDown(GameControllerButton::CONTROLLER_BUTTON_DPAD_LEFT))
+		if (InputManager::getInstance()->GameControllerGetAxisMovement(GameControllerAxis::CONTROLLER_AXIS_LEFTX, true) < -0.7 || InputManager::getInstance()->GameControllerIsButtonDown(GameControllerButton::CONTROLLER_BUTTON_DPAD_LEFT) || InputManager::getInstance()->IsKeyDown(Scancode::SCANCODE_A) || InputManager::getInstance()->IsKeyDown(Scancode::SCANCODE_LEFT))
 		{
 			if (currenPos > 0)
 				currenPos--;
@@ -38,7 +38,7 @@ void MainMenuControllerInputComponent::update()
 			MotorCasaPaco::getInstance()->getGUI_Manager()->injectPosition(positionsX[currenPos], positionsY[currenPos]);
 			currentTime = MotorCasaPaco::getInstance()->getTime();
 		}
-		else if (InputManager::getInstance()->GameControllerGetAxisMovement(GameControllerAxis::CONTROLLER_AXIS_LEFTX, true) > 0.7 || InputManager::getInstance()->GameControllerIsButtonDown(GameControllerButton::CONTROLLER_BUTTON_DPAD_RIGHT))
+		else if (InputManager::getInstance()->GameControllerGetAxisMovement(GameControllerAxis::CONTROLLER_AXIS_LEFTX, true) > 0.7 || InputManager::getInstance()->GameControllerIsButtonDown(GameControllerButton::CONTROLLER_BUTTON_DPAD_RIGHT) || InputManager::getInstance()->IsKeyDown(Scancode::SCANCODE_D) || InputManager::getInstance()->IsKeyDown(Scancode::SCANCODE_RIGHT))
 		{
 			if (currenPos < (tam - 1))
 				currenPos++;
@@ -51,7 +51,7 @@ void MainMenuControllerInputComponent::update()
 	}
 
 		//Boton A
-		if (MotorCasaPaco::getInstance()->getInputManager()->GameControllerIsButtonDown(GameControllerButton::CONTROLLER_BUTTON_A))
+		if (MotorCasaPaco::getInstance()->getInputManager()->GameControllerIsButtonDown(GameControllerButton::CONTROLLER_BUTTON_A) || InputManager::getInstance()->IsKeyDown(Scancode::SCANCODE_SPACE))
 		{
 			MotorCasaPaco::getInstance()->getInputManager()->injectLeftMouseButtonDown();
 		}
@@ -62,7 +62,7 @@ void MainMenuControllerInputComponent::update()
 	//}
 }
 
-void MainMenuControllerInputComponent::init(json& j)
+void MainMenuInputComponent::init(json& j)
 {
 	if (!j["buttons"].is_null() && j["buttons"].is_array() && !j["delay"].is_null())
 	{

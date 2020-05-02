@@ -1,15 +1,15 @@
 #pragma once
-#ifndef OPTIONSMENUCONTROLLERINPUTCOMPONENT_H
-#define OPTIONSMENUCONTROLLERINPUTCOMPONENT_H
+#ifndef OPTIONSMENUINPUTCOMPONENT_H
+#define OPTIONSMENUINPUTCOMPONENT_H
 #include "Entity/Component.h"
 #include "GUI/GUI_Manager.h"
 
-class OptionsMenuControllerInputComponent : public Component
+class OptionsMenuInputComponent : public Component
 {
 
 public:
-	OptionsMenuControllerInputComponent(json& args);
-	~OptionsMenuControllerInputComponent();
+	OptionsMenuInputComponent(json& args);
+	~OptionsMenuInputComponent();
 	void init(json& j) override;
 	bool function(const CEGUI::EventArgs& e);
 	bool ReceiveEvent(Event& event) override;

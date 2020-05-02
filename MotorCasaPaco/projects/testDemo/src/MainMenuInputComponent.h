@@ -1,15 +1,15 @@
 #pragma once
-#ifndef MAINMENUCONTROLLERINPUTCOMPONENT_H
-#define MAINMENUCONTROLLERINPUTCOMPONENT_H
+#ifndef MAINMENUINPUTCOMPONENT_H
+#define MAINMENUINPUTCOMPONENT_H
 #include "Entity/Component.h"
 #include "GUI/GUI_Manager.h"
 
-class MainMenuControllerInputComponent : public Component
+class MainMenuInputComponent : public Component
 {
 
 public:
-	MainMenuControllerInputComponent(json& args);
-	~MainMenuControllerInputComponent();
+	MainMenuInputComponent(json& args);
+	~MainMenuInputComponent();
 	void init(json& j) override;
 	bool function(const CEGUI::EventArgs& e);
 	bool ReceiveEvent(Event& event) override;

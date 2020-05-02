@@ -87,7 +87,7 @@
 					"vsync" : "GraphicOptions/Text_Selector_5"
 				},
 				{
-					"type": "OptionsMenuControllerInputComponent",
+					"type": "OptionsMenuInputComponent",
 					"DownButtons" :
 					[
 					 "GraphicOptions/Apply",
