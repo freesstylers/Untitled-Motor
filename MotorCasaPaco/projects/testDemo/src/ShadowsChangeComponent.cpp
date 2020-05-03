@@ -27,7 +27,7 @@ bool ShadowsChangeComponent::functionMore(const CEGUI::EventArgs& e)
 	MotorCasaPaco::getInstance()->setShadows(values[currenPos]);
 	GUI_Manager::getInstance()->changeText(textToChange, values[currenPos]);
 
-	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }
@@ -46,7 +46,7 @@ bool ShadowsChangeComponent::functionLess(const CEGUI::EventArgs& e)
 	MotorCasaPaco::getInstance()->setShadows(values[currenPos]);
 	GUI_Manager::getInstance()->changeText(textToChange, values[currenPos]);
 
-	AudioManager::getInstance()->playSound("assets/sound/buttonSound.mp3", 0);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0);
 
 	return true;
 }

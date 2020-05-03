@@ -1,27 +1,27 @@
 #pragma once
-#ifndef MENUCONTROLLERINPUTCOMPONENT_H
-#define MENUCONTROLLERINPUTCOMPONENT_H
+#ifndef MAINMENUINPUTCOMPONENT_H
+#define MAINMENUINPUTCOMPONENT_H
 #include "Entity/Component.h"
 #include "GUI/GUI_Manager.h"
 
-class MenuControllerInputComponent : public Component
+class MainMenuInputComponent : public Component
 {
 
 public:
-	MenuControllerInputComponent(json& args);
-	~MenuControllerInputComponent();
+	MainMenuInputComponent(json& args);
+	~MainMenuInputComponent();
 	void init(json& j) override;
 	bool function(const CEGUI::EventArgs& e);
 	bool ReceiveEvent(Event& event) override;
 	void update();
 private:
-	int posX = 0;
-	int posY = 0;
-
+	
 	std::vector<float> positionsX;
 	std::vector<float> positionsY;
 	int tam;
 	int currenPos;
+	float delay;
+	float currentTime;
 };
 
 #endif
