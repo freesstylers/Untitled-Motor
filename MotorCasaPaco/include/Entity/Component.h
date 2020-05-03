@@ -14,6 +14,7 @@ class Component: public EventListener
 {
 public:
 	Component(json& args);
+	Component(std::string tag);
 	virtual ~Component();
 
 	void setEntity(Entity* e);

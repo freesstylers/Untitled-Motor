@@ -13,6 +13,10 @@ Component::Component(json& args) {
 		enabled_ = false;
 }
 
+Component::Component(std::string tag) {
+	tag_ = tag;
+}
+
 Component::~Component() {
 	//e_ = nullptr;
 }
