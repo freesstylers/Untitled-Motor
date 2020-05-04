@@ -49,18 +49,26 @@ void Scene::setupScene(json& j) {
 				entitiesWithoutParent_.push_back(entities[ent["name"]]);
 		}
 	}
-	
+
 	if (!j["UI"].is_null() && j["UI"].is_array()) {
 		std::vector<json> e = j["UI"];
 
 		for (json UI_Elem : e) {
-			if (UI_Elem["type"] == "layout")
-				MotorCasaPaco::getInstance()->getGUI_Manager()->loadLayout(UI_Elem["name"], UI_Elem["visible"]);
+			if (!UI_Elem["type"].is_null() && !UI_Elem["name"].is_null()) {
 
-			else if (UI_Elem["type"] == "entity")
-			{
-				entities[UI_Elem["name"]] = createEntity(UI_Elem);
-				entitiesWithoutParent_.push_back(entities[UI_Elem["name"]]);
+				bool visible = true;
+				if (!UI_Elem["visible"].is_null())
+					visible = UI_Elem["visible"];
+
+
+				if (UI_Elem["type"] == "layout")
+					MotorCasaPaco::getInstance()->getGUI_Manager()->loadLayout(UI_Elem["name"], visible);
+
+				else if (UI_Elem["type"] == "entity")
+				{
+					entities[UI_Elem["name"]] = createEntity(UI_Elem);
+					entitiesWithoutParent_.push_back(entities[UI_Elem["name"]]);
+				}
 			}
 		}
 	}
@@ -68,7 +76,7 @@ void Scene::setupScene(json& j) {
 
 void Scene::recursivelyActivateEntities(Entity* ent) {
 	ent->setEnabled(ent->isEnabled());
-	
+
 	auto children = ent->getChildren();
 
 	std::map<std::string, Entity*>::iterator it = children.begin();
@@ -92,7 +100,7 @@ void Scene::start() {
 		recursivelyActivateEntities(e);
 	entitiesWithoutParent_.clear();
 
-	addedEntitiesCounter=0;
+	addedEntitiesCounter = 0;
 }
 
 void Scene::preupdate()
@@ -125,7 +133,7 @@ void Scene::lateUpdate()
 
 Entity* Scene::createEntity(json& j)
 {
-	
+
 	std::string tag = "Untagged";
 	if (!j["tag"].is_null()) {
 		std::string aux = j["tag"];
@@ -186,10 +194,10 @@ bool Scene::deleteEntity(const std::string name) {
 	if (it != entities.end()) {
 		delete it->second;
 		entities.erase(it);
-		
+
 		return true;
 	}
-	
+
 	return false;
 }
 
