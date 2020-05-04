@@ -56,9 +56,7 @@ void GUI_Manager::loadLayout(std::string filename, bool visible)
 	{
 		CEGUI::Window* layout = winManager->getSingleton().loadLayoutFromFile(filename); //Habria que a�adir el archivo del que proceden como opcion, en caso de usar mas de uno?
 		root->addChild(layout);
-
 		layouts.push_back(layout);
-		layouts[0]->setVisible(visible);
 	}
 	catch (std::exception e)
 	{
