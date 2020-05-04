@@ -45,10 +45,19 @@ public:
 	void detachObject(std::string& name);
 	void detachNode(std::string& name);
 
-	void rotateAroundPivot(Vector3 rot, Ogre::SceneNode* pivot);
-	void rotateAroundPivot(Quaternion rot, Ogre::SceneNode* pivot);
-	void rotateAroundPivot(Vector3 rot, Entity* pivot);
-	void rotateAroundPivot(Quaternion rot, Entity* pivot);
+	void rotateAroundPivot(Vector3 rot, Ogre::SceneNode* pivot, TransformSpace relativeTo = TransformSpace::PARENT);
+	void rotateAroundPivot(Quaternion rot, Ogre::SceneNode* pivot, TransformSpace relativeTo = TransformSpace::PARENT);
+	void rotateAroundPivot(Vector3 rot, Vector3 pivot, Vector3 pivotOrientation = Vector3(0, 0, 0), TransformSpace relativeTo = TransformSpace::PARENT);
+	void rotateAroundPivot(Quaternion rot, Vector3 pivot, Quaternion pivotOrientation = Quaternion(0, 0, 0, 0), TransformSpace relativeTo = TransformSpace::PARENT);
+	void rotateAroundPivot(Vector3 rot, Entity* pivot, TransformSpace relativeTo = TransformSpace::PARENT);
+	void rotateAroundPivot(Quaternion rot, Entity* pivot, TransformSpace relativeTo = TransformSpace::PARENT);
+
+	void setRotationAroundPivot(Vector3 rot, Ogre::SceneNode* pivot, TransformSpace relativeTo = TransformSpace::PARENT);
+	void setRotationAroundPivot(Quaternion rot, Ogre::SceneNode* pivot, TransformSpace relativeTo = TransformSpace::PARENT);
+	void setRotationAroundPivot(Vector3 rot, Vector3 pivot, Vector3 pivotOrientation = Vector3(0, 0, 0), TransformSpace relativeTo = TransformSpace::PARENT);
+	void setRotationAroundPivot(Quaternion rot, Vector3 pivot, Quaternion pivotOrientation = Quaternion(0, 0, 0, 0), TransformSpace relativeTo = TransformSpace::PARENT);
+	void setRotationAroundPivot(Vector3 rot, Entity* pivot, TransformSpace relativeTo = TransformSpace::PARENT);
+	void setRotationAroundPivot(Quaternion rot, Entity* pivot, TransformSpace relativeTo = TransformSpace::PARENT);
 
 	void lookAt(Vector3 dir, Vector3 localDir = Vector3(0, 1, 0), TransformSpace relativeTo = TransformSpace::WORLD);
 
