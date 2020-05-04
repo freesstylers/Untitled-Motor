@@ -27,7 +27,7 @@ public:
 	static void clean();
 	void clear();
 	void createRoot();
-	void loadLayout(std::string filename);
+	void loadLayout(std::string filename, bool visible);
 	void loadScheme(std::string filename);
 	CEGUI::System& getSystem();
 	void update(float deltaTime);
@@ -49,6 +49,7 @@ public:
 	GUI_Element* getRoot();
 	CEGUI::WindowManager* getWinManager();
 	void injectPosition(int x, int y);
+	void setLayoutVisible(int layout, bool visible);
 
 private:
 	GUI_Manager(Ogre::RenderWindow* window);
@@ -57,5 +58,6 @@ private:
 	CEGUI::OgreRenderer* renderer;
 	GUI_Element* root;
 	CEGUI::WindowManager* winManager;
+	std::vector<CEGUI::Window*> layouts;
 };
 

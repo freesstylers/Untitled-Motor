@@ -29,7 +29,8 @@
 	[
 		{
 			"type" : "layout", 
-			"name" : "GraphicOptionsMenuPastilla.layout"
+			"name" : "GraphicOptionsMenuPastilla.layout",
+			"visible" : true
 		},
 		{
 			"type" : "entity",

@@ -55,7 +55,7 @@ void Scene::setupScene(json& j) {
 
 		for (json UI_Elem : e) {
 			if (UI_Elem["type"] == "layout")
-				MotorCasaPaco::getInstance()->getGUI_Manager()->loadLayout(UI_Elem["name"]);
+				MotorCasaPaco::getInstance()->getGUI_Manager()->loadLayout(UI_Elem["name"], UI_Elem["visible"]);
 
 			else if (UI_Elem["type"] == "entity")
 			{
