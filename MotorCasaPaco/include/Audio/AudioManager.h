@@ -54,7 +54,7 @@ private:
 	Vector3 listenerVelocity, listenerUp, listenerForward, listenerPos;
 	bool activo[32];
 	FMOD::ChannelGroup* channelGroup;
-	FMOD::Channel* channels[];
+	FMOD::Channel* channels[32];
 
 	static AudioManager* instance;
 
