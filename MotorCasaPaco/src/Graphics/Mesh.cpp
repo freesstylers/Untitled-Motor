@@ -19,7 +19,7 @@ void Mesh::init(json& args)
 	{
 		std::string aux = args["material"];
 		materialName = aux;
-		ogreEnt->setMaterialName(args["material"]);
+		ogreEnt->setMaterialName(args["material"], "Materials");
 	}
 
 	if (!args["castShadow"].is_null())
