@@ -21,6 +21,8 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 	setupResources();
 
 	createRoot();
+
+	setupDefaultResources();
 	//Callbacks?
 }
 

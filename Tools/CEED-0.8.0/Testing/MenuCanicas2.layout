@@ -13,23 +13,23 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Logo" >
-            <Property name="Area" value="{{0,34},{0,60},{1,-1016},{1,-488}}" />
+            <Property name="Area" value="{{0.0265625,0},{0.0833333,0},{0.20625,0},{0.322222,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Logo" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="true" />
             <Property name="BackgroundEnabled" value="true" />
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
-        <Window type="GWEN/Button" name="Nivel1" >
-            <Property name="Area" value="{{0,906},{0,98},{0,1214},{0,168}}" />
+        <Window type="GWEN/Button" name="LevelSelect" >
+            <Property name="Area" value="{{0.707812,0},{0.136111,0},{0.948437,0},{0.233333,0}}" />
             <Property name="Text" value="ELEGIR NIVEL" />
         </Window>
         <Window type="GWEN/Button" name="Exit" >
-            <Property name="Area" value="{{0,906},{0,514},{0,1210},{0,576}}" />
+            <Property name="Area" value="{{0.707812,0},{0.713889,0},{0.945313,0},{0.8,0}}" />
             <Property name="Text" value="SALIR" />
         </Window>
         <Window type="GWEN/Button" name="Settings" >
-            <Property name="Area" value="{{0.700781,10},{0.873611,-324},{0.888281,74},{0.968056,-324}}" />
+            <Property name="Area" value="{{0.708593,0},{0.423611,0},{0.946093,0},{0.518055,0}}" />
             <Property name="Text" value="OPCIONES" />
         </Window>
     </Window>

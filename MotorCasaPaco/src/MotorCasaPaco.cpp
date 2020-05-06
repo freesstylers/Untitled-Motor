@@ -241,9 +241,23 @@ bool MotorCasaPaco::checkConfig()
 
 void MotorCasaPaco::extraConfig(json& j)
 {
+	if (!j["FullScreen"].is_null())
+	{
+		if (j["FullScreen"] == "Si")
+		{
+
+			fullScreen = true;
+		}
+		else if (j["FullScreen"] == "No")
+		{
+
+			fullScreen = false;
+		}
+	}
+
 	if (!j["Shadows"].is_null())
 	{
-		if (j["Shadows"] == "No")
+		/*if (j["Shadows"] == "No")
 		{
 			sm->setShadowTechnique(Ogre::SHADOWTYPE_NONE);
 		}
@@ -264,7 +278,7 @@ void MotorCasaPaco::extraConfig(json& j)
 			{
 				sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 			}
-		}
+		}*/
 		
 		std::string interm = j["Shadows"];
 		shadows = interm;
@@ -336,6 +350,25 @@ void MotorCasaPaco::setupRoot()
 void MotorCasaPaco::setup()
 {
 	MotorCasaPaco::getInstance()->getRoot()->initialise(false);
+
+	json j;
+	std::ifstream i("config.cfg");
+
+	if (i.is_open())
+	{
+		i >> j;
+		i.close();
+	}
+	else
+	{
+		std::cout << "File not found: config.cfg\n";
+	}
+
+	BackupExtraConfig = j;
+	ExtraConfig = j;
+
+	extraConfig(j);
+
 	setupWindow(appName);
 
 	try { ResourceManager::getInstance()->setup(); }
@@ -358,27 +391,14 @@ void MotorCasaPaco::setup()
 
 	sm = MotorCasaPaco::getInstance()->getRoot()->createSceneManager();
 
-	json j;
-	std::ifstream i("config.cfg");
-
-	if (i.is_open())
-	{
-		i >> j;
-		i.close();
-	}
-	else
-	{
-		std::cout << "File not found: config.cfg\n";
-	}
-
-	BackupExtraConfig = j;
-	ExtraConfig = j;
-
-	extraConfig(j);
-
 	ResourceManager::getInstance()->addSceneManager(sm);
 
 	MotorCasaPaco::getInstance()->getRoot()->addFrameListener(frameListener_);
+
+	if (fullScreen)
+		setFullScreenOn();
+	else
+		setFullScreenOff();
 }
 
 void MotorCasaPaco::shutdown()
@@ -591,7 +611,7 @@ void MotorCasaPaco::writeGraphicOptions()
 	outputFile << "Colour Depth=32\n"; //Unica opcion
 	outputFile << "Display Frequency=N/A\n"; //Unica opcion
 	outputFile << "FSAA=" << CurrentGraphicsConfiguration["FSAA"].currentValue << "\n"; //El 0 es opcion, pero aun no esta hecha
-	outputFile << "Full Screen=" << CurrentGraphicsConfiguration["Full Screen"].currentValue << "\n"; //El 0 es opcion, pero aun no esta hecha
+	outputFile << "Full Screen=No\n"; //No le gusta otra opcion, asi que se hace a traves de config.cfg
 	outputFile << "RTT Preferred Mode=FBO\n"; //Unica opcion
 	outputFile << "VSync=" << CurrentGraphicsConfiguration["VSync"].currentValue << "\n";
 	outputFile << "VSync Interval=1\n"; //Esto que hace xd
@@ -608,6 +628,10 @@ json MotorCasaPaco::writeExtraOptions()
 	outputFile.open("config.cfg");
 
 	outputFile << "{\n";
+	if (fullScreen)
+		outputFile << "\"FullScreen\" : \"" << "Si" << "\",\n";
+	else
+		outputFile << "\"FullScreen\" : \"" << "No" << "\",\n";
 	outputFile << "\"Shadows\" : \"" << "Medio" << "\",\n";
 	outputFile << "\"DrawDistance\" : \"" << "Medio" << "\",\n";
 	outputFile << "\"Reflections\" : \"" << "No" << "\",\n";
@@ -867,10 +891,10 @@ void MotorCasaPaco::storeGraphicsConfiguration()
 	CurrentGraphicsConfiguration = MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->getConfigOptions();
 	BackupGraphicsConfiguration = CurrentGraphicsConfiguration;
 
-	if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "Yes")
+	/*if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "Yes")
 		fullScreen = true;
 	else if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "No")
-		fullScreen = false;
+		fullScreen = false;*/
 
 	fsaa = CurrentGraphicsConfiguration["FSAA"].currentValue;
 

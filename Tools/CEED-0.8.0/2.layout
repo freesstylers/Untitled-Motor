@@ -5,11 +5,11 @@
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="GWEN/Button" name="Button" >
-            <Property name="Area" value="{{0,32},{0,594},{0,464},{0,682}}" />
+            <Property name="Area" value="{{0.025,0},{0.825,0},{0.3625,0},{0.947222,0}}" />
             <Property name="Text" value="VUELTA AL MENU" />
         </Window>
         <Window type="GWEN/StaticImage" name="Timer_Image" >
-            <Property name="Area" value="{{0,1026},{0,18},{1,-22},{1,-578}}" />
+            <Property name="Area" value="{{0.801562,0},{0.025,0},{0.982813,0},{0.197222,0}}" />
             <Property name="Image" value="GWEN/Input.Button.Hovered.Middle.Middle" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -17,7 +17,7 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticText" name="Timer_Text" >
-            <Property name="Area" value="{{0,1072},{0,52},{1,-68},{1,-600}}" />
+            <Property name="Area" value="{{0.8375,0},{0.0722222,0},{0.946875,0},{0.166667,0}}" />
             <Property name="Text" value="00:00" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -36,21 +36,21 @@
             </AutoWindow>
         </Window>
         <Window type="GWEN/StaticImage" name="Colleccionable_1" >
-            <Property name="Area" value="{{0,0},{0,4},{1,-1187},{1,-635}}" />
+            <Property name="Area" value="{{0,0},{0.00555556,0},{0.0726563,0},{0.118056,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Star_No" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
             <Property name="BackgroundEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Colleccionable_2" >
-            <Property name="Area" value="{{0,98},{0,4},{1,-1089},{1,-635}}" />
+            <Property name="Area" value="{{0.0765625,0},{0.00555556,0},{0.149219,0},{0.118056,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Star_No" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
             <Property name="BackgroundEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Colleccionable_3" >
-            <Property name="Area" value="{{0,197},{0,6},{1,-990},{1,-633}}" />
+            <Property name="Area" value="{{0.153906,0},{0.00833333,0},{0.226563,0},{0.120833,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Star_No" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
