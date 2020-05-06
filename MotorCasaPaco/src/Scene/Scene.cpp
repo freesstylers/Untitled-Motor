@@ -97,7 +97,7 @@ Entity* Scene::getEntity(const std::string& name)
 
 std::list<Entity*> Scene::getEntitiesByTag(const std::string& tag)
 {
-	std::list<Entity*> *entityTags = new std::list<Entity*>();
+	std::list<Entity*>* entityTags = new std::list<Entity*>();
 
 	for (auto it : entities)
 	{
@@ -170,10 +170,8 @@ Entity* Scene::createEntity(json& j)
 		if (!prefab.is_null()) {
 			prefab["name"] = j["name"];
 
-			if(tag == "Untagged")
-				tag = prefab["tag"];
-			else
-				prefab["tag"] = tag;
+			if (tag == "Untagged" && !prefab["tag"].is_null())
+				ent->setTag(prefab["tag"]);
 
 			ent->init(prefab);
 
