@@ -74,7 +74,7 @@ bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int
 	RigidBody* rb1;
 	RigidBody* rb2;
 	void* point1 = obj1->getCollisionObject()->getUserPointer();
-	void* point2 = obj1->getCollisionObject()->getUserPointer();
+	void* point2 = obj2->getCollisionObject()->getUserPointer();
 
 	if (point1 == nullptr || point2 == nullptr) return false;
 
