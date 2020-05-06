@@ -832,6 +832,8 @@ void MotorCasaPaco::changeGraphicComponents()
 
 	writeGraphicOptions();
 	BackupGraphicsConfiguration = CurrentGraphicsConfiguration;
+	writeExtraOptions();
+	BackupExtraConfig = ExtraConfig;
 }
 
 void MotorCasaPaco::changeAdvancedGraphicComponents()
