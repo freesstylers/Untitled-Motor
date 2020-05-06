@@ -48,6 +48,7 @@ void RigidBody::redefine(json& args)
 	if (args["disableDeactivation"].is_null())
 		args["disableDeactivation"] = (body->getActivationState() == DISABLE_DEACTIVATION);
 
+
 	body->setUserPointer(nullptr);
 	PhysicsManager::getInstance()->getWorld()->removeRigidBody(body);
 	delete body->getCollisionShape();
@@ -184,6 +185,16 @@ void RigidBody::createRigidBody(json& args)
 		body->setGravity(Vector3(x, y, z));
 	}
 
+	if (!args["FixRotation"].is_null() && args["FixRotation"]) {
+		body->setAngularFactor(btVector3(0.0f, 0.0f, 0.0f));
+	}
+
+	if (!args["isTrigger"].is_null() && args["isTrigger"]) {
+
+		body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+		isTrigger = true;
+	}
+
 	if (!args["isStatic"].is_null() && args["isStatic"])
 	{
 		body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_STATIC_OBJECT);
@@ -194,6 +205,7 @@ void RigidBody::createRigidBody(json& args)
 		body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_KINEMATIC_OBJECT);
 		isKinematic = true;
 	}
+
 	else {
 		body->setCollisionFlags(body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 		if (!args["disableDeactivation"].is_null() && args["disableDeactivation"])

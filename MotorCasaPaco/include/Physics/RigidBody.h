@@ -47,6 +47,7 @@ protected:
 private:
 	bool isStatic = false;
 	bool isKinematic = false;
+	bool isTrigger = false;
 
 	Vector3 bakPosition;
 	Vector3 bakScale;
