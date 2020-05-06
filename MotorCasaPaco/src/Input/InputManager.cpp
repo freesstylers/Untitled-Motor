@@ -405,6 +405,9 @@ float InputManager::GameControllerGetAxisMovement(GameControllerAxis axis, bool 
 	float x = (float) SDL_GameControllerGetAxis(controllers[controller].cReference, (SDL_GameControllerAxis)axis);
 	x = x / axisMax;
 
+	if (x > 1) x = 1;
+	else if (x < -1) x = -1;
+
 	if (!c.initialised || axis==SDL_CONTROLLER_AXIS_TRIGGERLEFT || axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT)
 		return x;
 	
