@@ -43,9 +43,9 @@ public:
 
 	void initLoadingTestScene();
 
-	void start();
+	void start(std::string initialScene);
 	void exit();
-	void pollEvents();
+	void processFrame();
 
 	Ogre::Root* getRoot();
 	Ogre::SceneManager* getSM();
@@ -111,6 +111,7 @@ private:
 	void setupRoot();
 	void setup();
 	void shutdown();
+	void pollEvents();
 	bool checkConfig();
 	void extraConfig(json& j);
 	void setupFactories();
