@@ -878,7 +878,7 @@ void MotorCasaPaco::revertAdvancedGraphicChanges()
 
 	if (CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue == "Yes")
 		gamma = true;
-	else
+	else if (CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue == "No")
 		gamma = false;
 
 	ExtraConfig = BackupExtraConfig;
@@ -890,12 +890,17 @@ void MotorCasaPaco::storeGraphicsConfiguration()
 	CurrentGraphicsConfiguration = MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->getConfigOptions();
 	BackupGraphicsConfiguration = CurrentGraphicsConfiguration;
 
-	/*if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "Yes")
-		fullScreen = true;
-	else if (CurrentGraphicsConfiguration["Full Screen"].currentValue == "No")
-		fullScreen = false;*/
-
 	fsaa = CurrentGraphicsConfiguration["FSAA"].currentValue;
+
+	if (CurrentGraphicsConfiguration["VSync"].currentValue == "Yes")
+		vSync = true;
+	else if (CurrentGraphicsConfiguration["VSync"].currentValue == "No")
+		vSync = false;
+
+	if (CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue == "Yes")
+		gamma = true;
+	else if (CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue == "No")
+		gamma = false;
 
 	std::istringstream mode(CurrentGraphicsConfiguration["Video Mode"].currentValue);
 	video_mode = CurrentGraphicsConfiguration["Video Mode"].currentValue;
