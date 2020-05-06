@@ -27,24 +27,8 @@ PacoFrameListener::~PacoFrameListener()
 bool PacoFrameListener::frameStarted(const Ogre::FrameEvent& evt)
 {
 	float prevTime = getTime();
-
-	MotorCasaPaco::getInstance()->pollEvents();
-
-	SceneManager::getInstance()->getCurrentScene()->preupdate();
-
-	PhysicsManager::getInstance()->stepWorld();
-
-	SceneManager::getInstance()->getCurrentScene()->physicsUpdate();
-
-	SceneManager::getInstance()->getCurrentScene()->update();
-
-	SceneManager::getInstance()->getCurrentScene()->lateUpdate();
-
-	AudioManager::getInstance()->update();
-
-	deltaTime_ = getTimeDifference(prevTime);
-
-	GUI_Manager::getInstance()->update(deltaTime_);
+	
+	MotorCasaPaco::getInstance()->processFrame();
 
 	deltaTime_ = getTimeDifference(prevTime);
 
