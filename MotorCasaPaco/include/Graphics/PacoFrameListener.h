@@ -2,6 +2,7 @@
 
 #include <OgreFrameListener.h>
 #include "Graphics\PacoFrameListener.h"
+#include <chrono>
 
 namespace Ogre {
 	class Timer;
@@ -21,12 +22,13 @@ public:
 	virtual void windowClosed(Ogre::RenderWindow* rw) {}
 	virtual void windowFocusChange(Ogre::RenderWindow* rw) {}
 
-	float getTime();
-	float getTimeDifference(float prevTime);
-	float DeltaTime();
+	uint64_t getTime();
+	uint64_t getTimeDifference(uint64_t prevTime);
+	double DeltaTime();
 	void resetTimer();
 
 private:
-	float deltaTime_;
+	std::chrono::time_point<std::chrono::high_resolution_clock> prevTime;
+	double deltaTime_;
 	Ogre::Timer* timer_;
 };

@@ -11,12 +11,17 @@
 #include "GUI/GUI_Manager.h"
 #include "MotorCasaPaco.h"
 
+#include <Windows.h> 
+
 #include <SDL_events.h>
 #include "checkML.h"
+
+//using namespace std::chrono;
 
 PacoFrameListener::PacoFrameListener() : Ogre::FrameListener(), deltaTime_(0)
 {
 	timer_ = new Ogre::Timer();
+	prevTime = std::chrono::high_resolution_clock::now();
 }
 
 PacoFrameListener::~PacoFrameListener()
@@ -26,7 +31,11 @@ PacoFrameListener::~PacoFrameListener()
 
 bool PacoFrameListener::frameStarted(const Ogre::FrameEvent& evt)
 {
-	float prevTime = getTime();
+	std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - prevTime;
+
+	deltaTime_ = elapsed.count();
+
+	prevTime = std::chrono::high_resolution_clock::now(); //Necesita Windows.h
 
 	MotorCasaPaco::getInstance()->pollEvents();
 
@@ -42,26 +51,25 @@ bool PacoFrameListener::frameStarted(const Ogre::FrameEvent& evt)
 
 	AudioManager::getInstance()->update();
 
-	deltaTime_ = getTimeDifference(prevTime);
-
-	GUI_Manager::getInstance()->update(deltaTime_);
-
-	deltaTime_ = getTimeDifference(prevTime);
+	GUI_Manager::getInstance()->update(elapsed.count());
 
 	return true;
 }
 
-float PacoFrameListener::getTime()
+//Devuleve los milisegundos que lleva activo el programa
+uint64_t PacoFrameListener::getTime()
 {
-	return timer_->getMicroseconds() / 1000.0f;
+	return GetTickCount();
 }
 
-float PacoFrameListener::getTimeDifference(float prevTime)
+//Diferencia de tiempos en milisegundos
+uint64_t PacoFrameListener::getTimeDifference(uint64_t prevTime)
 {
-	return timer_->getMicroseconds() / 1000.0f - prevTime;
+	return getTime() - prevTime;
 }
 
-float PacoFrameListener::DeltaTime()
+//Segundos que ha tardado un frame
+double PacoFrameListener::DeltaTime()
 {
 	return deltaTime_;
 }
