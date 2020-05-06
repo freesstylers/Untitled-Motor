@@ -92,7 +92,7 @@ void SceneManager::start(std::string initialScene){
 
 void SceneManager::preUpdate()
 {
-	currentScene_->update();
+	currentScene_->preupdate();
 }
 
 void SceneManager::physicsUpdate()
