@@ -177,9 +177,7 @@ void MotorCasaPaco::init()
 
 void MotorCasaPaco::changeScene(std::string name)
 {
-
 	SceneManager::getInstance()->changeScene(name);
-	SceneManager::getInstance()->getCurrentScene()->start();
 }
 
 void MotorCasaPaco::initLoadingTestScene()
@@ -187,14 +185,36 @@ void MotorCasaPaco::initLoadingTestScene()
 	changeScene("UITest");
 }
 
-void MotorCasaPaco::start()
+void MotorCasaPaco::start(std::string initialScene)
 {
+	SceneManager::getInstance()->start(initialScene);
 	MotorCasaPaco::getInstance()->getRoot()->startRendering();
 }
 
 void MotorCasaPaco::exit()
 {
 	MotorCasaPaco::getInstance()->getRoot()->queueEndRendering();
+}
+
+void MotorCasaPaco::processFrame()
+{
+	pollEvents();
+
+	SceneManager::getInstance()->preUpdate();
+
+	PhysicsManager::getInstance()->stepWorld();
+
+	SceneManager::getInstance()->physicsUpdate();
+
+	SceneManager::getInstance()->update();
+
+	SceneManager::getInstance()->lateUpdate();
+
+	AudioManager::getInstance()->update();
+
+	GUI_Manager::getInstance()->update(DeltaTime());
+
+	SceneManager::getInstance()->endFrame();
 }
 
 void MotorCasaPaco::pollEvents()
