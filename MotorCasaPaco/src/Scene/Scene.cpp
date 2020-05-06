@@ -169,7 +169,12 @@ Entity* Scene::createEntity(json& j)
 
 		if (!prefab.is_null()) {
 			prefab["name"] = j["name"];
-			prefab["tag"] = tag;
+
+			if(tag == "Untagged")
+				tag = prefab["tag"];
+			else
+				prefab["tag"] = tag;
+
 			ent->init(prefab);
 
 			if (!prefab["components"].is_null() && prefab["components"].is_array()) {
