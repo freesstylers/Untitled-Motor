@@ -783,18 +783,15 @@ void MotorCasaPaco::setShadows(std::string value)
 void MotorCasaPaco::changeGraphicComponents()
 {
 	//FullScreen
-	if (CurrentGraphicsConfiguration["Full Screen"].currentValue != getFullScreen(fullScreen))
+	if (fullScreen) //A Pantalla Completa
 	{
-		if (fullScreen) //A Pantalla Completa
-		{
-			setFullScreenOn();
-			CurrentGraphicsConfiguration["Full Screen"].currentValue = "Yes";
-		}
-		else //A Modo Ventana
-		{
-			setFullScreenOff();
-			CurrentGraphicsConfiguration["Full Screen"].currentValue = "No";
-		}
+		setFullScreenOn();
+		CurrentGraphicsConfiguration["Full Screen"].currentValue = "Yes";
+	}
+	else //A Modo Ventana
+	{
+		setFullScreenOff();
+		CurrentGraphicsConfiguration["Full Screen"].currentValue = "No";
 	}
 
 	if (CurrentGraphicsConfiguration["Video Mode"].currentValue != video_mode)
