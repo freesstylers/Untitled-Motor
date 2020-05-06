@@ -22,8 +22,8 @@ public:
 	virtual void windowClosed(Ogre::RenderWindow* rw) {}
 	virtual void windowFocusChange(Ogre::RenderWindow* rw) {}
 
-	uint64_t getTime();
-	uint64_t getTimeDifference(uint64_t prevTime);
+	double getTime();
+	double getTimeDifference(double prevTime);
 	double DeltaTime();
 	void resetTimer();
 

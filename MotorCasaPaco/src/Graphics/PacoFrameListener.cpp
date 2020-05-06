@@ -42,14 +42,14 @@ bool PacoFrameListener::frameStarted(const Ogre::FrameEvent& evt)
 	return true;
 }
 
-//Devuleve los milisegundos que lleva activo el programa
-uint64_t PacoFrameListener::getTime()
+//Devuleve los segundos que lleva activo el programa
+double PacoFrameListener::getTime()
 {
-	return GetTickCount();
+	return (double)GetTickCount()/1000.0;
 }
 
-//Diferencia de tiempos en milisegundos
-uint64_t PacoFrameListener::getTimeDifference(uint64_t prevTime)
+//Diferencia de tiempos en segundos
+double PacoFrameListener::getTimeDifference(double prevTime)
 {
 	return getTime() - prevTime;
 }
