@@ -95,6 +95,21 @@ Entity* Scene::getEntity(const std::string& name)
 		return entity->second;
 }
 
+std::list<Entity*> Scene::getEntitiesByTag(const std::string& tag)
+{
+	std::list<Entity*> *entityTags = new std::list<Entity*>();
+
+	for (auto it : entities)
+	{
+		if (it.second->getTag() == tag)
+		{
+			entityTags->push_back(it.second);
+		}
+	}
+
+	return *entityTags;
+}
+
 void Scene::start() {
 	for (Entity* e : entitiesWithoutParent_)
 		recursivelyActivateEntities(e);

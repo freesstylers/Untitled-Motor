@@ -16,6 +16,7 @@ public:
 	void setupScene(json& j);
 
 	Entity* getEntity(const std::string& name);
+	std::list<Entity*> getEntitiesByTag(const std::string& tag);
 	Entity* createEntity(json& j);
 	Entity* addEntity(std::string name, std::string tag = "Untagged", bool callStart = true);
 	bool deleteEntity(const std::string name);
