@@ -21,12 +21,15 @@ GUI_Manager::GUI_Manager(Ogre::RenderWindow* window)
 	setupResources();
 
 	createRoot();
+
+	setupDefaultResources();
 	//Callbacks?
 }
 
 GUI_Manager::~GUI_Manager()
 {
 	renderer->destroySystem();
+	layouts.clear(); //Igual no es esto, pero algo hay que hacer con el vector(?)
 	delete root;
 }
 
@@ -49,12 +52,13 @@ void GUI_Manager::createRoot()
 	CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(root->getWindowElement());
 }
 
-void GUI_Manager::loadLayout(std::string filename)
+void GUI_Manager::loadLayout(std::string filename, bool visible)
 {
 	try
 	{
 		CEGUI::Window* layout = winManager->getSingleton().loadLayoutFromFile(filename); //Habria que a�adir el archivo del que proceden como opcion, en caso de usar mas de uno?
 		root->addChild(layout);
+		layouts.push_back(layout);
 	}
 	catch (std::exception e)
 	{
@@ -148,7 +152,7 @@ void GUI_Manager::addChild(int type, std::string name)
 	break;
 	default:
 	{
-		loadLayout(name);
+	//	loadLayout(name);
 	}
 	break;
 	}
@@ -224,6 +228,11 @@ void GUI_Manager::injectPosition(int x, int y)
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMousePosition(x, y);
 }
 
+void GUI_Manager::setLayoutVisible(int layout, bool visible)
+{
+	layouts[layout]->setVisible(visible);
+}
+
 bool GUI_Manager::setupInstance(Ogre::RenderWindow* window)
 {
 	if (instance == 0)
@@ -253,6 +262,7 @@ void GUI_Manager::clear()
 {
 	//getRoot()->getWindowElement()->destroy();
 	delete root;
+	layouts.clear(); //Igual no es esto, pero algo hay que hacer con el vector(?)
 
 	createRoot();
 }

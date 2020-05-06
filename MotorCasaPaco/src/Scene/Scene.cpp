@@ -49,18 +49,26 @@ void Scene::setupScene(json& j) {
 				entitiesWithoutParent_.push_back(entities[ent["name"]]);
 		}
 	}
-	
+
 	if (!j["UI"].is_null() && j["UI"].is_array()) {
 		std::vector<json> e = j["UI"];
 
 		for (json UI_Elem : e) {
-			if (UI_Elem["type"] == "layout")
-				MotorCasaPaco::getInstance()->getGUI_Manager()->loadLayout(UI_Elem["name"]);
+			if (!UI_Elem["type"].is_null() && !UI_Elem["name"].is_null()) {
 
-			else if (UI_Elem["type"] == "entity")
-			{
-				entities[UI_Elem["name"]] = createEntity(UI_Elem);
-				entitiesWithoutParent_.push_back(entities[UI_Elem["name"]]);
+				bool visible = true;
+				if (!UI_Elem["visible"].is_null())
+					visible = UI_Elem["visible"];
+
+
+				if (UI_Elem["type"] == "layout")
+					MotorCasaPaco::getInstance()->getGUI_Manager()->loadLayout(UI_Elem["name"], visible);
+
+				else if (UI_Elem["type"] == "entity")
+				{
+					entities[UI_Elem["name"]] = createEntity(UI_Elem);
+					entitiesWithoutParent_.push_back(entities[UI_Elem["name"]]);
+				}
 			}
 		}
 	}
@@ -68,7 +76,7 @@ void Scene::setupScene(json& j) {
 
 void Scene::recursivelyActivateEntities(Entity* ent) {
 	ent->setEnabled(ent->isEnabled());
-	
+
 	auto children = ent->getChildren();
 
 	std::map<std::string, Entity*>::iterator it = children.begin();
@@ -87,12 +95,27 @@ Entity* Scene::getEntity(const std::string& name)
 		return entity->second;
 }
 
+std::list<Entity*> Scene::getEntitiesByTag(const std::string& tag)
+{
+	std::list<Entity*>* entityTags = new std::list<Entity*>();
+
+	for (auto it : entities)
+	{
+		if (it.second->getTag() == tag)
+		{
+			entityTags->push_back(it.second);
+		}
+	}
+
+	return *entityTags;
+}
+
 void Scene::start() {
 	for (Entity* e : entitiesWithoutParent_)
 		recursivelyActivateEntities(e);
 	entitiesWithoutParent_.clear();
 
-	addedEntitiesCounter=0;
+	addedEntitiesCounter = 0;
 }
 
 void Scene::preupdate()
@@ -125,7 +148,7 @@ void Scene::lateUpdate()
 
 Entity* Scene::createEntity(json& j)
 {
-	
+
 	std::string tag = "Untagged";
 	if (!j["tag"].is_null()) {
 		std::string aux = j["tag"];
@@ -146,7 +169,10 @@ Entity* Scene::createEntity(json& j)
 
 		if (!prefab.is_null()) {
 			prefab["name"] = j["name"];
-			prefab["tag"] = tag;
+
+			if (tag == "Untagged" && !prefab["tag"].is_null())
+				ent->setTag(prefab["tag"]);
+
 			ent->init(prefab);
 
 			if (!prefab["components"].is_null() && prefab["components"].is_array()) {
@@ -186,10 +212,10 @@ bool Scene::deleteEntity(const std::string name) {
 	if (it != entities.end()) {
 		delete it->second;
 		entities.erase(it);
-		
+
 		return true;
 	}
-	
+
 	return false;
 }
 

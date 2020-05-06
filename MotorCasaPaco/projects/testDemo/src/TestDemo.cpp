@@ -241,13 +241,10 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	JsonFactoryParser::getInstance()->addFactory("MainMenuInputComponent", new MainMenuInputComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("OptionsMenuInputComponent", new OptionsMenuInputComponentFactory());
 
-	MotorCasaPaco::getInstance()->getGUI_Manager()->getInstance()->setupDefaultResources();
 	MotorCasaPaco::getInstance()->getGUI_Manager()->loadScheme("A_Toda_Pastilla.scheme");
 	MotorCasaPaco::getInstance()->getGUI_Manager()->setMouseCursor("A_Toda_Pastilla/Mouse_Arrow");
 
-	motorCasaPaco->changeScene("test");
-
-	motorCasaPaco->start();
+	motorCasaPaco->start("test");
 
 	MotorCasaPaco::clean();
 

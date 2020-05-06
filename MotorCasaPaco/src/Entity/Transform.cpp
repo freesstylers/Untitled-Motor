@@ -198,16 +198,18 @@ void Transform::scale(Vector3 s)
 	node->scale(s);
 }
 
-void Transform::rotateAroundPivot(Vector3 rot, Ogre::SceneNode* pivot)
+void Transform::rotateAroundPivot(Vector3 rot, Ogre::SceneNode* pivot, TransformSpace relativeTo)
 {
-	rotateAroundPivot(Quaternion::FromEuler(rot), pivot);
+	rotateAroundPivot(Quaternion::FromEuler(rot), pivot, relativeTo);
 }
 
-void Transform::rotateAroundPivot(Quaternion rot, Ogre::SceneNode* pivot)
+void Transform::rotateAroundPivot(Quaternion rot, Ogre::SceneNode* pivot, TransformSpace relativeTo)
 {
 	Vector3 pos = getWorldPosition();
 	std::string auxName = "auxiliaryNode" + std::to_string(rand() % 10000);
 	Ogre::SceneNode* aux = MotorCasaPaco::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode(auxName);
+
+	aux->setInheritOrientation(true);
 
 	aux->setPosition(pivot->getPosition());
 
@@ -217,7 +219,7 @@ void Transform::rotateAroundPivot(Quaternion rot, Ogre::SceneNode* pivot)
 
 	setWorldPosition(pos);
 
-	aux->rotate(rot, Ogre::Node::TS_PARENT);
+	aux->rotate(rot, Ogre::Node::TransformSpace(relativeTo));
 
 	pos = getWorldPosition();
 
@@ -228,14 +230,99 @@ void Transform::rotateAroundPivot(Quaternion rot, Ogre::SceneNode* pivot)
 	setWorldPosition(pos);
 }
 
-void Transform::rotateAroundPivot(Vector3 rot, Entity* pivot)
+void Transform::rotateAroundPivot(Vector3 rot, Vector3 pivot, Vector3 pivotOrientation, TransformSpace relativeTo)
 {
-	rotateAroundPivot(Quaternion::FromEuler(rot), pivot->getTransform()->getNode());
+	rotateAroundPivot(Quaternion::FromEuler(rot), pivot, Quaternion::FromEuler(pivotOrientation), relativeTo);
 }
 
-void Transform::rotateAroundPivot(Quaternion rot, Entity* pivot)
+void Transform::rotateAroundPivot(Quaternion rot, Vector3 pivot, Quaternion pivotOrientation, TransformSpace relativeTo)
 {
-	rotateAroundPivot(rot, pivot->getTransform()->getNode());
+	std::string auxName = "auxiliaryNode" + std::to_string(rand() % 10000);
+	Ogre::SceneNode* aux = MotorCasaPaco::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode(auxName);
+
+	aux->setInheritOrientation(true);
+
+	aux->setOrientation(pivotOrientation);
+
+	rotateAroundPivot(rot, aux, relativeTo);
+
+	MotorCasaPaco::getInstance()->getSM()->getRootSceneNode()->removeAndDestroyChild(auxName);
+}
+
+void Transform::rotateAroundPivot(Vector3 rot, Entity* pivot, TransformSpace relativeTo)
+{
+	rotateAroundPivot(Quaternion::FromEuler(rot), pivot->getTransform()->getNode(), relativeTo);
+}
+
+void Transform::rotateAroundPivot(Quaternion rot, Entity* pivot, TransformSpace relativeTo)
+{
+	rotateAroundPivot(rot, pivot->getTransform()->getNode(), relativeTo);
+}
+
+//
+
+
+void Transform::setRotationAroundPivot(Vector3 rot, Ogre::SceneNode* pivot, TransformSpace relativeTo)
+{
+	setRotationAroundPivot(Quaternion::FromEuler(rot), pivot, relativeTo);
+}
+
+void Transform::setRotationAroundPivot(Quaternion rot, Ogre::SceneNode* pivot, TransformSpace relativeTo)
+{
+	Vector3 pos = getWorldPosition();
+	std::string auxName = "auxiliaryNode" + std::to_string(rand() % 10000);
+	Ogre::SceneNode* aux = MotorCasaPaco::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode(auxName);
+
+	node->setOrientation(Ogre::Quaternion());
+
+	aux->setInheritOrientation(true);
+
+	aux->setPosition(pivot->getPosition());
+
+	Ogre::SceneNode* parent = node->getParentSceneNode();
+	parent->removeChild(node->getName());
+	aux->addChild(node);
+
+	setWorldPosition(pos);
+
+	aux->rotate(rot, Ogre::Node::TransformSpace(relativeTo));
+
+	pos = getWorldPosition();
+
+	aux->removeChild(node->getName());
+	parent->addChild(node);
+	MotorCasaPaco::getInstance()->getSM()->getRootSceneNode()->removeAndDestroyChild(auxName);
+
+	setWorldPosition(pos);
+}
+
+void Transform::setRotationAroundPivot(Vector3 rot, Vector3 pivot, Vector3 pivotOrientation, TransformSpace relativeTo)
+{
+	setRotationAroundPivot(Quaternion::FromEuler(rot), pivot, Quaternion::FromEuler(pivotOrientation), relativeTo);
+}
+
+void Transform::setRotationAroundPivot(Quaternion rot, Vector3 pivot, Quaternion pivotOrientation, TransformSpace relativeTo)
+{
+	std::string auxName = "auxiliaryNode" + std::to_string(rand() % 10000);
+	Ogre::SceneNode* aux = MotorCasaPaco::getInstance()->getSM()->getRootSceneNode()->createChildSceneNode(auxName);
+
+	aux->setInheritOrientation(true);
+
+	aux->setOrientation(pivotOrientation);
+
+	setRotationAroundPivot(rot, aux, relativeTo);
+
+	MotorCasaPaco::getInstance()->getSM()->getRootSceneNode()->removeAndDestroyChild(auxName);
+}
+
+void Transform::setRotationAroundPivot(Vector3 rot, Entity* pivot, TransformSpace relativeTo)
+{
+	setRotationAroundPivot(Quaternion::FromEuler(rot), pivot->getTransform()->getNode(), relativeTo);
+}
+
+void Transform::setRotationAroundPivot(Quaternion rot, Entity* pivot, TransformSpace relativeTo)
+{
+	setRotationAroundPivot(rot, pivot->getTransform()->getNode(), relativeTo);
 }
 
 void Transform::lookAt(Vector3 dir, Vector3 localDir, TransformSpace relativeTo)

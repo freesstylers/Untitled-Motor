@@ -393,3 +393,7 @@ MotorCasaPaco/dependencies/ogre-1.12.4/build
 MotorCasaPaco/dependencies/ogre-1.12.4/.github
 
 MotorCasaPaco/dependencies/cegui-0.8.7/dependencies
+
+!MotorCasaPaco/bin/assets/ogre/*.exe
+!MotorCasaPaco/bin/assets/ogre/*.dll
+!MotorCasaPaco/bin/assets/ogre/*.bat

@@ -16,7 +16,6 @@
 #include <SDL_events.h>
 #include "checkML.h"
 
-//using namespace std::chrono;
 
 PacoFrameListener::PacoFrameListener() : Ogre::FrameListener(), deltaTime_(0)
 {
@@ -31,27 +30,14 @@ PacoFrameListener::~PacoFrameListener()
 
 bool PacoFrameListener::frameStarted(const Ogre::FrameEvent& evt)
 {
+
 	std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - prevTime;
 
 	deltaTime_ = elapsed.count();
 
 	prevTime = std::chrono::high_resolution_clock::now(); //Necesita Windows.h
-
-	MotorCasaPaco::getInstance()->pollEvents();
-
-	SceneManager::getInstance()->getCurrentScene()->preupdate();
-
-	PhysicsManager::getInstance()->stepWorld();
-
-	SceneManager::getInstance()->getCurrentScene()->physicsUpdate();
-
-	SceneManager::getInstance()->getCurrentScene()->update();
-
-	SceneManager::getInstance()->getCurrentScene()->lateUpdate();
-
-	AudioManager::getInstance()->update();
-
-	GUI_Manager::getInstance()->update(elapsed.count());
+	
+	MotorCasaPaco::getInstance()->processFrame();
 
 	return true;
 }

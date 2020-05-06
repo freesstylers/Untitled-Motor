@@ -33,7 +33,7 @@ string const Component::getTag() {
 
 void Component::init(json& args) { }
 
-void Component::redefine(json& args) {	}
+void Component::redefine(json& args) { init(args); }
 
 void Component::start() { }
 
