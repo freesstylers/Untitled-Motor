@@ -445,6 +445,12 @@ float InputManager::GameControllerGetAxisMovement(GameControllerAxis axis, bool 
 	default:
 		break;
 	}
+
+	if (x > 1.0)
+		x = 1.0;
+	else if (x < -1.0)
+		x = -1.0;
+
 	return x;
 
 }
