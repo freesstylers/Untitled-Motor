@@ -51,3 +51,8 @@ Ogre::Quaternion PacoToOgre(const Quaternion& quaternion);
 Quaternion OgreToPaco(const Ogre::Quaternion& quaternion);
 btQuaternion PacoToBullet(const Quaternion& quaternion);
 Quaternion BulletToPaco(const btQuaternion& quaternion);
+
+
+//otros
+float Lerp(float a, float b, float t);
+double Lerp(double a, double b, double t);

@@ -76,3 +76,18 @@ Quaternion::operator Ogre::Quaternion() const {
 Quaternion::operator btQuaternion() const {
 	return PacoToBullet(*this);
 }
+
+
+float Lerp(float a, float b, float t)
+{
+	if (t < 0) return a;
+	else if (t > 1) return b;
+	return (b - a) * t + a;;
+}
+
+double Lerp(double a, double b, double t)
+{
+	if (t < 0) return a;
+	else if (t > 1) return b;
+	return (b - a) * t + a;;
+}
