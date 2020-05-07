@@ -50,6 +50,7 @@ public:
 	CEGUI::WindowManager* getWinManager();
 	void injectPosition(int x, int y);
 	void setLayoutVisible(int layout, bool visible);
+	void changeImage(std::string image, std::string newImage);
 
 private:
 	GUI_Manager(Ogre::RenderWindow* window);

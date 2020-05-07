@@ -233,6 +233,12 @@ void GUI_Manager::setLayoutVisible(int layout, bool visible)
 	layouts[layout]->setVisible(visible);
 }
 
+void GUI_Manager::changeImage(std::string image, std::string newImage) 	// "Layout/Nombre", "ImageSet/Nombre
+{
+	CEGUI::Window* thumbnail = static_cast<CEGUI::Window*>(root->getWindowElement()->getChild(image));
+	thumbnail->setProperty("Image", newImage);
+}
+
 bool GUI_Manager::setupInstance(Ogre::RenderWindow* window)
 {
 	if (instance == 0)
