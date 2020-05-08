@@ -48,6 +48,18 @@ void RigidBody::redefine(json& args)
 	if (args["disableDeactivation"].is_null())
 		args["disableDeactivation"] = (body->getActivationState() == DISABLE_DEACTIVATION);
 
+	if (args["friction"].is_null()) {
+		args["friction"] = body->getFriction();
+	}
+
+	if (args["rollingFriction"].is_null()) {
+		args["rollingFriction"] = body->getRollingFriction();
+	}
+
+	if (args["spinningFriction"].is_null()) {
+		args["spinningFriction"] = body->getSpinningFriction();
+	}
+
 
 	body->setUserPointer(nullptr);
 	PhysicsManager::getInstance()->getWorld()->removeRigidBody(body);
@@ -183,6 +195,21 @@ void RigidBody::createRigidBody(json& args)
 		y = args["gravity"][1];
 		z = args["gravity"][2];
 		body->setGravity(Vector3(x, y, z));
+	}
+
+	if (!args["friction"].is_null()) {
+		float friction = args["friction"];
+		body->setFriction(friction);
+	}
+
+	if (!args["rollingFriction"].is_null()) {
+		float rollingFriction = args["rollingFriction"];
+		body->setRollingFriction(rollingFriction);
+	}
+
+	if (!args["spinningFriction"].is_null()) {
+		float spinningFriction = args["spinningFriction"];
+		body->setSpinningFriction(spinningFriction);
 	}
 
 	if (!args["FixRotation"].is_null() && args["FixRotation"]) {
