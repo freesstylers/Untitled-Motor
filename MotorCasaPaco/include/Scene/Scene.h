@@ -27,6 +27,8 @@ public:
 	void physicsUpdate();
 	void update();
 	void lateUpdate();
+	void pausedUpdate();
+	void alwaysLateUpdate();
 
 private:
 	std::map<std::string, Entity*> entities;

@@ -28,6 +28,8 @@ public:
 	virtual void physicsUpdate();
 	virtual void update();
 	virtual void lateUpdate();
+	virtual void pausedUpdate();
+	virtual void alwaysLateUpdate();
 	virtual void render();
 
 	virtual void OnCollision(Entity* other);

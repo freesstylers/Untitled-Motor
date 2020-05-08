@@ -35,8 +35,27 @@ void Entity::lateUpdate()
 	}
 }
 
+void Entity::pausedUpdate()
+{
+	int length = components_.size();
+	for (int i = 0; i < length; i++)
+	{
+		if (components_[i]->isActive()) components_[i]->pausedUpdate();
+	}
+}
+
+void Entity::alwaysLateUpdate()
+{
+	int length = components_.size();
+	for (int i = 0; i < length; i++)
+	{
+		if (components_[i]->isActive()) components_[i]->alwaysLateUpdate();
+	}
+}
+
 void Entity::OnCollision(Entity* other)
-{int length = components_.size();
+{
+	int length = components_.size();
 	for (int i = 0; i < length; i++)
 	{
 		if (components_[i]->isActive()) components_[i]->OnCollision(other);

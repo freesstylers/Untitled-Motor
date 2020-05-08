@@ -24,6 +24,15 @@ public:
 	std::string text;
 };
 
+struct BoolEvent : public Event {
+public:
+	inline BoolEvent(std::string id, bool flag) : Event(id) {
+		this->flag = flag;
+	};
+
+	bool flag;
+};
+
 struct RigidBodyInfoEvent : public Event {
 public:
 	inline RigidBodyInfoEvent(btRigidBody* rb) : Event("RIGIDBODY_INFO") {

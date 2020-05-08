@@ -62,6 +62,11 @@ public:
 	float DeltaTime();
 	void resetTimer();
 
+	// Stops the main loop from running until it gets called again.
+	// Menus will not be paused.
+	void pause();
+	bool isPaused();
+
 	void resize(int width, int height);
 	void setFullScreenOn();
 	void setFullScreenOff();
@@ -124,6 +129,7 @@ private:
 	std::string appName;
 	static MotorCasaPaco* instance;
 	PacoFrameListener* frameListener_;
+	bool paused_ = false;
 
 	void storeGraphicsConfiguration();
 

@@ -146,6 +146,20 @@ void Scene::lateUpdate()
 	}
 }
 
+void Scene::pausedUpdate()
+{
+	for (pair<string, Entity*> e : entities) {
+		if (e.second->isActive()) e.second->pausedUpdate();
+	}
+}
+
+void Scene::alwaysLateUpdate()
+{
+	for (pair<string, Entity*> e : entities) {
+		if (e.second->isActive()) e.second->alwaysLateUpdate();
+	}
+}
+
 Entity* Scene::createEntity(json& j)
 {
 

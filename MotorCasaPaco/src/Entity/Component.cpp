@@ -45,6 +45,10 @@ void Component::update() { }
 
 void Component::lateUpdate() { }
 
+void Component::pausedUpdate() { }
+
+void Component::alwaysLateUpdate() { }
+
 void Component::render() { }
 
 void Component::OnCollision(Entity* other){ }

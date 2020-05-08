@@ -110,6 +110,16 @@ void SceneManager::lateUpdate()
 	currentScene_->lateUpdate();
 }
 
+void SceneManager::pausedUpdate()
+{
+	currentScene_->pausedUpdate();
+}
+
+void SceneManager::alwaysLateUpdate()
+{
+	currentScene_->alwaysLateUpdate();
+}
+
 void SceneManager::processChangeSceneRequest()
 {
 	if (currentScene_ != nullptr)

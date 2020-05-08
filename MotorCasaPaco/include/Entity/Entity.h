@@ -25,6 +25,8 @@ public:
 	void physicsUpdate();
 	void update();
 	void lateUpdate();
+	void pausedUpdate();
+	void alwaysLateUpdate();
 
 	void OnCollision(Entity* other);
 

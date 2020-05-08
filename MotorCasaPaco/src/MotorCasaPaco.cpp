@@ -200,15 +200,21 @@ void MotorCasaPaco::processFrame()
 {
 	pollEvents();
 
-	SceneManager::getInstance()->preUpdate();
+	if (!paused_) {
+		SceneManager::getInstance()->preUpdate();
 
-	PhysicsManager::getInstance()->stepWorld();
+		PhysicsManager::getInstance()->stepWorld();
 
-	SceneManager::getInstance()->physicsUpdate();
+		SceneManager::getInstance()->physicsUpdate();
 
-	SceneManager::getInstance()->update();
+		SceneManager::getInstance()->update();
 
-	SceneManager::getInstance()->lateUpdate();
+		SceneManager::getInstance()->lateUpdate();
+	}
+	else
+		SceneManager::getInstance()->pausedUpdate();
+
+	SceneManager::getInstance()->alwaysLateUpdate();
 
 	AudioManager::getInstance()->update();
 
@@ -536,6 +542,15 @@ float MotorCasaPaco::DeltaTime()
 void MotorCasaPaco::resetTimer()
 {
 	frameListener_->resetTimer();
+}
+
+void MotorCasaPaco::pause()
+{
+	paused_ = !paused_;
+}
+
+bool MotorCasaPaco::isPaused() {
+	return paused_;
 }
 
 void MotorCasaPaco::resize(int width, int height)
