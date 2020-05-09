@@ -13,26 +13,35 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Logo" >
-            <Property name="Area" value="{{0.421875,0},{0.0416667,0},{0.601563,0},{0.280556,0}}" />
+            <Property name="Area" value="{{0.0265625,0},{0.0833333,0},{0.20625,0},{0.322222,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Logo" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="true" />
             <Property name="BackgroundEnabled" value="true" />
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
-        <Window type="GWEN/Button" name="LevelSelect" >
-            <Property name="Area" value="{{0.3675,0},{0.375,0},{0.652656,0},{0.472222,0}}" />
-            <Property name="Font" value="shump-48" />
-            <Property name="Text" value="ELEGIR NIVEL" />
+        <Window type="GWEN/Button" name="Nivel1" >
+            <Property name="Area" value="{{0.759375,0},{0.0416667,0},{0.946875,0},{0.180556,0}}" />
+            <Property name="Text" value="Nivel 1" />
+        </Window>
+        <Window type="GWEN/Button" name="Nivel2" >
+            <Property name="Area" value="{{0.759375,0},{0.216667,0},{0.946875,0},{0.355556,0}}" />
+            <Property name="Text" value="Nivel 2" />
+        </Window>
+        <Window type="GWEN/Button" name="Nivel3" >
+            <Property name="Area" value="{{0.759375,0},{0.386111,0},{0.946875,0},{0.525,0}}" />
+            <Property name="Text" value="Nivel 3" />
+        </Window>
+        <Window type="GWEN/Button" name="Nivel4" >
+            <Property name="Area" value="{{0.759375,0},{0.555556,0},{0.946875,0},{0.694444,0}}" />
+            <Property name="Text" value="Nivel 4" />
         </Window>
         <Window type="GWEN/Button" name="Exit" >
-            <Property name="Area" value="{{0.3675,0},{0.775,0},{0.652656,0},{0.872222,0}}" />
-            <Property name="Font" value="shump-48" />
+            <Property name="Area" value="{{0.7875,0},{0.75,0},{0.917188,0},{0.888889,0}}" />
             <Property name="Text" value="SALIR" />
         </Window>
         <Window type="GWEN/Button" name="Settings" >
-            <Property name="Area" value="{{0.3675,0},{0.575,0},{0.652656,0},{0.672222,0}}" />
-            <Property name="Font" value="shump-48" />
+            <Property name="Area" value="{{0.0273435,0},{0.784722,0},{0.214843,0},{0.879167,0}}" />
             <Property name="Text" value="OPCIONES" />
         </Window>
     </Window>

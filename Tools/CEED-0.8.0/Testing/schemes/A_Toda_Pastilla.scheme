@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <GUIScheme name="A_Toda_Pastilla"	version="5">
   <Imageset filename="A_Toda_Pastilla.imageset" />
-  <Font filename="shump-10.font" />
+  <Font filename="shump-48.font" />
   <LookNFeel filename="A_Toda_Pastilla.looknfeel" />
   <WindowRendererSet filename="CEGUICoreWindowRendererSet" />
   <FalagardMapping lookNFeel="A_Toda_Pastilla/Play"			renderer="Core/Button"			targetType="CEGUI/PushButton"		windowType="A_Toda_Pastilla/Play" />
