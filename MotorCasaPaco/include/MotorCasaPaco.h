@@ -110,7 +110,7 @@ private:
 
 	MotorCasaPaco(const std::string& appName);
 
-	void sceneCleanup();
+	void currentSceneCleanup();
 
 	void setupWindow(std::string windowName);
 	void setupRoot();

@@ -14,12 +14,11 @@ public:
 	static bool setupInstance();
 	static void clean();
 
-	Scene* loadScene(const std::string& scene);
-
 	Scene* getCurrentScene();
 
 	void sceneCleanup();
 
+	Scene* loadScene(const std::string& sceneName);
 	void changeScene(const std::string& name);
 
 	void start(std::string initialScene);
@@ -34,9 +33,10 @@ public:
 private:
 	SceneManager();
 	static SceneManager* instance;
-	
-	void processChangeSceneRequest();
+
 	Scene* currentScene_ = nullptr;
+
+	void processChangeSceneRequest();
 
 	bool changeSceneRequested_ = false;
 	std::string nextScene_ = "";

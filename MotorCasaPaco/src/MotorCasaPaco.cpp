@@ -40,7 +40,7 @@ MotorCasaPaco::MotorCasaPaco(const std::string& appName) : appName(appName)
 	root = nullptr;
 }
 
-void MotorCasaPaco::sceneCleanup()
+void MotorCasaPaco::currentSceneCleanup()
 {
 	SceneManager::getInstance()->sceneCleanup();
 }

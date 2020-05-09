@@ -43,14 +43,14 @@ void SceneManager::clean()
 	delete instance;
 }
 
-Scene* SceneManager::loadScene(const std::string& scene)
+Scene* SceneManager::loadScene(const std::string& sceneName)
 {
-	json j = ResourceManager::getInstance()->loadSceneFile(scene);
+	json j = ResourceManager::getInstance()->loadSceneFile(sceneName);
 
-	currentScene_ = new Scene();
-	currentScene_->setupScene(j);
+	Scene* scene = new Scene();
+	scene->setupScene(j);
 
-	return currentScene_;
+	return scene;
 }
 
 Scene* SceneManager::getCurrentScene()
@@ -60,9 +60,19 @@ Scene* SceneManager::getCurrentScene()
 
 void SceneManager::sceneCleanup()
 {
+	if (currentScene_ == nullptr) {
+#ifdef _DEBUG
+		printf("ERROR: Can't cleanup scene because current scene is nullptr.");
+#endif
+		return;
+	}
+
 	GUI_Manager::getInstance()->clear();
+
 	delete currentScene_;
 	currentScene_ = nullptr;
+
+	MotorCasaPaco::getInstance()->getSM()->clearScene();
 }
 
 void SceneManager::changeScene(const std::string& name)
@@ -123,10 +133,7 @@ void SceneManager::alwaysLateUpdate()
 void SceneManager::processChangeSceneRequest()
 {
 	if (currentScene_ != nullptr)
-	{
 		sceneCleanup();
-		MotorCasaPaco::getInstance()->getSM()->clearScene();
-	}
 
 	currentScene_ = loadScene(nextScene_);
 	currentScene_->start();
