@@ -79,9 +79,9 @@ void SceneManager::changeScene(const std::string& name)
 {
 	if (currentScene_ != nullptr && name == currentScene_->getName()) {
 #ifdef _DEBUG
-		printf("WARNING: Scene %s is currently active, ignoring 'changeScene()'...", name);
+		printf("RELOADING...", name);
 #endif
-		return;
+		//return;
 	}
 
 	if (changeSceneRequested_ && name == nextScene_) {
