@@ -47,10 +47,10 @@ Scene* SceneManager::loadScene(const std::string& sceneName)
 {
 	json j = ResourceManager::getInstance()->loadSceneFile(sceneName);
 
-	Scene* scene = new Scene();
-	scene->setupScene(j);
+	currentScene_ = new Scene();
+	currentScene_->setupScene(j);
 
-	return scene;
+	return currentScene_;
 }
 
 Scene* SceneManager::getCurrentScene()
@@ -135,7 +135,7 @@ void SceneManager::processChangeSceneRequest()
 	if (currentScene_ != nullptr)
 		sceneCleanup();
 
-	currentScene_ = loadScene(nextScene_);
+	loadScene(nextScene_);
 	currentScene_->start();
 
 	nextScene_ = "";
