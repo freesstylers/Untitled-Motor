@@ -212,8 +212,12 @@ void RigidBody::createRigidBody(json& args)
 		body->setSpinningFriction(spinningFriction);
 	}
 
-	if (!args["FixRotation"].is_null() && args["FixRotation"]) {
-		body->setAngularFactor(btVector3(0.0f, 0.0f, 0.0f));
+	if (!args["angularFactor"].is_null() && args["angularFactor"].is_array()) {
+		body->setAngularFactor(btVector3(args["angularFactor"][0], args["angularFactor"][1], args["angularFactor"][2]));
+	}
+
+	if (!args["linearFactor"].is_null() && args["linearFactor"].is_array()) {
+		body->setLinearFactor(btVector3(args["linearFactor"][0], args["linearFactor"][1], args["linearFactor"][2]));
 	}
 
 	if (!args["isTrigger"].is_null() && args["isTrigger"]) {
