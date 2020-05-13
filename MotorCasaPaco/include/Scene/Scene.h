@@ -29,6 +29,7 @@ public:
 	void lateUpdate();
 	void pausedUpdate();
 	void alwaysLateUpdate();
+	void deleteInstances();
 
 private:
 	std::map<std::string, Entity*> entities;

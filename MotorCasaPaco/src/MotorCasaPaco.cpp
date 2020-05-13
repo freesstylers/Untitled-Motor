@@ -219,6 +219,8 @@ void MotorCasaPaco::processFrame()
 
 	AudioManager::getInstance()->update();
 
+	SceneManager::getInstance()->deleteEntities();
+
 	GUI_Manager::getInstance()->update(DeltaTime());
 
 	SceneManager::getInstance()->endFrame();

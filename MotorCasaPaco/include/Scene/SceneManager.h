@@ -29,6 +29,7 @@ public:
 	void pausedUpdate();
 	void alwaysLateUpdate();
 	void endFrame();
+	void deleteEntities();
 
 private:
 	SceneManager();

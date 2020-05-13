@@ -130,6 +130,11 @@ void SceneManager::alwaysLateUpdate()
 	currentScene_->alwaysLateUpdate();
 }
 
+void SceneManager::deleteEntities()
+{
+	currentScene_->deleteInstances();
+}
+
 void SceneManager::processChangeSceneRequest()
 {
 	if (currentScene_ != nullptr)

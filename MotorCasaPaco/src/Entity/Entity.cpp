@@ -241,3 +241,13 @@ Transform* Entity::getTransform()
 {
 	return getComponent<Transform>("Transform");
 }
+
+bool Entity::isPreparedToDie()
+{
+	return preparedToDie;
+}
+
+void Entity::setPreparedToDie(bool die)
+{
+	preparedToDie = die;
+}
