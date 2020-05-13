@@ -77,9 +77,6 @@ public:
 
 	Transform* getTransform();
 
-	bool isPreparedToDie();
-	void setPreparedToDie(bool die);
-
 protected:
 
 private:
@@ -93,5 +90,4 @@ private:
 	std::map<std::string, Entity*> children_;
 
 	Scene* scene_;
-	bool preparedToDie = false;
 };

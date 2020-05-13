@@ -162,19 +162,14 @@ void Scene::alwaysLateUpdate()
 
 void Scene::deleteInstances()
 {
-	for (auto it = entities.begin(); it != entities.end();)
+	for (auto it = executioner.begin(); it != executioner.end();)
 	{
-		if ((*it).second->isPreparedToDie())
-		{
 			auto aux = it;
 			aux++;
 			delete it->second;
 			it->second = nullptr;
 			entities.erase(it);
 			it = aux;
-		}
-		else
-			it++;
 	}
 }
 Entity* Scene::createEntity(json& j)
@@ -241,8 +236,8 @@ Entity* Scene::addEntity(std::string name, std::string tag, bool callStart) {
 bool Scene::deleteEntity(const std::string name) {
 	auto it = entities.find(name);
 	if (it != entities.end()) {
-		it->second->setPreparedToDie(true);
-
+		executioner.insert(*it);
+		//it->second->setPreparedToDie(true);
 		return true;
 	}
 
