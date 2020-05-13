@@ -164,12 +164,14 @@ void Scene::deleteInstances()
 {
 	for (auto it = executioner.begin(); it != executioner.end();)
 	{
-			auto aux = it;
-			aux++;
-			delete it->second;
-			it->second = nullptr;
-			entities.erase(it);
-			it = aux;
+		auto aux = it;
+		auto originalEntity = entities.find(it->first);
+		aux++;
+		delete it->second;
+		it->second = nullptr;
+		executioner.erase(it);
+		entities.erase(originalEntity);
+		it = aux;
 	}
 }
 Entity* Scene::createEntity(json& j)
@@ -237,7 +239,6 @@ bool Scene::deleteEntity(const std::string name) {
 	auto it = entities.find(name);
 	if (it != entities.end()) {
 		executioner.insert(*it);
-		//it->second->setPreparedToDie(true);
 		return true;
 	}
 
