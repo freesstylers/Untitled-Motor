@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="DefaultWindow" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="GWEN/StaticImage" name="Background" >
+            <Property name="Area" value="{{0.219531,0},{0.211111,0},{0.789063,0},{0.786111,0}}" />
+            <Property name="Image" value="GWEN/Input.Button.Hovered.Middle.Middle" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="BackgroundEnabled" value="false" />
+            <Property name="RiseOnClickEnabled" value="false" />
+        </Window>
+        <Window type="GWEN/Button" name="Selection" >
+            <Property name="Area" value="{{0.227344,0},{0.704167,0},{0.471875,0},{0.773611,0}}" />
+            <Property name="Font" value="shump-48" />
+            <Property name="Text" value="ELEGIR NIVEL" />
+        </Window>
+        <Window type="GWEN/StaticImage" name="Star2" >
+            <Property name="Area" value="{{0.458594,0},{0.322222,0},{0.573438,0},{0.498611,0}}" />
+            <Property name="Image" value="VayaCanicastanhazos/Star_Yes" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="BackgroundEnabled" value="false" />
+            <Property name="RiseOnClickEnabled" value="false" />
+        </Window>
+        <Window type="GWEN/StaticText" name="LevelCompleted" >
+            <Property name="Area" value="{{0.3375,0},{0.223611,0},{0.69375,0},{0.305556,0}}" />
+            <Property name="Font" value="shump-48" />
+            <Property name="Text" value="nivel completado" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="true" />
+            <Property name="BackgroundEnabled" value="true" />
+            <AutoWindow namePath="__auto_hscrollbar__" >
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+            <AutoWindow namePath="__auto_vscrollbar__" >
+                <Property name="VerticalScrollbar" value="true" />
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+        </Window>
+        <Window type="GWEN/StaticImage" name="Star1" >
+            <Property name="Area" value="{{0.3375,0},{0.322222,0},{0.452344,0},{0.498611,0}}" />
+            <Property name="Image" value="VayaCanicastanhazos/Star_Yes" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="BackgroundEnabled" value="false" />
+            <Property name="RiseOnClickEnabled" value="false" />
+        </Window>
+        <Window type="GWEN/Button" name="NextLevel" >
+            <Property name="Area" value="{{0.482031,0},{0.704167,0},{0.782812,0},{0.773611,0}}" />
+            <Property name="Font" value="shump-48" />
+            <Property name="Text" value="SIGUIENTE NIVEL" />
+        </Window>
+        <Window type="GWEN/StaticText" name="Time" >
+            <Property name="Area" value="{{0.342969,0},{0.509722,0},{0.699219,0},{0.591667,0}}" />
+            <Property name="Font" value="shump-48" />
+            <Property name="Text" value="TIEMPO 00:00" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="true" />
+            <Property name="HorzFormatting" value="CentreAligned" />
+            <Property name="BackgroundEnabled" value="true" />
+            <AutoWindow namePath="__auto_hscrollbar__" >
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+            <AutoWindow namePath="__auto_vscrollbar__" >
+                <Property name="VerticalScrollbar" value="true" />
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+        </Window>
+        <Window type="GWEN/StaticText" name="Record" >
+            <Property name="Area" value="{{0.341406,0},{0.602778,0},{0.697656,0},{0.684722,0}}" />
+            <Property name="Font" value="shump-48" />
+            <Property name="Text" value="RECORD 00:00" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="true" />
+            <Property name="HorzFormatting" value="CentreAligned" />
+            <Property name="BackgroundEnabled" value="true" />
+            <AutoWindow namePath="__auto_hscrollbar__" >
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+            <AutoWindow namePath="__auto_vscrollbar__" >
+                <Property name="VerticalScrollbar" value="true" />
+                <AutoWindow namePath="__auto_thumb__" >
+                    <Property name="MouseInputPropagationEnabled" value="true" />
+                </AutoWindow>
+            </AutoWindow>
+        </Window>
+        <Window type="GWEN/StaticImage" name="Star3" >
+            <Property name="Area" value="{{0.58125,0},{0.322222,0},{0.696094,0},{0.498611,0}}" />
+            <Property name="Image" value="VayaCanicastanhazos/Star_Yes" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="FrameEnabled" value="false" />
+            <Property name="BackgroundEnabled" value="false" />
+            <Property name="RiseOnClickEnabled" value="false" />
+        </Window>
+    </Window>
+</GUILayout>
