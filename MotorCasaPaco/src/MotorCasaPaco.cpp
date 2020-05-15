@@ -164,6 +164,12 @@ void MotorCasaPaco::init()
 		throw std::runtime_error("EventManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
+	try { InputManager::getInstance()->setup(); }
+	catch (const std::exception & e)
+	{
+		throw std::runtime_error("InputManager setup fail \n" + (Ogre::String)e.what() + "\n");	return;
+	}
+
 	setupRoot();
 
 	if (checkConfig()) {
@@ -274,19 +280,59 @@ void MotorCasaPaco::extraConfig(json& j)
 	{
 		if (j["FullScreen"] == "Si")
 		{
-
 			fullScreen = true;
 		}
 		else if (j["FullScreen"] == "No")
 		{
-
 			fullScreen = false;
 		}
 	}
 
+	if (!j["InvertAxisX"].is_null())
+	{
+		if (j["InvertAxisX"] == "Si")
+		{
+			InputManager::getInstance()->setInvertedAxisX(true);
+			invertedAxisX = true;
+		}
+		else if (j["InvertAxisX"] == "No")
+		{
+			InputManager::getInstance()->setInvertedAxisX(false);
+			invertedAxisX = false;
+		}
+	}
+
+	if (!j["InvertAxisY"].is_null())
+	{
+		if (j["InvertAxisY"] == "Si")
+		{
+			InputManager::getInstance()->setInvertedAxisY(true);
+			invertedAxisY = true;
+		}
+		else if (j["InvertAxisY"] == "No")
+		{
+			InputManager::getInstance()->setInvertedAxisY(false);
+			invertedAxisY = false;
+		}
+	}
+
+	if (!j["Filter"].is_null() && j["Filter"] != "No")
+	{
+		//Filtro
+	}
+
+
+	if (!j["ShowFPS"].is_null() && j["ShowFPS"] != "No")
+	{
+		//Show FPS
+	}
+}
+
+void MotorCasaPaco::extraConfigSM(json& j)
+{
 	if (!j["Shadows"].is_null())
 	{
-		/*if (j["Shadows"] == "No")
+		if (j["Shadows"] == "No")
 		{
 			sm->setShadowTechnique(Ogre::SHADOWTYPE_NONE);
 		}
@@ -307,8 +353,8 @@ void MotorCasaPaco::extraConfig(json& j)
 			{
 				sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 			}
-		}*/
-		
+		}
+
 		std::string interm = j["Shadows"];
 		shadows = interm;
 	}
@@ -337,17 +383,6 @@ void MotorCasaPaco::extraConfig(json& j)
 		else if (j["Reflections"] == "Alto")
 		{
 		}
-	}
-
-	if (!j["Filter"].is_null() && j["Filter"] != "No")
-	{
-		//Filtro
-	}
-
-
-	if (!j["ShowFPS"].is_null() && j["ShowFPS"] != "No")
-	{
-		//Show FPS
 	}
 }
 
@@ -406,12 +441,6 @@ void MotorCasaPaco::setup()
 		throw std::runtime_error("ResourceManager setup fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
-	try { InputManager::getInstance()->setup(); }
-	catch (const std::exception& e)
-	{
-		throw std::runtime_error("InputManager setup fail \n" + (Ogre::String)e.what() + "\n");	return;
-	}
-
 	try { GUI_Manager::setupInstance(MotorCasaPaco::getInstance()->getOgreWin()); }
 	catch (const std::exception & e)
 	{
@@ -423,6 +452,8 @@ void MotorCasaPaco::setup()
 	ResourceManager::getInstance()->addSceneManager(sm);
 
 	MotorCasaPaco::getInstance()->getRoot()->addFrameListener(frameListener_);
+
+	extraConfigSM(j);
 
 	if (fullScreen)
 		setFullScreenOn();
@@ -670,7 +701,19 @@ json MotorCasaPaco::writeExtraOptions()
 		outputFile << "\"FullScreen\" : \"" << "Si" << "\",\n";
 	else
 		outputFile << "\"FullScreen\" : \"" << "No" << "\",\n";
+
 	outputFile << "\"Shadows\" : \"" << "Medio" << "\",\n";
+
+	if (invertedAxisX)
+		outputFile << "\"InvertAxisX\" : \"" << "Si" << "\",\n";
+	else
+		outputFile << "\"InvertAxisX\" : \"" << "No" << "\",\n";
+
+	if (invertedAxisY)
+		outputFile << "\"InvertAxisY\" : \"" << "Si" << "\",\n";
+	else
+		outputFile << "\"InvertAxisY\" : \"" << "No" << "\",\n";
+
 	outputFile << "\"DrawDistance\" : \"" << "Medio" << "\",\n";
 	outputFile << "\"Reflections\" : \"" << "No" << "\",\n";
 	outputFile << "\"Filter\" : \"" << "No" << "\",\n";
@@ -818,6 +861,42 @@ void MotorCasaPaco::setShadows(std::string value)
 	shadows = value;
 }
 
+void MotorCasaPaco::setInvertedAxisX(bool value)
+{
+	invertedAxisX = value;
+}
+
+void MotorCasaPaco::setInvertedAxisY(bool value)
+{
+	invertedAxisY = value;
+}
+
+bool MotorCasaPaco::getInvertedAxisX()
+{
+	return invertedAxisX;
+}
+
+bool MotorCasaPaco::getInvertedAxisY()
+{
+	return invertedAxisY;
+}
+
+void MotorCasaPaco::changeBasicOptions()
+{
+	InputManager::getInstance()->setInvertedAxisX(invertedAxisX);
+	InputManager::getInstance()->setInvertedAxisY(invertedAxisY);
+
+	ExtraConfig = writeExtraOptions();
+}
+
+void MotorCasaPaco::revertBasicOptions()
+{
+	invertedAxisX = InputManager::getInstance()->getInvertedAxisX();
+	invertedAxisY = InputManager::getInstance()->getInvertedAxisY();
+
+	extraConfig(ExtraConfig);
+}
+
 void MotorCasaPaco::changeGraphicComponents()
 {
 	//FullScreen
@@ -920,7 +999,7 @@ void MotorCasaPaco::revertAdvancedGraphicChanges()
 		gamma = false;
 
 	ExtraConfig = BackupExtraConfig;
-	extraConfig(ExtraConfig);
+	extraConfigSM(ExtraConfig);
 }
 
 void MotorCasaPaco::storeGraphicsConfiguration()

@@ -425,6 +425,8 @@ float InputManager::GameControllerGetAxisMovement(GameControllerAxis axis, bool 
 			if (x < 0) x = x * x * -1;
 			else x = x * x;
 		}
+		if (invertedAxisX)
+			x = x * -1;
 		break;
 	case SDL_CONTROLLER_AXIS_LEFTY:
 		if (x <= (c.deadZoneLY / axisMax) && x >= -(c.deadZoneLY / axisMax))
@@ -441,6 +443,8 @@ float InputManager::GameControllerGetAxisMovement(GameControllerAxis axis, bool 
 			if (x < 0) x = x * x * -1;
 			else x = x * x;
 		}
+		if (invertedAxisY)
+			x = x * -1;
 		break;
 	default:
 		break;
@@ -498,4 +502,24 @@ void InputManager::injectLeftMouseButtonDown()
 void InputManager::injectLeftMouseButtonUp()
 {
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectMouseButtonUp(CEGUI::MouseButton::LeftButton);
+}
+
+void InputManager::setInvertedAxisX(bool value)
+{
+	invertedAxisX = value;
+}
+
+void InputManager::setInvertedAxisY(bool value)
+{
+	invertedAxisY = value;
+}
+
+bool InputManager::getInvertedAxisX()
+{
+	return invertedAxisX;
+}
+
+bool InputManager::getInvertedAxisY()
+{
+	return invertedAxisY;
 }

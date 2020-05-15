@@ -96,6 +96,13 @@ public:
 	std::string getShadows();
 	void setShadows(std::string value);
 
+	void setInvertedAxisX(bool value);
+	void setInvertedAxisY(bool value);
+	bool getInvertedAxisX();
+	bool getInvertedAxisY();
+
+	void changeBasicOptions();
+	void revertBasicOptions();
 	void changeGraphicComponents();
 	void changeAdvancedGraphicComponents();
 	void revertGraphicChanges();
@@ -119,6 +126,7 @@ private:
 	void pollEvents();
 	bool checkConfig();
 	void extraConfig(json& j);
+	void extraConfigSM(json& j);
 	void setupFactories();
 
 	Ogre::Root* root;
@@ -146,6 +154,10 @@ private:
 	std::string fsaa;
 	std::string shadows;
 	std::string BackupShadows;
+
+	bool invertedAxisX;
+	bool invertedAxisY;
+
 	json ExtraConfig;
 	json BackupExtraConfig;
 };
