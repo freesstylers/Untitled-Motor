@@ -77,10 +77,12 @@ public:
 
 	Transform* getTransform();
 
+	bool DontDestroyOnLoad = false;
 protected:
 
 private:
 	bool enabled_ = true, activeOnHierarchy_ = true;
+
 	std::string name_;
 	std::string tag_;
 	std::vector<uptr_cmp> components_;
