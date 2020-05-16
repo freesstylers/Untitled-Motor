@@ -51,6 +51,7 @@ public:
 	void injectPosition(int x, int y);
 	void setLayoutVisible(int layout, bool visible);
 	void changeImage(std::string image, std::string newImage);
+	std::vector<CEGUI::Window*> getLayouts();
 
 private:
 	GUI_Manager(Ogre::RenderWindow* window);

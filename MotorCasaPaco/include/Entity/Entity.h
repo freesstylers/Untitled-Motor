@@ -77,13 +77,12 @@ public:
 
 	Transform* getTransform();
 
-	bool isPreparedToDie();
-	void setPreparedToDie(bool die);
-
+	bool DontDestroyOnLoad = false;
 protected:
 
 private:
 	bool enabled_ = true, activeOnHierarchy_ = true;
+
 	std::string name_;
 	std::string tag_;
 	std::vector<uptr_cmp> components_;
@@ -93,5 +92,4 @@ private:
 	std::map<std::string, Entity*> children_;
 
 	Scene* scene_;
-	bool preparedToDie = false;
 };

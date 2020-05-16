@@ -62,6 +62,9 @@ private:
 	int LtriggerPressed = 0;
 	int RtriggerPressed = 0;
 
+	bool invertedAxisX;
+	bool invertedAxisY;
+
 public:
 	~InputManager();
 
@@ -94,4 +97,9 @@ public:
 
 	void injectLeftMouseButtonDown();
 	void injectLeftMouseButtonUp();
+	
+	void setInvertedAxisX(bool value);
+	void setInvertedAxisY(bool value);
+	bool getInvertedAxisX();
+	bool getInvertedAxisY();
 };

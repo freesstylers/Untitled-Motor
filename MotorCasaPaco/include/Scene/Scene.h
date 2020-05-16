@@ -33,6 +33,7 @@ public:
 
 private:
 	std::map<std::string, Entity*> entities;
+	std::map<std::string, Entity*> executioner;
 	std::vector<Entity*> entitiesWithoutParent_; // Used recursively enable all entities on start
 	std::string name;
 	int addedEntitiesCounter = 0;

@@ -5,7 +5,7 @@
         <Property name="Area" value="{{0,0},{0,-2},{1,0},{1,11}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="GWEN/StaticImage" name="Fondo" >
-            <Property name="Area" value="{{0,1},{0,2},{0,1281},{0,722}}" />
+            <Property name="Area" value="{{0.00078125,0},{0.00277778,0},{1.00078,0},{1.00278,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Fondo" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -90,7 +90,7 @@
             <Property name="Area" value="{{0.783594,0},{0.425,30},{0.903907,0},{0.625,30}}" />
         </Window>
         <Window type="GWEN/StaticImage" name="Info_6_Back" >
-            <Property name="Area" value="{{0,406},{0,592},{1,-682},{1,-74}}" />
+            <Property name="Area" value="{{0.317187,0},{0.822222,0},{0.467187,0},{0.897222,0}}" />
             <Property name="Image" value="GWEN/Input.Button.Disabled.Middle.Middle" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -98,9 +98,9 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticText" name="Info_6_Text" >
-            <Property name="Area" value="{{0,411},{0,627},{1,-684},{1,-75}}" />
+            <Property name="Area" value="{{0.321094,0},{0.870833,0},{0.465625,0},{0.895833,0}}" />
             <Property name="Font" value="shump-20" />
-            <Property name="Text" value="RECORD 00:00" />
+            <Property name="Text" value="00:00" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
             <Property name="HorzFormatting" value="CentreAligned" />
@@ -119,7 +119,7 @@
             </AutoWindow>
         </Window>
         <Window type="GWEN/StaticImage" name="Info_6_Star_1" >
-            <Property name="Area" value="{{0,450},{0,594},{0,482},{0,626}}" />
+            <Property name="Area" value="{{0.351563,0},{0.825,0},{0.376563,0},{0.869444,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Star_Yes" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -127,7 +127,7 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Info_6_Star_2" >
-            <Property name="Area" value="{{0,485},{0,594},{0,517},{0,626}}" />
+            <Property name="Area" value="{{0.378906,0},{0.825,0},{0.403906,0},{0.869444,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Star_Yes" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -135,7 +135,7 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Info_6_Star_3" >
-            <Property name="Area" value="{{0,520},{0,594},{0,552},{0,626}}" />
+            <Property name="Area" value="{{0.40625,0},{0.825,0},{0.43125,0},{0.869444,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Star_Yes" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -143,7 +143,7 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Info_6_Back2" >
-            <Property name="Area" value="{{0,106},{0,594},{1,-982},{1,-72}}" />
+            <Property name="Area" value="{{0.0828125,0},{0.825,0},{0.232813,0},{0.9,0}}" />
             <Property name="Image" value="GWEN/Input.Button.Disabled.Middle.Middle" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -151,7 +151,7 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Info_6_Star_32" >
-            <Property name="Area" value="{{0,178},{0,604},{0,213},{0,639}}" />
+            <Property name="Area" value="{{0.139062,0},{0.838889,0},{0.166406,0},{0.8875,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Star_Yes" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -159,7 +159,7 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Info_6_Star_22" >
-            <Property name="Area" value="{{0,142},{0,604},{0,177},{0,639}}" />
+            <Property name="Area" value="{{0.110937,0},{0.838889,0},{0.138281,0},{0.8875,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Star_Yes" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -167,7 +167,7 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticImage" name="Info_6_Star_12" >
-            <Property name="Area" value="{{0,107},{0,604},{0,142},{0,639}}" />
+            <Property name="Area" value="{{0.0835937,0},{0.838889,0},{0.110937,0},{0.8875,0}}" />
             <Property name="Image" value="VayaCanicastanhazos/Star_Yes" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />
             <Property name="FrameEnabled" value="false" />
@@ -175,7 +175,7 @@
             <Property name="RiseOnClickEnabled" value="false" />
         </Window>
         <Window type="GWEN/StaticText" name="Info_6_Text2" >
-            <Property name="Area" value="{{0,214},{0,600},{1,-984},{1,-76}}" />
+            <Property name="Area" value="{{0.167187,0},{0.833333,0},{0.23125,0},{0.894444,0}}" />
             <Property name="Font" value="shump-32" />
             <Property name="Text" value="00:00" />
             <Property name="MaxSize" value="{{1,0},{1,0}}" />

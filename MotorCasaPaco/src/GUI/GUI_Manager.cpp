@@ -242,6 +242,11 @@ void GUI_Manager::changeImage(std::string image, std::string newImage) 	// "Layo
 	thumbnail->setProperty("Image", newImage);
 }
 
+std::vector<CEGUI::Window*> GUI_Manager::getLayouts()
+{
+	return layouts;
+}
+
 bool GUI_Manager::setupInstance(Ogre::RenderWindow* window)
 {
 	if (instance == 0)

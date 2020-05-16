@@ -21,10 +21,23 @@ Scene::~Scene()
 {
 	MotorCasaPaco::getInstance()->getOgreWin()->removeAllViewports();
 	MotorCasaPaco::getInstance()->getSM()->destroyAllCameras();
+	std::map<std::string, Entity*> dontDelete;
 	for (std::pair<std::string, Entity*> i : entities) {
-		delete i.second;
+		//Esto esta para que haya objetos que no se eliminen entre escenas
+		//Principalmente para el gameManager o cualquier otro singleton
+		if (!i.second->DontDestroyOnLoad)
+			delete i.second;
+		else
+			dontDelete.insert(i);
 	}
 	entities.clear();
+
+	//Volvemos a meter las entidades que no queremos eliminar
+	for (std::pair<std::string, Entity*> i : dontDelete)
+	{
+		entities.insert(i);
+	}
+	dontDelete.clear();
 }
 
 void Scene::setupScene(json& j) {
@@ -162,19 +175,21 @@ void Scene::alwaysLateUpdate()
 
 void Scene::deleteInstances()
 {
-	for (auto it = entities.begin(); it != entities.end();)
+	for (auto it = executioner.begin(); it != executioner.end();)
 	{
-		if ((*it).second->isPreparedToDie())
-		{
-			auto aux = it;
-			aux++;
-			delete it->second;
-			it->second = nullptr;
-			entities.erase(it);
+		auto aux = it;
+		auto originalEntity = entities.find(it->first);
+		aux++;
+		//excluimos a los que no se deben eliminar (por si acaso)
+		if (it->second->DontDestroyOnLoad) {
 			it = aux;
+			continue;
 		}
-		else
-			it++;
+		delete it->second;
+		it->second = nullptr;
+		executioner.erase(it);
+		entities.erase(originalEntity);
+		it = aux;
 	}
 }
 Entity* Scene::createEntity(json& j)
@@ -185,12 +200,18 @@ Entity* Scene::createEntity(json& j)
 		std::string aux = j["tag"];
 		tag = aux;
 	}
+	bool d = false;
+	if (!j["dontDestroyOnLoad"].is_null()) {
+		bool destroy = j["dontDestroyOnLoad"];
+		d = destroy;
+	}
 
 	bool entEnabled = true;
 	if (!j["enabled"].is_null() && j["enabled"] == "false")
 		entEnabled = false;
 
 	Entity* ent = new Entity(this, j["name"], tag, entEnabled);
+	ent->DontDestroyOnLoad = d;
 
 	if (!j["prefab"].is_null() && j["prefab"].is_string()) {
 
@@ -203,6 +224,8 @@ Entity* Scene::createEntity(json& j)
 
 			if (tag == "Untagged" && !prefab["tag"].is_null())
 				ent->setTag(prefab["tag"]);
+			if (!prefab["dontDestroyOnLoad"].is_null())
+				ent->DontDestroyOnLoad = prefab["dontDestroyOnLoad"];
 
 			ent->init(prefab);
 
@@ -241,8 +264,7 @@ Entity* Scene::addEntity(std::string name, std::string tag, bool callStart) {
 bool Scene::deleteEntity(const std::string name) {
 	auto it = entities.find(name);
 	if (it != entities.end()) {
-		it->second->setPreparedToDie(true);
-
+		executioner.insert(*it);
 		return true;
 	}
 

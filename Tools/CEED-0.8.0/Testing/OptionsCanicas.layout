@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <GUILayout version="4" >
-    <Window type="DefaultWindow" name="GraphicOptions" >
+    <Window type="DefaultWindow" name="BasicOptions" >
         <Property name="Area" value="{{0,0},{0,0},{1,2},{1,0}}" />
         <Property name="MaxSize" value="{{1,0},{1,0}}" />
         <Window type="GWEN/StaticImage" name="Fondo" >
@@ -339,55 +339,55 @@
                 </AutoWindow>
             </AutoWindow>
         </Window>
+        <Window type="GWEN/Button" name="GraphicOptions" >
+            <Property name="Area" value="{{0.296876,0},{0.730556,0},{0.702345,0},{0.825001,0}}" />
+            <Property name="Font" value="shump-48" />
+            <Property name="Text" value="OPCIONES graficas" />
+        </Window>
         <Window type="GWEN/Button" name="Apply" >
             <Property name="Area" value="{{0.109375,0},{0.873611,0},{0.296875,0},{0.968056,0}}" />
             <Property name="Font" value="shump-48" />
             <Property name="Text" value="Aplicar" />
-        </Window>
-        <Window type="GWEN/Button" name="Revert" >
-            <Property name="Area" value="{{0.407813,0},{0.875,0},{0.595313,0},{0.969445,0}}" />
-            <Property name="Font" value="shump-48" />
-            <Property name="Text" value="Revertir" />
         </Window>
         <Window type="GWEN/Button" name="Back" >
             <Property name="Area" value="{{0.700781,0},{0.873611,0},{0.888281,0},{0.968056,0}}" />
             <Property name="Font" value="shump-48" />
             <Property name="Text" value="Atrás" />
         </Window>
-        <Window type="GWEN/Button" name="AdvancedOptions" >
-            <Property name="Area" value="{{0.296876,0},{0.730556,0},{0.702345,0},{0.825001,0}}" />
+        <Window type="GWEN/Button" name="Revert" >
+            <Property name="Area" value="{{0.407813,0},{0.875,0},{0.595313,0},{0.969445,0}}" />
             <Property name="Font" value="shump-48" />
-            <Property name="Text" value="OPCIONES graficas" />
+            <Property name="Text" value="Revertir" />
         </Window>
-        <Window type="VayaCanicastanhazos/LeftArrow" name="LeftArrow_1" >
-            <Property name="Area" value="{{0.604688,0},{0.161111,0},{0.64375,0},{0.230556,0}}" />
+        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow_1" >
+            <Property name="Area" value="{{0,1169},{0,116},{0,1219},{0,166}}" />
         </Window>
-        <Window type="VayaCanicastanhazos/LeftArrow" name="LeftArrow_2" >
-            <Property name="Area" value="{{0.604688,0},{0.265278,0},{0.64375,0},{0.334722,0}}" />
+        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow_1" >
+            <Property name="Area" value="{{0,774},{0,116},{0,824},{0,166}}" />
         </Window>
-        <Window type="VayaCanicastanhazos/LeftArrow" name="LeftArrow_3" >
-            <Property name="Area" value="{{0.604688,0},{0.369444,0},{0.64375,0},{0.438889,0}}" />
+        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow_2" >
+            <Property name="Area" value="{{0,1169},{0,191},{0,1219},{0,241}}" />
         </Window>
-        <Window type="VayaCanicastanhazos/LeftArrow" name="LeftArrow_4" >
-            <Property name="Area" value="{{0.604688,0},{0.473611,0},{0.64375,0},{0.543056,0}}" />
+        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow_5" >
+            <Property name="Area" value="{{0,1169},{0,416},{0,1219},{0,466}}" />
         </Window>
-        <Window type="VayaCanicastanhazos/LeftArrow" name="LeftArrow_5" >
-            <Property name="Area" value="{{0.604688,0},{0.577778,0},{0.64375,0},{0.647222,0}}" />
+        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow_4" >
+            <Property name="Area" value="{{0,1169},{0,341},{0,1219},{0,391}}" />
         </Window>
-        <Window type="VayaCanicastanhazos/RightArrow" name="RightArrow_1" >
-            <Property name="Area" value="{{0.913281,0},{0.161111,0},{0.952344,0},{0.230556,0}}" />
+        <Window type="A_Toda_Pastilla/RightArrow" name="RightArrow_3" >
+            <Property name="Area" value="{{0,1169},{0,266},{0,1219},{0,316}}" />
         </Window>
-        <Window type="VayaCanicastanhazos/RightArrow" name="RightArrow_2" >
-            <Property name="Area" value="{{0.913281,0},{0.265278,0},{0.952344,0},{0.334722,0}}" />
+        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow_2" >
+            <Property name="Area" value="{{0,774},{0,191},{0,824},{0,241}}" />
         </Window>
-        <Window type="VayaCanicastanhazos/RightArrow" name="RightArrow_3" >
-            <Property name="Area" value="{{0.913281,0},{0.369444,0},{0.952344,0},{0.438889,0}}" />
+        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow_3" >
+            <Property name="Area" value="{{0,774},{0,266},{0,824},{0,316}}" />
         </Window>
-        <Window type="VayaCanicastanhazos/RightArrow" name="RightArrow_4" >
-            <Property name="Area" value="{{0.913281,0},{0.473611,0},{0.952344,0},{0.543056,0}}" />
+        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow_4" >
+            <Property name="Area" value="{{0,774},{0,341},{0,824},{0,391}}" />
         </Window>
-        <Window type="VayaCanicastanhazos/RightArrow" name="RightArrow_5" >
-            <Property name="Area" value="{{0.913281,0},{0.577778,0},{0.952344,0},{0.647222,0}}" />
+        <Window type="A_Toda_Pastilla/LeftArrow" name="LeftArrow_5" >
+            <Property name="Area" value="{{0,774},{0,416},{0,824},{0,466}}" />
         </Window>
     </Window>
 </GUILayout>
