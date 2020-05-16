@@ -237,6 +237,9 @@ call preBuild.bat "$(SolutionDir)bin"</Command>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)..\..\dependencies\cegui-0.8.7\build\cegui\include\CEGUI;$(ProjectDir)..\..\dependencies\cegui-0.8.7\dependencies\include;$(ProjectDir)..\..\dependencies\cegui-0.8.7\cegui\include;$(ProjectDir)..\..\dependencies\ogre-1.12.4\build\include\;$(ProjectDir)..\..\dependencies\ogre-1.12.4\OgreMain\include\;$(ProjectDir)..\..\dependencies\SDL2-2.0.10\include;$(ProjectDir)..\..\dependencies\bullet3-2.89\src;$(ProjectDir)..\..\dependencies\btogre\src;$(ProjectDir)..\..\dependencies\fmod-2.00.07\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <Optimization>MaxSpeed</Optimization>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

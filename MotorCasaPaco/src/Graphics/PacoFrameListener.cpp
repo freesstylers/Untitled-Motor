@@ -30,7 +30,6 @@ PacoFrameListener::~PacoFrameListener()
 
 bool PacoFrameListener::frameStarted(const Ogre::FrameEvent& evt)
 {
-
 	std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - prevTime;
 
 	deltaTime_ = elapsed.count();

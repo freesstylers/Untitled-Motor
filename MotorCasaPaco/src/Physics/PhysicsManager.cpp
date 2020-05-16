@@ -6,6 +6,7 @@
 #include <BulletCollision/Gimpact/btGImpactShape.h>
 #include <btBulletDynamicsCommon.h>
 #include <OgreMesh.h>
+#include "MotorCasaPaco.h"
 
 PhysicsManager* PhysicsManager::instance = 0;
 
@@ -16,11 +17,13 @@ PhysicsManager::PhysicsManager()
 	broadphase = new btDbvtBroadphase();
 	solver = new btSequentialImpulseConstraintSolver();
 	world = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, config);
+
+	STEP_TIME = 1.0f / ITERATIONS_PER_SECOND;
 }
 
 void PhysicsManager::initWorld()
 {
-	world->setGravity(btVector3(0, -10, 0));
+	world->setGravity(btVector3(0, -100, 0));
 }
 
 void PhysicsManager::stepWorld()
@@ -28,7 +31,7 @@ void PhysicsManager::stepWorld()
 	if (!active_)
 		return;
 
-	world->stepSimulation(1.0 / 60.0, 10);
+	world->stepSimulation(MotorCasaPaco::getInstance()->DeltaTime(), 1, STEP_TIME);
 }
 
 void PhysicsManager::addRigidBody(btRigidBody* body)
@@ -39,6 +42,23 @@ void PhysicsManager::addRigidBody(btRigidBody* body)
 void PhysicsManager::setActive(bool active)
 {
 	this->active_ = active;
+}
+
+void PhysicsManager::setIterationsPerSecond(int iterationsPerSecond)
+{
+	ITERATIONS_PER_SECOND = iterationsPerSecond;
+	STEP_TIME = 1.0f / ITERATIONS_PER_SECOND;
+}
+
+void PhysicsManager::setGravity(Vector3 gravity)
+{
+	world->setGravity(gravity);
+}
+
+void PhysicsManager::setDefaultSleepingThresholds(float linear, float angular)
+{
+	DEFAULT_LINEAR_SLEEPING_THRESHOLD = linear;
+	DEFAULT_ANGULAR_SLEEPING_THRESHOLD = angular;
 }
 
 btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Vector3& pos, Ogre::Entity* ent, const float& mass, const bool& isAnimated, const bool& addToWorld)
@@ -92,6 +112,7 @@ btRigidBody* PhysicsManager::createRigidBody(const std::string& shape, const Vec
 	btMotionState* motion = new btDefaultMotionState(t);
 	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, colShape, inertia);
 	btRigidBody* body = new btRigidBody(info);
+	body->setSleepingThresholds(DEFAULT_LINEAR_SLEEPING_THRESHOLD, DEFAULT_ANGULAR_SLEEPING_THRESHOLD);
 	
 	if (addToWorld)
 		addRigidBody(body);
