@@ -339,15 +339,15 @@ void MotorCasaPaco::extraConfigSM(json& j)
 		else
 		{
 			sm->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-			MotorCasaPaco::getInstance()->getSM()->setShadowFarDistance(1000000);
+			MotorCasaPaco::getInstance()->getSM()->setShadowFarDistance(1000);
 
 			if (j["Shadows"] == "Bajo")
 			{
-				sm->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_MODULATIVE);
+				sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 			}
 			else if (j["Shadows"] == "Medio")
 			{
-				sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
+				sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 			}
 			else if (j["Shadows"] == "Alto")
 			{
@@ -357,6 +357,12 @@ void MotorCasaPaco::extraConfigSM(json& j)
 
 		std::string interm = j["Shadows"];
 		shadows = interm;
+	}
+	else
+	{
+		sm->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+		MotorCasaPaco::getInstance()->getSM()->setShadowFarDistance(10000000);
+		sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 	}
 
 	if (!j["DrawDistance"].is_null())
