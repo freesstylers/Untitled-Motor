@@ -14,7 +14,7 @@ public:
 	~Scene();
 
 	void setupScene(json& j);
-
+	void setupProcess(json& j);
 	Entity* getEntity(const std::string& name);
 	std::list<Entity*> getEntitiesByTag(const std::string& tag);
 	Entity* createEntity(json& j);
@@ -36,6 +36,7 @@ private:
 	std::map<std::string, Entity*> executioner;
 	std::vector<Entity*> entitiesWithoutParent_; // Used recursively enable all entities on start
 	std::string name;
+	bool sceneLoaded = false;
 	int addedEntitiesCounter = 0;
 
 	void recursivelyActivateEntities(Entity* ent);

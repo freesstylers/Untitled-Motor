@@ -184,7 +184,6 @@ void MotorCasaPaco::init()
 void MotorCasaPaco::changeScene(std::string name)
 {
 	SceneManager::getInstance()->changeScene(name);
-	EventManager::getInstance()->EmitEvent("changeScene");
 }
 
 void MotorCasaPaco::initLoadingTestScene()

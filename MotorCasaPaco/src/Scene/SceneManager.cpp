@@ -49,7 +49,7 @@ Scene* SceneManager::loadScene(const std::string& sceneName)
 
 	currentScene_ = new Scene();
 	currentScene_->setupScene(j);
-
+	EventManager::getInstance()->EmitEvent("changeScene");
 	return currentScene_;
 }
 
