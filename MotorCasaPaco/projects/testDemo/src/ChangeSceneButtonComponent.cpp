@@ -17,7 +17,7 @@ ChangeSceneButtonComponent::~ChangeSceneButtonComponent()
 bool ChangeSceneButtonComponent::function(const CEGUI::EventArgs& e)
 {
 	MotorCasaPaco::getInstance()->changeScene(sceneToLoad);
-	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,true);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,false);
 	return true;
 }
 

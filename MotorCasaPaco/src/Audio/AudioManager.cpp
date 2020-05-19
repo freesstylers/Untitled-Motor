@@ -168,9 +168,9 @@ void AudioManager::update()
 
 bool AudioManager::isPlayingChannel(int nChannel)
 {
-    bool isPlaying;
-    channels[nChannel]->isPlaying(&isPlaying);
-    return isPlaying;
+    bool isPaused;
+    channels[nChannel]->getPaused(&isPaused);
+    return !isPaused;
 }
 
 

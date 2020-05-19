@@ -85,7 +85,7 @@ bool FormatResolutionChangeComponent::functionResLess(const CEGUI::EventArgs& e)
 
 	GUI_Manager::getInstance()->changeText(ResText, currentRes);
 	MotorCasaPaco::getInstance()->setResolution(currentRes);
-	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,true);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,false);
 
 	return true;
 }
@@ -138,7 +138,7 @@ bool FormatResolutionChangeComponent::functionResMore(const CEGUI::EventArgs& e)
 
 	GUI_Manager::getInstance()->changeText(ResText, currentRes);
 	MotorCasaPaco::getInstance()->setResolution(currentRes);
-	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,true);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,false);
 
 	return true;
 }
@@ -174,7 +174,7 @@ bool FormatResolutionChangeComponent::functionForLess(const CEGUI::EventArgs& e)
 	GUI_Manager::getInstance()->changeText(ResText, currentRes);
 	MotorCasaPaco::getInstance()->setScreenProportion(currentFormat);
 	MotorCasaPaco::getInstance()->setResolution(currentRes);
-	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,true);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,false);
 
 	return true;
 }
@@ -210,7 +210,7 @@ bool FormatResolutionChangeComponent::functionForMore(const CEGUI::EventArgs& e)
 	GUI_Manager::getInstance()->changeText(ResText, currentRes);
 	MotorCasaPaco::getInstance()->setScreenProportion(currentFormat);
 	MotorCasaPaco::getInstance()->setResolution(currentRes);
-	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,true);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,false);
 
 	return true;
 }

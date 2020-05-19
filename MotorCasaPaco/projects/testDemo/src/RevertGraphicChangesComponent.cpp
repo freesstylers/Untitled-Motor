@@ -15,7 +15,7 @@ RevertGraphicChangesComponent::~RevertGraphicChangesComponent()
 bool RevertGraphicChangesComponent::function(const CEGUI::EventArgs& e)
 {
 	MotorCasaPaco::getInstance()->revertGraphicChanges();
-	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,true);
+	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,false);
 
 	Event evt = Event("RESET_GRAPHIC_INFO");
 	EventManager::getInstance()->EmitEvent(evt);
