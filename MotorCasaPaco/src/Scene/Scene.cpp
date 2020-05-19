@@ -10,9 +10,10 @@
 #include "Resources/ResourceManager.h"
 #include <GUI/GUI_Manager.h>
 #include "checkML.h"
-
+#include <condition_variable>
 using namespace std;
-
+std::mutex mtx;
+std::condition_variable cv;
 Scene::Scene()
 {
 }
@@ -41,6 +42,14 @@ Scene::~Scene()
 }
 
 void Scene::setupScene(json& j) {
+	std::unique_lock<std::mutex> lck(mtx);
+	setupProcess(j);
+	while (!sceneLoaded) cv.wait(lck);
+	sceneLoaded = false;
+}
+
+void Scene::setupProcess(json& j)
+{
 	std::string interm = j["name"];
 	name = interm;
 
@@ -85,6 +94,8 @@ void Scene::setupScene(json& j) {
 			}
 		}
 	}
+	sceneLoaded = true;
+	cv.notify_all();
 }
 
 void Scene::recursivelyActivateEntities(Entity* ent) {
