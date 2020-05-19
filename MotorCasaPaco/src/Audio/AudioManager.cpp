@@ -174,13 +174,15 @@ bool AudioManager::isPlayingChannel(int nChannel)
 }
 
 
-void AudioManager::playMusic(const char* path, int nChannel)
+void AudioManager::playMusic(const char* path, int nChannel, bool loop)
 {
     Sound* sound;
 
     system->createSound(path, FMOD_CREATESTREAM, nullptr, &sound);
 
-
+    if (loop) {
+        sound->setMode(FMOD_LOOP_NORMAL);
+    }
     result = system->playSound(sound, nullptr, false, &channels[nChannel]);
 
     if (result != FMOD_OK)

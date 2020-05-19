@@ -29,7 +29,7 @@ public:
 	~AudioManager();
 
 	void playSound(const char* path, int nChannel);
-	void playMusic(const char* path, int nChannel);
+	void playMusic(const char* path, int nChannel,bool loop);
 
 	void pauseChannel(int nChannel);
 	void setVolume(float vol, int nChannel);
@@ -43,7 +43,7 @@ public:
 
 	int addEmisor(Vector3 position, Vector3 velocity);
 	void removeEmisor(int numObj);
-
+	
 private:
 	AudioManager();
 
