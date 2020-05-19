@@ -62,4 +62,5 @@ double PacoFrameListener::DeltaTime()
 void PacoFrameListener::resetTimer()
 {
 	timer_->reset();
+	prevTime = std::chrono::high_resolution_clock::now();
 }

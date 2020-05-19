@@ -46,6 +46,8 @@ void Scene::setupScene(json& j) {
 	setupProcess(j);
 	while (!sceneLoaded) cv.wait(lck);
 	sceneLoaded = false;
+	MotorCasaPaco::getInstance()->resetTimer();
+
 }
 
 void Scene::setupProcess(json& j)
