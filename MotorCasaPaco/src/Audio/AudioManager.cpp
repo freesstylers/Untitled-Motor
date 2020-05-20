@@ -150,6 +150,11 @@ void AudioManager::pauseChannel(int nChannel)
     }
 }
 
+void AudioManager::stopChannel(int nChannel)
+{
+        channels[nChannel]->stop();
+}
+
 bool AudioManager::isPlaying()
 {
     bool isPlaying;

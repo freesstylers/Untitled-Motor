@@ -87,6 +87,8 @@ bool FormatResolutionChangeComponent::functionResLess(const CEGUI::EventArgs& e)
 	MotorCasaPaco::getInstance()->setResolution(currentRes);
 	AudioManager::getInstance()->playMusic("assets/sound/buttonSound.mp3", 0,false);
 
+
+
 	return true;
 }
 

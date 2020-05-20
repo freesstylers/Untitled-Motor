@@ -32,6 +32,7 @@ public:
 	void playMusic(const char* path, int nChannel,bool loop);
 
 	void pauseChannel(int nChannel);
+	void stopChannel(int nChannel);
 	void setVolume(float vol, int nChannel);
 
 	bool isPlaying();
