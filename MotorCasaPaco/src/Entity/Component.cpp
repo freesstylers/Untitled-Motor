@@ -67,7 +67,7 @@ void Component::setEnabled(bool enabled) {
 			}
 			onActivated();
 		}
-		else if (startWasCalled_) onDeactivated();
+		else onDeactivated();
 	}
 }
 
@@ -85,7 +85,7 @@ void Component::setActiveOnHierarchy(bool active) {
 			}
 			onActivated();
 		}
-		else if (startWasCalled_) onDeactivated();
+		else onDeactivated();
 	}
 }
 
