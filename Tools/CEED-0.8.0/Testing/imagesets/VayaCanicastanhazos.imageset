@@ -1,6 +1,6 @@
 <Imageset autoScaled="" imagefile="VayaCanicastanhazos.png" name="VayaCanicastanhazos" nativeHorzRes="800" nativeVertRes="600" version="2">
-    <Image height="369" name="Logo" width="499" xPos="2" yPos="1092" />
-    <Image height="1080" name="Fondo" width="1920" xPos="0" yPos="0" />
+    <Image height="326" name="Logo" width="594" xPos="948" yPos="1091" />
+    <Image height="343" name="Seal" width="495" xPos="2" yPos="1095" />
     <Image height="23" name="Mouse_Arrow" width="13" xPos="513" yPos="1096" />
     <Image height="24" name="Mouse_Move" width="23" xPos="536" yPos="1095" />
     <Image height="20" name="Mouse_Resize" width="21" xPos="566" yPos="1098" />
@@ -15,4 +15,8 @@
     <Image height="57" name="RightArrow_3" width="49" xPos="610" yPos="1131" />
     <Image height="70" name="Star_Yes" width="77" xPos="515" yPos="1269" />
     <Image height="70" name="Star_No" width="77" xPos="515" yPos="1198" />
+    <Image height="1080" name="Fondo" width="1938" xPos="0" yPos="0" />
+    <Image height="477" name="Yayo 1" width="465" xPos="20" yPos="1476" />
+    <Image height="496" name="Yayo 2" width="307" xPos="522" yPos="1461" />
+    <Image height="50" name="Blank" width="50" xPos="613" yPos="1207" />
 </Imageset>
