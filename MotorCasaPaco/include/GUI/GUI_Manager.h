@@ -51,6 +51,8 @@ public:
 	void injectPosition(int x, int y);
 	void setLayoutVisible(int layout, bool visible);
 	void changeImage(std::string image, std::string newImage);
+	void changeAlpha(std::string image, float alpha);
+	float getAlpha(std::string image);
 	std::vector<CEGUI::Window*> getLayouts();
 
 private:

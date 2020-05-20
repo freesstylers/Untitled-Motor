@@ -242,6 +242,18 @@ void GUI_Manager::changeImage(std::string image, std::string newImage) 	// "Layo
 	thumbnail->setProperty("Image", newImage);
 }
 
+void GUI_Manager::changeAlpha(std::string  image, float alpha)
+{
+	CEGUI::Window* thumbnail = static_cast<CEGUI::Window*>(root->getWindowElement()->getChild(image));
+	thumbnail->setAlpha(alpha);
+}
+
+float GUI_Manager::getAlpha(std::string image)
+{
+	CEGUI::Window* thumbnail = static_cast<CEGUI::Window*>(root->getWindowElement()->getChild(image));
+	return thumbnail->getAlpha();
+}
+
 std::vector<CEGUI::Window*> GUI_Manager::getLayouts()
 {
 	return layouts;
