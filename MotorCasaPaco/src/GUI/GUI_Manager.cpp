@@ -91,6 +91,7 @@ CEGUI::System& GUI_Manager::getSystem()
 void GUI_Manager::update(float deltaTime)
 {
 	CEGUI::System::getSingleton().getDefaultGUIContext().injectTimePulse(deltaTime);
+	CEGUI::System::getSingleton().renderAllGUIContexts();
 
 	//Mas cosas a a�adir
 }
@@ -155,7 +156,7 @@ void GUI_Manager::addChild(int type, std::string name)
 	break;
 	default:
 	{
-	//	loadLayout(name);
+		//	loadLayout(name);
 	}
 	break;
 	}

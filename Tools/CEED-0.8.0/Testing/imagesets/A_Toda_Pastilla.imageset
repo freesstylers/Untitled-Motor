@@ -42,4 +42,5 @@
     <Image height="50" name="AdvancedOptions_Clicked" width="533" xPos="539" yPos="76" />
     <Image height="50" name="AdvancedOptions_Hover" width="533" xPos="532" yPos="131" />
     <Image height="51" name="AdvancedOptions_Normal" width="533" xPos="537" yPos="184" />
+    <Image height="50" name="Blank" width="50" xPos="239" yPos="55" />
 </Imageset>
