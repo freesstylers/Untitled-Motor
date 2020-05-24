@@ -37,6 +37,16 @@ void AudioComponent::removeEmisor() {
 	numObj = -1;
 }
 
+void AudioComponent::playMusic(std::string path,int channel)
+{
+	AudioManager::getInstance()->playMusic(path.c_str(), channel, true);
+}
+
+void AudioComponent::playMusic(std::string path)
+{
+	AudioManager::getInstance()->playMusic( path.c_str(), numObj, true);
+}
+
 void AudioComponent::init(json& j)
 {
 	pos.X = e_->getComponent<Transform>("Transform")->getPosition().X;

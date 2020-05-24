@@ -13,6 +13,9 @@ public:
 	void update() override;
 	void init(json& args) override;
 
+	virtual void playMusic(std::string path,int channel);
+	virtual void playMusic(std::string path);
+
 	void removeEmisor();
 
 private:
