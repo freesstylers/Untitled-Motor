@@ -67,7 +67,7 @@ MotorCasaPaco::~MotorCasaPaco()
 	SDL_Quit();
 
 }
-	
+
 bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
 {
 	//Chamar a funcion de colision do componente rigidbody
@@ -123,43 +123,43 @@ void MotorCasaPaco::init()
 	SDL_Init(SDL_INIT_EVERYTHING);
 
 	try { ResourceManager::setupInstance("./assets/"); }
-	catch (const std::exception& e)
+	catch (const std::exception & e)
 	{
 		throw std::runtime_error("ResourceManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
 	try { SceneManager::setupInstance(); }
-	catch (const std::exception& e)
+	catch (const std::exception & e)
 	{
 		throw std::runtime_error("SceneManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
-	try	{ InputManager::setupInstance(); }
-	catch (const std::exception& e)
+	try { InputManager::setupInstance(); }
+	catch (const std::exception & e)
 	{
 		throw std::runtime_error("InputManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
 	try { PhysicsManager::setupInstance(); PhysicsManager::getInstance()->initWorld(); }
-	catch (const std::exception& e)
+	catch (const std::exception & e)
 	{
 		throw std::runtime_error("PhysicsManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
 	try { JsonFactoryParser::setupInstance(); }
-	catch (const std::exception& e)
+	catch (const std::exception & e)
 	{
 		throw std::runtime_error("JsonFactoryParser init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
 	try { AudioManager::setupInstance(); }
-	catch (const std::exception& e)
+	catch (const std::exception & e)
 	{
 		throw std::runtime_error("AudioManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
 
 	try { EventManager::setupInstance(); }
-	catch (const std::exception& e)
+	catch (const std::exception & e)
 	{
 		throw std::runtime_error("EventManager init fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
@@ -176,7 +176,7 @@ void MotorCasaPaco::init()
 		setup();
 	}
 
-	gContactAddedCallback=callbackFunc;
+	gContactAddedCallback = callbackFunc;
 
 	setupFactories();
 }
@@ -320,13 +320,22 @@ void MotorCasaPaco::extraConfig(json& j)
 		//Filtro
 	}
 
-	if (!j["Volume"].is_null())
+	if (!j["VolumeMusic"].is_null())
 	{
-		volume = j["Volume"];
-		backupVolume = volume;
+		volumeMusic = j["VolumeMusic"];
+		backupVolumeMusic = volumeMusic;
 
-		for (int i = 0; i < 31; i++) //Numero de canales
-			AudioManager::getInstance()->setVolume(volume, i);
+		for (int i = 0; i < 2; i++) //Numero de canales
+			AudioManager::getInstance()->setVolume(volumeMusic / 100, i);
+	}
+
+	if (!j["VolumeSFX"].is_null())
+	{
+		volumeSFX = j["VolumeSFX"];
+		backupVolumeSFX = volumeSFX;
+
+		for (int i = 2; i < 31; i++) //Numero de canales
+			AudioManager::getInstance()->setVolume(volumeSFX / 100, i);
 	}
 }
 
@@ -353,13 +362,13 @@ void MotorCasaPaco::setupRoot()
 
 	Ogre::String pluginPath;
 
-	#ifdef  _DEBUG
-		pluginPath = "plugins_d.cfg";
-		root = new Ogre::Root("plugins_d.cfg", "window_d.cfg");
-	#else
+#ifdef  _DEBUG
+	pluginPath = "plugins_d.cfg";
+	root = new Ogre::Root("plugins_d.cfg", "window_d.cfg");
+#else
 	pluginPath = "plugins.cfg";
-		root = new Ogre::Root("plugins.cfg", "window.cfg");
-	#endif
+	root = new Ogre::Root("plugins.cfg", "window.cfg");
+#endif
 
 	if (!Ogre::FileSystemLayer::fileExists(pluginPath))
 	{	// IG2: OGRE_CONFIG_DIR tiene un valor absoluto no portable
@@ -396,7 +405,7 @@ void MotorCasaPaco::setup()
 	setupWindow(appName);
 
 	try { ResourceManager::getInstance()->setup(); }
-	catch (const std::exception& e)
+	catch (const std::exception & e)
 	{
 		throw std::runtime_error("ResourceManager setup fail \n" + (Ogre::String)e.what() + "\n");	return;
 	}
@@ -631,11 +640,11 @@ void MotorCasaPaco::writeGraphicOptions()
 {
 	ofstream outputFile;
 
-	#ifdef  _DEBUG
-		outputFile.open("window_d.cfg");
-	#else
-		outputFile.open("window.cfg");
-	#endif
+#ifdef  _DEBUG
+	outputFile.open("window_d.cfg");
+#else
+	outputFile.open("window.cfg");
+#endif
 
 	outputFile << "Render System=OpenGL Rendering Subsystem\n";
 	outputFile << "[OpenGL Rendering Subsystem]\n";
@@ -675,7 +684,8 @@ json MotorCasaPaco::writeExtraOptions()
 		outputFile << "\"InvertAxisY\" : \"" << "No" << "\",\n";
 
 	outputFile << "\"DrawDistance\" : \"" << "Medio" << "\",\n";
-	outputFile << "\"Volume\" : \"" << volume << "\",\n";
+	outputFile << "\"VolumeMusic\" : " << volumeMusic << ",\n";
+	outputFile << "\"VolumeSFX\" : " << volumeSFX << ",\n";
 	outputFile << "\"Filter\" : \"" << "No" << "\",\n";
 	outputFile << "}";
 
@@ -835,10 +845,15 @@ void MotorCasaPaco::changeBasicOptions()
 	InputManager::getInstance()->setInvertedAxisY(invertedAxisY);
 
 	//Volume
-	for (int i = 0; i < 31; i++) //Numero de canales
-		AudioManager::getInstance()->setVolume(volume, i);
+	//Volume
+	for (int i = 0; i < 2; i++) //Numero de canales de SFX, 0/1
+		AudioManager::getInstance()->setVolume(volumeMusic / 100, i);
 
-	backupVolume = volume;
+	for (int i = 2; i < 31; i++) //Numero de canales
+		AudioManager::getInstance()->setVolume(volumeSFX / 100, i);
+
+	backupVolumeMusic = volumeMusic;
+	backupVolumeSFX = volumeSFX;
 
 	ExtraConfig = writeExtraOptions();
 }
@@ -850,8 +865,12 @@ void MotorCasaPaco::revertBasicOptions()
 	invertedAxisY = InputManager::getInstance()->getInvertedAxisY();
 
 	//Volume
-	for (int i = 0; i < 31; i++) //Numero de canales
-		AudioManager::getInstance()->setVolume(backupVolume, i);
+	for (int i = 0; i < 2; i++) //Numero de canales de SFX, 0/1
+		AudioManager::getInstance()->setVolume(backupVolumeMusic / 100, i);
+
+	for (int i = 2; i < 31; i++) //Numero de canales de musica (y extras)
+		AudioManager::getInstance()->setVolume(backupVolumeSFX / 100, i);
+
 
 	extraConfig(ExtraConfig);
 }
@@ -913,12 +932,12 @@ void MotorCasaPaco::changeGraphicComponents()
 void MotorCasaPaco::changeAdvancedGraphicComponents()
 {
 	/*
-	
+
 	Stuff
 
 	*/
 	BackupGraphicsConfiguration = CurrentGraphicsConfiguration;
-	ExtraConfig	= writeExtraOptions();
+	ExtraConfig = writeExtraOptions();
 }
 
 void MotorCasaPaco::revertGraphicChanges()
@@ -926,7 +945,7 @@ void MotorCasaPaco::revertGraphicChanges()
 	CurrentGraphicsConfiguration = BackupGraphicsConfiguration;
 
 	video_mode = CurrentGraphicsConfiguration["Video Mode"].currentValue;
-	
+
 	std::stringstream mode(video_mode);
 
 	Ogre::String token;
@@ -1010,14 +1029,24 @@ Ogre::ShadowTechnique MotorCasaPaco::getShadowTechnique()
 	return sm->getShadowTechnique();
 }
 
-void MotorCasaPaco::setVolume(int value)
+void MotorCasaPaco::setVolumeSFX(float value)
 {
-	volume = value;
+	volumeSFX = value;
 }
 
-int MotorCasaPaco::getVolume()
+float MotorCasaPaco::getVolumeSFX()
 {
-	return volume;
+	return volumeSFX;
+}
+
+void MotorCasaPaco::setVolumeMusic(float value)
+{
+	volumeMusic = value;
+}
+
+float MotorCasaPaco::getVolumeMusic()
+{
+	return volumeMusic;
 }
 
 #include "Entity/Factory.h"

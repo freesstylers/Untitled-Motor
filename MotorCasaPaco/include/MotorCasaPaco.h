@@ -94,8 +94,10 @@ public:
 	bool getGamma();
 	void setGamma(bool value);
 
-	void setVolume(int value);
-	int getVolume();
+	void setVolumeSFX(float value);
+	float getVolumeSFX();
+	void setVolumeMusic(float value);
+	float getVolumeMusic();
 	void setInvertedAxisX(bool value);
 	void setInvertedAxisY(bool value);
 	bool getInvertedAxisX();
@@ -159,7 +161,8 @@ private:
 	json ExtraConfig;
 	json BackupExtraConfig;
 
-	int volume;
-	int backupVolume;
+	float volumeSFX;
+	float backupVolumeSFX;
+	float volumeMusic;
+	float backupVolumeMusic;
 };
-
