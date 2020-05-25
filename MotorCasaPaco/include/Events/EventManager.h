@@ -47,6 +47,9 @@ public:
 	void ClearListeners(std::string type);
 
 private:
+	//Comprueba si hay un listener concreto para un evento, devuelve su posicion. -1 si no esta
+	int hayListener(EventListener* listener, std::string eventType);
+
 	EventManager();
 	~EventManager();
 	static EventManager* instance;

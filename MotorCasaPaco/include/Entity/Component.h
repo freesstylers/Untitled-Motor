@@ -48,6 +48,10 @@ public:
 
 	virtual bool ReceiveEvent(Event& event) override { return false; };
 
+	virtual bool operator== (EventListener& o);
+	virtual bool compare(Entity* e);
+	virtual bool compare(Component* e);
+
 protected:
 	std::string tag_;
 	Entity* e_;

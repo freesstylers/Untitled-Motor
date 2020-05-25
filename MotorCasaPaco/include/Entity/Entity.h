@@ -78,6 +78,10 @@ public:
 	Transform* getTransform();
 
 	bool DontDestroyOnLoad = false;
+
+	virtual bool operator==(EventListener& other);
+	virtual bool compare(Entity* e); 
+	virtual bool compare(Component* e);
 protected:
 
 private:

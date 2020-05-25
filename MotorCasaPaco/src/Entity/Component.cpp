@@ -19,6 +19,7 @@ Component::Component(std::string tag) {
 
 Component::~Component() {
 	//e_ = nullptr;
+	EventManager::getInstance()->UnregisterListenerForAll(this);
 }
 
 void Component::setEntity(Entity* e) { e_ = e; }
@@ -106,3 +107,18 @@ void Component::onSetParent(Entity* parent) { }
 void Component::onActivated() { }
 
 void Component::onDeactivated() { }
+
+bool Component::operator==(EventListener& o)
+{
+	return o.compare(this);
+}
+
+bool Component::compare(Entity* e)
+{
+	return false;
+}
+
+bool Component::compare(Component* e)
+{
+	return tag_ == e->getTag();
+}

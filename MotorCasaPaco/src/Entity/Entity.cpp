@@ -64,6 +64,7 @@ void Entity::OnCollision(Entity* other)
 
 Entity::~Entity()
 {
+	EventManager::getInstance()->UnregisterListenerForAll(this);
 	for (int i = 0; i < components_.size(); i++)
 		components_[i].reset(nullptr);
 }
@@ -241,3 +242,19 @@ Transform* Entity::getTransform()
 {
 	return getComponent<Transform>("Transform");
 }
+
+bool Entity::operator== (EventListener& o)
+{
+	return o.compare(this);
+}
+
+bool Entity::compare(Entity* e)
+{
+	return name_ == e->getName();
+}
+
+bool Entity::compare(Component* e)
+{
+	return false;
+}
+

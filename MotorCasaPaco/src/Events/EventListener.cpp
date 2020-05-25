@@ -3,5 +3,5 @@
 
 EventListener::~EventListener()
 {
-	EventManager::getInstance()->UnregisterListenerForAll(this);
+	//EventManager::getInstance()->UnregisterListenerForAll(this);
 }
