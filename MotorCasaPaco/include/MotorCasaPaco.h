@@ -93,9 +93,9 @@ public:
 	void setFSAA(std::string value);
 	bool getGamma();
 	void setGamma(bool value);
-	std::string getShadows();
-	void setShadows(std::string value);
 
+	void setVolume(int value);
+	int getVolume();
 	void setInvertedAxisX(bool value);
 	void setInvertedAxisY(bool value);
 	bool getInvertedAxisX();
@@ -152,13 +152,14 @@ private:
 	std::string screen_proportion;
 	std::string video_mode;
 	std::string fsaa;
-	std::string shadows;
-	std::string BackupShadows;
 
 	bool invertedAxisX;
 	bool invertedAxisY;
 
 	json ExtraConfig;
 	json BackupExtraConfig;
+
+	int volume;
+	int backupVolume;
 };
 

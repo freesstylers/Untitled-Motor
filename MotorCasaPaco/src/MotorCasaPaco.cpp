@@ -320,50 +320,18 @@ void MotorCasaPaco::extraConfig(json& j)
 		//Filtro
 	}
 
-
-	if (!j["ShowFPS"].is_null() && j["ShowFPS"] != "No")
+	if (!j["Volume"].is_null())
 	{
-		//Show FPS
+		volume = j["Volume"];
+		backupVolume = volume;
+
+		for (int i = 0; i < 31; i++) //Numero de canales
+			AudioManager::getInstance()->setVolume(volume, i);
 	}
 }
 
 void MotorCasaPaco::extraConfigSM(json& j)
 {
-	if (!j["Shadows"].is_null())
-	{
-		if (j["Shadows"] == "No")
-		{
-			sm->setShadowTechnique(Ogre::SHADOWTYPE_NONE);
-		}
-		else
-		{
-			sm->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-			MotorCasaPaco::getInstance()->getSM()->setShadowFarDistance(1000);
-
-			if (j["Shadows"] == "Bajo")
-			{
-				sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-			}
-			else if (j["Shadows"] == "Medio")
-			{
-				sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-			}
-			else if (j["Shadows"] == "Alto")
-			{
-				sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-			}
-		}
-
-		std::string interm = j["Shadows"];
-		shadows = interm;
-	}
-	else
-	{
-		sm->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
-		MotorCasaPaco::getInstance()->getSM()->setShadowFarDistance(10000000);
-		sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
-	}
-
 	if (!j["DrawDistance"].is_null())
 	{
 		if (j["DrawDistance"] == "Bajo")
@@ -373,19 +341,6 @@ void MotorCasaPaco::extraConfigSM(json& j)
 		{
 		}
 		else if (j["DrawDistance"] == "Alto")
-		{
-		}
-	}
-
-	if (!j["Reflections"].is_null() && j["Reflections"] != "No")
-	{
-		if (j["Reflections"] == "Bajo")
-		{
-		}
-		else if (j["Reflections"] == "Normal")
-		{
-		}
-		else if (j["Reflections"] == "Alto")
 		{
 		}
 	}
@@ -595,9 +550,7 @@ bool MotorCasaPaco::isPaused() {
 void MotorCasaPaco::resize(int width, int height)
 {
 	SDL_SetWindowSize(sdlWindow, width, height);
-	//window->resize(width, height);
 	window->windowMovedOrResized();
-//	getOgreWin()->getViewport(0)->setDimensions(0,0,width, height);
 
 	GUI_Manager::getInstance()->setDefaultFont(width);
 
@@ -707,8 +660,6 @@ json MotorCasaPaco::writeExtraOptions()
 	else
 		outputFile << "\"FullScreen\" : \"" << "No" << "\",\n";
 
-	outputFile << "\"Shadows\" : \"" << "Medio" << "\",\n";
-
 	if (invertedAxisX)
 		outputFile << "\"InvertAxisX\" : \"" << "Si" << "\",\n";
 	else
@@ -720,9 +671,8 @@ json MotorCasaPaco::writeExtraOptions()
 		outputFile << "\"InvertAxisY\" : \"" << "No" << "\",\n";
 
 	outputFile << "\"DrawDistance\" : \"" << "Medio" << "\",\n";
-	outputFile << "\"Reflections\" : \"" << "No" << "\",\n";
+	outputFile << "\"Volume\" : \"" << volume << "\",\n";
 	outputFile << "\"Filter\" : \"" << "No" << "\",\n";
-	outputFile << "\"ShowFPS\" : \"" << "No" << "\"\n";
 	outputFile << "}";
 
 	outputFile.close();
@@ -785,8 +735,6 @@ void MotorCasaPaco::setResolution(std::string value)
 	mode >> screen_width;
 	mode >> token;
 	mode >> screen_height;
-
-	//MotorCasaPaco::getInstance()->getRoot()->getRenderSystem()->setConfigOption("Video Mode", video_mode);
 }
 
 int MotorCasaPaco::getScreenWidth()
@@ -856,16 +804,6 @@ void MotorCasaPaco::setGamma(bool value)
 	CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue = v;
 }
 
-std::string MotorCasaPaco::getShadows()
-{
-	return shadows;
-}
-
-void MotorCasaPaco::setShadows(std::string value)
-{
-	shadows = value;
-}
-
 void MotorCasaPaco::setInvertedAxisX(bool value)
 {
 	invertedAxisX = value;
@@ -888,16 +826,28 @@ bool MotorCasaPaco::getInvertedAxisY()
 
 void MotorCasaPaco::changeBasicOptions()
 {
+	//Axis
 	InputManager::getInstance()->setInvertedAxisX(invertedAxisX);
 	InputManager::getInstance()->setInvertedAxisY(invertedAxisY);
+
+	//Volume
+	for (int i = 0; i < 31; i++) //Numero de canales
+		AudioManager::getInstance()->setVolume(volume, i);
+
+	backupVolume = volume;
 
 	ExtraConfig = writeExtraOptions();
 }
 
 void MotorCasaPaco::revertBasicOptions()
 {
+	//Axis
 	invertedAxisX = InputManager::getInstance()->getInvertedAxisX();
 	invertedAxisY = InputManager::getInstance()->getInvertedAxisY();
+
+	//Volume
+	for (int i = 0; i < 31; i++) //Numero de canales
+		AudioManager::getInstance()->setVolume(backupVolume, i);
 
 	extraConfig(ExtraConfig);
 }
@@ -910,6 +860,7 @@ void MotorCasaPaco::changeGraphicComponents()
 		setFullScreenOn();
 		CurrentGraphicsConfiguration["Full Screen"].currentValue = "Yes";
 	}
+
 	else //A Modo Ventana
 	{
 		setFullScreenOff();
@@ -1053,6 +1004,16 @@ float MotorCasaPaco::getFarShadowDistance()
 Ogre::ShadowTechnique MotorCasaPaco::getShadowTechnique()
 {
 	return sm->getShadowTechnique();
+}
+
+void MotorCasaPaco::setVolume(int value)
+{
+	volume = value;
+}
+
+int MotorCasaPaco::getVolume()
+{
+	return volume;
 }
 
 #include "Entity/Factory.h"

@@ -43,4 +43,11 @@
     <Image height="50" name="AdvancedOptions_Hover" width="533" xPos="532" yPos="131" />
     <Image height="51" name="AdvancedOptions_Normal" width="533" xPos="537" yPos="184" />
     <Image height="50" name="Blank" width="50" xPos="239" yPos="55" />
+    <Image height="65" name="Escudo" width="65" xPos="1101" yPos="130" />
+    <Image height="71" name="Bomba" width="71" xPos="1239" yPos="123" />
+    <Image height="80" name="Pastilla_Basica" width="80" xPos="1380" yPos="14" />
+    <Image height="80" name="Pastilla_Mejora" width="80" xPos="1256" yPos="12" />
+    <Image height="105" name="Pastilla_Mejora_2" width="105" xPos="1104" yPos="0" />
+    <Image height="65" name="Escudo_No" width="65" xPos="1347" yPos="125" />
+    <Image height="71" name="Bomba_No" width="71" xPos="1486" yPos="119" />
 </Imageset>
