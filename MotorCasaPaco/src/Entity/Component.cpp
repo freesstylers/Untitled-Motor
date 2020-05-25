@@ -120,5 +120,5 @@ bool Component::compare(Entity* e)
 
 bool Component::compare(Component* e)
 {
-	return tag_ == e->getTag();
+	return tag_ == e->getTag() && e_->getName() == e->e_->getName();
 }
