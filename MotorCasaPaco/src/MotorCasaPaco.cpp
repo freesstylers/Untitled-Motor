@@ -686,7 +686,7 @@ json MotorCasaPaco::writeExtraOptions()
 	outputFile << "\"DrawDistance\" : \"" << "Medio" << "\",\n";
 	outputFile << "\"VolumeMusic\" : " << volumeMusic << ",\n";
 	outputFile << "\"VolumeSFX\" : " << volumeSFX << ",\n";
-	outputFile << "\"Filter\" : \"" << "No" << "\",\n";
+	outputFile << "\"Filter\" : \"" << "No" << "\"\n";
 	outputFile << "}";
 
 	outputFile.close();

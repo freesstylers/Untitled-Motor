@@ -166,3 +166,4 @@ private:
 	float volumeMusic;
 	float backupVolumeMusic;
 };
+
