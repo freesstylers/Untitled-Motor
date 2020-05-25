@@ -409,6 +409,10 @@ void MotorCasaPaco::setup()
 
 	sm = MotorCasaPaco::getInstance()->getRoot()->createSceneManager();
 
+	sm->setShadowColour(Ogre::ColourValue(0.5, 0.5, 0.5));
+	MotorCasaPaco::getInstance()->getSM()->setShadowFarDistance(1000);
+	sm->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+
 	ResourceManager::getInstance()->addSceneManager(sm);
 
 	MotorCasaPaco::getInstance()->getRoot()->addFrameListener(frameListener_);

@@ -18,7 +18,6 @@
 #include "ApplyGraphicChangesComponent.h"
 #include "ChangeVyncComponent.h"
 #include "FSAAChangeComponent.h"
-#include "ShadowsChangeComponent.h"
 #include "ApplyAdvancedGraphicChangesComponent.h"
 #include "RevertGraphicChangesComponent.h"
 #include "TestComponent.h"
@@ -107,15 +106,6 @@ public:
 	Component* createComponent(json& args) override
 	{
 		return new FSAAChangeComponent(args);
-	};
-};
-
-class ShadowsChangeComponentFactory : public BaseFactory
-{
-public:
-	Component* createComponent(json& args) override
-	{
-		return new ShadowsChangeComponent(args);
 	};
 };
 
@@ -231,7 +221,6 @@ WinMain(HINSTANCE hinstance, HINSTANCE prevInstance, LPSTR lpCmdLine, int nCmdSh
 	JsonFactoryParser::getInstance()->addFactory("ApplyGraphicChangesComponent", new ApplyGraphicChangesComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("ChangeVSyncComponent", new ChangeVSyncComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("FSAAChangeComponent", new FSAAChangeComponentFactory());
-	JsonFactoryParser::getInstance()->addFactory("ShadowsChangeComponent", new ShadowsChangeComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("ApplyAdvancedGraphicChangesComponent", new ApplyAdvancedGraphicChangesComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("RevertGraphicChangesComponent", new RevertGraphicChangesComponentFactory());
 	JsonFactoryParser::getInstance()->addFactory("RevertAdvancedGraphicChangesComponent", new RevertAdvancedGraphicChangesComponentFactory());

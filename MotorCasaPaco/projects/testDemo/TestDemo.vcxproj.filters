@@ -54,9 +54,6 @@
     <ClCompile Include="src\FSAAChangeComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ShadowsChangeComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\ApplyAdvancedGraphicChangesComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -114,9 +111,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\FSAAChangeComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ShadowsChangeComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ApplyAdvancedGraphicChangesComponent.h">
