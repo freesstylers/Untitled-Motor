@@ -30,6 +30,7 @@
 #include "Physics/RigidBody.h"
 #include "Graphics/PacoFrameListener.h"
 #include "checkML.h"
+#include "Graphics/ParticleSystem.h"
 
 using namespace std;
 MotorCasaPaco* MotorCasaPaco::instance = 0;
@@ -1126,6 +1127,15 @@ public:
 	};
 };
 
+class ParticleSystemFactory : public BaseFactory
+{
+public:
+	Component* createComponent(json& args) override
+	{
+		return new ParticleSystem(args);
+	};
+};
+
 void MotorCasaPaco::setupFactories()
 {
 	JsonFactoryParser* j = JsonFactoryParser::getInstance();
@@ -1138,4 +1148,5 @@ void MotorCasaPaco::setupFactories()
 	j->addFactory("AudioListenerComponent", new AudioListenerComponentFactory());
 	j->addFactory("Light", new LightFactory());
 	j->addFactory("Skybox", new SkyboxFactory());
+	j->addFactory("ParticleSystem", new ParticleSystemFactory());
 }

@@ -1,0 +1,23 @@
+vertex_program PlasmaVSglsl glsl
+{
+	source Plasma_vs.glsl
+
+	default_params
+	{
+	}
+}
+
+fragment_program PlasmaPSglsl glsl
+{
+	source Plasma_ps.glsl
+
+	default_params
+	{
+		param_named_auto time time
+		param_named_auto lightPosition light_position 0
+		param_named alpha float 0.5
+		param_named texture1 int 0
+		param_named texture2 int 1
+		param_named texture3 int 2
+	}
+}

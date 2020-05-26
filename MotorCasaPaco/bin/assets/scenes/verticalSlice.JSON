@@ -24,6 +24,11 @@
 				{
 					"type" : "RigidBody",
 					"mass" : 10
+				},
+				{
+					"type" : "ParticleSystem",
+					"name" : "testParticles",
+					"template" : "PlasmaShader"
 				}
 			]
 		},

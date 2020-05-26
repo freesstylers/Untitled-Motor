@@ -80,6 +80,7 @@
     <ClCompile Include="..\..\src\Events\EventListener.cpp">
       <Filter>Events</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Graphics\ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Audio\AudioManager.h">
@@ -177,6 +178,7 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\checkML.h" />
+    <ClInclude Include="..\..\include\Graphics\ParticleSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Audio">

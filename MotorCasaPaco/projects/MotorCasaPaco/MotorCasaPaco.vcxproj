@@ -25,6 +25,7 @@
     <ClCompile Include="..\..\src\Audio\AudioManager.cpp" />
     <ClCompile Include="..\..\src\Events\EventListener.cpp" />
     <ClCompile Include="..\..\src\Graphics\PacoFrameListener.cpp" />
+    <ClCompile Include="..\..\src\Graphics\ParticleSystem.cpp" />
     <ClCompile Include="..\..\src\MotorCasaPaco.cpp" />
     <ClCompile Include="..\..\src\Entity\Component.cpp" />
     <ClCompile Include="..\..\src\Entity\Entity.cpp" />
@@ -52,6 +53,7 @@
     <ClInclude Include="..\..\include\Audio\AudioListenerComponent.h" />
     <ClInclude Include="..\..\include\Audio\AudioManager.h" />
     <ClInclude Include="..\..\include\Graphics\PacoFrameListener.h" />
+    <ClInclude Include="..\..\include\Graphics\ParticleSystem.h" />
     <ClInclude Include="..\..\include\Input\PacoKeys.h" />
     <ClInclude Include="..\..\include\MotorCasaPaco.h" />
     <ClInclude Include="..\..\include\Entity\Component.h" />
