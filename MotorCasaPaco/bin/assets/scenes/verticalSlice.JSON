@@ -41,7 +41,7 @@
 				{
 					"type" : "Mesh",
 					"mesh" : "NaveWiterico.mesh",
-					"material" : "NaveWiterico"
+					"material" : "Plasma"
 				},
 				{
 					"type" : "RigidBody",
