@@ -5,17 +5,15 @@
     <Image height="24" name="Mouse_Move" width="23" xPos="536" yPos="1095" />
     <Image height="20" name="Mouse_Resize" width="21" xPos="566" yPos="1098" />
     <Image height="21" name="Mouse_Text" width="23" xPos="590" yPos="1097" />
-    <Image height="55" name="LeftArrow_1" width="47" xPos="870" yPos="1133" />
-    <Image height="55" name="LeftArrow_4" width="47" xPos="716" yPos="1132" />
-    <Image height="56" name="LeftArrow_3" width="49" xPos="766" yPos="1132" />
-    <Image height="55" name="RightArrow_1" width="47" xPos="508" yPos="1133" />
-    <Image height="57" name="RightArrow_2" width="49" xPos="559" yPos="1132" />
-    <Image height="55" name="RightArrow_4" width="47" xPos="662" yPos="1132" />
-    <Image height="57" name="LeftArrow_2" width="49" xPos="817" yPos="1132" />
-    <Image height="57" name="RightArrow_3" width="49" xPos="610" yPos="1131" />
+    <Image height="50" name="LeftArrow_1" width="57" xPos="822" yPos="1135" />
+    <Image height="56" name="LeftArrow_3" width="63" xPos="691" yPos="1133" />
+    <Image height="50" name="RightArrow_1" width="57" xPos="498" yPos="1138" />
+    <Image height="56" name="RightArrow_2" width="63" xPos="556" yPos="1134" />
+    <Image height="57" name="LeftArrow_2" width="63" xPos="755" yPos="1133" />
+    <Image height="56" name="RightArrow_3" width="63" xPos="620" yPos="1134" />
     <Image height="70" name="Star_Yes" width="77" xPos="515" yPos="1269" />
     <Image height="70" name="Star_No" width="77" xPos="515" yPos="1198" />
-    <Image height="1080" name="Fondo" width="1938" xPos="0" yPos="2" />
+    <Image height="1078" name="Fondo" width="1920" xPos="0" yPos="2" />
     <Image height="477" name="Yayo 1" width="465" xPos="20" yPos="1476" />
     <Image height="496" name="Yayo 2" width="307" xPos="522" yPos="1461" />
     <Image height="50" name="Blank" width="50" xPos="526" yPos="1355" />
@@ -27,4 +25,5 @@
     <Image height="248" name="Bocadillo_Dcha_2" width="283" xPos="1598" yPos="1150" />
     <Image height="247" name="Bocadillo_Dcha_3" width="283" xPos="1450" yPos="1707" />
     <Image height="247" name="Bocadillo_Dcha_4" width="282" xPos="1460" yPos="1442" />
+    <Image height="415" name="Tutorial" width="399" xPos="1761" yPos="1510" />
 </Imageset>

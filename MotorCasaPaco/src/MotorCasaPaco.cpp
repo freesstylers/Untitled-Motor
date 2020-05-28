@@ -316,11 +316,6 @@ void MotorCasaPaco::extraConfig(json& j)
 		}
 	}
 
-	if (!j["Filter"].is_null() && j["Filter"] != "No")
-	{
-		//Filtro
-	}
-
 	if (!j["VolumeMusic"].is_null())
 	{
 		volumeMusic = j["VolumeMusic"];
@@ -337,22 +332,6 @@ void MotorCasaPaco::extraConfig(json& j)
 
 		for (int i = 2; i < 31; i++) //Numero de canales
 			AudioManager::getInstance()->setVolume(volumeSFX / 100, i);
-	}
-}
-
-void MotorCasaPaco::extraConfigSM(json& j)
-{
-	if (!j["DrawDistance"].is_null())
-	{
-		if (j["DrawDistance"] == "Bajo")
-		{
-		}
-		else if (j["DrawDistance"] == "Normal")
-		{
-		}
-		else if (j["DrawDistance"] == "Alto")
-		{
-		}
 	}
 }
 
@@ -426,8 +405,6 @@ void MotorCasaPaco::setup()
 	ResourceManager::getInstance()->addSceneManager(sm);
 
 	MotorCasaPaco::getInstance()->getRoot()->addFrameListener(frameListener_);
-
-	extraConfigSM(j);
 
 	if (fullScreen)
 		setFullScreenOn();

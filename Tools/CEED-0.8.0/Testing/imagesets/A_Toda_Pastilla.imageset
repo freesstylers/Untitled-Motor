@@ -50,4 +50,5 @@
     <Image height="105" name="Pastilla_Mejora_2" width="105" xPos="1104" yPos="0" />
     <Image height="65" name="Escudo_No" width="65" xPos="1347" yPos="125" />
     <Image height="71" name="Bomba_No" width="71" xPos="1486" yPos="119" />
+    <Image height="718" name="Overlay" width="1282" xPos="3" yPos="1547" />
 </Imageset>

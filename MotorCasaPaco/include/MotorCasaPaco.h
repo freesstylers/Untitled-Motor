@@ -130,7 +130,6 @@ private:
 	void pollEvents();
 	bool checkConfig();
 	void extraConfig(json& j);
-	void extraConfigSM(json& j);
 	void setupFactories();
 
 	Ogre::Root* root;
