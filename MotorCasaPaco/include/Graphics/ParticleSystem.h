@@ -17,9 +17,16 @@ public:
 	void onDeactivated() override;
 	~ParticleSystem() override;
 
+	void update() override;
+
+	void emit();
+
 private:
 	Ogre::ParticleSystem* ogrePSystem_ = nullptr;
-	std::string ogrePSystemName_, ogrePSystemTemplate_;
+	std::string ogrePSystemName_, ogrePSystemFixedName_, ogrePSystemTemplate_;
 
+	bool destroyOnTimeLimit_ = false;
+	float timeLimit_ = 0, timer_ = 0;
+	void updateTimeLimit();
 };
 

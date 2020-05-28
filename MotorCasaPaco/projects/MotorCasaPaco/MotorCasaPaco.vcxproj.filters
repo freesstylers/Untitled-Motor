@@ -80,7 +80,9 @@
     <ClCompile Include="..\..\src\Events\EventListener.cpp">
       <Filter>Events</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Graphics\ParticleSystem.cpp" />
+    <ClCompile Include="..\..\src\Graphics\ParticleSystem.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Audio\AudioManager.h">
@@ -178,7 +180,9 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\checkML.h" />
-    <ClInclude Include="..\..\include\Graphics\ParticleSystem.h" />
+    <ClInclude Include="..\..\include\Graphics\ParticleSystem.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Audio">
