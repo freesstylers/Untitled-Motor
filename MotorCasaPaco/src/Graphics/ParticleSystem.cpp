@@ -55,13 +55,11 @@ void ParticleSystem::redefine(json& args)
 void ParticleSystem::onActivated()
 {
 	ogrePSystem_->setEmitting(true);
-	ogrePSystem_->setVisible(true);
 }
 
 void ParticleSystem::onDeactivated()
 {
 	ogrePSystem_->setEmitting(false);
-	ogrePSystem_->setVisible(false);
 }
 
 ParticleSystem::~ParticleSystem()
@@ -80,7 +78,7 @@ void ParticleSystem::update()
 void ParticleSystem::emit()
 {
 	timer_ = 0;
-	ogrePSystem_->setEmitting(true);
+	setEnabled(true);
 }
 
 void ParticleSystem::updateTimeLimit()
@@ -93,7 +91,7 @@ void ParticleSystem::updateTimeLimit()
 	}
 	else {
 		if (destroyOnTimeLimit_) e_->getScene()->deleteEntity(e_->getName());
-		else ogrePSystem_->setEmitting(false);	
+		else ogrePSystem_->setEmitting(false);
 	}
 }
 
