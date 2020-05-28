@@ -188,9 +188,6 @@
     <Filter Include="Audio">
       <UniqueIdentifier>{321633f3-ee74-4d36-ad7f-3a81620f811d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entity">
-      <UniqueIdentifier>{84fc6324-f241-47f4-9ae0-208b33bf8fd0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Events">
       <UniqueIdentifier>{f275d6ca-1b10-4555-8d6d-1eea78e8f0b2}</UniqueIdentifier>
     </Filter>
@@ -214,6 +211,9 @@
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{d2c8a5db-0181-4e85-b064-7c9312a19d6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{84fc6324-f241-47f4-9ae0-208b33bf8fd0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
