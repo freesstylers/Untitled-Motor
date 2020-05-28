@@ -684,10 +684,8 @@ json MotorCasaPaco::writeExtraOptions()
 	else
 		outputFile << "\"InvertAxisY\" : \"" << "No" << "\",\n";
 
-	outputFile << "\"DrawDistance\" : \"" << "Medio" << "\",\n";
 	outputFile << "\"VolumeMusic\" : " << volumeMusic << ",\n";
-	outputFile << "\"VolumeSFX\" : " << volumeSFX << ",\n";
-	outputFile << "\"Filter\" : \"" << "No" << "\"\n";
+	outputFile << "\"VolumeSFX\" : " << volumeSFX << "\n";
 	outputFile << "}";
 
 	outputFile.close();
@@ -829,12 +827,22 @@ void MotorCasaPaco::setInvertedAxisY(bool value)
 	invertedAxisY = value;
 }
 
-bool MotorCasaPaco::getInvertedAxisX()
+bool MotorCasaPaco::getInvertedAxisXInput()
+{
+	return InputManager::getInstance()->getInvertedAxisX();
+}
+
+bool MotorCasaPaco::getInvertedAxisYInput()
+{
+	return InputManager::getInstance()->getInvertedAxisY();
+}
+
+bool MotorCasaPaco::getInvertedAxisXTemp()
 {
 	return invertedAxisX;
 }
 
-bool MotorCasaPaco::getInvertedAxisY()
+bool MotorCasaPaco::getInvertedAxisYTemp()
 {
 	return invertedAxisY;
 }
@@ -845,7 +853,6 @@ void MotorCasaPaco::changeBasicOptions()
 	InputManager::getInstance()->setInvertedAxisX(invertedAxisX);
 	InputManager::getInstance()->setInvertedAxisY(invertedAxisY);
 
-	//Volume
 	//Volume
 	for (int i = 0; i < 2; i++) //Numero de canales de SFX, 0/1
 		AudioManager::getInstance()->setVolume(volumeMusic / 100, i);
@@ -932,13 +939,14 @@ void MotorCasaPaco::changeGraphicComponents()
 
 void MotorCasaPaco::changeAdvancedGraphicComponents()
 {
-	/*
+	CurrentGraphicsConfiguration["FSAA"].currentValue = fsaa;
 
-	Stuff
+	if (gamma)
+		CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue = "Yes";
+	else
+		CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue = "No";
 
-	*/
 	BackupGraphicsConfiguration = CurrentGraphicsConfiguration;
-	ExtraConfig = writeExtraOptions();
 }
 
 void MotorCasaPaco::revertGraphicChanges()
@@ -977,9 +985,6 @@ void MotorCasaPaco::revertAdvancedGraphicChanges()
 		gamma = true;
 	else if (CurrentGraphicsConfiguration["sRGB Gamma Conversion"].currentValue == "No")
 		gamma = false;
-
-	ExtraConfig = BackupExtraConfig;
-	extraConfigSM(ExtraConfig);
 }
 
 void MotorCasaPaco::storeGraphicsConfiguration()

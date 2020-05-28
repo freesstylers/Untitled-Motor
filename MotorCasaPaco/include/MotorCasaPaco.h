@@ -100,8 +100,10 @@ public:
 	float getVolumeMusic();
 	void setInvertedAxisX(bool value);
 	void setInvertedAxisY(bool value);
-	bool getInvertedAxisX();
-	bool getInvertedAxisY();
+	bool getInvertedAxisXInput();
+	bool getInvertedAxisYInput();
+	bool getInvertedAxisXTemp();
+	bool getInvertedAxisYTemp();
 
 	void changeBasicOptions();
 	void revertBasicOptions();
