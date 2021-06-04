@@ -205,7 +205,7 @@ call preBuild.bat "$(SolutionDir)bin"</Command>
       <Message>Copies all necessary DLL's from the Ogre build directory (you need to build Ogre for this to work)</Message>
     </PreBuildEvent>
     <Lib>
-      <AdditionalDependencies>cegui\CEGUIBase-0_d.lib;cegui\CEGUIExpatParser_d.lib;cegui\CEGUIOgreRenderer-0_d.lib;cegui\CEGUISILLYImageCodec_d.lib;ogre\OgreMain_d.lib;ogre\OgreRTShaderSystem_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cegui\CEGUIBase-0_d.lib;cegui\CEGUIExpatParser_d.lib;cegui\CEGUIOgreRenderer-0_d.lib;cegui\CEGUISILLYImageCodec_d.lib;ogre\OgreMain_d.lib;ogre\OgreRTShaderSystem_d.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;fmod\fmodstudio_vc.lib;fmod\fmodstudioL_vc.lib;fmod\fsbank_vc.lib;bullet\BulletDynamics_Debug.lib;bullet\BulletCollision_Debug.lib;bullet\LinearMath_Debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -256,7 +256,7 @@ call preBuild.bat "$(SolutionDir)bin"</Command>
       <Message>Copies all necessary DLL's from the Ogre build directory (you need to build Ogre for this to work)</Message>
     </PreBuildEvent>
     <Lib>
-      <AdditionalDependencies>cegui\CEGUIBase-0.lib;cegui\CEGUIExpatParser.lib;cegui\CEGUIOgreRenderer-0.lib;cegui\CEGUISILLYImageCodec.lib;ogre\OgreMain.lib;ogre\OgreRTShaderSystem.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;bullet\BulletDynamics.lib;bullet\BulletCollision.lib;bullet\LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>cegui\CEGUIBase-0.lib;cegui\CEGUIExpatParser.lib;cegui\CEGUIOgreRenderer-0.lib;cegui\CEGUISILLYImageCodec.lib;ogre\OgreMain.lib;ogre\OgreRTShaderSystem.lib;sdl\SDL2.lib;sdl\SDL2main.lib;sdl\SDL2test.lib;fmod\fmod_vc.lib;fmod\fmodL_vc.lib;fmod\fmodstudio_vc.lib;fmod\fmodstudioL_vc.lib;fmod\fsbank_vc.lib;bullet\BulletDynamics.lib;bullet\BulletCollision.lib;bullet\LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

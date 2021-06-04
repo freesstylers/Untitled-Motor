@@ -5,10 +5,20 @@
 
 #include "Others/General.h"
 
-namespace FMOD {
+
+namespace FMOD 
+{
 	class ChannelGroup;
 	class Channel;
 	class System;
+
+	namespace Studio
+	{
+		class System;
+		class Bank;
+		class EventDescription;
+		class EventInstance;
+	}
 }
 
 enum FMOD_RESULT;
@@ -27,6 +37,18 @@ public:
 	static void clean();
 
 	~AudioManager();
+
+	//////////////////////
+
+	void LoadBankFile();
+
+	void playEvent(std::string event);
+	void stopEvent(std::string event);
+
+	void setEventParameter(std::string event, std::string parameter, float value);
+	float getEventParameter(std::string event, std::string parameter, float value);
+
+	//////////////////////
 
 	void playSound(const char* path, int nChannel);
 	void playMusic(const char* path, int nChannel,bool loop);
@@ -48,7 +70,8 @@ public:
 private:
 	AudioManager();
 
-	FMOD::System* system;
+	//Studio::System* studio;
+
 	FMOD_RESULT result;
 
 	emisor emisores[32];
@@ -58,6 +81,21 @@ private:
 	FMOD::Channel* channels[32];
 
 	static AudioManager* instance;
+
+	/////////////
+
+	FMOD::System* coreSystem;
+	FMOD::Studio::System* system;
+	FMOD::Studio::Bank* bank;
+
+	FMOD::Studio::EventInstance* getEventInstance(std::string event);
+	void startEvents();
+
+	FMOD::Studio::EventDescription* MenuNivelesEvent;
+	FMOD::Studio::EventInstance* MenuNivelesInstance;
+
+	FMOD::Studio::EventDescription* InLevelEvent;
+	FMOD::Studio::EventInstance* InLevelInstance;
 
 };
 
